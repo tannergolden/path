@@ -1,0 +1,76 @@
+# Installed from tannergolden/standards. Edit freely: this file is YOURS.
+#
+# Dispatch-only. Run it to apply the shared label taxonomy, and to write the
+# branch and tag rulesets.
+#
+# ⚠️ IT PREVIEWS BY DEFAULT AND CHANGES NOTHING. `dry-run` starts on, because
+# a ruleset names required status checks and a wrong one blocks every merge in
+# this repository. Read what the preview says it would do, then run it again
+# with `dry-run` off.
+#
+# ⚠️ IT DOES NOT INSTALL STUBS. Every stub this repository needs arrived with
+# it when it was generated from the template. Nothing here writes files under
+# .github/workflows/, so no BOT_ACCESS_TOKEN is involved.
+#
+# ⚠️ WRITING RULESETS NEEDS ADMIN. Pass a token with administration write as
+# ADMIN_TOKEN, or leave `apply-rulesets` off and set branch protection by hand.
+
+name: '🎯 Apply Standards'
+
+on:
+  workflow_dispatch:
+    inputs:
+      dry-run:
+        description: 'Preview only. Turn this OFF to actually apply anything.'
+        type: boolean
+        default: true
+      apply-labels:
+        description: 'Apply the shared label taxonomy'
+        type: boolean
+        default: true
+      apply-settings:
+        description: 'Write the repository settings (needs ADMIN_TOKEN)'
+        type: boolean
+        default: false
+      apply-rulesets:
+        description: 'Write the branch and tag rulesets (needs ADMIN_TOKEN)'
+        type: boolean
+        default: false
+
+concurrency:
+  group: ${{ github.workflow }}
+  cancel-in-progress: false
+
+# ⚠️ THE `permissions:` BELOW IS A CEILING, NOT A GRANT. For a job that calls a
+# reusable workflow, the caller's permissions cap what the called workflow may
+# request. Anything it asks for beyond them fails the run before a single job
+# starts: a startup failure, with no job, no step, and no log to read.
+#
+# They are written out rather than left to this repository's DEFAULT token
+# permissions, because a repository set to read-only - now the common default -
+# caps every write scope the same invisible way.
+#
+# The list is the union of what the called workflow's own jobs ask for, and
+# each of those jobs still narrows it further from there. Widen it only to
+# match a scope the called workflow actually declares.
+
+permissions: {}
+
+jobs:
+  apply:
+    # Guarded on is_template like every other stub here. A template ships the
+    # WIRING, never the effects: its own labels, settings, and rulesets are
+    # not what a generated repository inherits - the files are - so applying
+    # them here would change nothing downstream while making the template the
+    # only repository that needs an ADMIN_TOKEN it has no use for.
+    if: ${{ !github.event.repository.is_template }}
+    permissions:
+      contents: read # check this repository out when labels-file names a file in it
+      issues: write # create and update the shared labels
+    uses: tannergolden/standards/.github/workflows/apply-standards.yml@v1
+    with:
+      dry-run: ${{ inputs.dry-run }}
+      apply-labels: ${{ inputs.apply-labels }}
+      apply-settings: ${{ inputs.apply-settings }}
+      apply-rulesets: ${{ inputs.apply-rulesets }}
+    secrets: inherit # zizmor: ignore[secrets-inherit] - first-party callee at the ref pinned above.

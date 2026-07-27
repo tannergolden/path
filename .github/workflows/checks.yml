@@ -1,0 +1,110 @@
+# Installed from tannergolden/standards. Edit freely: this file is YOURS.
+#
+# Everything that VERIFIES a change, in one file: lint/test/build, the
+# secret scan, CodeQL, and the workflow lint. All read-only gates - nothing
+# in here writes to the repository. One push produces one run with every
+# check grouped, instead of four runs to read separately.
+#
+# The weekly cron re-runs all of them against code nothing has touched:
+# CodeQL's sweep, the full-history secret scan, and a config re-validation,
+# so a dormant repository still gets told when a rule it relies on breaks.
+#
+# ⚠️ THE JOB IDS ARE THE CHECK NAMES. A called workflow reports as
+# `<job id> / <job name>`, so `ci` and `secrets` below are load-bearing:
+# branch protection names them. Renaming either leaves every pull request
+# waiting on a check that never reports.
+
+name: '🚦 Checks'
+
+on:
+  push:
+  pull_request:
+  schedule:
+    - cron: '0 3 * * 1' # weekly sweep of code nothing has touched
+  workflow_dispatch:
+
+concurrency:
+  # In-progress runs are never canceled, so a required check cannot vanish
+  # mid-merge. Later pushes wait their turn instead.
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: false
+
+# ⚠️ THE `permissions:` BELOW IS A CEILING, NOT A GRANT. For a job that calls a
+# reusable workflow, the caller's permissions cap what the called workflow may
+# request. Anything it asks for beyond them fails the run before a single job
+# starts: a startup failure, with no job, no step, and no log to read.
+#
+# They are written out rather than left to this repository's DEFAULT token
+# permissions, because a repository set to read-only - now the common default -
+# caps every write scope the same invisible way.
+#
+# Each job declares the union of what ITS called workflow's jobs ask for, and
+# nothing more - grouping the callers into one file does not widen any of
+# them. Widen one only to match a scope its called workflow actually declares.
+
+permissions: {}
+
+jobs:
+  # RULESET-LOAD-BEARING JOB ID. The check reports as
+  # 'ci / 🧪 Lint, Test & Build'. Renaming this leaves branch protection
+  # waiting on a check that never reports.
+  ci:
+    # A pull request always runs. A direct push runs only on the default
+    # branch, WHATEVER IT IS CALLED - resolved at run time rather than
+    # written into this file, so renaming your default branch cannot
+    # silently stop this workflow. It also stops a branch with an open
+    # pull request running everything twice.
+    if: ${{ !github.event.repository.is_template && (github.event_name != 'push' || github.ref_name == github.event.repository.default_branch) }}
+    permissions:
+      contents: read # read the repository
+    uses: tannergolden/standards/.github/workflows/ci.yml@v1
+    with:
+      # Tell CI how your project builds. The job FAILS when every stage
+      # resolves to nothing, rather than reporting a green check that checked
+      # nothing - so one real command is always enough.
+      #
+      # Until you have a linter, this one validates the repository's OWN
+      # configuration: every YAML and JSON file parses, every workflow `uses:`
+      # is pinned to a tag or a commit, no stray whitespace or CRLF. That is a
+      # real check on files that exist from day one, which is why this gate is
+      # honestly green before you have written any code.
+      #
+      # Replace it when your project has a linter, and add the others as they
+      # become true:
+      #
+      #   lint-command: 'golangci-lint run'
+      #   test-command: 'go test ./...'
+      #   build-command: 'go build ./...'
+      lint-command: 'python3 .github/scripts/validate-repository.py'
+
+  # RULESET-LOAD-BEARING JOB ID: reports as 'secrets / 🔍 Scan for Secrets'.
+  secrets:
+    if: ${{ !github.event.repository.is_template && (github.event_name != 'push' || github.ref_name == github.event.repository.default_branch) }}
+    permissions:
+      contents: read # full-history checkout for the secret scan
+      issues: write # one-time escalation issue when scanning is silently off
+    uses: tannergolden/standards/.github/workflows/gitleaks.yml@v1
+    secrets: inherit # zizmor: ignore[secrets-inherit] - first-party callee at the ref pinned above.
+
+  codeql:
+    # INERT IN A TEMPLATE REPOSITORY. `is_template` is true only in the
+    # template itself, which holds no source code, so a weekly sweep there
+    # would analyse an empty tree forever. It is false in every repository
+    # generated from the template, where this same file runs normally - the
+    # same signal init-template.yml guards on, rather than a repository name.
+    if: ${{ !github.event.repository.is_template && (github.event_name != 'push' || github.ref_name == github.event.repository.default_branch) }}
+    permissions:
+      actions: read # CodeQL resolves workflow run metadata during analysis
+      contents: read # walk the checkout to build the language matrix
+      security-events: write # upload CodeQL results to code scanning
+    uses: tannergolden/standards/.github/workflows/codeql.yml@v1
+
+  lint:
+    # This used to run only when a workflow file changed. Grouped, it runs
+    # with the rest of the checks - actionlint and zizmor over a stub set
+    # take seconds, and a finding can appear without a workflow file
+    # changing when the shared configuration behind them moves.
+    if: ${{ !github.event.repository.is_template && (github.event_name != 'push' || github.ref_name == github.event.repository.default_branch) }}
+    permissions:
+      contents: read # read the repository
+    uses: tannergolden/standards/.github/workflows/lint-workflows.yml@v1

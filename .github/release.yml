@@ -1,0 +1,51 @@
+# GitHub auto-generated release notes configuration.
+# Complements the git-cliff drafts: when a release is created in the UI with
+# "Generate release notes", pull requests are grouped by these labels.
+#
+# The labels themselves are NOT a file in this repository. They live in
+# tannergolden/standards/data/labels.yml and are written to this repository
+# over the GitHub API by the governance workflow's label sync, so there is
+# nothing here to keep in step - only these category mappings.
+#
+# A label with no category below still appears, under Maintenance & Other,
+# because that entry matches '*'. Nothing falls out of the notes.
+changelog:
+  exclude:
+    labels:
+      - 'status: stale'
+      - 'duplicate'
+      - 'wontfix'
+      - 'invalid'
+  categories:
+    - title: 💥 Breaking Changes
+      labels:
+        - 'semver: major'
+    # Deprecations ship as a MINOR - nothing breaks yet - so without their own
+    # category they file under Features, which is where a consumer is least
+    # likely to look for the warning that something they use is going away.
+    - title: ⚠️ Deprecations
+      labels:
+        - 'type: deprecation'
+    - title: 🔒 Security
+      labels:
+        - 'type: security'
+    - title: ✨ Features
+      labels:
+        - 'type: feature'
+        - 'enhancement'
+    - title: 🐞 Bug Fixes
+      labels:
+        - 'type: bug'
+        - 'bug'
+    - title: ⚡ Performance
+      labels:
+        - 'type: performance'
+    - title: 📚 Documentation
+      labels:
+        - 'type: documentation'
+    - title: 📦 Dependencies
+      labels:
+        - 'dependencies'
+    - title: 🧰 Maintenance & Other
+      labels:
+        - '*'

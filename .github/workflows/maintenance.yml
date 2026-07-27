@@ -1,0 +1,82 @@
+# Installed from tannergolden/standards. Edit freely: this file is YOURS.
+#
+# Scheduled housekeeping, in one file: the weekly prune of workflow runs and
+# stale deployments, and the draft-release cleanup.
+#
+# The prune still checks WHICH cron fired via `github.event.schedule`, so
+# adding a second schedule later cannot silently start running it.
+#
+# A dispatch runs ONE task, chosen in the form. Draft-release deletion has
+# no schedule at all, deliberately: a scheduled deletion is a deletion
+# nobody decided to make.
+#
+# ⚠️ THE COPYRIGHT YEAR IS NOT MAINTAINED HERE, OR ANYWHERE. It is stamped
+# once, at generation, with the year this repository was created, and it
+# stays that year. A copyright notice records when a work was published, not
+# what today's date is.
+
+name: '🧹 Maintenance'
+
+on:
+  schedule:
+    - cron: '0 6 * * 1' # weekly: prune runs and deployments
+  workflow_dispatch:
+    inputs:
+      task:
+        description: 'Which maintenance task to run'
+        type: choice
+        options: [prune, prune-drafts]
+        default: prune
+      dry-run:
+        description: 'For prune: list what would be deleted and delete nothing'
+        type: boolean
+        default: false
+
+concurrency:
+  # One maintenance task at a time: a second prune would race the first
+  # run's paginated snapshot of the list it is deleting from.
+  group: ${{ github.workflow }}
+  cancel-in-progress: false
+
+# ⚠️ THE `permissions:` BELOW IS A CEILING, NOT A GRANT. For a job that calls a
+# reusable workflow, the caller's permissions cap what the called workflow may
+# request. Anything it asks for beyond them fails the run before a single job
+# starts: a startup failure, with no job, no step, and no log to read.
+#
+# They are written out rather than left to this repository's DEFAULT token
+# permissions, because a repository set to read-only - now the common default -
+# caps every write scope the same invisible way.
+#
+# Each job declares the union of what ITS called workflow's jobs ask for, and
+# nothing more - grouping the callers into one file does not widen any of
+# them. Widen one only to match a scope its called workflow actually declares.
+
+permissions: {}
+
+jobs:
+  prune:
+    # Inert in a template repository, live in every repository generated
+    # from one. `is_template` is true only in the template itself, which
+    # is the same signal init-template.yml guards on.
+    if: ${{ !github.event.repository.is_template && (github.event.schedule == '0 6 * * 1' || (github.event_name == 'workflow_dispatch' && inputs.task == 'prune')) }}
+    permissions:
+      actions: write # ceiling for the runs job, which this caller turns off
+      contents: read # read the recent commit list for the protection window
+      deployments: write # deactivate and delete stale deployments
+    uses: tannergolden/standards/.github/workflows/prune.yml@v1
+    with:
+      dry-run: ${{ inputs.dry-run || false }}
+      # Runs are pruned by prune-runs.yml, which runs in templates too.
+      # Two pruners would race each other's paginated snapshot.
+      prune-workflow-runs: false
+
+  prune-drafts:
+    # DISPATCH-ONLY, DELIBERATELY. This deletes releases, and no schedule
+    # can reach it: the condition names the dispatch and the task.
+    #
+    # Inert in a template repository, live in every repository generated
+    # from one.
+    if: ${{ !github.event.repository.is_template && github.event_name == 'workflow_dispatch' && inputs.task == 'prune-drafts' }}
+    permissions:
+      contents: write # deleting releases requires write
+    uses: tannergolden/standards/.github/workflows/prune-drafts.yml@v1

@@ -1,0 +1,54 @@
+// Development container - deliberately language-neutral.
+//
+// This scaffold does not know what you are about to write, so it installs
+// nothing language-specific. The base image plus git and the common utilities
+// is enough to clone, read, edit, and commit in any language.
+//
+// ADD YOUR OWN TOOLCHAIN below. The commented features cover the common ones;
+// the full catalogue is at https://containers.dev/features. Installing one
+// nobody needs costs a slow rebuild for everybody, which is why none is on.
+{
+  "name": "Golden Path",
+  "image": "mcr.microsoft.com/devcontainers/base:ubuntu",
+
+  "features": {
+    "ghcr.io/devcontainers/features/common-utils:1": {},
+    "ghcr.io/devcontainers/features/git:1": {}
+
+    // --- Uncomment what this project actually uses --------------------------
+    //
+    // "ghcr.io/devcontainers/features/node:1":   { "version": "lts" },
+    // "ghcr.io/devcontainers/features/python:1": { "version": "3.12" },
+    // "ghcr.io/devcontainers/features/go:1":     { "version": "latest" },
+    // "ghcr.io/devcontainers/features/rust:1":   { "version": "latest" },
+    // "ghcr.io/devcontainers/features/java:1":   { "version": "21" },
+    // "ghcr.io/devcontainers/features/dotnet:2": { "version": "latest" },
+    // "ghcr.io/devcontainers/features/ruby:1":   { "version": "latest" },
+    // "ghcr.io/devcontainers/features/php:1":    { "version": "latest" }
+  },
+
+  "customizations": {
+    "vscode": {
+      // Editor-agnostic essentials only. A formatter is a per-language choice,
+      // so none is installed and none is set as the default.
+      "extensions": [
+        "editorconfig.editorconfig",
+        "eamodio.gitlens",
+        "yzhang.markdown-all-in-one",
+        "davidanson.vscode-markdownlint",
+        "tamasfe.even-better-toml"
+      ],
+      "settings": {
+        "editor.formatOnSave": true,
+        "markdownlint.config": {
+          "MD013": false,
+          "MD033": false
+        }
+      }
+    }
+  }
+
+  // Set this to your project's bootstrap command once it has one, for example
+  // "npm ci", "pip install -e .", "go mod download", or "cargo fetch".
+  // "postCreateCommand": ""
+}

@@ -1,0 +1,55 @@
+# Installed from tannergolden/standards. Edit freely: this file is YOURS.
+#
+# Builds a branch and publishes it somewhere reviewable before it is
+# promoted.
+#
+# ⚠️ THE BRANCH BELOW IS NAMED DELIBERATELY. `Preview` is a promotion
+# branch, not your default branch, so it cannot be resolved at run
+# time. If you do not use one, change the trigger or delete this file.
+#
+# ⚠️ WITHOUT A `deploy-command` IT BUILDS AND DEPLOYS NOTHING, and says
+# so loudly rather than reporting a successful deploy that never
+# happened.
+
+name: '🚀 Preview Deploy'
+
+on:
+  push:
+    branches: ['Preview']
+  workflow_dispatch:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: false
+
+# ⚠️ THE `permissions:` BELOW IS A CEILING, NOT A GRANT. For a job that calls a
+# reusable workflow, the caller's permissions cap what the called workflow may
+# request. Anything it asks for beyond them fails the run before a single job
+# starts: a startup failure, with no job, no step, and no log to read.
+#
+# They are written out rather than left to this repository's DEFAULT token
+# permissions, because a repository set to read-only - now the common default -
+# caps every write scope the same invisible way.
+#
+# The list is the union of what the called workflow's own jobs ask for, and
+# each of those jobs still narrows it further from there. Widen it only to
+# match a scope the called workflow actually declares.
+
+permissions: {}
+
+jobs:
+  deploy:
+    # Inert in a template repository, live in every repository generated
+    # from one. `is_template` is true only in the template itself, which
+    # is the same signal init-template.yml guards on.
+    if: ${{ !github.event.repository.is_template }}
+    permissions:
+      contents: read # check out the ref being previewed
+      id-token: write # OIDC token for keyless auth to the deploy target
+    uses: tannergolden/standards/.github/workflows/preview-deploy.yml@v1
+    # The deploy command is yours; the credential reaches it as
+    # $DEPLOY_TOKEN. Nothing is published until you set one.
+    #
+    # with:
+    #   deploy-command: 'npx vercel deploy --prebuilt --token "$DEPLOY_TOKEN"'
+    secrets: inherit # zizmor: ignore[secrets-inherit] - first-party callee at the ref pinned above.

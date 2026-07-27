@@ -1,0 +1,112 @@
+# Keep the prefill short - the structured details are captured by the
+# form fields below.
+title: '📢 Announcement: <Component/Scope> - <Short summary>'
+labels:
+  - 'type: discussion'
+  - 'status: needs triage'
+body:
+  - type: markdown
+    attributes:
+      value: |
+        ## 📢 Announcements
+        Official updates such as releases, deprecations, and roadmap notes.
+        Maintainers post here; subscribers are notified.
+
+  - type: dropdown
+    id: update_type
+    attributes:
+      label: '📌 Update type'
+      options:
+        - 'Release (GA)'
+        - 'Patch / Hotfix'
+        - 'Breaking change'
+        - 'Security advisory'
+        - 'Deprecation announced'
+        - 'Deprecation effective'
+        - 'End-of-life (EOL)'
+        - 'Migration required'
+        - 'Roadmap note'
+        - 'Maintenance / Operations'
+        - 'Incident / Outage'
+        - 'Scheduled downtime'
+        - 'Dependency / Toolchain upgrade'
+        - 'Performance / Optimization'
+        - 'Beta / Preview'
+        - 'Governance / Policy'
+        - 'Compliance / Legal'
+        - 'Pricing / Billing change'
+        - 'Data / Privacy notice'
+        - 'Documentation update'
+        - 'Ecosystem / Integrations'
+        - 'Event / Meeting'
+        - 'Community announcement'
+    validations:
+      required: true
+
+  - type: input
+    id: version_or_id
+    attributes:
+      label: '🏷️ Version or identifier'
+      description: 'Release tag, milestone, or reference.'
+      placeholder: 'v1.2.3 / 2025-09 roadmap'
+
+  - type: input
+    id: effective_date
+    attributes:
+      label: '📅 Effective date'
+      description: 'When this takes effect (YYYY-MM-DD).'
+      placeholder: 'YYYY-MM-DD'
+
+  - type: input
+    id: scope
+    attributes:
+      label: '🧭 Scope'
+      description: 'Affected area or component (e.g., API, UI, docs, infra).'
+      placeholder: 'api, ui, docs, infra'
+
+  - type: textarea
+    id: summary
+    attributes:
+      label: '📰 Summary'
+      description: 'What changed and why (one to three sentences).'
+      placeholder: 'Concise overview of the announcement.'
+    validations:
+      required: true
+
+  - type: textarea
+    id: impact
+    attributes:
+      label: '🎯 Impact'
+      description: 'User/technical impact, risks, and any call to action.'
+      placeholder: "- Impacted users...\n- Risks...\n- Action required..."
+    validations:
+      required: true
+
+  - type: textarea
+    id: notes_guidance
+    attributes:
+      label: '🧾 Notes & guidance'
+      description: 'Optional additional context, policies, tips, cautions, or warnings.'
+      placeholder: |
+        Additional context:
+        Policy or rule:
+        Tip or best practice:
+        Caution (footguns to avoid):
+        Warning (breaking/security-critical):
+
+  - type: checkboxes
+    id: action_required
+    attributes:
+      label: '✅ Action required'
+      options:
+        - label: 'No action required'
+        - label: 'Update recommended'
+        - label: 'Migration required'
+        - label: 'Follow-up discussion scheduled'
+
+  - type: textarea
+    id: links
+    attributes:
+      label: '🔗 Links and references'
+      description: 'Changelog, docs, tracking issues, or PRs.'
+      placeholder: "- Changelog: …\n- Docs: …\n- Issue: …\n- PR: …"

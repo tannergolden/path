@@ -93,12 +93,12 @@ body:
   - type: checkboxes
     id: platform
     attributes:
-      label: '🧰 Environment (if applicable)'
-      description: 'Select platforms involved.'
+      label: '🧰 Platform (optional)'
       options:
         - label: Web
         - label: Mobile
         - label: Desktop
+        - label: Other
 
   - type: input
     id: device

@@ -132,27 +132,32 @@ body:
         <error/output here>
 
   - type: checkboxes
-    id: environment_labels
+    id: platform
     attributes:
-      label: '🌎 Environment labels (optional)'
+      label: '🧰 Platform (optional)'
       options:
-        - label: 'environment: Mobile'
-        - label: 'environment: Web Browser'
+        - label: Web
+        - label: Mobile
+        - label: Desktop
+        - label: Other
 
   - type: checkboxes
-    id: area_labels
+    id: affected_areas
     attributes:
-      label: '🧩 Affected areas (context)'
+      label: '🧩 Affected areas (optional)'
+      description: 'Maps to the shared area: labels. Tick any that apply.'
       options:
-        - label: 'area: Application Programming Interface (API)'
-        - label: 'area: Authentication'
-        - label: 'area: Billing'
+        - label: 'area: analytics'
+        - label: 'area: api'
+        - label: 'area: backend'
+        - label: 'area: database'
         - label: 'area: dx'
-        - label: 'area: Database'
-        - label: 'area: Deployment'
-        - label: 'area: Design / User Experience (UX)'
-        - label: 'area: Testing'
-        - label: 'area: User Interface (UI)'
+        - label: 'area: frontend'
+        - label: 'area: governance'
+        - label: 'area: i18n'
+        - label: 'area: infrastructure'
+        - label: 'area: mobile'
+        - label: 'area: ui/ux'
 
   - type: textarea
     id: links

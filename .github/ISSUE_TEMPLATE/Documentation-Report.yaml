@@ -111,11 +111,12 @@ body:
   - type: checkboxes
     id: platform
     attributes:
-      label: '🖥️ Platform context'
+      label: '🧰 Platform (optional)'
       options:
         - label: Web
         - label: Mobile
         - label: Desktop
+        - label: Other
 
   - type: textarea
     id: screenshots

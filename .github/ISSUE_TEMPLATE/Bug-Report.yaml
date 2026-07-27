@@ -100,11 +100,12 @@ body:
   - type: checkboxes
     id: platform
     attributes:
-      label: '🧰 Platform'
+      label: '🧰 Platform (optional)'
       options:
         - label: Web
         - label: Mobile
         - label: Desktop
+        - label: Other
 
   - type: input
     id: device
@@ -200,14 +201,20 @@ body:
   - type: checkboxes
     id: affected_areas
     attributes:
-      label: '🧩 Scope (areas affected)'
+      label: '🧩 Affected areas (optional)'
+      description: 'Maps to the shared area: labels. Tick any that apply.'
       options:
-        - label: User Interface (UI)
-        - label: Application Programming Interface (API)
-        - label: Database
-        - label: Build
-        - label: Deployment
-        - label: Other
+        - label: 'area: analytics'
+        - label: 'area: api'
+        - label: 'area: backend'
+        - label: 'area: database'
+        - label: 'area: dx'
+        - label: 'area: frontend'
+        - label: 'area: governance'
+        - label: 'area: i18n'
+        - label: 'area: infrastructure'
+        - label: 'area: mobile'
+        - label: 'area: ui/ux'
 
   - type: textarea
     id: workarounds

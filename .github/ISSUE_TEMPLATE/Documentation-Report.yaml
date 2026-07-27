@@ -1,0 +1,142 @@
+name: '📚 Documentation Report'
+description: '📖 Report documentation gaps, inaccuracies, outdated sections, or clarity issues so we can correct and improve them.'
+title: '📚 Documentation: <Page/Section> - <Concise Summary>'
+labels:
+  - 'status: needs triage'
+  - 'type: documentation'
+body:
+  - type: markdown
+    attributes:
+      value: |
+        <!-- Thank you for helping improve our documentation!
+             Please provide enough context so we can locate the content, understand
+             the issue, and fix it efficiently. Avoid sharing secrets or personally
+             identifiable information (PII). -->
+
+        ## 📌 What this template is for (and not for)
+
+        **Use this template for:**
+        - Outdated, inaccurate, or unclear instructions
+        - Missing examples, code snippets, or edge-case notes
+        - Broken links, typos, or formatting problems
+
+        **Don’t use this template for:**
+        - Product bugs or errors → use 🐛 Bug Report
+        - Usability or UX feedback → use 📝 Feedback Report
+        - Performance issues → use 🚀 Performance Report
+        - Accessibility issues → use ♿ Accessibility Report
+        - Feature requests → use ✨ Feature Request
+        - Security vulnerabilities → follow SECURITY.md (responsible disclosure)
+
+  - type: textarea
+    id: summary
+    attributes:
+      label: '✍️ Summary'
+      description: 'One or two sentences describing the documentation issue.'
+      placeholder: 'Example: The environment setup steps reference configuration screens that no longer exist.'
+    validations:
+      required: true
+
+  - type: textarea
+    id: location
+    attributes:
+      label: '🔗 Location'
+      description: 'Point us to the exact content. Include multiple if relevant.'
+      placeholder: |
+        - Page/Section: docs/<path>/<page>.md or navigation path
+        - URL(s): https://… , https://…
+        - Anchor/Heading (if applicable): <#heading-id>
+    validations:
+      required: true
+
+  - type: textarea
+    id: current_problem
+    attributes:
+      label: '🔎 Current content / problem'
+      description: 'Quote or summarize the current text/steps. Explain what is wrong or confusing.'
+      placeholder: 'Describe the current instructions/content and what’s inaccurate or unclear.'
+    validations:
+      required: true
+
+  - type: textarea
+    id: proposed_change
+    attributes:
+      label: '✅ Proposed change'
+      description: 'Provide the corrected text, steps, or structure you suggest. Code fences welcome.'
+      placeholder: |
+        Proposed text change or code sample:
+        ```md
+        # New heading
+        Updated steps…
+        ```
+    validations:
+      required: true
+
+  - type: textarea
+    id: rationale
+    attributes:
+      label: '📈 Rationale / impact'
+      description: 'Why this change matters.'
+      placeholder: 'Reduces support requests, prevents setup errors, aligns with current behavior, etc.'
+    validations:
+      required: true
+
+  - type: textarea
+    id: evidence
+    attributes:
+      label: '📎 Evidence / references (optional)'
+      description: 'Screenshots, recordings, or links that support your proposal (release notes, source code, product UI). Redact sensitive data.'
+      placeholder: 'Links, screenshots, or snippets supporting the change.'
+
+  - type: textarea
+    id: scope
+    attributes:
+      label: '🗺️ Scope (optional)'
+      description: 'List other pages/sections that may also need updates to stay consistent.'
+      placeholder: "- docs/…\n- guides/…\n- README sections…"
+
+  - type: input
+    id: product_version
+    attributes:
+      label: '🏷️ Product/App version (SemVer)'
+      placeholder: 'x.y.z'
+
+  - type: textarea
+    id: tooling_versions
+    attributes:
+      label: '🧰 Tooling versions'
+      description: 'If the documentation depends on versions.'
+      placeholder: 'Node.js x.y.z, CLI/SDK x.y.z, etc.'
+
+  - type: checkboxes
+    id: platform
+    attributes:
+      label: '🖥️ Platform context'
+      options:
+        - label: Web
+        - label: Mobile
+        - label: Desktop
+
+  - type: textarea
+    id: screenshots
+    attributes:
+      label: '🖼️ Screenshots / recordings (optional)'
+      description: 'Visuals that highlight the issue or show the updated flow.'
+      placeholder: 'Attach images or paste links to recordings.'
+
+  - type: textarea
+    id: additional_context
+    attributes:
+      label: '🔗 Additional context / links'
+      description: 'Related issues, PRs, discussions, or style guide references.'
+      placeholder: 'Links and extra notes.'
+
+  - type: checkboxes
+    id: reporter_checklist
+    attributes:
+      label: '✅ Reporter checklist'
+      options:
+        - label: 'I provided a link/path to the affected content.'
+        - label: 'I explained what is incorrect/missing and proposed a concrete change.'
+        - label: 'I verified product behavior and versions where relevant.'
+        - label: 'I removed or obfuscated secrets and personally identifiable information (PII).'

@@ -1,0 +1,67 @@
+# Installed from tannergolden/standards. Edit freely: this file is YOURS.
+#
+# Opens a labeled issue when a watched workflow fails on a long-lived
+# branch, and closes it again when that workflow recovers.
+#
+# ⚠️ THE WATCH LIST BELOW MATCHES ON WORKFLOW NAME, and those names are the
+# `name:` at the top of each file in THIS repository. The list ships
+# pointing at the stubs installed alongside it. Rename one of those and this
+# stops watching it silently, because a name that matches nothing is not an
+# error.
+#
+# The failure this exists for is the quiet one. A required check going red
+# blocks a merge and is noticed in minutes; a weekly scheduled job that
+# breaks is noticed in a month, if at all.
+
+name: '🚨 CI Failure Alerts'
+
+on:
+  workflow_run:
+    # ⚠️ WATCHED BY NAME, and a name that drifts is a workflow that silently
+    # stops being watched. These are the grouped workflow names - renaming
+    # one of those files' `name:` means renaming it here too.
+    workflows:
+      - '🚦 Checks'
+      - '⚖️ Governance'
+      - '📦 Release'
+      - '🧹 Maintenance'
+      # A job that runs twice a year is the one nobody notices has been
+      # broken since the last time it ran.
+      - '🎯 Standards Lifecycle'
+      - '🖌️ Code Style Formatter'
+      # Add any workflow whose silent failure would cost something.
+      #
+      # ⚠️ NEVER ADD THIS WORKFLOW TO ITS OWN LIST. It cannot escalate its
+      # own failure, and listing it only produces a loop.
+    types: [completed]
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.workflow_run.name }}-${{ github.event.workflow_run.head_branch }}
+  cancel-in-progress: false
+
+# ⚠️ THE `permissions:` BELOW IS A CEILING, NOT A GRANT. For a job that calls a
+# reusable workflow, the caller's permissions cap what the called workflow may
+# request. Anything it asks for beyond them fails the run before a single job
+# starts: a startup failure, with no job, no step, and no log to read.
+#
+# They are written out rather than left to this repository's DEFAULT token
+# permissions, because a repository set to read-only - now the common default -
+# caps every write scope the same invisible way.
+#
+# The list is the union of what the called workflow's own jobs ask for, and
+# each of those jobs still narrows it further from there. Widen it only to
+# match a scope the called workflow actually declares.
+
+permissions: {}
+
+jobs:
+  alert:
+    if: ${{ !github.event.repository.is_template }}
+    permissions:
+      issues: write # open the escalation issue, and close it on recovery
+    uses: tannergolden/standards/.github/workflows/ci-failure-alert.yml@v1
+    # Failures escalate on your default branch only. A topic branch failing
+    # is ordinary work in progress.
+    #
+    # with:
+    #   branches: '["Development", "Development"]'

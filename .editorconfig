@@ -1,0 +1,48 @@
+root = true
+
+[*]
+charset = utf-8
+end_of_line = lf
+insert_final_newline = true
+trim_trailing_whitespace = true
+indent_style = space
+indent_size = 2
+
+# Language Specific
+#
+# Each entry matches that language's own formatter default, so the editor and
+# the formatter never disagree. Add yours as the project grows.
+
+# Tabs are the language's own convention, not a preference.
+[*.go]
+indent_style = tab
+
+[Makefile]
+indent_style = tab
+
+[*.{c,h,cpp,hpp,cc,cs,java,kt,kts,swift,php,rs,sql,groovy,gradle}]
+indent_size = 4
+
+[*.py]
+indent_size = 4
+
+[*.{js,jsx,ts,tsx,mjs,cjs,vue,svelte,rb,lua,scala,dart,r,R}]
+indent_size = 2
+
+# Shell scripts must be LF regardless of the authoring platform: a script with
+# CRLF line endings fails to execute on Linux with a confusing error.
+[*.{sh,bash,zsh}]
+indent_size = 2
+end_of_line = lf
+
+# Batch files are the opposite case and need CRLF.
+[*.{bat,cmd}]
+end_of_line = crlf
+
+# Data & Config
+
+[*.{json,yml,yaml,toml}]
+indent_size = 2
+
+[*.md]
+trim_trailing_whitespace = false

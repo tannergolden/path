@@ -1,0 +1,26 @@
+{
+  // Formatting on save is universal. WHICH formatter is a per-language
+  // choice, so no default is set here - your language extension supplies it.
+  "editor.formatOnSave": true,
+  "editor.codeActionsOnSave": {
+    "source.fixAll": "explicit"
+  },
+  "files.insertFinalNewline": true,
+  "files.trimTrailingWhitespace": true,
+  "telemetry.telemetryLevel": "off",
+  "markdownlint.config": {
+    "MD013": false,
+    "MD033": false
+  },
+  "files.exclude": {
+    "**/.git": true,
+    "**/.svn": true,
+    "**/.hg": true,
+    "**/CVS": true,
+    "**/.DS_Store": true,
+    "**/Thumbs.db": true
+  },
+  // Words this scaffold uses that a spell checker would otherwise flag. Add
+  // your own project's vocabulary as it grows.
+  "cSpell.words": ["adrs", "CODEOWNERS", "devcontainer", "gitleaks", "zizmor"]
+}

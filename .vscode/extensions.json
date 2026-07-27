@@ -1,0 +1,13 @@
+{
+  // Language-neutral recommendations only. Add the extension for whatever you
+  // end up writing; this scaffold cannot know what that is.
+  "recommendations": [
+    "editorconfig.editorconfig",
+    "eamodio.gitlens",
+    "usernamehw.errorlens",
+    "streetsidesoftware.code-spell-checker",
+    "yzhang.markdown-all-in-one",
+    "davidanson.vscode-markdownlint",
+    "tamasfe.even-better-toml"
+  ]
+}

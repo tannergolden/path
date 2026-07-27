@@ -1,0 +1,222 @@
+name: '🚀 Performance Report'
+description: '⚡️ Report slow pages, high latency, memory spikes, or inefficiencies so we can measure, reproduce, and optimize performance.'
+# Keep the prefill short - platform and version are captured by dedicated
+# form fields below.
+title: '🚀 Performance: <Component/Flow> - <Symptom/Metric>'
+labels:
+  - 'status: needs triage'
+  - 'type: performance'
+body:
+  - type: markdown
+    attributes:
+      value: |
+        <!-- Thank you for helping us improve performance!
+             Provide measurable signals and clear steps. Avoid sharing secrets
+             or personally identifiable information (PII). -->
+
+        ## 📌 What this template is for (and not for)
+
+        **Use this template for:**
+        - Slow load times or app startup delays
+        - High memory or CPU usage
+        - Animation jank, frame drops, or lag
+
+        **Don’t use this template for:**
+        - Product bugs or broken features → use 🐛 Bug Report
+        - Usability or design improvements → use 📝 Feedback Report
+        - Documentation gaps or errors → use 📖 Documentation Report
+        - Accessibility-specific issues → use ♿ Accessibility Report
+        - New functionality requests → use ✨ Feature Request
+        - Security vulnerabilities → follow SECURITY.md (responsible disclosure)
+
+  - type: textarea
+    id: summary
+    attributes:
+      label: '✍️ Summary'
+      description: 'One or two sentences describing the performance concern.'
+      placeholder: 'Example: Dashboard takes ~6–8s to become interactive on first load over 4G.'
+    validations:
+      required: true
+
+  - type: input
+    id: audience
+    attributes:
+      label: '👥 Who is affected'
+      description: 'Audience/persona and scope.'
+      placeholder: 'Example: New users on mobile over cellular networks.'
+    validations:
+      required: true
+
+  - type: dropdown
+    id: scope
+    attributes:
+      label: '📊 Approximate scope'
+      options:
+        - All
+        - Many
+        - Some
+        - Few
+    validations:
+      required: true
+
+  - type: textarea
+    id: scenario
+    attributes:
+      label: '🔎 Scenario / current experience'
+      description: 'Describe the flow/workload where the issue appears. Include data size, filters, or account state if relevant.'
+      placeholder: 'User journey, workload characteristics, and where slowness is noticed.'
+    validations:
+      required: true
+
+  - type: textarea
+    id: steps_to_reproduce
+    attributes:
+      label: '🔁 Steps to reproduce'
+      description: 'Precise, numbered steps to reproduce consistently. Include dataset size, concurrency, or iteration counts if relevant.'
+      placeholder: |
+        1) …
+        2) …
+        3) …
+        4) …
+    validations:
+      required: true
+
+  - type: textarea
+    id: measurements
+    attributes:
+      label: '📈 Measurements & evidence'
+      description: 'Provide concrete metrics, timestamps, and artifacts. Attach screenshots/recordings and link traces if available.'
+      placeholder: |
+        - Page load: TTFB __ ms · TTI __ ms · LCP __ ms
+        - Runtime: CPU __% · Memory peak __ MB
+        - Network: p95 latency __ ms · Payload __ KB/MB · Requests/action __
+        - Logs/traces: link to profiling session / flamegraph / trace ID(s)
+        - Before vs after (if tested): baseline → candidate numbers
+    validations:
+      required: true
+
+  - type: textarea
+    id: actual_result
+    attributes:
+      label: '❗ Actual result'
+      description: 'What happens now (measured).'
+      placeholder: 'Observed timings, resource usage, and user-visible symptoms.'
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected_result
+    attributes:
+      label: '✅ Expected result'
+      description: 'Target goals or budgets.'
+      placeholder: 'e.g., p95 < 300 ms, LCP < 2.5 s, memory stable within ±10%.'
+    validations:
+      required: true
+
+  - type: checkboxes
+    id: platform
+    attributes:
+      label: '🧰 Platform'
+      options:
+        - label: Web
+        - label: Mobile
+        - label: Desktop
+
+  - type: input
+    id: device
+    attributes:
+      label: '📱 Device (for mobile/low-power)'
+      placeholder: 'e.g., iPhone 15 / Pixel 8 / low-end Android'
+
+  - type: input
+    id: os_version
+    attributes:
+      label: '💻 Operating System (OS) & version'
+      placeholder: 'macOS 14.5 / Windows 11 / iOS 17.5 / Android 14'
+
+  - type: input
+    id: browser_version
+    attributes:
+      label: '🌐 Web Browser & version'
+      placeholder: 'Chrome 128 / Safari 17.5 / Firefox 128 / Edge 128'
+
+  - type: input
+    id: network_conditions
+    attributes:
+      label: '📶 Network conditions'
+      placeholder: 'Wi-Fi (speed/latency) / Cellular (3G/4G/5G) / throttled profile'
+
+  - type: input
+    id: app_version
+    attributes:
+      label: '🏷️ Application version (SemVer)'
+      placeholder: 'x.y.z'
+
+  - type: input
+    id: branch_commit
+    attributes:
+      label: '🔖 Branch / Commit SHA'
+      placeholder: 'Development|Preview|Release / abcdef1'
+
+  - type: input
+    id: backend_region
+    attributes:
+      label: '🗺️ Backend/region (if applicable)'
+      placeholder: 'e.g., United States-East, Europe-West'
+
+  - type: input
+    id: backend_environment
+    attributes:
+      label: '☁️ Backend / cloud environment (if relevant)'
+      description: 'Project/account identifier, region, or local emulator/stack.'
+      placeholder: 'e.g., production eu-west-1 / staging project-id / local emulator'
+
+  - type: textarea
+    id: diagnostics
+    attributes:
+      label: '🧪 Diagnostics performed (optional)'
+      description: 'Profiling tools and results (e.g., Performance panel, Lighthouse, React Profiler, flamegraphs, query plans).'
+      placeholder: 'List diagnostics and attach results if possible.'
+
+  - type: dropdown
+    id: severity
+    attributes:
+      label: '🎯 Impact / severity'
+      options:
+        - Critical
+        - High
+        - Medium
+        - Low
+    validations:
+      required: true
+
+  - type: textarea
+    id: business_impact
+    attributes:
+      label: '💼 Business impact (optional)'
+      description: 'Conversion, time-to-task, support volume, SLAs, or other effects.'
+      placeholder: 'Describe downstream impact.'
+
+  - type: textarea
+    id: proposed_direction
+    attributes:
+      label: '🧭 Proposed direction (optional)'
+      description: 'Quick ideas to explore (e.g., cache layer, pagination, index, code-splitting, image optimization).'
+      placeholder: 'Potential fixes or experiments.'
+
+  - type: textarea
+    id: additional_context
+    attributes:
+      label: '🔗 Additional context / links'
+      description: 'Related issues, PRs, dashboards, runbooks, or documents.'
+      placeholder: 'Links and extra notes.'
+
+  - type: checkboxes
+    id: reporter_checklist
+    attributes:
+      label: '✅ Reporter checklist'
+      options:
+        - label: 'I provided measurable metrics (e.g., p95, TTI, LCP).'
+        - label: 'I included exact reproduction steps and environment details.'
+        - label: 'I attached evidence (screenshots/recordings/profiles) where possible.'
+        - label: 'I removed or obfuscated secrets and personally identifiable information (PII).'

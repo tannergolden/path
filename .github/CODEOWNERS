@@ -1,0 +1,45 @@
+# =============================================================================
+# CODEOWNERS - Folder-based ownership rules
+#
+# This is a TEMPLATE. No owners are assigned by default, so a fresh repository
+# never ships with invalid CODEOWNERS entries (a rule with no valid owner is a
+# GitHub error and cannot satisfy "Require review from Code Owners").
+#
+# To enable code-owner review:
+#   1. Uncomment the rule(s) you want below.
+#   2. Replace @your-org/your-team with a real @user or @org/team that has
+#      write access to this repository.
+#   3. (Optional) Enable: Settings → Branches → Branch protection →
+#      "Require review from Code Owners".
+#
+# PRECEDENCE: the LAST matching rule wins. Put broad defaults first, then more
+# specific overrides below.
+# =============================================================================
+
+
+# ---------------------------------------------------------------------------
+# 0) GLOBAL DEFAULT - fallback owner for any unmatched file.
+# ---------------------------------------------------------------------------
+# *                                    @your-org/your-team
+
+
+# ---------------------------------------------------------------------------
+# 1) REPOSITORY GOVERNANCE & AUTOMATION
+# ---------------------------------------------------------------------------
+# /.github/                            @your-org/your-team
+# /.github/workflows/                  @your-org/your-team
+# /assets/                             @your-org/your-team
+# /.devcontainer/                      @your-org/your-team
+
+
+# ---------------------------------------------------------------------------
+# 2) APPLICATION SOURCE & TESTS
+# ---------------------------------------------------------------------------
+# /src/                                @your-org/your-team
+# /tests/                              @your-org/your-team
+
+
+# ---------------------------------------------------------------------------
+# 3) DOCUMENTATION
+# ---------------------------------------------------------------------------
+# /docs/                               @your-org/your-team

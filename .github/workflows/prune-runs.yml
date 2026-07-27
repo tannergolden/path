@@ -1,0 +1,58 @@
+# Installed from tannergolden/standards. Edit freely: this file is YOURS.
+#
+# Keeps the Actions tab readable. Everything is deleted except:
+#
+#   * every COMMIT-TRIGGERED run from the last 7 days - a push, a pull
+#     request, or a merge group. Those answer "what happened to this
+#     commit?", which is the only question old run history ever gets asked.
+#   * one run per workflow, so every workflow keeps a worked example even
+#     when nobody has touched it for months.
+#
+# A schedule or a manual dispatch is NOT commit-triggered, deliberately. A
+# nightly job that ran 300 times says nothing a single kept run does not.
+#
+# ⚠️ THIS RUNS IN THE TEMPLATE ITSELF, and it is one of only two that do
+# (the other is 🎯 Apply Standards). A template accumulates run history the
+# same way any repository does, and nothing else would ever clear it.
+#
+# Deleting a run removes its logs and artifacts too. In-flight runs are
+# never deleted, so this can never delete the job it is executing in.
+
+name: '🧹 Prune Run History'
+
+on:
+  schedule:
+    - cron: '30 6 * * 1' # weekly, half an hour after 🧹 Maintenance
+  workflow_dispatch:
+    inputs:
+      dry-run:
+        description: 'List what would be deleted and delete nothing'
+        type: boolean
+        default: false
+
+concurrency:
+  # One pruner at a time: a second run would race this one's paginated
+  # snapshot of the list it is deleting from.
+  group: ${{ github.workflow }}
+  cancel-in-progress: false
+
+# ⚠️ THE `permissions:` BELOW IS A CEILING, NOT A GRANT. For a job that calls a
+# reusable workflow, the caller's permissions cap what the called workflow may
+# request. Anything it asks for beyond them fails the run before a single job
+# starts: a startup failure, with no job, no step, and no log to read.
+
+permissions: {}
+
+jobs:
+  prune-runs:
+    permissions:
+      actions: write # delete workflow runs, with their logs and artifacts
+      contents: read # read the default branch to resolve the commit window
+    uses: tannergolden/standards/.github/workflows/prune-runs.yml@v1
+    with:
+      dry-run: ${{ inputs.dry-run || false }}
+      keep: 1
+      keep-recent-days: 7
+      # Off: the 7-day window is the protection here, and a commit count
+      # would silently widen it for a repository that commits in bursts.
+      keep-recent-commits: 0

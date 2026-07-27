@@ -1,0 +1,69 @@
+# Installed from tannergolden/standards. Edit freely: this file is YOURS.
+#
+# This repository's relationship with the standards, in one file: claimed
+# for its new owner at generation, and told - once - when a new major of
+# the standards exists.
+#
+# The init job runs exactly once. The template ships a sentinel file,
+# `.github/TEMPLATE_INIT`; initialisation removes it on success, and every
+# later trigger sees it missing and does nothing. Re-running is harmless,
+# which is why the dispatch stays available.
+
+name: '🎯 Standards Lifecycle'
+
+on:
+  push:
+  create:
+  schedule:
+    - cron: '0 7 * * 1' # weekly: is there a new major of the standards?
+  workflow_dispatch:
+
+concurrency:
+  group: ${{ github.workflow }}
+  cancel-in-progress: false
+
+# ⚠️ THE `permissions:` BELOW IS A CEILING, NOT A GRANT. For a job that calls a
+# reusable workflow, the caller's permissions cap what the called workflow may
+# request. Anything it asks for beyond them fails the run before a single job
+# starts: a startup failure, with no job, no step, and no log to read.
+#
+# They are written out rather than left to this repository's DEFAULT token
+# permissions, because a repository set to read-only - now the common default -
+# caps every write scope the same invisible way.
+#
+# Each job declares the union of what ITS called workflow's jobs ask for, and
+# nothing more - grouping the callers into one file does not widen any of
+# them. Widen one only to match a scope its called workflow actually declares.
+
+permissions: {}
+
+jobs:
+  init:
+    # ONLY EVER THE DEFAULT BRANCH, whatever it is called. This matters more
+    # than it looks: `create` fires for every branch AND every tag, so without
+    # this a topic branch created before initialisation would run it, and this
+    # workflow force-pushes to the default branch - it would put that topic
+    # branch's content there. A manual dispatch is exempt because the operator
+    # chose the ref themselves. The weekly cron belongs to the version check
+    # below, not to this.
+    if: ${{ !github.event.repository.is_template && (github.event_name != 'schedule' && (github.event_name == 'workflow_dispatch' || github.ref_name == github.event.repository.default_branch)) }}
+    permissions:
+      contents: write # rewrite the identity and push the result
+    uses: tannergolden/standards/.github/workflows/init-template.yml@v1
+    # Set amend-initial to false to keep GitHub's bare "Initial commit"
+    # instead of rewriting it into a Conventional Commit.
+    #
+    # with:
+    #   amend-initial: false
+
+  standards:
+    # The version check runs on its schedule and on request - never on every
+    # push, which would be noise and API calls for an answer that changes at
+    # most once per major.
+    if: ${{ !github.event.repository.is_template && (github.event_name == 'schedule' || github.event_name == 'workflow_dispatch') }}
+    permissions:
+      contents: read # read this repository's own stubs
+      issues: write # open the one notice
+    uses: tannergolden/standards/.github/workflows/standards-version.yml@v1
+    # with:
+    #   label: 'dependencies'

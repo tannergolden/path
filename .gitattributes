@@ -1,0 +1,135 @@
+# =============================================================================
+# Git attributes - line endings, diffs, and what counts as binary
+# =============================================================================
+# Git reads this file only from the repository that owns it, so it cannot be
+# shared and always lives here.
+# =============================================================================
+
+# Normalise every text file to LF in the repository. Working copies still use
+# the platform's convention; only what Git stores is normalised.
+* text=auto
+
+# --- Line endings that are not a preference ---------------------------------
+#
+# A shell script committed with CRLF fails to execute on Linux with an error
+# that names the interpreter rather than the line endings, which is why this is
+# forced rather than left to autocrlf.
+*.sh    text eol=lf
+*.bash  text eol=lf
+*.zsh   text eol=lf
+*.fish  text eol=lf
+Makefile text eol=lf
+
+# Batch and PowerShell are the opposite case.
+*.bat text eol=crlf
+*.cmd text eol=crlf
+*.ps1 text eol=crlf
+
+# --- Language-aware diff hunk headers ---------------------------------------
+#
+# Git shows the enclosing function or section in each hunk header for these.
+*.md   diff=markdown
+*.html diff=html
+*.css  diff=css
+*.py   diff=python
+*.go   diff=golang
+*.rs   diff=rust
+*.rb   diff=ruby
+*.php  diff=php
+*.java diff=java
+*.cs   diff=csharp
+*.c    diff=cpp
+*.h    diff=cpp
+*.cpp  diff=cpp
+*.tex  diff=tex
+*.json diff=json
+*.xml  diff=xml
+
+# --- Generated files --------------------------------------------------------
+#
+# Lockfiles are machine-written: collapse them in pull-request diffs and keep
+# them out of the language statistics, which they would otherwise dominate.
+package-lock.json  linguist-generated=true -diff
+yarn.lock          linguist-generated=true -diff
+pnpm-lock.yaml     linguist-generated=true -diff
+bun.lockb          linguist-generated=true -diff binary
+poetry.lock        linguist-generated=true -diff
+Cargo.lock         linguist-generated=true -diff
+composer.lock      linguist-generated=true -diff
+Gemfile.lock       linguist-generated=true -diff
+go.sum             linguist-generated=true -diff
+
+# Vendored dependencies are somebody else's code.
+vendor/**       linguist-vendored=true
+third_party/**  linguist-vendored=true
+
+# Documentation should not be counted as the project's language.
+docs/**  linguist-documentation=true
+
+# --- Binary ------------------------------------------------------------------
+#
+# Marked explicitly so Git never attempts a text diff or a line-ending
+# conversion on them, which corrupts the file.
+*.png  binary
+*.jpg  binary
+*.jpeg binary
+*.gif  binary
+*.ico  binary
+*.webp binary
+*.avif binary
+*.bmp  binary
+*.tif  binary
+*.tiff binary
+*.psd  binary
+*.ai   binary
+*.pdf  binary
+
+*.mov binary
+*.mp4 binary
+*.avi binary
+*.webm binary
+*.mp3 binary
+*.wav binary
+*.flac binary
+*.ogg binary
+
+*.ttf   binary
+*.otf   binary
+*.eot   binary
+*.woff  binary
+*.woff2 binary
+
+*.gz  binary
+*.bz2 binary
+*.xz  binary
+*.zip binary
+*.7z  binary
+*.rar binary
+*.tar binary
+*.jar binary
+*.war binary
+
+*.so    binary
+*.dylib binary
+*.dll   binary
+*.exe   binary
+*.wasm  binary
+*.pyc   binary
+*.class binary
+*.o     binary
+*.a     binary
+
+*.db     binary
+*.sqlite binary
+*.sqlite3 binary
+
+# --- Archive hygiene ---------------------------------------------------------
+#
+# Excluded from `git archive`, so a source tarball carries the project rather
+# than the machinery that develops it.
+.github/       export-ignore
+.devcontainer/ export-ignore
+.vscode/       export-ignore
+.gitattributes export-ignore
+.gitignore     export-ignore
+.editorconfig  export-ignore

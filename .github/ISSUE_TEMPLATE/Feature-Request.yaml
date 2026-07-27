@@ -1,0 +1,158 @@
+name: '✨ Feature Request'
+description: '🪄 Propose new functionality or enhancements with clear acceptance criteria, rationale, and success metrics.'
+title: '✨ Feature Request: <Component/Area> - <Concise Summary>'
+labels:
+  - 'status: needs triage'
+  - 'type: feature'
+body:
+  - type: markdown
+    attributes:
+      value: |
+        <!-- Use this to request a new capability or enhancement. Avoid sharing secrets or personally identifiable information (PII). -->
+
+        ## 📌 What this template is for (and not for)
+
+        **Use this template for:**
+        - Proposing new functionality or tools
+        - Enhancements to existing features
+        - Ideas for improving workflows or expanding capabilities
+
+        **Don’t use this template for:**
+        - Bugs, crashes, or broken functionality → use 🐛 Bug Report
+        - Usability feedback → use 📝 Feedback Report
+        - Performance issues → use 🚀 Performance Report
+        - Documentation improvements → use 📖 Documentation Report
+        - Accessibility concerns → use ♿ Accessibility Report
+        - Security vulnerabilities → follow SECURITY.md (responsible disclosure)
+
+  - type: textarea
+    id: summary
+    attributes:
+      label: '✍️ Summary'
+      description: 'One or two sentences describing the requested capability.'
+      placeholder: 'Brief description of the request.'
+    validations:
+      required: true
+
+  - type: input
+    id: audience
+    attributes:
+      label: '👥 Who is affected'
+      description: 'Audience/persona most impacted.'
+      placeholder: 'End users, admins, developers, operators, etc.'
+    validations:
+      required: true
+
+  - type: dropdown
+    id: scope
+    attributes:
+      label: '📊 Approximate scope'
+      options:
+        - All
+        - Many
+        - Some
+        - Few
+    validations:
+      required: true
+
+  - type: textarea
+    id: problem_motivation
+    attributes:
+      label: '🤔 Problem / motivation'
+      description: 'What problem are we solving and why does it matter?'
+      placeholder: 'Pain points, user goals, business impact.'
+    validations:
+      required: true
+
+  - type: textarea
+    id: current_experience
+    attributes:
+      label: '🔎 Current experience / limitation (optional)'
+      description: 'What happens today? Where is the friction or limitation?'
+      placeholder: 'Describe the current flow and its limitations.'
+
+  - type: textarea
+    id: proposed_solution
+    attributes:
+      label: '💡 Proposed solution'
+      description: 'High-level solution. Include examples, sketches, or references.'
+      placeholder: 'Describe the proposed approach and alternatives considered.'
+    validations:
+      required: true
+
+  - type: textarea
+    id: acceptance_criteria
+    attributes:
+      label: '✅ Acceptance criteria'
+      description: 'Verifiable outcomes (Given/When/Then or a checklist).'
+      placeholder: |
+        - [ ] Given <context>, when <action>, then <outcome>.
+        - [ ] Key behavior validated via automated tests.
+        - [ ] Documentation updated (README/CHANGELOG).
+    validations:
+      required: true
+
+  - type: textarea
+    id: success_metrics
+    attributes:
+      label: '📈 Success metrics (optional)'
+      description: 'How we will measure success.'
+      placeholder: 'Adoption, conversion, error rate, time-on-task, NPS, etc.'
+
+  - type: textarea
+    id: dependencies_risks
+    attributes:
+      label: '🔗 Dependencies / risks (optional)'
+      description: 'Upstream services, permissions, migrations, sequencing, rollout risks.'
+      placeholder: 'List dependencies, blockers, and known risks.'
+
+  - type: textarea
+    id: scope_in_out
+    attributes:
+      label: '🗺️ Scope / out of scope (optional)'
+      description: 'Clarify what is included vs. explicitly excluded.'
+      placeholder: "In scope: …\nOut of scope: …"
+
+  - type: checkboxes
+    id: platform
+    attributes:
+      label: '🧰 Platform (if applicable)'
+      options:
+        - label: Web
+        - label: Mobile
+        - label: Desktop
+
+  - type: checkboxes
+    id: affected_areas
+    attributes:
+      label: '🧩 Affected areas'
+      options:
+        - label: User Interface (UI)
+        - label: Application Programming Interface (API)
+        - label: Backend
+        - label: Database
+        - label: Build / Deployment
+        - label: Other
+
+  - type: input
+    id: app_version
+    attributes:
+      label: '🏷️ Application version (SemVer)'
+      placeholder: 'x.y.z'
+
+  - type: textarea
+    id: additional_context
+    attributes:
+      label: '🔗 Additional context / links'
+      description: 'Related issues, PRs, designs, analytics, or documents.'
+      placeholder: 'Links and extra notes.'
+
+  - type: checkboxes
+    id: reporter_checklist
+    attributes:
+      label: '✅ Reporter checklist'
+      options:
+        - label: 'I explained the problem, motivation, and proposed solution.'
+        - label: 'I included acceptance criteria and success metrics.'
+        - label: 'I linked relevant designs, analytics, or related issues.'
+        - label: 'I removed or obfuscated secrets and PII.'

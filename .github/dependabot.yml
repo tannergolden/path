@@ -1,0 +1,73 @@
+# =============================================================================
+# Dependabot - automated dependency updates
+# https://docs.github.com/en/code-security/dependabot/dependabot-version-updates
+# =============================================================================
+# GitHub reads this file ONLY from the repository that owns it, so unlike the
+# workflows it cannot be shared and has to live here.
+#
+# ⚠️ ONLY `github-actions` IS ENABLED, because it is the only ecosystem this
+# template can be sure exists. A `package-ecosystem` pointing at a manifest
+# that is not there produces a standing error on the Dependabot tab rather
+# than being quietly ignored, so the language ecosystems are commented out
+# below for you to enable as you add them.
+#
+# Pair this with the `dependabot-automerge` stub from tannergolden/standards
+# and patch and minor updates approve and merge themselves once your required
+# checks pass. Majors still wait for a human.
+#
+# EVERY UPDATE IS A CONVENTIONAL COMMIT. `commit-message.prefix` makes
+# Dependabot title its pull requests `build(deps): ...` rather than its default
+# "Bump x from 1 to 2". That matters for two reasons:
+#
+#   1. On a squash merge the pull request TITLE becomes the commit that lands.
+#      The default is not a Conventional Commit, so every merged update would
+#      put a non-conforming message into permanent history.
+#   2. Changelog generation parses those messages. A non-conforming one is
+#      silently dropped, so dependency updates would be missing from your
+#      release notes entirely.
+#
+# `build` is the Conventional Commits type for changes to the build system or
+# external dependencies. Keep it on any ecosystem you enable below.
+# =============================================================================
+
+version: 2
+updates:
+  # Keeps the pinned action SHAs in your workflow stubs current. Correct for
+  # every repository from the moment it is generated, whatever language it is
+  # written in.
+  - package-ecosystem: 'github-actions'
+    directory: '/'
+    schedule:
+      # Monthly, not weekly. Grouped updates make the cadence the only
+      # remaining source of noise, and a pin that is four weeks old is not a
+      # problem worth a weekly interruption. `day` is a weekly-only key and is
+      # dropped here; monthly runs on the first of the month.
+      interval: 'monthly'
+      time: '07:00'
+      timezone: 'Etc/UTC'
+    open-pull-requests-limit: 5
+    commit-message:
+      prefix: 'build'
+      include: 'scope'
+    labels:
+      - 'type: build'
+      - 'dependencies'
+    groups:
+      github-actions:
+        patterns:
+          - '*'
+
+  # --- Enable the ones your project actually uses -------------------------
+  #
+  # Copy the block above - INCLUDING the commit-message block, or that
+  # ecosystem's updates will not be Conventional Commits - change
+  # `package-ecosystem`, and point `directory` at the folder holding the
+  # manifest:
+  #
+  #   npm       package.json          pip        pyproject.toml
+  #   cargo     Cargo.toml            gomod      go.mod
+  #   maven     pom.xml               gradle     build.gradle
+  #   nuget     *.csproj              bundler    Gemfile
+  #   composer  composer.json         docker     Dockerfile
+  #
+  # The full list is in the documentation linked at the top of this file.

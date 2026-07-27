@@ -1,0 +1,209 @@
+# Installed from tannergolden/standards. Edit freely: this file is YOURS.
+#
+# Checks that every stub in this repository declares the permission ceiling
+# its called workflow actually needs, and passes only inputs that workflow
+# accepts.
+#
+# ⚠️ THIS IS THE CHEAPEST CHECK HERE AND THE MOST EXPENSIVE FAILURE IT
+# PREVENTS. A caller's `permissions:` block is a CEILING, not a grant: it
+# caps what the called workflow may request. Ask for less than the callee
+# declares and the run fails at STARTUP - no job, no step, no log, nothing in
+# the Actions tab to read. Ask for more and you have handed a workflow scopes
+# it never said it needed.
+#
+# ⚠️ IT READS TWO REFS, AND THAT IS THE POINT. The stubs pin `@v1`, so the
+# check resolves them against `v1` - the code you actually run. But `v1` is a
+# MOVING tag, which means the same commit can pass at one moment and fail at
+# another: push a stub that uses something newer than the current release and
+# it fails until the release moves. That is a true failure (the stub really is
+# broken meanwhile) but it is a DIFFERENT failure from a typo, so it is
+# reported differently. The standards default branch is read purely to tell
+# the two apart:
+#
+#   missing at v1, missing on the default branch  -> a real mistake
+#   missing at v1, PRESENT on the default branch  -> waiting on a release
+#
+# The rule that avoids the second entirely: ship standards, cut the release
+# so `v1` moves, THEN change the stubs. Remember that re-signing commits is
+# also a push, and lands them in a new minute.
+#
+# Runs when a workflow file changes, and once a day - so a failure that was
+# only ever waiting on a release clears itself without anyone re-running it.
+
+name: '🔬 Verify Stub Ceilings'
+
+on:
+  push:
+    paths: ['.github/workflows/**']
+  pull_request:
+    paths: ['.github/workflows/**']
+  schedule:
+    - cron: '15 7 * * *' # daily: clears a stale "waiting on a release"
+  workflow_dispatch:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: false
+
+permissions: {}
+
+jobs:
+  ceilings:
+    name: '🔬 Stub Permission Ceilings'
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      contents: read # read this repository's workflows
+    steps:
+      - name: '🛡️ Harden Runner'
+        uses: tannergolden/standards/actions/harden@v1
+        with:
+          egress-policy: audit
+          notice: '🔬 Verifying that every stub asks for what its called workflow declares.'
+
+      - name: '📂 Checkout'
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+
+      - name: '📥 Fetch the standards at the pinned ref'
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          repository: tannergolden/standards
+          ref: v1
+          path: .standards
+          persist-credentials: false
+
+      # The same repository at its DEFAULT branch, used only to classify a
+      # failure. `continue-on-error` on purpose: losing this comparison makes
+      # the diagnosis vaguer, it does not make the check wrong.
+      - name: '📥 Fetch the standards at its default branch'
+        continue-on-error: true
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          repository: tannergolden/standards
+          path: .standards-latest
+          persist-credentials: false
+
+      - name: '🔬 Compare every ceiling against its callee'
+        run: |
+          python3 - <<'PY'
+          import os, pathlib, re, sys, yaml
+
+          HERE   = pathlib.Path('.github/workflows')
+          PINNED = pathlib.Path('.standards/.github/workflows')
+          LATEST = pathlib.Path('.standards-latest/.github/workflows')
+          CALL   = re.compile(r'tannergolden/standards/\.github/workflows/([\w.-]+\.yml)@(\S+)')
+
+          def load(path):
+              return yaml.safe_load(path.read_text(encoding='utf-8')) if path.is_file() else None
+
+          def ceiling_of(doc):
+              # The union of what the callee's own jobs ask for. write beats
+              # read wherever both appear, so the result does not depend on
+              # the order the jobs are declared.
+              want = {}
+              for inner in (doc.get('jobs') or {}).values():
+                  for scope, level in (inner.get('permissions') or {}).items():
+                      if want.get(scope) != 'write':
+                          want[scope] = level
+              return want
+
+          def inputs_of(doc):
+              # A bare `workflow_call:` parses as None, not {}.
+              spec = ((doc.get(True) or doc.get('on')) or {}).get('workflow_call') or {}
+              return set(spec.get('inputs') or {})
+
+          broken, pending, checked = [], [], 0
+          comparable = LATEST.is_dir()
+
+          for f in sorted(HERE.glob('*.yml')):
+              doc = yaml.safe_load(f.read_text(encoding='utf-8')) or {}
+              for job_id, job in (doc.get('jobs') or {}).items():
+                  m = CALL.search(str(job.get('uses', '')))
+                  if not m:
+                      continue
+                  name = m.group(1)
+                  pinned = load(PINNED / name)
+                  latest = load(LATEST / name) if comparable else None
+
+                  if pinned is None:
+                      if latest is not None:
+                          pending.append(
+                              f"{f.name}: job '{job_id}' calls {name}, which exists on the "
+                              f"standards default branch but is NOT in the release v1 points "
+                              f"at. Cut a release with move-major; this check clears itself "
+                              f"on its daily run.")
+                      else:
+                          broken.append(
+                              f"{f.name}: job '{job_id}' calls {name}, which does not exist in "
+                              f"tannergolden/standards at v1 or on its default branch.")
+                      continue
+
+                  checked += 1
+
+                  # Passing an input a reusable workflow does not declare is
+                  # not ignored - it fails the run.
+                  unknown = sorted(set(job.get('with') or {}) - inputs_of(pinned))
+                  if unknown:
+                      nowhere = sorted(set(unknown) - (inputs_of(latest) if latest else set()))
+                      if latest is not None and not nowhere:
+                          pending.append(
+                              f"{f.name}: job '{job_id}' passes {unknown}, which {name} accepts "
+                              f"on the standards default branch but NOT at v1. Cut a release "
+                              f"with move-major; this check clears itself on its daily run.")
+                      else:
+                          broken.append(
+                              f"{f.name}: job '{job_id}' passes {nowhere or unknown}, which "
+                              f"{name} does not accept - the run fails, it is not ignored.")
+
+                  want = ceiling_of(pinned)
+                  have = job.get('permissions') or {}
+                  if have != want:
+                      if latest is not None and have == ceiling_of(latest):
+                          pending.append(
+                              f"{f.name}: job '{job_id}' declares the ceiling {name} asks for on "
+                              f"the standards default branch, not the one at v1 ({want}). Cut a "
+                              f"release with move-major; this check clears itself on its daily run.")
+                      else:
+                          missing = {k: v for k, v in want.items() if have.get(k) != v}
+                          extra = {k: v for k, v in have.items() if k not in want}
+                          detail = []
+                          if missing:
+                              detail.append(f"missing or too narrow: {missing} (this fails the run at startup)")
+                          if extra:
+                              detail.append(f"wider than declared: {extra}")
+                          broken.append(
+                              f"{f.name}: job '{job_id}' declares {have or '{}'}; "
+                              f"{name} asks for {want}. " + '; '.join(detail))
+
+          for problem in broken:
+              print(f"::error title=Stub ceiling::{problem}")
+          for problem in pending:
+              print(f"::error title=Waiting on a release::{problem}")
+          if not comparable:
+              print("::warning title=Stub ceiling::Could not read the standards default branch, "
+                    "so a genuine mistake cannot be told apart from a change awaiting release.")
+
+          verdict = (
+              f"{checked} stub(s) checked, {len(broken)} problem(s), "
+              f"{len(pending)} waiting on a release."
+          )
+          print("\n" + verdict)
+
+          summary = os.environ.get('GITHUB_STEP_SUMMARY')
+          if summary:
+              with open(summary, 'a', encoding='utf-8') as handle:
+                  handle.write("### 🔬 Stub ceilings\n\n" + verdict + "\n")
+                  for problem in broken:
+                      handle.write(f"\n- ❌ {problem}\n")
+                  for problem in pending:
+                      handle.write(f"\n- ⏳ {problem}\n")
+                  if pending and not broken:
+                      handle.write(
+                          "\n> [!NOTE]\n> Nothing here is wrong with the stubs: they use "
+                          "standards changes that are merged but not released. Cut a release "
+                          "with `move-major`, or wait for the daily run once you have.\n")
+
+          sys.exit(1 if (broken or pending) else 0)
+          PY

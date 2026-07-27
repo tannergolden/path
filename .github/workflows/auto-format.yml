@@ -1,0 +1,45 @@
+# Installed from tannergolden/standards. Edit freely: this file is YOURS.
+#
+# Formats what a formatter can settle, so review is never spent on
+# style. The result arrives as a pull request rather than a push to
+# your branch: a job that rewrites your work under you is a job
+# people turn off.
+
+name: '🖌️ Code Style Formatter'
+
+on:
+  push:
+  workflow_dispatch:
+
+concurrency:
+  # Only the newest state needs formatting, so superseding an
+  # in-flight run is correct here, unlike a required check.
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+# ⚠️ THE `permissions:` BELOW IS A CEILING, NOT A GRANT. For a job that calls a
+# reusable workflow, the caller's permissions cap what the called workflow may
+# request. Anything it asks for beyond them fails the run before a single job
+# starts: a startup failure, with no job, no step, and no log to read.
+#
+# They are written out rather than left to this repository's DEFAULT token
+# permissions, because a repository set to read-only - now the common default -
+# caps every write scope the same invisible way.
+#
+# The list is the union of what the called workflow's own jobs ask for, and
+# each of those jobs still narrows it further from there. Widen it only to
+# match a scope the called workflow actually declares.
+
+permissions: {}
+
+jobs:
+  format:
+    # A direct push runs only on the default branch, WHATEVER IT IS
+    # CALLED - resolved at run time rather than written into this file, so
+    # renaming your default branch cannot silently stop this workflow.
+    if: ${{ !github.event.repository.is_template && (github.event_name != 'push' || github.ref_name == github.event.repository.default_branch) }}
+    permissions:
+      contents: write # push the fixed topic branch (PR-only flow)
+      pull-requests: write # open or update the auto-format pull request
+    uses: tannergolden/standards/.github/workflows/auto-format.yml@v1
+    secrets: inherit # zizmor: ignore[secrets-inherit] - first-party callee at the ref pinned above.

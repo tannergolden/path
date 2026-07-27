@@ -1,0 +1,156 @@
+name: '📝 Feedback Report'
+description: '💡 Share feedback, suggestions, or usability insights to help us improve the project.'
+title: '📝 Feedback: <Component/Area> - <Concise Summary>'
+labels:
+  - 'status: needs triage'
+  - 'type: feedback'
+body:
+  - type: markdown
+    attributes:
+      value: |
+        <!-- Thank you for your feedback!
+             Please give enough context so we understand the problem, who it
+             affects, and how to improve. Avoid sharing secrets or personally
+             identifiable information (PII). -->
+
+        ## 📌 What this template is for (and not for)
+
+        **Use this template for:**
+        - Usability concerns (confusing flows, unclear UI)
+        - General design or UX feedback not tied to accessibility
+        - Suggestions to improve user experience
+
+        **Don’t use this template for:**
+        - Reproducible product bugs → use 🐛 Bug Report
+        - Performance issues → use 🚀 Performance Report
+        - Documentation corrections → use 📖 Documentation Report
+        - Accessibility problems → use ♿ Accessibility Report
+        - Requests for new features → use ✨ Feature Request
+        - Security vulnerabilities → follow SECURITY.md (responsible disclosure)
+
+  - type: textarea
+    id: summary
+    attributes:
+      label: '✍️ Summary'
+      description: 'One or two sentences describing the feedback or idea.'
+      placeholder: 'Example: The onboarding form feels long; splitting into steps would reduce drop-off.'
+    validations:
+      required: true
+
+  - type: input
+    id: audience
+    attributes:
+      label: '👥 Who is affected'
+      description: 'Audience/persona most impacted.'
+      placeholder: 'New users, admins, mobile users, etc.'
+    validations:
+      required: true
+
+  - type: dropdown
+    id: impact_scope
+    attributes:
+      label: '📊 Approximate impact'
+      options:
+        - All
+        - Many
+        - Some
+        - Few
+    validations:
+      required: true
+
+  - type: textarea
+    id: current_experience
+    attributes:
+      label: '🔎 Current experience / workflow'
+      description: 'Describe what you do today and where the friction is.'
+      placeholder: 'Screens/paths involved, steps tried, areas that are confusing or slow.'
+    validations:
+      required: true
+
+  - type: textarea
+    id: desired_outcome
+    attributes:
+      label: '✅ Desired outcome'
+      description: 'What would “good” look like?'
+      placeholder: 'Describe the ideal experience or outcome you’re hoping for.'
+    validations:
+      required: true
+
+  - type: textarea
+    id: rationale
+    attributes:
+      label: '📈 Rationale (optional)'
+      description: 'Why this matters: pain points, goals, or metrics.'
+      placeholder: 'Conversion, time-on-task, error rate, support volume, etc.'
+
+  - type: textarea
+    id: evidence
+    attributes:
+      label: '📎 Evidence'
+      description: 'Screenshots, recordings, or links that illustrate the experience. Redact sensitive data.'
+      placeholder: 'Attach images or paste links to recordings and examples.'
+
+  - type: checkboxes
+    id: platform
+    attributes:
+      label: '🧰 Environment (if applicable)'
+      description: 'Select platforms involved.'
+      options:
+        - label: Web
+        - label: Mobile
+        - label: Desktop
+
+  - type: input
+    id: device
+    attributes:
+      label: '📱 Device (for mobile)'
+      placeholder: 'e.g., iPhone 15 Pro / Pixel 8'
+
+  - type: input
+    id: os_version
+    attributes:
+      label: '💻 Operating System (OS) & version'
+      placeholder: 'macOS 14.5 / Windows 11 / iOS 17.5 / Android 14'
+
+  - type: input
+    id: browser_version
+    attributes:
+      label: '🌐 Web Browser & version'
+      placeholder: 'Chrome 128 / Safari 17.5 / Firefox 128 / Edge 128'
+
+  - type: input
+    id: app_version
+    attributes:
+      label: '🏷️ Application version (SemVer)'
+      placeholder: 'x.y.z'
+
+  - type: textarea
+    id: proposed_direction
+    attributes:
+      label: '🧭 Proposed direction (optional)'
+      description: 'Ideas, sketches, or references.'
+      placeholder: 'Example: Split onboarding into 3 steps; auto-save progress; show progress indicator.'
+
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: '🔀 Alternatives considered (optional)'
+      description: 'Other approaches you thought about and trade-offs.'
+      placeholder: "Alternative A: …\nAlternative B: …"
+
+  - type: textarea
+    id: additional_context
+    attributes:
+      label: '🔗 Additional context / links'
+      description: 'Related issues, PRs, discussions, documents, or analytics dashboards.'
+      placeholder: 'Links and extra notes.'
+
+  - type: checkboxes
+    id: reporter_checklist
+    attributes:
+      label: '✅ Reporter checklist'
+      options:
+        - label: 'I searched existing issues and did not find a duplicate.'
+        - label: 'I explained who is affected, the current workflow, and the desired outcome.'
+        - label: 'I provided evidence (screenshots/recordings/links) where possible.'
+        - label: 'I removed or obfuscated secrets and personally identifiable information (PII).'

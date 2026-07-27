@@ -28,10 +28,18 @@ _Empty on purpose. Yours to fill._
 | `branding/` | Logos, icons, colour palettes, typography specimens             |
 | `images/`   | General project imagery, screenshots, product shots             |
 | `docs/`     | Diagrams and figures embedded in documents under `docs/`        |
+| `badges/`   | Badge artwork and the definitions a generator reads             |
 
-Three folders because three is what every project needs. Add your own -
-`mockups/`, `diagrams/`, `video/` - as soon as you have something to put in
-them. An empty folder invented ahead of a need is a folder nobody uses.
+`badges/` has two homes of its own: `static/` for badges committed as finished
+SVGs and served straight from the repository, and `dynamic/` for the
+definitions a generator reads to produce a badge when it runs. Both are empty
+until that generator lands.
+
+The first three folders are what every project needs, and `badges/` is the one
+here that precedes its contents on purpose, because its shape is already
+decided. Add your own - `mockups/`, `diagrams/`, `video/` - as soon as you have
+something to put in them. An empty folder invented ahead of a need is a folder
+nobody uses.
 
 ---
 

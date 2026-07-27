@@ -106,42 +106,43 @@ You do not have to fill in all of them - one real command is enough.
 
 ## 🤖 No AI Infrastructure, On Purpose
 
-There is no `AGENTS.md` here, and no `CLAUDE.md`, `GEMINI.md`, `.cursorrules`,
-`.windsurfrules`, `.github/copilot-instructions.md` or `.claude/`. That is a
-decision, not an omission.
+This template ships **no agent instruction files and no agent configuration**.
+That is a decision, not an omission.
 
-Agent instruction files are **always loaded**. Every byte is paid on every
-session, in every repository, forever. They also encode conventions that are
-yours rather than the template's: how you write commits, what you never touch,
-which commands actually build the thing. A template that ships them makes a
-choice on your behalf that you cannot see and did not make, and the usual result
-is a file nobody wrote and nobody trusts.
+Agent instructions are **always loaded**. Every byte is paid on every session, in
+every repository, forever. They also carry conventions that belong to a project
+rather than to a scaffold: how you write commits, what must never be touched by
+hand, which commands actually build the thing. Shipping a default set makes that
+choice on your behalf, invisibly, and the usual result is a file nobody wrote and
+nobody trusts.
 
 **Nothing here depends on them.** Initialisation, CI, the rulesets, the release
-flow and every workflow behave identically with zero agent files present. Adding
-them is additive, and so is taking them away.
+flow and every workflow behave identically with none of it present. Adding it is
+additive, and so is taking it away.
 
-When you do want them, there are two supported routes and no wrong answer:
+When you do want it, there are two supported routes and no wrong answer:
 
-| Route                                                              | You commit             | Updates arrive by                            |
-| :----------------------------------------------------------------- | :--------------------- | :------------------------------------------- |
-| **By hand**                                                        | the instruction files  | you editing them                             |
-| **[`tannergolden/ai`](https://github.com/tannergolden/ai)**        | one workflow stub      | a release moving a tag, with no pull request |
+| Route                                                       | You commit                  | Updates arrive by                            |
+| :----------------------------------------------------------- | :-------------------------- | :------------------------------------------- |
+| **By hand**                                                 | the instructions themselves | you editing them                             |
+| **[`tannergolden/ai`](https://github.com/tannergolden/ai)** | one workflow stub           | a release moving a tag, with no pull request |
 
-Writing them by hand is the right call when the conventions are specific to one
-project. Keep the body in `AGENTS.md` and make `CLAUDE.md` and `GEMINI.md` one
-line each that imports it, because Claude Code has no discovery path for
-`AGENTS.md` at all and would otherwise read nothing.
+Writing them by hand suits conventions that are specific to one project. The
+publisher suits several repositories that share one set, for the same reason the
+workflows here are called rather than copied: the law lives in one place, and a
+fix reaches everything pinned to it. Its README carries the stub to copy and the
+version to pin.
 
-The publisher is the right call across several repositories that share one set of
-conventions, for the same reason the workflows here are called rather than
-copied: the law lives in one place and a fix reaches everything pinned to it. Its
-README carries the stub to copy and the version to pin.
+> [!IMPORTANT]
+> **Whichever route you take, confirm the tools you actually use load what you
+> wrote.** They do not agree on which filename to read, and some will not find a
+> shared file at all unless a small per-tool file points them at it. Instructions
+> nothing loads are worse than none, because they look finished.
 
 > [!TIP]
-> **Either route stays reversible.** Files written by hand are yours to delete.
-> Files delivered by the publisher are listed with their digests in a lockfile,
-> so the inventory of what arrived is also the manifest for removing it.
+> **Either route stays reversible.** What you write by hand is yours to delete.
+> What the publisher delivers is listed with digests in a lockfile, so the
+> inventory of what arrived is also the manifest for removing it.
 
 ---
 

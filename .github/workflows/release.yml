@@ -1,0 +1,123 @@
+# Installed from tannergolden/standards. Edit freely: this file is YOURS.
+#
+# The whole release chain, in one file: draft the notes through the week,
+# publish the assets when a release is cut, optionally push the package to
+# its registries, and prune the releases the new one superseded.
+#
+# A dispatch runs ONE task, chosen in the form, so running the package
+# publish can never accidentally prune a release. The scheduled and
+# release-event paths pick their own jobs the same way.
+#
+# ⚠️ TAGS ARE NEVER DELETED by the prune. A release is a page; a tag is a
+# contract. Anything pinned to `vX.Y.Z` keeps resolving after its release
+# page is gone.
+
+name: '📦 Release'
+
+on:
+  schedule:
+    - cron: '0 5 * * 1' # draft the notes at the start of the week
+  release:
+    types: [published]
+  workflow_dispatch:
+    inputs:
+      task:
+        description: 'Which release task to run'
+        type: choice
+        options: [notes, publish, package, prune]
+        default: notes
+      manual-tag:
+        description: 'For publish: optional tag override, as v1.2.3-branch'
+        type: string
+      dry-run:
+        description: 'For package and prune: validate and delete nothing'
+        type: boolean
+        default: true
+
+concurrency:
+  # One release task at a time: the prune snapshots the release list it is
+  # deleting from, and the publish must not race the notes draft.
+  group: ${{ github.workflow }}
+  cancel-in-progress: false
+
+# ⚠️ THE `permissions:` BELOW IS A CEILING, NOT A GRANT. For a job that calls a
+# reusable workflow, the caller's permissions cap what the called workflow may
+# request. Anything it asks for beyond them fails the run before a single job
+# starts: a startup failure, with no job, no step, and no log to read.
+#
+# They are written out rather than left to this repository's DEFAULT token
+# permissions, because a repository set to read-only - now the common default -
+# caps every write scope the same invisible way.
+#
+# Each job declares the union of what ITS called workflow's jobs ask for, and
+# nothing more - grouping the callers into one file does not widen any of
+# them. Widen one only to match a scope its called workflow actually declares.
+
+permissions: {}
+
+jobs:
+  # Every job here is inert in a template repository, live in every
+  # repository generated from one. `is_template` is true only in the
+  # template itself - the same signal init-template.yml guards on.
+  notes:
+    if: ${{ !github.event.repository.is_template && (github.event_name == 'schedule' || (github.event_name == 'workflow_dispatch' && inputs.task == 'notes')) }}
+    permissions:
+      contents: write # create or update the draft release
+    uses: tannergolden/standards/.github/workflows/release-notes.yml@v1
+    # A scheduled run below this many commits skips; a manual one never does.
+    #
+    # with:
+    #   minimum-commits: 3
+
+  publish:
+    if: ${{ !github.event.repository.is_template && (github.event_name == 'release' || (github.event_name == 'workflow_dispatch' && inputs.task == 'publish')) }}
+    permissions:
+      attestations: write # record the attestation
+      contents: write # create the tag and publish the release
+      id-token: write # sign the build provenance attestation
+    uses: tannergolden/standards/.github/workflows/release-publish.yml@v1
+    with:
+      manual-tag: ${{ inputs.manual-tag || '' }}
+
+  package:
+    # Dispatch-only until a registry is configured and a dry run has passed,
+    # so an unconfigured stub cannot redden a release. Once it has, add
+    # `github.event_name == 'release'` to the condition and every release
+    # publishes the package too.
+    if: ${{ !github.event.repository.is_template && github.event_name == 'workflow_dispatch' && inputs.task == 'package' }}
+    permissions:
+      attestations: write # record it
+      contents: read # read the repository
+      id-token: write # signs the provenance statement npm attaches
+      packages: write # push to GHCR under this repository
+    uses: tannergolden/standards/.github/workflows/publish-package.yml@v1
+    with:
+      # Turn on exactly the registries this project ships to.
+      #
+      # npm: true
+      # pypi: true
+      # crates: true
+      # container: true
+      #
+      # Containers build one architecture by default. Naming two builds each
+      # natively on a runner of that architecture and combines them into one
+      # image, so `docker pull` resolves correctly on Apple Silicon and
+      # Graviton as well as x86. Nothing is emulated.
+      #
+      # container-platforms: 'linux/amd64,linux/arm64'
+      #
+      # build-command: 'npm ci && npm run build'
+      dry-run: ${{ inputs.dry-run || false }}
+    secrets: inherit # zizmor: ignore[secrets-inherit] - first-party callee at the ref pinned above.
+
+  prune-releases:
+    # Event-driven on purpose: pruning is triggered by the thing that makes
+    # an old release old. The release event applies the plan; a dispatch
+    # defaults to a dry run.
+    if: ${{ !github.event.repository.is_template && (github.event_name == 'release' || (github.event_name == 'workflow_dispatch' && inputs.task == 'prune')) }}
+    permissions:
+      contents: write # deleting releases requires write
+    uses: tannergolden/standards/.github/workflows/prune-releases.yml@v1
+    with:
+      keep: 1
+      dry-run: ${{ inputs.dry-run || false }}

@@ -1,0 +1,170 @@
+# Keep the prefill short - the structured details are captured by the
+# form fields below.
+title: '🧭 Roadmap: <Initiative/Theme> - <Timeframe>'
+labels:
+  - 'type: discussion'
+  - 'status: needs triage'
+body:
+  - type: markdown
+    attributes:
+      value: |
+        ## 🧭 Roadmap
+        High-level plans and milestones. Link to Issues and Pull Requests for tracking.
+        Use for visibility and alignment, not detailed troubleshooting.
+
+  - type: dropdown
+    id: entry_type
+    attributes:
+      label: '🧭 Roadmap entry type'
+      options:
+        - Initiative / Epic
+        - Theme
+        - Milestone
+        - Quarter plan
+        - Release train
+        - Objective / Key Result (OKR)
+        - Spike / Research
+        - Dependency
+        - De-scope / Defer
+        - Decommission / EOL
+        - Maintenance / Operations
+        - Compliance / Legal
+        - Security / Hardening
+        - Performance / Optimization
+        - Reliability / SRE
+        - UX / UI
+        - API / Contracts
+        - Data / Analytics
+        - Observability / Telemetry
+        - Tooling / Developer Experience (DevEx)
+        - Docs / Education
+        - Internationalization / Localization (i18n/L10n)
+        - Accessibility (A11y)
+        - Pricing / Billing change
+        - Governance / Policy
+    validations:
+      required: true
+
+  - type: dropdown
+    id: status
+    attributes:
+      label: '📊 Status'
+      options:
+        - Proposed
+        - In planning
+        - In progress
+        - Blocked
+        - On hold
+        - Ready for review
+        - Done
+        - Cancelled
+    validations:
+      required: true
+
+  - type: input
+    id: timeframe_start
+    attributes:
+      label: '🗓️ Start (YYYY-MM-DD)'
+      placeholder: '2025-10-01'
+
+  - type: input
+    id: timeframe_end
+    attributes:
+      label: '🗓️ End (YYYY-MM-DD)'
+      placeholder: '2025-12-31'
+
+  - type: input
+    id: milestone_ref
+    attributes:
+      label: '🏁 Milestone / release tag (optional)'
+      placeholder: 'milestone-2025q4 / v1.8.0'
+
+  - type: textarea
+    id: overview
+    attributes:
+      label: '✍️ Overview'
+      description: 'One to three sentences summarizing the initiative and why it matters.'
+      placeholder: 'Concise overview of the plan, the user problem, and intended outcome.'
+    validations:
+      required: true
+
+  - type: textarea
+    id: goals
+    attributes:
+      label: '🎯 Goals / success criteria'
+      description: 'What success looks like (measurable when possible).'
+      placeholder: "- Goal 1…\n- Goal 2…\n- Exit criteria…"
+    validations:
+      required: true
+
+  - type: textarea
+    id: deliverables
+    attributes:
+      label: '📦 Deliverables'
+      description: 'Key artifacts or changes to ship.'
+      placeholder: "- API v2 endpoints…\n- New UI for …\n- Migration guide…"
+    validations:
+      required: true
+
+  - type: textarea
+    id: dependencies
+    attributes:
+      label: '🔗 Dependencies / sequencing'
+      description: 'Upstream services, teams, or prior work this depends on.'
+      placeholder: "- Service A upgrade…\n- Library B release…"
+
+  - type: textarea
+    id: risks
+    attributes:
+      label: '⚠️ Risks / assumptions'
+      description: 'Potential blockers, unknowns, or trade-offs.'
+      placeholder: "- Risk: …\n- Assumption: …\n- Mitigation: …"
+
+  - type: textarea
+    id: metrics
+    attributes:
+      label: '📈 Metrics (optional)'
+      description: 'KPIs to monitor during/after delivery.'
+      placeholder: '- Adoption %, p95 latency target, error rate, support volume…'
+
+  - type: checkboxes
+    id: areas
+    attributes:
+      label: '🧩 Affected areas (context)'
+      options:
+        - label: 'area: Application Programming Interface (API)'
+        - label: 'area: Authentication'
+        - label: 'area: Billing'
+        - label: 'area: dx'
+        - label: 'area: Database'
+        - label: 'area: Deployment'
+        - label: 'area: Design / User Experience (UX)'
+        - label: 'area: Testing'
+        - label: 'area: User Interface (UI)'
+
+  - type: checkboxes
+    id: environment
+    attributes:
+      label: '🌎 Environment (if applicable)'
+      options:
+        - label: 'environment: Mobile'
+        - label: 'environment: Web Browser'
+
+  - type: textarea
+    id: links
+    attributes:
+      label: '🔗 Tracking links'
+      description: 'Issues, PRs, project boards, docs, or runbooks.'
+      placeholder: "- Issue: #…\n- PR: #…\n- Doc: …\n- Project board: …"
+
+  - type: checkboxes
+    id: call_to_action
+    attributes:
+      label: '👥 Participation / call to action'
+      options:
+        - label: Feedback welcome
+        - label: Maintainer review requested
+        - label: Help wanted (implementation)
+        - label: Help wanted (testing)
+        - label: Beta / preview sign-ups
+        - label: Docs contributions welcome

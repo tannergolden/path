@@ -1,0 +1,234 @@
+name: '🐛 Bug Report'
+description: '🐞 Report a defect, regression, or unexpected behavior so we can reproduce and fix it quickly.'
+# Keep the prefill short - platform, OS, browser, and version are captured
+# by dedicated form fields below.
+title: '🐛 Bug: <Component/Area> - <Concise Summary>'
+labels:
+  - 'status: needs triage'
+  - 'type: bug'
+body:
+  - type: markdown
+    attributes:
+      value: |
+        <!-- Thank you for helping improve quality!
+             Please provide clear, reproducible details. Remove any sensitive data
+             (secrets, tokens, personally identifiable information (PII)). -->
+
+        ## 📌 What this template is for (and not for)
+
+        **Use this template for:**
+        - Crashes, errors, or broken features
+        - Unexpected behavior compared to expected outcomes
+        - Reproducible defects with clear steps to reproduce
+
+        **Don’t use this template for:**
+        - Usability or design suggestions → use 📝 Feedback Report
+        - Performance concerns (lag, memory usage) → use 🚀 Performance Report
+        - Documentation issues → use 📖 Documentation Report
+        - Accessibility-specific problems → use ♿ Accessibility Report
+        - Feature ideas or enhancements → use ✨ Feature Request
+        - Security vulnerabilities → follow SECURITY.md (responsible disclosure)
+
+  - type: textarea
+    id: summary
+    attributes:
+      label: '✍️ Summary'
+      description: 'One or two sentences describing the problem.'
+      placeholder: 'Example: Saving a draft throws 500 when the title is empty.'
+    validations:
+      required: true
+
+  - type: input
+    id: audience
+    attributes:
+      label: '👥 Who is affected'
+      description: 'Audience/persona most impacted.'
+      placeholder: 'All users, admins, mobile users, etc.'
+    validations:
+      required: true
+
+  - type: dropdown
+    id: scope
+    attributes:
+      label: '📊 Approximate scope'
+      options:
+        - All
+        - Many
+        - Some
+        - Few
+    validations:
+      required: true
+
+  - type: textarea
+    id: steps_to_reproduce
+    attributes:
+      label: '🔁 Steps to reproduce'
+      description: 'Precise, numbered steps that consistently reproduce the issue.'
+      placeholder: |
+        1) Go to …
+        2) Click/press …
+        3) Observe …
+        4) Error/behavior …
+    validations:
+      required: true
+
+  - type: textarea
+    id: actual_result
+    attributes:
+      label: '❗ Actual result'
+      description: 'What happened? Include on-screen errors and relevant behavior.'
+      placeholder: 'Observed behavior, error messages, side effects.'
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected_result
+    attributes:
+      label: '✅ Expected result'
+      description: 'What you expected to happen instead.'
+      placeholder: 'Describe the expected behavior.'
+    validations:
+      required: true
+
+  - type: textarea
+    id: evidence
+    attributes:
+      label: '📎 Evidence'
+      description: 'Screenshots, recordings, or links that illustrate the issue. Redact sensitive data.'
+      placeholder: 'Attach files or paste links to evidence.'
+
+  - type: checkboxes
+    id: platform
+    attributes:
+      label: '🧰 Platform'
+      options:
+        - label: Web
+        - label: Mobile
+        - label: Desktop
+
+  - type: input
+    id: device
+    attributes:
+      label: '📱 Device (for mobile)'
+      placeholder: 'e.g., iPhone 15 Pro / Pixel 8'
+
+  - type: input
+    id: os_version
+    attributes:
+      label: '💻 Operating System (OS) & version'
+      placeholder: 'macOS 14.5 / Windows 11 / iOS 17.5 / Android 14'
+
+  - type: input
+    id: browser_version
+    attributes:
+      label: '🌐 Web Browser & version'
+      placeholder: 'Chrome 128 / Safari 17.5 / Firefox 128 / Edge 128'
+
+  - type: input
+    id: app_version
+    attributes:
+      label: '🏷️ Application version (SemVer)'
+      placeholder: 'x.y.z'
+
+  - type: input
+    id: branch_commit
+    attributes:
+      label: '🔖 Branch / Commit SHA'
+      placeholder: 'Development|Preview|Release / abcdef1'
+
+  - type: input
+    id: backend_environment
+    attributes:
+      label: '☁️ Backend / cloud environment (if relevant)'
+      description: 'Project/account identifier, region, or local emulator/stack.'
+      placeholder: 'e.g., production eu-west-1 / staging project-id / local emulator'
+
+  - type: input
+    id: network
+    attributes:
+      label: '📶 Network conditions (if relevant)'
+      placeholder: 'Wi-Fi / Cellular, approximate speed/latency'
+
+  - type: textarea
+    id: logs
+    attributes:
+      label: '📜 Logs / errors'
+      description: 'Paste relevant logs and stack traces; sanitize secrets and URLs.'
+      render: shell
+
+  - type: dropdown
+    id: frequency
+    attributes:
+      label: '🔄 Reproducibility - frequency'
+      options:
+        - Always
+        - Often
+        - Intermittent
+        - Rare
+    validations:
+      required: true
+
+  - type: dropdown
+    id: regression
+    attributes:
+      label: '↩️ Regression - did this work before?'
+      options:
+        - 'Yes'
+        - 'No'
+        - Unknown
+    validations:
+      required: true
+
+  - type: input
+    id: last_known_good
+    attributes:
+      label: '🕒 If Yes, last known good version/commit'
+      placeholder: 'Version or commit where it last worked'
+
+  - type: dropdown
+    id: severity
+    attributes:
+      label: '🎯 Impact / severity'
+      options:
+        - Critical
+        - High
+        - Medium
+        - Low
+    validations:
+      required: true
+
+  - type: checkboxes
+    id: affected_areas
+    attributes:
+      label: '🧩 Scope (areas affected)'
+      options:
+        - label: User Interface (UI)
+        - label: Application Programming Interface (API)
+        - label: Database
+        - label: Build
+        - label: Deployment
+        - label: Other
+
+  - type: textarea
+    id: workarounds
+    attributes:
+      label: '🩹 Workarounds'
+      description: 'Any temporary mitigation steps.'
+      placeholder: 'Describe steps to mitigate the issue temporarily.'
+
+  - type: textarea
+    id: additional_context
+    attributes:
+      label: '🔗 Additional context / links'
+      description: 'Related issues, PRs, discussions, docs, or analytics dashboards.'
+      placeholder: 'Links and extra notes.'
+
+  - type: checkboxes
+    id: reporter_checklist
+    attributes:
+      label: '✅ Reporter checklist'
+      options:
+        - label: 'I searched existing issues and did not find a duplicate.'
+        - label: 'I included exact reproduction steps and environment details.'
+        - label: 'I provided screenshots/recordings/logs where possible (redacted).'
+        - label: 'I removed or obfuscated secrets and personally identifiable information (PII).'

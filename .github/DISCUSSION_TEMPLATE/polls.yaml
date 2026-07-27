@@ -1,0 +1,147 @@
+# Keep the prefill short - the structured details are captured by the
+# form fields below.
+title: '📮 Poll: <Question>'
+labels:
+  - 'type: discussion'
+  - 'status: needs triage'
+body:
+  - type: markdown
+    attributes:
+      value: |
+        ## 📮 Polls
+        Run time-boxed surveys to gather community sentiment and make lightweight decisions
+        (priorities, roadmap themes, release timing, naming). Keep the question neutral,
+        provide clear options, and specify when the poll closes.
+
+  - type: textarea
+    id: question
+    attributes:
+      label: '❓ Poll question'
+      description: 'Ask one clear, unbiased question.'
+      placeholder: 'Example: Which theme should we prioritize for the next release?'
+
+  - type: dropdown
+    id: poll_type
+    attributes:
+      label: '🧭 Poll type'
+      options:
+        - Priority / theme selection
+        - Roadmap item ranking
+        - Feature selection
+        - Naming / terminology
+        - Release timing
+        - UX flow preference
+        - Tooling / DevEx focus
+        - Performance focus area
+        - Documentation focus area
+        - Community / process decision
+        - Event scheduling
+        - Governance / policy input
+        - Research / discovery survey
+        - Retro / lessons learned
+        - Other
+    validations:
+      required: true
+
+  - type: textarea
+    id: choices
+    attributes:
+      label: '🔢 Options'
+      description: 'List one option per line. Aim for 2–7 concise choices.'
+      placeholder: |
+        Option A
+        Option B
+        Option C
+
+  - type: dropdown
+    id: voting_method
+    attributes:
+      label: '🗳️ Voting method'
+      options:
+        - Single choice
+        - Multiple choice
+        - Ranked choice (1–3)
+        - Score voting (0–5)
+    validations:
+      required: true
+
+  - type: dropdown
+    id: results_visibility
+    attributes:
+      label: '👀 Results visibility'
+      options:
+        - Visible during poll
+        - Hidden until close
+    validations:
+      required: true
+
+  - type: input
+    id: closes_on
+    attributes:
+      label: '⏰ Close date & time'
+      description: 'When voting ends. Include timezone.'
+      placeholder: 'YYYY-MM-DD HH:MM TZ (e.g., 2025-09-12 18:00 ET)'
+
+  - type: dropdown
+    id: duration_hint
+    attributes:
+      label: '🗓️ Duration (hint)'
+      options:
+        - 24 hours
+        - 3 days
+        - 7 days
+        - 14 days
+        - 30 days
+
+  - type: checkboxes
+    id: audience
+    attributes:
+      label: '👥 Audience (target voters)'
+      options:
+        - label: End users
+        - label: Developers
+        - label: Operators / DevOps
+        - label: Designers / UX
+        - label: Documentation
+        - label: Security
+        - label: Data / Analytics
+        - label: All community members
+
+  - type: checkboxes
+    id: areas
+    attributes:
+      label: '🧩 Affected areas (context)'
+      options:
+        - label: 'area: Application Programming Interface (API)'
+        - label: 'area: Authentication'
+        - label: 'area: Billing'
+        - label: 'area: dx'
+        - label: 'area: Database'
+        - label: 'area: Deployment'
+        - label: 'area: Design / User Experience (UX)'
+        - label: 'area: Testing'
+        - label: 'area: User Interface (UI)'
+
+  - type: textarea
+    id: background
+    attributes:
+      label: 'ℹ️ Background'
+      description: 'Brief context, goals, constraints, or prior discussions.'
+      placeholder: 'Why we’re running this poll and how results will be used.'
+
+  - type: textarea
+    id: links
+    attributes:
+      label: '🔗 Links & references'
+      description: 'Related issues, docs, prototypes, or examples.'
+      placeholder: "- Issue: …\n- Doc: …\n- Prototype: …"
+
+  - type: checkboxes
+    id: conduct
+    attributes:
+      label: '✅ Participation guidelines'
+      options:
+        - label: 'I will vote once and be respectful.'
+          required: true
+        - label: 'I agree to follow the Code of Conduct.'
+          required: true

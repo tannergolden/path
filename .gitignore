@@ -1,0 +1,124 @@
+# 🗄️ Universal Ignore Patterns
+
+# --- Language Specific ---
+
+# Node & Tooling
+node_modules/
+npm-debug.log*
+yarn*.log
+.pnpm-store/
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+.venv
+venv/
+# Hypothesis example database (created by the local property-test run)
+.hypothesis/
+ENV/
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Go
+bin/
+pkg/
+obj/
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+
+# Rust
+target/
+**/*.rs.bk
+cargo-home/
+
+# Java / JVM
+.gradle/
+build/
+!src/main/**/build/
+!src/test/**/build/
+bin/
+out/
+.artifacts/
+*.jar
+*.war
+*.ear
+*.zip
+*.tar.gz
+*.rar
+
+# C / C++
+*.o
+*.obj
+*.so
+*.a
+*.lib
+*.exe
+*.out
+*.app
+cmake-build-*/
+.cache/
+
+# Mobile (Android/iOS)
+*.apk
+*.aar
+*.app
+*.ipa
+.gradle/
+local.properties
+.bundle/
+
+# --- Environment & Secrets ---
+# Always use .env.example for templates
+.env
+.env.local
+.env.*.local
+*.pem
+*.key
+firebase-debug.log
+.firebaserc
+
+# --- IDE & Editors ---
+.vscode/*
+!.vscode/extensions.json
+!.vscode/settings.json
+!.vscode/launch.json
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+Thumbs.db
+
+# --- Build & Caches ---
+dist/
+build/
+out/
+.cache/
+coverage/
+*.tsbuildinfo
+.next/
+.serverless/
+.terraform/
+
+# --- Docs Site (Jekyll / GitHub Pages) ---
+# Built in CI by pages-deploy.yml; local builds stay out of git.
+_site/
+.jekyll-cache/
+.jekyll-metadata

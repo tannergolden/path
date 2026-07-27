@@ -1,0 +1,29 @@
+# .github/ISSUE_TEMPLATE/config.yml
+#
+# Purpose: steer reporters into the right template, and keep vulnerability
+# reports PRIVATE.
+#
+# ⚠️ THE URL BELOW MUST BE EDITED AFTER GENERATION. GitHub never substitutes
+# placeholders in contact links and there is no expression syntax here, so a
+# contact link either names a real repository or it 404s. It is left visibly
+# wrong on purpose: a placeholder that fails loudly beats a link quietly
+# pointing at somebody else's discussions.
+#
+# There is deliberately NO security contact link. GitHub adds "Report a
+# vulnerability" to this chooser on its own once private vulnerability
+# reporting is enabled (Settings → Security → Private vulnerability
+# reporting), and this repository ships its own SECURITY.md. A hand-written
+# link would duplicate that and go stale.
+#
+# NOTE: the "Vulnerability Report" issue template beside this file is for
+# PRIVATE repositories only. On a public repository, reporters must use the
+# private intake above rather than opening an issue.
+
+blank_issues_enabled: false
+
+contact_links:
+  # 💬 Questions belong in Discussions. With blank issues disabled, this is
+  # the chooser's path for how-to asks (SUPPORT.md routes them here too).
+  - name: 💬 Questions, Ideas & Support (Discussions)
+    url: 'https://github.com/OWNER/REPOSITORY/discussions'
+    about: 'How-to questions, tooling setup, and ideas belong in Discussions. Replace OWNER/REPOSITORY above. If this link 404s, enable Discussions under Settings → General → Features.'

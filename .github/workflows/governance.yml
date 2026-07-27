@@ -1,0 +1,84 @@
+# Installed from tannergolden/standards. Edit freely: this file is YOURS.
+#
+# Everything that REACTS to humans, in one file: pull request title and
+# sign-off validation, onboarding and triage, the stale sweep, and the
+# slash commands in issue comments.
+#
+# All three jobs run on privileged triggers (pull_request_target, comments)
+# and NONE of them checks out or executes pull-request code - they read and
+# write through the API. That is what makes grouping them safe; do not add a
+# job here that checks out a pull request's head.
+#
+# ⚠️ THE `pr` JOB ID IS A CHECK NAME. It reports as 'pr / ✍️ DCO Sign-Off',
+# which branch protection names. Renaming it leaves every pull request
+# waiting on a check that never reports.
+
+name: '⚖️ Governance'
+
+on:
+  pull_request_target:
+    # The union of what the jobs need: `edited` re-validates a corrected
+    # title, `reopened` re-triages. The extra firings are idempotent - the
+    # labeler re-applies the same labels, the title check re-passes.
+    types: [opened, edited, synchronize, reopened]
+  issues:
+    types: [opened]
+  issue_comment:
+    types: [created]
+  schedule:
+    - cron: '0 4 * * 1' # start-of-week triage, and the label sync
+  workflow_dispatch:
+
+concurrency:
+  # Keyed per pull request or issue: under pull_request_target github.ref is
+  # the BASE branch, so a branch-keyed group would put every open pull
+  # request into one queue slot.
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.event.issue.number || github.ref }}
+  cancel-in-progress: false
+
+# ⚠️ THE `permissions:` BELOW IS A CEILING, NOT A GRANT. For a job that calls a
+# reusable workflow, the caller's permissions cap what the called workflow may
+# request. Anything it asks for beyond them fails the run before a single job
+# starts: a startup failure, with no job, no step, and no log to read.
+#
+# They are written out rather than left to this repository's DEFAULT token
+# permissions, because a repository set to read-only - now the common default -
+# caps every write scope the same invisible way.
+#
+# Each job declares the union of what ITS called workflow's jobs ask for, and
+# nothing more - grouping the callers into one file does not widen any of
+# them. Widen one only to match a scope its called workflow actually declares.
+
+permissions: {}
+
+jobs:
+  # RULESET-LOAD-BEARING JOB ID: reports as 'pr / ✍️ DCO Sign-Off'.
+  pr:
+    if: ${{ !github.event.repository.is_template && (github.event_name == 'pull_request_target') }}
+    permissions:
+      pull-requests: read # read the PR title under validation
+      statuses: write # publish the semantic-title status check on the PR
+    uses: tannergolden/standards/.github/workflows/semantic-pr.yml@v1
+
+  governance:
+    # Everything except comments, which belong to issue-ops below. The
+    # called workflow gates its own jobs by event: triage on pull requests,
+    # onboarding on first interactions, the stale sweep on the schedule.
+    if: ${{ !github.event.repository.is_template && (github.event_name != 'issue_comment') }}
+    permissions:
+      contents: read # read the labeler rules
+      issues: write # post the welcome on issues
+      pull-requests: write # post the welcome on pull requests
+    uses: tannergolden/standards/.github/workflows/governance.yml@v1
+
+  issue-ops:
+    # Slash commands in issue comments - /assign, /label, /close and the
+    # rest. Anything unrecognised is left alone.
+    #
+    # Inert in a template repository, live in every repository generated
+    # from one. `is_template` is true only in the template itself, which
+    # is the same signal init-template.yml guards on.
+    if: ${{ github.event_name == 'issue_comment' && !github.event.repository.is_template }}
+    permissions:
+      issues: write # apply the command's label and assignment changes
+    uses: tannergolden/standards/.github/workflows/issue-ops.yml@v1

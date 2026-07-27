@@ -1,0 +1,106 @@
+# Keep the prefill short - the structured details are captured by the
+# form fields below.
+title: '👋 Community: <Topic>'
+labels:
+  - 'type: discussion'
+  - 'status: needs triage'
+body:
+  - type: markdown
+    attributes:
+      value: |
+        ## 👋 Community
+        General discussion, introductions, meetups, and topics that don’t fit other categories.
+        Be welcoming, constructive, and follow our Code of Conduct.
+
+  - type: dropdown
+    id: discussion_type
+    attributes:
+      label: '🧭 Topic type'
+      options:
+        - Introduction
+        - General discussion
+        - Meetup / event
+        - User group / local chapter
+        - Office hours
+        - AMA (Ask Me Anything)
+        - Show & tell / demos
+        - Success stories
+        - Help wanted
+        - Looking for collaborators
+        - Study group / pair programming
+        - Mentorship (seeking/offering)
+        - Jobs / hiring / opportunities
+        - Volunteer opportunities
+        - Resource share (articles/videos/tools)
+        - Community guidelines / moderation
+        - Social / off-topic (light)
+        - Poll / survey
+        - Retrospective / lessons learned
+        - New member questions
+        - Regional / location-specific
+        - Feedback on community processes
+    validations:
+      required: true
+
+  - type: input
+    id: location
+    attributes:
+      label: '📍 Location (if event)'
+      description: "City/venue and timezone, or 'Virtual'."
+      placeholder: 'Example: New York, NY (ET) - or Virtual'
+
+  - type: input
+    id: date_time
+    attributes:
+      label: '🗓️ Date & time (if event)'
+      description: 'Use local time with timezone.'
+      placeholder: 'YYYY-MM-DD HH:MM TZ (e.g., 2025-09-12 18:00 ET)'
+
+  - type: textarea
+    id: about_or_context
+    attributes:
+      label: '🙋 About you / context'
+      description: 'For introductions: who you are, interests, how you use this project.'
+      placeholder: 'Share a short intro or the context for this discussion.'
+
+  - type: textarea
+    id: details
+    attributes:
+      label: '📝 Details'
+      description: 'Main message: what you’d like to share, ask, or discuss.'
+      placeholder: 'Describe your topic, question, or announcement.'
+    validations:
+      required: true
+
+  - type: textarea
+    id: agenda
+    attributes:
+      label: '🧾 Agenda or topics (optional)'
+      description: 'For meetups/events: outline agenda, speakers, or goals.'
+      placeholder: "- Welcome & intros\n- Demo: …\n- Q&A"
+
+  - type: checkboxes
+    id: participation
+    attributes:
+      label: '👥 Participation'
+      options:
+        - label: Organizer
+        - label: Speaker
+        - label: Attendee
+        - label: Looking for collaborators
+        - label: Mentor / mentee
+
+  - type: textarea
+    id: links
+    attributes:
+      label: '🔗 Links & media'
+      description: 'Registration links, slides, recordings, or related resources.'
+      placeholder: "- Event link: …\n- Slides: …\n- Recording: …"
+
+  - type: checkboxes
+    id: conduct
+    attributes:
+      label: '✅ Community guidelines'
+      options:
+        - label: 'I agree to follow the Code of Conduct.'
+          required: true

@@ -1,0 +1,52 @@
+# Installed from tannergolden/standards. Edit freely: this file is YOURS.
+#
+# Mention-gated: it does nothing until somebody writes @claude in an
+# issue or a review comment.
+#
+# ⚠️ INERT WITHOUT `ANTHROPIC_API_KEY`. With no key set it reports that
+# clearly and stops, rather than failing every issue comment in the
+# repository.
+
+name: '🤖 Claude Agent'
+
+on:
+  issue_comment:
+    types: [created]
+  pull_request_review_comment:
+    types: [created]
+  issues:
+    types: [opened]
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.issue.number || github.event.pull_request.number }}
+  cancel-in-progress: false
+
+# ⚠️ THE `permissions:` BELOW IS A CEILING, NOT A GRANT. For a job that calls a
+# reusable workflow, the caller's permissions cap what the called workflow may
+# request. Anything it asks for beyond them fails the run before a single job
+# starts: a startup failure, with no job, no step, and no log to read.
+#
+# They are written out rather than left to this repository's DEFAULT token
+# permissions, because a repository set to read-only - now the common default -
+# caps every write scope the same invisible way.
+#
+# The list is the union of what the called workflow's own jobs ask for, and
+# each of those jobs still narrows it further from there. Widen it only to
+# match a scope the called workflow actually declares.
+
+permissions: {}
+
+jobs:
+  claude:
+    # Inert in a template repository, live in every repository generated
+    # from one. `is_template` is true only in the template itself, which
+    # is the same signal init-template.yml guards on.
+    if: ${{ !github.event.repository.is_template }}
+    permissions:
+      actions: read # read CI results so the agent can react to failures
+      contents: write # create branches carrying the requested changes
+      id-token: write # OIDC exchange used by the action's auth flow
+      issues: write # reply on issues and update checklists
+      pull-requests: write # open and update pull requests, reply on threads
+    uses: tannergolden/standards/.github/workflows/claude.yml@v1
+    secrets: inherit # zizmor: ignore[secrets-inherit] - first-party callee at the ref pinned above.

@@ -138,10 +138,8 @@ The Golden Path utilizes an Agentic workflow to reduce friction. Understanding w
 | **Branch Naming**          | 🤖 Automated | `governance.yml`                         |
 | **DCO Sign-Off Check**     | 🤖 Automated | `governance.yml` (bot PRs exempt)        |
 | **Runner Egress Audit**    | 🤖 Automated | Harden-Runner (first step of every job)      |
-| **AI Agent (`@claude`)**   | 🤖 Automated | `ops-claude.yml` (opt-in via secret)         |
 | **Docs Site Publishing**   | 🤖 Automated | `pages-deploy.yml` (GitHub Pages)            |
 | **Branch Protection**      | 🤖 Automated | Published rulesets, applied by dispatching `apply-standards` |
-| **Agent Git Guardrails**   | 🤖 Automated | `.claude/settings.json` hooks                |
 | **Merge Gate (green CI)**  | 🤖 Automated | Required status checks, set by the published rulesets |
 | **CI Failure Escalation**  | 🤖 Automated | `ops-ci-failure-alert.yml`                   |
 | **Template Engine Sync**   | 🤖 Automated | `ops-sync-template.yml` (weekly PR)          |

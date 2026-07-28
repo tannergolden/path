@@ -260,7 +260,6 @@ with every check in it, not four runs to read separately.
 | `apply-standards.yml`      | Dispatch-only. The label taxonomy and branch protection           |
 | `auto-format.yml`          | Formats what a push touched                                       |
 | `preview-deploy.yml`       | Deploys pushes to a preview target, once one is configured        |
-| `claude.yml`               | The AI assistant, on mention                                      |
 | `verify-stubs.yml`         | Proves every job's permission ceiling matches its called workflow |
 
 **Do not rename the job ids** `ci` and `secrets` (in `checks.yml`) or `pr`

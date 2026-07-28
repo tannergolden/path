@@ -60,7 +60,7 @@ We strictly enforce **Conventional Commits** (`type(scope): summary`). This is c
 
 - **Format**: `type(scope): 🩹 summary`
 - **Types (the full enforced set)**: `feat`, `fix`, `docs`, `style`, `refactor`, `perf`, `test`, `build`, `ci`, `chore`, `revert`, `security`.
-- **AI Assistance**: Refer to the **[AI-Driven Commit Process](https://github.com/tannergolden/standards/blob/Development/docs/distribution/AI-Driven-Commit-Process.md)** for the specific prompt to generate compliant messages.
+- **Message Format**: the full standard, including the required scope and the required body, is **[Conventional Commits](https://github.com/tannergolden/standards/blob/Development/docs/distribution/Conventional-Commits.md)**.
 
 ### Code Quality Checklist
 

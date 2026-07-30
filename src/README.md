@@ -10,4 +10,4 @@ This scaffold ships empty on purpose - the template imposes a layout, not a stac
 
 Standards to follow while filling it in: the fill-in [Source Code](/docs/templates/technical/Source-Code.md) and [Technology Stack & Tooling](/docs/templates/technical/Technology-Stack-&-Tooling.md) documents seeded under `docs/templates/technical/` - instantiate them with your decisions.
 
-This directory is **PROTECTED** from the template sync engine: it is yours, and no upstream sync will ever write or delete here.
+This directory is **yours from the first commit**. Nothing here syncs, and nothing upstream will ever write to it or delete from it - there is no sync engine to protect it from.

@@ -69,7 +69,7 @@ Quality is enforced by process, not trust:
 
 - Start with the [Contributing Guidelines](/.github/CONTRIBUTING.md) and the setup checklist in the repository [README](/README.md).
 - Good entry points are issues labelled **`good first issue`** and **`help wanted`** - small, well-scoped tasks that need no deep context. Maintainers keep a few of these open on purpose.
-- Ask questions in [Discussions](/.github/DISCUSSION_TEMPLATE) or via [Support](/.github/SUPPORT.md).
+- Ask questions in **Discussions** (the tab on this repository; enable it under Settings → General → Features if it is not there) or via [Support](/.github/SUPPORT.md).
 
 ---
 

@@ -72,7 +72,7 @@ mark it N/A.
 - [ ] Targeting `Development`; ready to **squash merge** on green CI
 
 <!--
-Reviewer rubric (see docs/distribution/Pull-Requests-&-Code-Reviews.md):
+Reviewer rubric (https://github.com/tannergolden/standards/blob/Development/docs/distribution/Pull-Requests-&-Code-Reviews.md):
 - Blocking: Correctness (edge cases + requirement met), Security (secrets,
   least privilege), Testability (coverage matches intent).
 - High: Readability. Medium: Parity with established patterns.

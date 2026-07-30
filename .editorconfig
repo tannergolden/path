@@ -35,8 +35,12 @@ indent_size = 2
 indent_size = 2
 end_of_line = lf
 
-# Batch files are the opposite case and need CRLF.
-[*.{bat,cmd}]
+# Windows scripts are the opposite case and need CRLF. The extension list
+# matches .gitattributes exactly, on purpose: git checks these out with CRLF,
+# so an editor rule of LF would rewrite them on every save and git would
+# normalise them back, flipping the working file between the two without ever
+# showing a diff. PowerShell was missing here and inherited LF from [*].
+[*.{bat,cmd,ps1}]
 end_of_line = crlf
 
 # Data & Config

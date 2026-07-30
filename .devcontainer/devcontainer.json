@@ -37,14 +37,13 @@
         "yzhang.markdown-all-in-one",
         "davidanson.vscode-markdownlint",
         "tamasfe.even-better-toml"
-      ],
-      "settings": {
-        "editor.formatOnSave": true,
-        "markdownlint.config": {
-          "MD013": false,
-          "MD033": false
-        }
-      }
+      ]
+
+      // No "settings" block here on purpose. VS Code reads
+      // .vscode/settings.json inside the container like anywhere else, so
+      // repeating editor.formatOnSave and markdownlint.config would create a
+      // second source of truth - and the copy that drifts is always the one
+      // nobody remembers exists.
     }
   }
 

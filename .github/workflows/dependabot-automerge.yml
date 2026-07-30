@@ -4,9 +4,14 @@
 # waits on your required checks, so this removes the click and not the
 # verification. Major bumps are left for a human on purpose.
 #
-# This does nothing until .github/dependabot.yml exists in this repository.
-# GitHub only reads that file from the repository it belongs to, so it
-# cannot be shared and is not installed here.
+# This is LIVE from the first commit. `.github/dependabot.yml` ships beside
+# it with the `github-actions` ecosystem enabled, so Dependabot opens
+# `build(deps):` pull requests for action updates and this workflow approves
+# and queues them. GitHub only reads that file from the repository it belongs
+# to, which is why it is installed here rather than shared like the logic.
+#
+# To review action bumps by hand instead, delete this file - the pull requests
+# still arrive, they just wait for you.
 
 name: '🦾 Automate Dependabot'
 

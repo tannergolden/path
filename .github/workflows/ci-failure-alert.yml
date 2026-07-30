@@ -29,6 +29,13 @@ on:
       # broken since the last time it ran.
       - '🎯 Standards Lifecycle'
       - '🖌️ Code Style Formatter'
+      # The three schedule-driven checks. Nothing about these blocks a merge,
+      # so a failure produces no signal at all unless it is watched: the stub
+      # verifier runs daily, the pruner weekly, and a preview deploy fails on
+      # a branch nobody is looking at.
+      - '🔬 Verify Stub Ceilings'
+      - '🧹 Prune Run History'
+      - '🚀 Preview Deploy'
       # Add any workflow whose silent failure would cost something.
       #
       # ⚠️ NEVER ADD THIS WORKFLOW TO ITS OWN LIST. It cannot escalate its
@@ -64,4 +71,4 @@ jobs:
     # is ordinary work in progress.
     #
     # with:
-    #   branches: '["Development", "Development"]'
+    #   branches: '["Development", "Preview"]'

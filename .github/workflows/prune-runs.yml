@@ -12,8 +12,12 @@
 # nightly job that ran 300 times says nothing a single kept run does not.
 #
 # ⚠️ THIS RUNS IN THE TEMPLATE ITSELF, and it is one of only two that do
-# (the other is 🎯 Apply Standards). A template accumulates run history the
-# same way any repository does, and nothing else would ever clear it.
+# (the other is 🔬 Verify Stub Ceilings). A template accumulates run history
+# the same way any repository does, and nothing else would ever clear it.
+#
+# 🎯 Apply Standards is NOT the other one. It carries `!is_template` like
+# every other stub, so its single job is skipped here - a dispatch with
+# dry-run off applies nothing and still reports green.
 #
 # Deleting a run removes its logs and artifacts too. In-flight runs are
 # never deleted, so this can never delete the job it is executing in.

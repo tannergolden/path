@@ -89,8 +89,28 @@ class TestLineEndings(ValidatorTestCase):
         # .gitattributes forces `eol=crlf` on these, so git checks them out
         # with CRLF on the runner. Failing them demands a file that cannot
         # exist: satisfying the linter violates .gitattributes, and vice versa.
+        #
+        # The exemption comes from the declaration, so the fixture has to make
+        # it - a hardcoded suffix list would pass this test without the file
+        # that gives the rule its authority.
+        self.repo.write('.gitattributes', '*.bat text eol=crlf\n'
+                                          '*.cmd text eol=crlf\n'
+                                          '*.ps1 text eol=crlf\n')
         for name in ('build.bat', 'run.cmd', 'deploy.ps1'):
             self.repo.write(name, 'echo hello\n', newline='\r\n')
+        self.assertClean(self.repo.run())
+
+    def test_crlf_is_reported_where_gitattributes_does_not_ask_for_it(self) -> None:
+        # The complement, and the reason the exemption is not a suffix list:
+        # the same extension is a finding in a repository that never declared
+        # it. The rule is what .gitattributes says, not what the name looks
+        # like.
+        self.repo.write('build.bat', 'echo hello\n', newline='\r\n')
+        self.assertFinding(self.repo.run(), 'CRLF')
+
+    def test_an_extension_nobody_anticipated_is_exempt_once_declared(self) -> None:
+        self.repo.write('.gitattributes', '*.vbs text eol=crlf\n')
+        self.repo.write('legacy.vbs', 'WScript.Echo "hi"\n', newline='\r\n')
         self.assertClean(self.repo.run())
 
     def test_crlf_is_still_reported_in_a_nested_windows_lookalike(self) -> None:
@@ -231,6 +251,30 @@ class TestCleanRepository(ValidatorTestCase):
         self.repo.write('config.yml', 'key: value\n')
         self.repo.write('data.json', '{"a": 1}\n')
         self.assertClean(self.repo.run())
+
+
+class TestBinaryFiles(ValidatorTestCase):
+    """What counts as binary is .gitattributes' answer, not a suffix list."""
+
+    def test_a_file_gitattributes_calls_binary_is_not_read_as_text(self) -> None:
+        # The bug this replaces: the suffix list covered 14 extensions where
+        # .gitattributes marked about forty, so committing a logo in one of
+        # the other twenty-six failed the run with "not valid UTF-8".
+        self.repo.write('.gitattributes', '*.avif binary\n')
+        (self.repo.root / 'logo.avif').write_bytes(b'\x00\x01\xff\xfe not utf-8')
+        self.assertClean(self.repo.run())
+
+    def test_an_undeclared_binary_is_still_skipped_by_the_nul_heuristic(self) -> None:
+        # No declaration at all: git falls back to looking for a NUL byte
+        # under `text=auto`, and so does this.
+        (self.repo.root / 'mystery.qqq').write_bytes(b'\x00\x01\xff\xfe')
+        self.assertClean(self.repo.run())
+
+    def test_a_text_file_that_is_not_utf8_is_still_reported(self) -> None:
+        # No NUL bytes and no binary declaration, so it is a text file this
+        # repository cannot read - which is a real finding, not an exemption.
+        (self.repo.root / 'latin1.txt').write_bytes('caf\xe9\n'.encode('latin-1'))
+        self.assertFinding(self.repo.run(), 'not valid UTF-8')
 
 
 if __name__ == '__main__':

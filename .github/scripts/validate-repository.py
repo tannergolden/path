@@ -36,13 +36,6 @@ import sys
 ROOT = pathlib.Path(__file__).resolve().parents[2]
 IN_ACTIONS = os.environ.get('GITHUB_ACTIONS') == 'true'
 
-# Anything git ignores is not ours to judge, and anything binary cannot be
-# read as text. Both are excluded by asking git what it tracks.
-BINARY_SUFFIXES = {
-    '.png', '.jpg', '.jpeg', '.gif', '.webp', '.ico', '.pdf',
-    '.woff', '.woff2', '.ttf', '.otf', '.zip', '.gz', '.mp4',
-}
-
 problems: list[str] = []
 
 
@@ -63,13 +56,47 @@ def tracked_files() -> list[pathlib.Path]:
     return [ROOT / p for p in out.split('\0') if p]
 
 
-def is_text(path: pathlib.Path) -> bool:
-    return path.suffix.lower() not in BINARY_SUFFIXES
+def attributes(paths: list[pathlib.Path]) -> dict[str, dict[str, str]]:
+    """Ask git what each file IS, rather than guessing from its extension.
+
+    .gitattributes already declares which files are binary and which need
+    CRLF. Mirroring those declarations in a second list here meant keeping
+    two answers in step by hand, and they had already drifted: the list
+    covered 14 suffixes where .gitattributes marked about forty, so
+    committing `assets/branding/logo.avif` - a suffix .gitattributes calls
+    binary, into the directory that exists for it - failed the run with
+    "not valid UTF-8".
+
+    One call for every path, not one per path.
+    """
+    if not paths:
+        return {}
+    rels = [p.relative_to(ROOT).as_posix() for p in paths]
+    out = subprocess.run(
+        ['git', 'check-attr', '--stdin', '-z', 'text', 'eol'],
+        cwd=ROOT, input='\0'.join(rels) + '\0',
+        check=True, capture_output=True, text=True,
+    ).stdout
+    fields = out.split('\0')
+    found: dict[str, dict[str, str]] = {}
+    for i in range(0, len(fields) - 2, 3):
+        found.setdefault(fields[i], {})[fields[i + 1]] = fields[i + 2]
+    return found
 
 
-def read(path: pathlib.Path) -> str | None:
-    """Read as UTF-8, reporting rather than raising when it is not."""
-    raw = path.read_bytes()
+def is_text(path: pathlib.Path, attrs: dict[str, str], raw: bytes) -> bool:
+    """Whether this file is ours to read as text.
+
+    Two answers, because either alone leaves a gap. `text: unset` is
+    .gitattributes saying binary outright. A NUL byte is the heuristic git
+    itself falls back on under `text=auto`, which covers a binary file whose
+    suffix nobody has declared yet.
+    """
+    return attrs.get('text') != 'unset' and b'\0' not in raw
+
+
+def read(path: pathlib.Path, raw: bytes) -> str | None:
+    """Decode as UTF-8, reporting rather than raising when it is not."""
     try:
         return raw.decode('utf-8')
     except UnicodeDecodeError as exc:
@@ -201,24 +228,26 @@ def check_pins(path: pathlib.Path, text: str) -> None:
             report(path, number, f'`{ref}` is pinned to a branch: use a tag or a commit')
 
 
-# The two exemptions this repository's OWN configuration requires.
-#
-# .gitattributes forces `eol=crlf` on Windows scripts, so git checks them out
-# with CRLF on the runner. Failing them demanded a file that cannot exist:
-# satisfying the linter violated .gitattributes, and satisfying .gitattributes
-# reddened the required `ci` check, with no way to have both.
-CRLF_SUFFIXES = {'.bat', '.cmd', '.ps1'}
-
 # .editorconfig sets `[*.md] trim_trailing_whitespace = false`, because two
 # trailing spaces are Markdown's hard line break. There they are syntax, not
-# noise - and every seeded document is Markdown.
+# noise - and every seeded document is Markdown. This one is a rule about
+# language, not about the file's storage, so .gitattributes cannot answer it.
 TRAILING_WS_EXEMPT_SUFFIXES = {'.md', '.markdown'}
 
 
-def check_whitespace(path: pathlib.Path, text: str) -> None:
-    """The parts of .editorconfig a parser cannot enforce on its own."""
+def check_whitespace(path: pathlib.Path, text: str, eol: str) -> None:
+    """The parts of .editorconfig a parser cannot enforce on its own.
+
+    `eol` is what .gitattributes says this file needs. Windows scripts are
+    declared `eol=crlf` there, so git checks them out with CRLF: failing them
+    demanded a file that cannot exist, since satisfying the linter violated
+    .gitattributes and satisfying .gitattributes reddened the required `ci`
+    check. Asking git rather than keeping a second list of suffixes here means
+    the exemption follows whatever .gitattributes declares, including
+    extensions nobody has thought of yet.
+    """
     suffix = path.suffix.lower()
-    if '\r\n' in text and suffix not in CRLF_SUFFIXES:
+    if '\r\n' in text and eol != 'crlf':
         report(path, None, 'CRLF line endings; this repository is LF only')
     if text and not text.endswith('\n'):
         report(path, len(text.splitlines()), 'no newline at end of file')
@@ -240,16 +269,26 @@ def main() -> int:
         )
         return 1
 
-    files = [p for p in tracked_files() if p.is_file() and is_text(p)]
-    if not files:
+    tracked = [p for p in tracked_files() if p.is_file()]
+    if not tracked:
         print('::error::git reported no tracked files, so nothing was checked.')
         return 1
 
-    for path in files:
-        text = read(path)
+    attrs = attributes(tracked)
+    files = []
+
+    for path in tracked:
+        rel = path.relative_to(ROOT).as_posix()
+        mine = attrs.get(rel, {})
+        raw = path.read_bytes()
+        if not is_text(path, mine, raw):
+            continue
+        files.append(path)
+
+        text = read(path, raw)
         if text is None:
             continue
-        check_whitespace(path, text)
+        check_whitespace(path, text, mine.get('eol', 'unspecified'))
         suffix = path.suffix.lower()
         if suffix == '.json':
             check_json(path, text)

@@ -136,8 +136,25 @@ def main() -> int:
     stubs = sorted(set(HERE.glob('*.yml')) | set(HERE.glob('*.yaml')))
 
     for f in stubs:
-        doc = yaml.safe_load(f.read_text(encoding='utf-8')) or {}
-        for job_id, job in (doc.get('jobs') or {}).items():
+        # One unreadable file must not take the others with it. Unguarded,
+        # a malformed stub raised out of the loop: no annotation, no summary,
+        # and every stub after it silently unchecked - while the traceback
+        # said `in "<unicode string>"` and did not even name the file.
+        try:
+            doc = yaml.safe_load(f.read_text(encoding='utf-8')) or {}
+        except (yaml.YAMLError, OSError, UnicodeDecodeError) as exc:
+            broken.append(
+                f"{f.name}: could not be read as YAML ({type(exc).__name__}); "
+                f"every other stub was still checked.")
+            continue
+
+        jobs = doc.get('jobs') if isinstance(doc, dict) else None
+        if not isinstance(jobs, dict):
+            continue
+
+        for job_id, job in jobs.items():
+            if not isinstance(job, dict):
+                continue
             m = CALL.search(str(job.get('uses', '')))
             if not m:
                 continue

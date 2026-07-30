@@ -20,6 +20,11 @@ from __future__ import annotations
 
 import importlib.util
 import pathlib
+import shutil
+import subprocess
+import sys
+import tempfile
+import textwrap
 import unittest
 
 SCRIPT = pathlib.Path(__file__).resolve().parent / 'verify-stub-ceilings.py'
@@ -146,6 +151,108 @@ class TestInputsOf(unittest.TestCase):
     def test_yaml_one_dot_one_parses_on_as_the_boolean_true(self) -> None:
         doc = {True: {'workflow_call': {'inputs': {'keep': {'type': 'number'}}}}}
         self.assertEqual(check.inputs_of(doc), {'keep'})
+
+
+class Tree:
+    """A throwaway checkout: stubs here, the standards at the pinned ref."""
+
+    def __init__(self) -> None:
+        self.root = pathlib.Path(tempfile.mkdtemp(prefix='ceilings-test-'))
+        (self.root / '.github/workflows').mkdir(parents=True)
+        (self.root / '.standards/.github/workflows').mkdir(parents=True)
+
+    def stub(self, name: str, body: str) -> None:
+        (self.root / '.github/workflows' / name).write_text(
+            textwrap.dedent(body).lstrip(), encoding='utf-8')
+
+    def callee(self, name: str, body: str) -> None:
+        (self.root / '.standards/.github/workflows' / name).write_text(
+            textwrap.dedent(body).lstrip(), encoding='utf-8')
+
+    def run(self) -> subprocess.CompletedProcess:
+        return subprocess.run(
+            [sys.executable, str(SCRIPT)],
+            cwd=self.root, capture_output=True, text=True,
+        )
+
+    def cleanup(self) -> None:
+        shutil.rmtree(self.root, ignore_errors=True)
+
+
+GOOD_CALLEE = """
+    on:
+      workflow_call:
+        inputs:
+          lint-command: {type: string}
+    jobs:
+      j:
+        permissions:
+          contents: read
+    """
+
+GOOD_STUB = """
+    name: 'Good'
+    permissions: {}
+    jobs:
+      ok:
+        permissions:
+          contents: read
+        uses: tannergolden/standards/.github/workflows/ci.yml@v1
+    """
+
+
+class TestSurvivesABadFile(unittest.TestCase):
+    """A file it cannot read must cost that file, not the whole run."""
+
+    def setUp(self) -> None:
+        self.tree = Tree()
+        self.tree.callee('ci.yml', GOOD_CALLEE)
+        self.addCleanup(self.tree.cleanup)
+
+    def test_a_clean_tree_passes(self) -> None:
+        self.tree.stub('a.yml', GOOD_STUB)
+        result = self.tree.run()
+        self.assertEqual(result.returncode, 0, result.stdout + result.stderr)
+        self.assertIn('1 stub(s) checked', result.stdout)
+
+    def test_malformed_yaml_is_reported_and_the_others_still_run(self) -> None:
+        # 'aaa.yml' sorts first, so an abort here would take 'zzz.yml' with it.
+        self.tree.stub('aaa.yml', 'name: broken\n  bad: [indent\n')
+        self.tree.stub('zzz.yml', GOOD_STUB)
+        result = self.tree.run()
+        self.assertNotIn('Traceback', result.stderr)
+        self.assertIn('aaa.yml', result.stdout)
+        self.assertIn('could not be read as YAML', result.stdout)
+        self.assertIn('1 stub(s) checked', result.stdout)
+        self.assertEqual(result.returncode, 1)
+
+    def test_a_jobs_block_that_is_not_a_mapping_is_skipped(self) -> None:
+        self.tree.stub('aaa.yml', 'name: odd\njobs:\n  - one\n  - two\n')
+        self.tree.stub('zzz.yml', GOOD_STUB)
+        result = self.tree.run()
+        self.assertNotIn('Traceback', result.stderr)
+        self.assertIn('1 stub(s) checked', result.stdout)
+
+    def test_a_job_that_is_not_a_mapping_is_skipped(self) -> None:
+        self.tree.stub('aaa.yml', 'name: odd\njobs:\n  weird: just-a-string\n')
+        self.tree.stub('zzz.yml', GOOD_STUB)
+        result = self.tree.run()
+        self.assertNotIn('Traceback', result.stderr)
+        self.assertIn('1 stub(s) checked', result.stdout)
+
+    def test_a_callee_using_read_all_does_not_crash(self) -> None:
+        self.tree.callee('all.yml', 'on: workflow_call\njobs:\n  j:\n    permissions: read-all\n')
+        self.tree.stub('a.yml', """
+            name: 'A'
+            jobs:
+              j:
+                permissions:
+                  contents: read
+                uses: tannergolden/standards/.github/workflows/all.yml@v1
+            """)
+        result = self.tree.run()
+        self.assertNotIn('Traceback', result.stderr)
+        self.assertIn('1 stub(s) checked', result.stdout)
 
 
 if __name__ == '__main__':

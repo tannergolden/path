@@ -299,9 +299,14 @@ it: when `v2` is published it opens **one issue** telling you, and changes
 nothing. Adopting a
 major is a decision, not a chore.
 
-Nothing here pins a third-party action, either. Every `uses:` points at
-`tannergolden/standards`, so the SHA pins that do need maintaining are
+Almost nothing here pins a third-party action, either. Every `uses:` in the
+stubs points at `tannergolden/standards`, so the SHA pins behind them are
 maintained once, there, rather than in every repository built from this one.
+The exception is `verify-stubs.yml`, which runs steps of its own and pins
+`actions/checkout` to a commit three times. Those three are why
+`.github/dependabot.yml` ships with `github-actions` enabled: it keeps them
+current, and it is the one ecosystem that is correct for every repository
+from the moment it is generated.
 
 > [!NOTE]
 > **If this repository goes quiet for 60 days, GitHub disables its scheduled

@@ -18,7 +18,9 @@ Run it:
 
 from __future__ import annotations
 
+import contextlib
 import importlib.util
+import io
 import pathlib
 import shutil
 import subprocess
@@ -253,6 +255,22 @@ class TestSurvivesABadFile(unittest.TestCase):
         result = self.tree.run()
         self.assertNotIn('Traceback', result.stderr)
         self.assertIn('1 stub(s) checked', result.stdout)
+
+
+class TestMissingPyYAML(unittest.TestCase):
+    """The dependency is runner-provided, so its absence must explain itself."""
+
+    def test_it_is_explained_and_never_reported_as_clean(self) -> None:
+        original = check.yaml
+        check.yaml = None
+        try:
+            captured = io.StringIO()
+            with contextlib.redirect_stdout(captured):
+                code = check.main()
+        finally:
+            check.yaml = original
+        self.assertEqual(code, 1, 'an unchecked run must not exit 0')
+        self.assertIn('PyYAML', captured.getvalue())
 
 
 if __name__ == '__main__':

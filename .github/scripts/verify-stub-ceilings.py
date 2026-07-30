@@ -31,7 +31,10 @@ import pathlib
 import re
 import sys
 
-import yaml
+try:
+    import yaml
+except ImportError:  # reported by main(), so the message is the whole output
+    yaml = None
 
 HERE = pathlib.Path('.github/workflows')
 PINNED = pathlib.Path('.standards/.github/workflows')
@@ -127,6 +130,15 @@ def inputs_of(doc):
 
 
 def main() -> int:
+    if yaml is None:
+        print(
+            '::error::PyYAML is not available, so no stub ceiling could be '
+            'checked. Install it (pip install pyyaml) on the runner this job '
+            'uses. Nothing was verified, so treat this run as unchecked '
+            'rather than clean.'
+        )
+        return 1
+
     broken, pending, checked = [], [], 0
     comparable = LATEST.is_dir()
 

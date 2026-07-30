@@ -1,0 +1,173 @@
+#!/usr/bin/env python3
+"""Tests for the repository validator.
+
+WHY THIS EXISTS. `validate-repository.py` runs as the `ci` job's
+`lint-command` from the first commit, which makes it the only gate a fresh
+repository actually has - and it had no test. It also enforced three rules
+this repository contradicts elsewhere, so it failed files that
+`.gitattributes` and `.editorconfig` require to look exactly that way.
+
+Every test builds a throwaway repository, runs the real script as a
+subprocess exactly as CI does, and asserts on its exit code and output.
+Nothing here reads or writes the repository it ships in.
+
+Run it:
+
+    python3 .github/scripts/test_validate_repository.py
+"""
+
+from __future__ import annotations
+
+import pathlib
+import shutil
+import subprocess
+import sys
+import tempfile
+import unittest
+
+SCRIPT = pathlib.Path(__file__).resolve().parent / 'validate-repository.py'
+
+
+class Repo:
+    """A throwaway git repository with the validator installed."""
+
+    def __init__(self) -> None:
+        self.root = pathlib.Path(tempfile.mkdtemp(prefix='validate-test-'))
+        self.run_git('init', '-q', '.')
+        self.write('.github/scripts/validate-repository.py', SCRIPT.read_text(encoding='utf-8'))
+
+    def run_git(self, *args: str) -> None:
+        subprocess.run(['git', *args], cwd=self.root, check=True, capture_output=True)
+
+    def write(self, rel: str, text: str, newline: str = '\n') -> None:
+        path = self.root / rel
+        path.parent.mkdir(parents=True, exist_ok=True)
+        path.write_bytes(text.replace('\n', newline).encode('utf-8'))
+
+    def run(self) -> subprocess.CompletedProcess[str]:
+        self.run_git('add', '-A')
+        return subprocess.run(
+            [sys.executable, '.github/scripts/validate-repository.py'],
+            cwd=self.root, capture_output=True, text=True,
+        )
+
+    def cleanup(self) -> None:
+        shutil.rmtree(self.root, ignore_errors=True)
+
+
+class ValidatorTestCase(unittest.TestCase):
+    def setUp(self) -> None:
+        self.repo = Repo()
+        self.addCleanup(self.repo.cleanup)
+
+    def assertClean(self, result: subprocess.CompletedProcess[str]) -> None:
+        self.assertEqual(
+            result.returncode, 0,
+            f'expected a clean run, got exit {result.returncode}:\n'
+            f'{result.stdout}\n{result.stderr}',
+        )
+
+    def assertFinding(
+        self, result: subprocess.CompletedProcess[str], fragment: str
+    ) -> None:
+        self.assertEqual(
+            result.returncode, 1,
+            f'expected a finding, got exit {result.returncode}:\n'
+            f'{result.stdout}\n{result.stderr}',
+        )
+        self.assertIn(fragment, result.stdout)
+
+
+class TestLineEndings(ValidatorTestCase):
+    """LF everywhere, except where .gitattributes forces CRLF."""
+
+    def test_crlf_in_an_ordinary_file_is_reported(self) -> None:
+        self.repo.write('notes.txt', 'a\nb\n', newline='\r\n')
+        self.assertFinding(self.repo.run(), 'CRLF')
+
+    def test_lf_in_a_windows_script_is_still_fine(self) -> None:
+        self.repo.write('build.bat', 'echo hello\n')
+        self.assertClean(self.repo.run())
+
+
+class TestTrailingWhitespace(ValidatorTestCase):
+    """Trailing spaces are noise - except in Markdown, where they are syntax."""
+
+    def test_trailing_whitespace_is_reported(self) -> None:
+        self.repo.write('config.yml', 'key: value   \n')
+        self.assertFinding(self.repo.run(), 'trailing whitespace')
+
+    def test_markdown_is_still_checked_for_everything_else(self) -> None:
+        self.repo.write('NOTES.md', 'no newline at the end')
+        self.assertFinding(self.repo.run(), 'no newline at end of file')
+
+
+class TestActionPins(ValidatorTestCase):
+    """Every `uses:` must name a tag or a commit, never a branch."""
+
+    def workflow(self, uses: str) -> str:
+        return (
+            'name: t\n'
+            'on: push\n'
+            'jobs:\n'
+            '  a:\n'
+            '    runs-on: ubuntu-latest\n'
+            '    steps:\n'
+            f'      - uses: {uses}\n'
+        )
+
+    def test_a_branch_ref_is_reported(self) -> None:
+        self.repo.write('.github/workflows/t.yml', self.workflow('actions/checkout@main'))
+        self.assertFinding(self.repo.run(), 'pinned to a branch')
+
+    def test_a_missing_ref_is_reported(self) -> None:
+        self.repo.write('.github/workflows/t.yml', self.workflow('actions/checkout'))
+        self.assertFinding(self.repo.run(), 'has no ref')
+
+    def test_a_tag_is_accepted(self) -> None:
+        self.repo.write('.github/workflows/t.yml', self.workflow('actions/checkout@v4'))
+        self.assertClean(self.repo.run())
+
+    def test_a_trailing_comment_is_not_part_of_the_ref(self) -> None:
+        sha = '3d3c42e5aac5ba805825da76410c181273ba90b1'
+        self.repo.write(
+            '.github/workflows/t.yml', self.workflow(f'actions/checkout@{sha} # v7.0.1')
+        )
+        self.assertClean(self.repo.run())
+
+    def test_a_local_action_needs_no_ref(self) -> None:
+        self.repo.write('.github/workflows/t.yml', self.workflow('./.github/actions/thing'))
+        self.assertClean(self.repo.run())
+
+
+class TestParsing(ValidatorTestCase):
+    """Every YAML and JSON file has to parse."""
+
+    def test_invalid_yaml_is_reported(self) -> None:
+        self.repo.write('config.yml', 'key: [unclosed\n')
+        self.assertFinding(self.repo.run(), 'invalid YAML')
+
+    def test_invalid_json_is_reported(self) -> None:
+        self.repo.write('data.json', '{"a": 1,}\n')
+        self.assertFinding(self.repo.run(), 'invalid JSON')
+
+    def test_jsonc_comments_and_trailing_commas_are_accepted(self) -> None:
+        self.repo.write(
+            '.vscode/settings.json',
+            '{\n  // a comment\n  "a": 1,\n  /* block */\n  "b": [1, 2,],\n}\n',
+        )
+        self.assertClean(self.repo.run())
+
+
+class TestCleanRepository(ValidatorTestCase):
+    """The shape a fresh repository actually has."""
+
+    def test_a_tidy_repository_passes(self) -> None:
+        self.repo.write('README.md', '# Title\n')
+        self.repo.write('config.yml', 'key: value\n')
+        self.repo.write('data.json', '{"a": 1}\n')
+        self.assertClean(self.repo.run())
+
+
+if __name__ == '__main__':
+    unittest.main(verbosity=2)

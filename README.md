@@ -125,7 +125,7 @@ When you do want it, there are two supported routes and no wrong answer:
 | Route                                                       | You commit                  | Updates arrive by                            |
 | :----------------------------------------------------------- | :-------------------------- | :------------------------------------------- |
 | **By hand**                                                 | the instructions themselves | you editing them                             |
-| **[`tannergolden/ai`](https://github.com/tannergolden/ai)** | one workflow stub           | a release moving a tag, with no pull request |
+| **[`tannergolden/intelligence`](https://github.com/tannergolden/intelligence)** | one workflow stub | a release moving a tag, with no pull request |
 
 Writing them by hand suits conventions that are specific to one project. The
 publisher suits several repositories that share one set, for the same reason the

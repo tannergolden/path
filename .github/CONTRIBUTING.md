@@ -129,26 +129,31 @@ This is a **mandated policy**, not a preference:
 
 ## 🤖 Automation vs. Manual
 
-The Golden Path utilizes an Agentic workflow to reduce friction. Understanding what is handled by "The Engine" vs. "The Human" is key to efficient contribution.
+Knowing what a workflow already does for you is what keeps a contribution
+small. Every row below names a file that exists in `.github/workflows/`; the
+logic it calls lives in `tannergolden/standards`.
 
-| Task                       | Handling     | Tooling                                      |
-| :------------------------- | :----------- | :------------------------------------------- |
-| **PR Triage & Labeling**   | 🤖 Automated | `ops-governance.yml`                         |
-| **Title Validation**       | 🤖 Automated | `governance.yml`                         |
-| **Branch Naming**          | 🤖 Automated | `governance.yml`                         |
-| **DCO Sign-Off Check**     | 🤖 Automated | `governance.yml` (bot PRs exempt)        |
-| **Runner Egress Audit**    | 🤖 Automated | Harden-Runner (first step of every job)      |
-| **Docs Site Publishing**   | 🤖 Automated | `pages-deploy.yml` (GitHub Pages)            |
-| **Branch Protection**      | 🤖 Automated | Published rulesets, applied by dispatching `apply-standards` |
-| **Merge Gate (green CI)**  | 🤖 Automated | Required status checks, set by the published rulesets |
-| **CI Failure Escalation**  | 🤖 Automated | `ops-ci-failure-alert.yml`                   |
-| **Template Engine Sync**   | 🤖 Automated | `ops-sync-template.yml` (weekly PR)          |
-| **Vulnerability Scanning** | 🤖 Automated | `ci-dependency-review.yml`                   |
-| **Broken Link Checks**     | 🤖 Automated | `ci-main.yml`                                |
-| **Stale Issue Cleanup**    | 🤖 Automated | `ops-governance.yml`                         |
-| **Priority Assessment**    | 🧑‍💻 Manual    | Human Review                                 |
-| **Architectural Sign-off** | 🧑‍💻 Manual    | Code Review Approval                         |
-| **Merging to Production**  | 🧑‍💻 Manual    | Human Promotion                              |
+| Task                       | Handling     | Tooling                                                      |
+| :------------------------- | :----------- | :----------------------------------------------------------- |
+| **Lint, Test & Build**     | 🤖 Automated | `checks.yml` (required check `ci`)                           |
+| **Secret Scanning**        | 🤖 Automated | `checks.yml` (required check `secrets`)                      |
+| **Static Analysis**        | 🤖 Automated | `checks.yml` (CodeQL, advisory)                              |
+| **Workflow Linting**       | 🤖 Automated | `checks.yml` (actionlint, zizmor)                            |
+| **PR Title Validation**    | 🤖 Automated | `governance.yml`                                             |
+| **DCO Sign-Off Check**     | 🤖 Automated | `governance.yml` (required check `pr`; bot PRs exempt)       |
+| **PR Triage & Labeling**   | 🤖 Automated | `governance.yml`                                             |
+| **Stale Issue Cleanup**    | 🤖 Automated | `governance.yml` (weekly)                                    |
+| **Slash Commands**         | 🤖 Automated | `governance.yml`                                             |
+| **Runner Egress Audit**    | 🤖 Automated | Harden-Runner (first step of every job)                      |
+| **Code Formatting**        | 🤖 Automated | `auto-format.yml` (opens a PR, never pushes to your branch)  |
+| **Dependency Updates**     | 🤖 Automated | Dependabot + `dependabot-automerge.yml` (patch & minor only) |
+| **CI Failure Escalation**  | 🤖 Automated | `ci-failure-alert.yml`                                       |
+| **Stub Ceiling Checks**    | 🤖 Automated | `verify-stubs.yml` (daily)                                   |
+| **Branch Protection**      | 🤖 Automated | Rulesets, applied by dispatching `apply-standards.yml`       |
+| **Merge Gate (green CI)**  | 🤖 Automated | Required status checks, set by those rulesets                |
+| **Priority Assessment**    | 🧑‍💻 Manual    | Human Review                                                 |
+| **Architectural Sign-off** | 🧑‍💻 Manual    | Code Review Approval                                         |
+| **Merging to Production**  | 🧑‍💻 Manual    | Human Promotion                                              |
 
 ---
 

@@ -254,7 +254,8 @@ with every check in it, not four runs to read separately.
 | `checks.yml`               | The gates: lint/test/build, secret scan, CodeQL, workflow lint    |
 | `governance.yml`           | PR title and DCO checks, onboarding, triage, stale sweep, slash commands |
 | `release.yml`              | Draft notes, publish assets, registries, prune superseded releases |
-| `maintenance.yml`          | Prunes runs, deployments and drafts; rolls the copyright year     |
+| `maintenance.yml`          | Prunes stale deployments; deletes draft releases on request        |
+| `prune-runs.yml`           | Prunes workflow run history, with its logs and artifacts          |
 | `lifecycle.yml`            | Claims this repository once; tells you when a new major exists    |
 | `dependabot-automerge.yml` | Approves and queues Dependabot's patch and minor updates          |
 | `ci-failure-alert.yml`     | Opens an issue when a watched workflow fails, closes it on green  |

@@ -147,6 +147,34 @@ class TestActionPins(ValidatorTestCase):
         self.repo.write('.github/workflows/t.yml', self.workflow('actions/checkout@v4'))
         self.assertClean(self.repo.run())
 
+    def test_a_quoted_tag_is_accepted(self) -> None:
+        # Single-quoted scalars are this repository's dominant YAML style, and
+        # the quotes are not part of the ref.
+        self.repo.write('.github/workflows/t.yml', self.workflow("'actions/checkout@v4'"))
+        self.assertClean(self.repo.run())
+
+    def test_a_double_quoted_sha_is_accepted(self) -> None:
+        sha = '3d3c42e5aac5ba805825da76410c181273ba90b1'
+        self.repo.write('.github/workflows/t.yml', self.workflow(f'"actions/checkout@{sha}"'))
+        self.assertClean(self.repo.run())
+
+    def test_an_uppercase_sha_is_accepted(self) -> None:
+        sha = '3D3C42E5AAC5BA805825DA76410C181273BA90B1'
+        self.repo.write('.github/workflows/t.yml', self.workflow(f'actions/checkout@{sha}'))
+        self.assertClean(self.repo.run())
+
+    def test_a_quoted_branch_ref_is_still_reported(self) -> None:
+        self.repo.write('.github/workflows/t.yml', self.workflow("'actions/checkout@main'"))
+        self.assertFinding(self.repo.run(), 'pinned to a branch')
+
+    def test_a_quoted_bare_ref_is_still_reported(self) -> None:
+        self.repo.write('.github/workflows/t.yml', self.workflow("'actions/checkout'"))
+        self.assertFinding(self.repo.run(), 'has no ref')
+
+    def test_the_message_does_not_quote_the_quotes(self) -> None:
+        self.repo.write('.github/workflows/t.yml', self.workflow("'actions/checkout@main'"))
+        self.assertIn('`actions/checkout@main`', self.repo.run().stdout)
+
     def test_a_trailing_comment_is_not_part_of_the_ref(self) -> None:
         sha = '3d3c42e5aac5ba805825da76410c181273ba90b1'
         self.repo.write(

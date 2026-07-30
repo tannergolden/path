@@ -145,8 +145,26 @@ def check_yaml(path: pathlib.Path, text: str) -> None:
 
 # A ref that is a branch moves under you; a bare `uses:` has no ref at all.
 # Neither is acceptable in a workflow that runs with this repository's token.
+#
+# `re.I` because a commit SHA is hex either way, and the `$` anchor means the
+# quotes have to come off first - see `unquote` below.
 UNPINNED = re.compile(r'^\s*(?:-\s*)?uses:\s*([^\s#]+)\s*(?:#.*)?$')
-PINNED_REF = re.compile(r'@(?:[0-9a-f]{40}|v\d+(?:\.\d+){0,2})$')
+PINNED_REF = re.compile(r'@(?:[0-9a-f]{40}|v\d+(?:\.\d+){0,2})$', re.I)
+
+
+def unquote(ref: str) -> str:
+    """Strip the YAML quoting the pattern captured but the ref does not have.
+
+    `uses: 'actions/checkout@v4'` is valid YAML, correctly pinned, and the
+    dominant scalar style in these workflows. Matched raw against a `$`-anchored
+    pattern, the trailing quote meant nothing ever looked pinned, and a properly
+    pinned action was reported as "pinned to a branch" - a message that is not
+    merely unhelpful but the opposite of true.
+    """
+    for quote in ("'", '"'):
+        if len(ref) >= 2 and ref.startswith(quote) and ref.endswith(quote):
+            return ref[1:-1]
+    return ref
 
 
 def check_pins(path: pathlib.Path, text: str) -> None:
@@ -154,7 +172,7 @@ def check_pins(path: pathlib.Path, text: str) -> None:
         match = UNPINNED.match(line)
         if not match:
             continue
-        ref = match.group(1)
+        ref = unquote(match.group(1))
         if ref.startswith('./') or ref.startswith('docker://'):
             continue
         if '@' not in ref:

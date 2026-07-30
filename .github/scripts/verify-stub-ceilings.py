@@ -66,10 +66,24 @@ def permissions_of(node):
     return dict(perms)
 
 
+def _rank(level: str) -> int:
+    """How wide a permission level is. Narrowest to widest.
+
+    An unrecognised level sorts WIDEST on purpose. Demanding a ceiling that
+    turns out unnecessary costs a maintainer one puzzled minute; dropping one
+    that was needed costs a startup failure with no log to read.
+    """
+    return {'none': 0, 'read': 1, 'write': 2}.get(level, 3)
+
+
 def ceiling_of(doc):
-    # The union of what the callee's own jobs ask for. write beats read
-    # wherever both appear, so the result does not depend on the order the
-    # jobs are declared.
+    # The union of what the callee's own jobs ask for: the WIDEST level any
+    # job asks for wins, so the result does not depend on the order the jobs
+    # are declared. Comparing against 'write' alone was not a union - `none`
+    # is narrower than `read` but is not 'write', so a job declaring
+    # `contents: none` overwrote a `contents: read` from an earlier job and
+    # the answer flipped with the job order, which the comment here promised
+    # it would not.
     #
     # A job with no block of its own inherits the workflow-level one, which is
     # a legal and common style. Reading only the job blocks made such a callee
@@ -88,7 +102,8 @@ def ceiling_of(doc):
     for inner in (doc.get('jobs') or {}).values():
         declared = permissions_of(inner)
         for scope, level in (top if declared is None else declared).items():
-            if want.get(scope) != 'write':
+            current = want.get(scope)
+            if current is None or _rank(level) > _rank(current):
                 want[scope] = level
     return want
 

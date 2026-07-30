@@ -68,6 +68,32 @@ class TestCeilingOf(unittest.TestCase):
         self.assertEqual(check.ceiling_of(a), {'contents': 'write'})
         self.assertEqual(check.ceiling_of(b), {'contents': 'write'})
 
+    def test_read_beats_none_in_either_order(self) -> None:
+        # `none` is the narrowest level, so it can never narrow the union.
+        # Comparing only against 'write' let it overwrite a `read` from an
+        # earlier job, making the answer depend on job order.
+        a = {'jobs': {'x': {'permissions': {'contents': 'read'}},
+                      'y': {'permissions': {'contents': 'none'}}}}
+        b = {'jobs': {'y': {'permissions': {'contents': 'none'}},
+                      'x': {'permissions': {'contents': 'read'}}}}
+        self.assertEqual(check.ceiling_of(a), {'contents': 'read'})
+        self.assertEqual(check.ceiling_of(b), {'contents': 'read'})
+
+    def test_write_beats_none_in_either_order(self) -> None:
+        a = {'jobs': {'x': {'permissions': {'contents': 'write'}},
+                      'y': {'permissions': {'contents': 'none'}}}}
+        b = {'jobs': {'y': {'permissions': {'contents': 'none'}},
+                      'x': {'permissions': {'contents': 'write'}}}}
+        self.assertEqual(check.ceiling_of(a), {'contents': 'write'})
+        self.assertEqual(check.ceiling_of(b), {'contents': 'write'})
+
+    def test_an_unrecognised_level_is_kept_rather_than_dropped(self) -> None:
+        # Better to demand a ceiling that turns out unnecessary than to drop
+        # one and fail the run at startup.
+        doc = {'jobs': {'x': {'permissions': {'contents': 'read'}},
+                        'y': {'permissions': {'contents': 'brand-new'}}}}
+        self.assertEqual(check.ceiling_of(doc), {'contents': 'brand-new'})
+
     def test_a_job_with_no_block_inherits_the_workflow_level_one(self) -> None:
         doc = {'permissions': {'contents': 'read'}, 'jobs': {'j': {}}}
         self.assertEqual(check.ceiling_of(doc), {'contents': 'read'})

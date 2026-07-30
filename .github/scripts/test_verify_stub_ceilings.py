@@ -51,6 +51,12 @@ class TestPermissionsOf(unittest.TestCase):
         got = check.permissions_of({'permissions': 'write-all'})
         self.assertEqual(set(got.values()), {'write'})
 
+    def test_models_is_a_scope(self) -> None:
+        # GitHub added `models` for the Models API. Omitting it means a callee
+        # declaring `read-all` yields a ceiling without it, and a stub that
+        # correctly declares `models: read` is reported "wider than declared".
+        self.assertIn('models', check.ALL_SCOPES)
+
     def test_a_mapping_is_copied_not_aliased(self) -> None:
         node = {'permissions': {'contents': 'read'}}
         check.permissions_of(node)['contents'] = 'write'

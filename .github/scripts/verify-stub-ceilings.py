@@ -48,9 +48,14 @@ def load(path: pathlib.Path):
 # neither is a mapping, so calling .items() on one used to raise
 # AttributeError - a raw traceback here, caused by somebody reformatting a
 # workflow in another repository.
+#
+# Keep this list current with GitHub's own. A scope missing here is invisible
+# when a callee says `read-all`, so a stub that correctly declares it is
+# reported "wider than declared" - a finding that names a real scope and is
+# still wrong.
 ALL_SCOPES = (
     'actions', 'attestations', 'checks', 'contents', 'deployments',
-    'discussions', 'id-token', 'issues', 'packages', 'pages',
+    'discussions', 'id-token', 'issues', 'models', 'packages', 'pages',
     'pull-requests', 'repository-projects', 'security-events',
     'statuses',
 )

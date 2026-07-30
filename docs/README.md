@@ -61,17 +61,18 @@ was generated they are ordinary files in your tree.
 
 ## 📁 This Folder As You Grow
 
-`docs/` is where your instantiated documents go. A conventional shape, none of
-it mandatory:
+`docs/` is where your instantiated documents go - the tree you build by copying
+seeds out, not the tree they sit in. A conventional shape, none of it mandatory:
 
 ```txt
 docs/
-├── README.md            # this file
-├── templates/           # seed content, copied out as you adopt it
 ├── technical/           # architecture, backend, database, interface, testing
 ├── adrs/                # architecture decision records
 └── operations/          # runbooks, on-call, incident response
 ```
+
+Nothing belongs in it until you put something there, and `templates/` is not
+copied across - the seeds stay where they are and you take what you want.
 
 ---
 

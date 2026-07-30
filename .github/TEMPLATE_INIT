@@ -1,15 +1,16 @@
 This repository has not been initialised yet.
 
-The presence of this file is what permits `.github/workflows/init-template.yml`
-to run. That workflow rewrites the template author's identity to yours - the
-licence holder, the funding target, the documentation footers, and the issue
-chooser's contact link - and then deletes this file, which is what stops it
-ever running again.
+The presence of this file is what permits the `init` job in
+`.github/workflows/lifecycle.yml` to run. That job rewrites the template
+author's identity to yours - the licence holder, the funding target, the
+documentation footers, and the issue chooser's contact link - and then deletes
+this file, which is what stops it ever running again.
 
 It should fire on its own shortly after generation. GitHub does not reliably
 deliver an event when a repository is created from a template, so if nothing
-happens, run "🎉 Initialise From Template" from the Actions tab. Running it
+happens, dispatch "🎯 Standards Lifecycle" from the Actions tab. Running it
 twice is harmless.
 
-Deleting this file by hand skips initialisation entirely; you would then edit
-LICENSE, .github/FUNDING.yml, and .github/ISSUE_TEMPLATE/config.yml yourself.
+Deleting this file by hand skips initialisation entirely; you would then set
+the licence holder, the funding target and the issue chooser's contact link
+yourself, wherever this repository keeps them.

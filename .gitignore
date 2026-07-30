@@ -86,9 +86,18 @@ local.properties
 
 # --- Environment & Secrets ---
 # Always use .env.example for templates
+#
+# ⚠️ `.env.*` MATCHES EVERY VARIANT, and that is the point. Naming them one at
+# a time missed .env.production, .env.staging, .env.development and .env.test
+# - ordinary source files as far as git was concerned, while .env.example
+# promised that every `.env*` was covered. A file holding real credentials
+# must not depend on somebody having listed its exact name first.
+#
+# The negation keeps this repository's own example, and MUST stay after the
+# pattern that would otherwise ignore it: git applies the last match.
 .env
-.env.local
-.env.*.local
+.env.*
+!.env.example
 *.pem
 *.key
 firebase-debug.log

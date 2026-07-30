@@ -340,7 +340,10 @@ starts going stale the moment you paste it.
 
 The one exception is [`docs/templates/`](docs/templates/README.md), which is
 meant to be copied: those are fill-in documents that become _your_ project's
-decisions. A fill-in document's destination mirrors its path minus `templates/`.
+decisions. A fill-in **standard** instantiates at its own path minus
+`templates/`; the **work-product forms** - an ADR, a post-mortem, a user
+story - go where a numbered or dated record belongs instead. The
+[catalogue](docs/templates/README.md) gives each destination.
 
 ---
 

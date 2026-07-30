@@ -111,13 +111,33 @@ def strip_jsonc(text: str) -> str:
             while i < n and not text.startswith('*/', i):
                 out.append('\n' if text[i] == '\n' else ' ')
                 i += 1
-            out.append('  ')
-            i += 2
+            # Only blank the terminator if there IS one. Appending it
+            # unconditionally put two characters past the file's final newline
+            # and invented a line that does not exist, so the reported line
+            # landed outside the file - and GitHub silently drops an
+            # annotation whose line is out of range, losing the finding.
+            if i < n:
+                out.append('  ')
+                i += 2
         else:
             out.append(ch)
             i += 1
     # Trailing commas, once comments can no longer hide one.
     return re.sub(r',(\s*[}\]])', r' \1', ''.join(out))
+
+
+def clamp_line(text: str, line: int | None) -> int | None:
+    """Keep a reported line inside the file it refers to.
+
+    A parser that fails at END of input reports the line after the last one -
+    `{` with an unterminated comment is a 4-line file whose error is at line 5.
+    GitHub silently DROPS an annotation whose line is out of range, so the
+    finding vanishes from the diff instead of landing on the last line, which
+    is the one place the reader would look.
+    """
+    if line is None:
+        return None
+    return max(1, min(line, len(text.splitlines()) or 1))
 
 
 def check_json(path: pathlib.Path, text: str) -> None:
@@ -126,7 +146,7 @@ def check_json(path: pathlib.Path, text: str) -> None:
         json.loads(strip_jsonc(text) if jsonc else text)
     except json.JSONDecodeError as exc:
         kind = 'JSONC' if jsonc else 'JSON'
-        report(path, exc.lineno, f'invalid {kind}: {exc.msg}')
+        report(path, clamp_line(text, exc.lineno), f'invalid {kind}: {exc.msg}')
 
 
 def check_yaml(path: pathlib.Path, text: str) -> None:
@@ -140,7 +160,7 @@ def check_yaml(path: pathlib.Path, text: str) -> None:
         mark = getattr(exc, 'problem_mark', None)
         line = mark.line + 1 if mark else None
         detail = getattr(exc, 'problem', None) or str(exc).splitlines()[0]
-        report(path, line, f'invalid YAML: {detail}')
+        report(path, clamp_line(text, line), f'invalid YAML: {detail}')
 
 
 # A ref that is a branch moves under you; a bare `uses:` has no ref at all.

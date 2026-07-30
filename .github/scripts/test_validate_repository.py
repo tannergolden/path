@@ -205,6 +205,23 @@ class TestParsing(ValidatorTestCase):
         )
         self.assertClean(self.repo.run())
 
+    def test_an_unterminated_block_comment_is_reported_in_range(self) -> None:
+        # The scan runs to end-of-input when the terminator is missing, then
+        # used to append two more characters past the final newline - creating
+        # a line that does not exist. GitHub silently drops an annotation whose
+        # line is outside the file, so the finding vanished from the diff.
+        self.repo.write('.vscode/settings.json', '{\n  /* never closed\n  "a": 1\n}\n')
+        result = self.repo.run()
+        self.assertEqual(result.returncode, 1)
+        reported = [
+            int(line.split('settings.json:')[1].split(':')[0])
+            for line in result.stdout.splitlines()
+            if 'settings.json:' in line and 'invalid' in line
+        ]
+        self.assertTrue(reported, f'no finding reported:\n{result.stdout}')
+        for n in reported:
+            self.assertLessEqual(n, 4, f'line {n} is past the end of a 4-line file')
+
 
 class TestCleanRepository(ValidatorTestCase):
     """The shape a fresh repository actually has."""

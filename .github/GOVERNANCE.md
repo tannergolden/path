@@ -34,9 +34,9 @@ This project uses a **lightweight maintainer model**. A small group of **Maintai
 
 | Role                   | Who they are                                 | Responsibilities                                                                                    |
 | :--------------------- | :------------------------------------------- | :-------------------------------------------------------------------------------------------------- |
-| **Maintainer**         | Named in [`CODEOWNERS`](/.github/CODEOWNERS) | Review and merge PRs, cut releases, steward security response, administer repository settings.      |
-| **Contributor**        | Anyone who opens a PR or issue               | Follow the [Contributing Guidelines](/.github/CONTRIBUTING.md); respond to review feedback.         |
-| **Security responder** | A Maintainer on rotation                     | Triage private reports per the [Security Policy](/.github/SECURITY.md) within the stated timelines. |
+| **Maintainer**         | Named in [`CODEOWNERS`](CODEOWNERS) | Review and merge PRs, cut releases, steward security response, administer repository settings.      |
+| **Contributor**        | Anyone who opens a PR or issue               | Follow the [Contributing Guidelines](CONTRIBUTING.md); respond to review feedback.         |
+| **Security responder** | A Maintainer on rotation                     | Triage private reports per the [Security Policy](SECURITY.md) within the stated timelines. |
 
 Maintainers are added by consensus of the existing Maintainers after a sustained record of quality contributions, and are recorded in `CODEOWNERS` - once populated, that file is the single source of truth for who currently holds authority (the template ships it commented out; list your maintainers there as one of your first governance acts).
 
@@ -67,9 +67,9 @@ Quality is enforced by process, not trust:
 
 ## 🌱 Onboarding New Contributors
 
-- Start with the [Contributing Guidelines](/.github/CONTRIBUTING.md) and the setup checklist in the repository [README](/README.md).
+- Start with the [Contributing Guidelines](CONTRIBUTING.md) and the setup checklist in the repository [README](../README.md).
 - Good entry points are issues labelled **`good first issue`** and **`help wanted`** - small, well-scoped tasks that need no deep context. Maintainers keep a few of these open on purpose.
-- Ask questions in **Discussions** (the tab on this repository; enable it under Settings → General → Features if it is not there) or via [Support](/.github/SUPPORT.md).
+- Ask questions in **Discussions** (the tab on this repository; enable it under Settings → General → Features if it is not there) or via [Support](SUPPORT.md).
 
 ---
 

@@ -39,7 +39,7 @@ We value **small, frequent, and high-quality** contributions that adhere to our 
 - Review the **[Testing Strategy](https://github.com/tannergolden/standards/blob/Development/docs/distribution/Testing-Strategy.md)** to understand our testing layers.
 
 > [!TIP]
-> **New here?** Start with an issue labelled **`good first issue`** or **`help wanted`** - these are small, well-scoped tasks that need no deep context. Maintainers keep a few open on purpose (see [Governance](/.github/GOVERNANCE.md)).
+> **New here?** Start with an issue labelled **`good first issue`** or **`help wanted`** - these are small, well-scoped tasks that need no deep context. Maintainers keep a few open on purpose (see [Governance](GOVERNANCE.md)).
 
 ### 2. Branching Strategy
 
@@ -104,14 +104,14 @@ This is a **mandated policy**, not a preference:
 ### 1. Opening the PR
 
 - Target the **`Development`** branch.
-- Complete the **[Pull Request Template](/.github/pull_request_template.md)** in its entirety. Empty descriptions will be closed.
+- Complete the **[Pull Request Template](pull_request_template.md)** in its entirety. Empty descriptions will be closed.
 - **Sign off your commits (DCO).** By adding a `Signed-off-by` line you certify the [Developer Certificate of Origin](https://developercertificate.org/) - that you wrote the change or have the right to submit it. This is machine-checked: the **✍️ DCO Sign-Off** job fails any PR whose human-authored commits lack the trailer (bot PRs are exempt). Git does it for you:
 
   ```bash
   git commit -s -m "feat(scope): 🎯 summary"
   ```
 
-  This appends `Signed-off-by: Your Name <you@example.com>` using your git identity. Contributions licensed inbound under the repository's [MIT License](/LICENSE).
+  This appends `Signed-off-by: Your Name <you@example.com>` using your git identity. Contributions licensed inbound under the repository's [MIT License](../LICENSE).
 
 ### 2. CI/CD Gating
 

@@ -2,15 +2,31 @@ This repository has not been initialised yet.
 
 The presence of this file is what permits the `init` job in
 `.github/workflows/lifecycle.yml` to run. That job rewrites the template
-author's identity to yours - the licence holder, the funding target, the
-documentation footers, and the issue chooser's contact link - and then deletes
-this file, which is what stops it ever running again.
+author's identity to yours - the licence holder, the funding target, and the
+documentation footers - and then deletes this file, which is what stops it
+ever running again.
+
+ONE THING IT CANNOT DO FOR YOU. The issue chooser's Discussions link in
+`.github/ISSUE_TEMPLATE/config.yml` still says OWNER/REPOSITORY. GitHub does
+not substitute placeholders in contact links and there is no expression
+syntax there, so it is left visibly wrong on purpose - a link that fails
+loudly beats one quietly pointing at somebody else's discussions. Blank
+issues are disabled, which makes that link the chooser's only route for
+how-to questions, so it is worth fixing early.
 
 It should fire on its own shortly after generation. GitHub does not reliably
 deliver an event when a repository is created from a template, so if nothing
 happens, dispatch "🎯 Standards Lifecycle" from the Actions tab. Running it
 twice is harmless.
 
-Deleting this file by hand skips initialisation entirely; you would then set
-the licence holder, the funding target and the issue chooser's contact link
-yourself, wherever this repository keeps them.
+Deleting this file by hand skips initialisation entirely. You would then set
+the licence holder in LICENSE, the funding target in .github/FUNDING.yml, and
+the documentation footers in README.md and assets/README.md yourself - plus
+the chooser link above, which is yours either way. To find every one of them:
+
+    git grep -n tannergolden | grep -v tannergolden/standards \
+                             | grep -v tannergolden/intelligence
+
+Those two are links to the shared repositories every generated repository
+calls, and are correct for everyone - which is why they are filtered out
+rather than replaced.

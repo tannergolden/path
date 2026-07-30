@@ -269,11 +269,23 @@ with every check in it, not four runs to read separately.
 `<job id> / <job name>`, so branch protection depends on them - the file a
 job lives in does not matter, but its id does.
 
-Every workflow ships installed, and the optional ones are **inert here on
-purpose**: jobs that publish, prune, deploy or react to comments carry an
-`is_template` guard, so they are silent in this template and come alive in
-every repository generated from it. Delete any file that does not fit your
-project - each one is yours, and nothing reinstalls it.
+Every workflow ships installed, and **almost all of them are inert here on
+purpose**: nearly every job carries an `is_template` guard, so it is silent
+in this template and comes alive in every repository generated from it. Only
+two jobs run in the template itself - `prune-runs.yml`, because a template
+accumulates run history like any other repository, and `verify-stubs.yml`,
+because a stub with a wrong ceiling should be caught here rather than
+downstream. Delete any file that does not fit your project - each one is
+yours, and nothing reinstalls it.
+
+> [!IMPORTANT]
+> **The guard covers the required checks too.** `ci`, `secrets` and `pr` -
+> the three job ids branch protection names - are guarded like everything
+> else, so they do not run while a repository is marked as a template. That
+> is right for this one, which has no source code to check. But if you keep
+> your own repository flagged as a template and apply the rulesets from step
+> 4, every pull request will wait forever on three checks that never report.
+> Un-flag it, or leave those checks out of the ruleset.
 
 ### Staying current takes no effort
 

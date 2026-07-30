@@ -50,10 +50,8 @@ cargo-home/
 
 # Java / JVM
 .gradle/
-build/
 !src/main/**/build/
 !src/test/**/build/
-bin/
 out/
 .artifacts/
 *.jar
@@ -66,10 +64,8 @@ out/
 # C / C++
 *.o
 *.obj
-*.so
 *.a
 *.lib
-*.exe
 *.out
 *.app
 cmake-build-*/
@@ -78,9 +74,7 @@ cmake-build-*/
 # Mobile (Android/iOS)
 *.apk
 *.aar
-*.app
 *.ipa
-.gradle/
 local.properties
 .bundle/
 
@@ -104,10 +98,14 @@ firebase-debug.log
 .firebaserc
 
 # --- IDE & Editors ---
+# The four VS Code files a team shares. `tasks.json` belongs with the other
+# three - it is where build, test and run tasks are defined, so leaving it out
+# meant `git add -A` silently dropped it and teammates never got the tasks.
 .vscode/*
 !.vscode/extensions.json
 !.vscode/settings.json
 !.vscode/launch.json
+!.vscode/tasks.json
 .idea/
 *.swp
 *.swo
@@ -116,10 +114,12 @@ firebase-debug.log
 Thumbs.db
 
 # --- Build & Caches ---
-dist/
-build/
-out/
-.cache/
+#
+# `dist/`, `build/`, `out/` and `.cache/` are NOT repeated here: the language
+# sections above already carry them. Restating a pattern after a negation
+# silently revokes it - git applies the last match, so the `build/` that used
+# to sit here undid `!src/main/**/build/` fifty lines earlier and swallowed
+# any Java package named `build`. A duplicate is never harmless in this file.
 coverage/
 *.tsbuildinfo
 .next/
@@ -127,7 +127,8 @@ coverage/
 .terraform/
 
 # --- Docs Site (Jekyll / GitHub Pages) ---
-# Built in CI by pages-deploy.yml; local builds stay out of git.
+# Local builds stay out of git. Nothing here publishes a docs site; wire that
+# up yourself if you add one.
 _site/
 .jekyll-cache/
 .jekyll-metadata

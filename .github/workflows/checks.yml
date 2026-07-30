@@ -69,13 +69,18 @@ jobs:
       # real check on files that exist from day one, which is why this gate is
       # honestly green before you have written any code.
       #
-      # Replace it when your project has a linter, and add the others as they
-      # become true:
+      # Replace them when your project has its own, and add the third as it
+      # becomes true:
       #
       #   lint-command: 'golangci-lint run'
       #   test-command: 'go test ./...'
       #   build-command: 'go build ./...'
       lint-command: 'python3 .github/scripts/validate-repository.py'
+      # The validator is the only gate a fresh repository has, so it is the
+      # one piece of code here that must not regress silently. Its tests ship
+      # beside it and run on every push - a suite nothing executes is not a
+      # regression net, it only looks like one.
+      test-command: 'python3 .github/scripts/test_validate_repository.py'
 
   # RULESET-LOAD-BEARING JOB ID: reports as 'secrets / 🔍 Scan for Secrets'.
   secrets:

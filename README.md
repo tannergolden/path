@@ -165,9 +165,10 @@ publishes nothing.
 
 > [!NOTE]
 > GitHub does not reliably fire an event when a repository is created from a
-> template. If nothing happens within a minute or two, run **🎉 Initialise From
-> Template** from the Actions tab. Running it twice is harmless: the marker file
-> is what permits it, and it is only removed on success.
+> template. If nothing happens within a minute or two, dispatch **🎯 Standards
+> Lifecycle** from the Actions tab - the `init` job inside it is what claims the
+> repository. Running it twice is harmless: the marker file is what permits
+> it, and it is only removed on success.
 
 ---
 
@@ -180,7 +181,7 @@ publishes nothing.
 
 1. **Check that init ran** - `.github/TEMPLATE_INIT` should be gone and the
    `LICENSE` should carry your name and the current year. If not, dispatch
-   **🎉 Initialise From Template** from the Actions tab.
+   **🎯 Standards Lifecycle** from the Actions tab.
 2. **Sign your commits off.** `git commit -s` adds the `Signed-off-by` trailer
    that the DCO check requires. Once branch protection is on, a commit without
    it blocks the merge. `git config alias.ci 'commit -s'` and forget about it.

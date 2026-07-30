@@ -5,7 +5,6 @@ tags: [authentication, security, backend, authorization]
 category: docs
 -->
 
-<!-- markdownlint-disable MD041 -->
 <div align="center">
 
 # 🔐 AUTHENTICATION & SECURITY

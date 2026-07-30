@@ -5,7 +5,6 @@ tags: [conduct, community, governance, contributors]
 category: community
 -->
 
-<!-- markdownlint-disable MD041 -->
 <div align="center">
 
 # 📜 CODE OF CONDUCT

@@ -5,7 +5,6 @@ tags: [assets, branding, images, documentation]
 category: docs
 -->
 
-<!-- markdownlint-disable MD041 -->
 
 <div align="center">
 

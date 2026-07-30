@@ -5,7 +5,6 @@ tags: [template, design, architecture, engineering]
 category: docs
 -->
 
-<!-- markdownlint-disable MD041 -->
 <div align="center">
 
 # 📐 TECHNICAL DESIGN TEMPLATE

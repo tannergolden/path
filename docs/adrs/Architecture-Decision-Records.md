@@ -6,7 +6,6 @@ category: docs
 index: true # pins this page to the top of its sidebar folder
 -->
 
-<!-- markdownlint-disable MD041 -->
 <!-- A per-repository living record, not canonical law. This arrives with the scaffold and is yours from the first commit: nothing syncs it and nothing overwrites it. The decision table starts empty and grows as you add ADRs from docs/templates/ADR.md. -->
 <div align="center">
 

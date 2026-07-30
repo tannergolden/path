@@ -5,7 +5,6 @@ tags: [templates, index, documentation, scaffold]
 category: docs
 -->
 
-<!-- markdownlint-disable MD041 -->
 <div align="center">
 
 # 📋 PROJECT TEMPLATES

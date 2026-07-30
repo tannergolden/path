@@ -5,7 +5,6 @@ tags: [contributing, standards, workflow, community]
 category: community
 -->
 
-<!-- markdownlint-disable MD041 -->
 <div align="center">
 
 # 🤝 CONTRIBUTING GUIDELINES

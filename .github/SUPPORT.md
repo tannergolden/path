@@ -5,7 +5,6 @@ tags: [support, community, help, questions]
 category: community
 -->
 
-<!-- markdownlint-disable MD041 -->
 
 <div align="center">
 

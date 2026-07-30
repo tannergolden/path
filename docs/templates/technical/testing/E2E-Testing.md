@@ -5,7 +5,6 @@ tags: [testing, e2e, quality, automation]
 category: docs
 -->
 
-<!-- markdownlint-disable MD041 -->
 <div align="center">
 
 # 🎭 E2E TESTING

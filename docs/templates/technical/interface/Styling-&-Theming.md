@@ -5,7 +5,6 @@ tags: [styling, theming, css, interface]
 category: docs
 -->
 
-<!-- markdownlint-disable MD041 -->
 <div align="center">
 
 # 📝 STYLING & THEMING

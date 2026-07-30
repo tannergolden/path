@@ -5,7 +5,6 @@ tags: [schema, validation, backend, data]
 category: docs
 -->
 
-<!-- markdownlint-disable MD041 -->
 <div align="center">
 
 # 📋 SCHEMA & VALIDATION

@@ -5,7 +5,6 @@ tags: [template, post-mortem, incidents, operations]
 category: docs
 -->
 
-<!-- markdownlint-disable MD041 -->
 <div align="center">
 
 # 📉 POST-MORTEM TEMPLATE

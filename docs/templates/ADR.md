@@ -8,7 +8,6 @@ date: '[YYYY-MM-DD]'
 evidence: '[Commit-pinned permalink to the research report(s) that informed this, as a markdown link - or N/A]'
 -->
 
-<!-- markdownlint-disable MD041 -->
 <div align="center">
 
 # 📄 ADR TEMPLATE

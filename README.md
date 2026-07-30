@@ -5,7 +5,6 @@ tags: [template, scaffold, ci-cd, engineering-standards]
 category: docs
 -->
 
-<!-- markdownlint-disable MD041 -->
 
 <div align="center">
 
@@ -238,7 +237,8 @@ publishes nothing.
 | `.devcontainer/`, `.vscode/` | A working development container and editor defaults                        |
 
 The root carries only what a tool discovers there by mechanism: `.editorconfig`,
-`.gitattributes`, `.gitignore`, `LICENSE`, and this file.
+`.gitattributes`, `.gitignore`, `.markdownlint.json`, `.env.example`, `LICENSE`,
+and this file.
 
 ---
 

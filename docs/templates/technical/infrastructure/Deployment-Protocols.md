@@ -5,7 +5,6 @@ tags: [deployment, protocol, releases, infrastructure]
 category: docs
 -->
 
-<!-- markdownlint-disable MD041 -->
 <div align="center">
 
 # 🚀 DEPLOYMENT PROTOCOLS

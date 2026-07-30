@@ -5,7 +5,6 @@ tags: [communication, community, etiquette, template]
 category: docs
 -->
 
-<!-- markdownlint-disable MD041 -->
 <div align="center">
 
 # 💬 COMMUNICATION GUIDELINES

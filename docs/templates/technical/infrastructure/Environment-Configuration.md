@@ -5,7 +5,6 @@ tags: [configuration, environments, secrets, infrastructure]
 category: docs
 -->
 
-<!-- markdownlint-disable MD041 -->
 <div align="center">
 
 # ☁️ ENVIRONMENT CONFIGURATION

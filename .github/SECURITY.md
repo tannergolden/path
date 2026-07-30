@@ -5,7 +5,6 @@ tags: [security, policy, disclosure, vulnerabilities]
 category: security
 -->
 
-<!-- markdownlint-disable MD041 -->
 <div align="center">
 
 # 🛡️ SECURITY POLICY

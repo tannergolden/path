@@ -5,7 +5,6 @@ tags: [testing, unit-tests, standards, quality]
 category: docs
 -->
 
-<!-- markdownlint-disable MD041 -->
 <div align="center">
 
 # 🧩 UNIT TEST STANDARDS

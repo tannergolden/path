@@ -5,7 +5,6 @@ tags: [governance, roles, continuity, maintainers]
 category: community
 -->
 
-<!-- markdownlint-disable MD041 -->
 <div align="center">
 
 # 🏛️ PROJECT GOVERNANCE

@@ -5,7 +5,6 @@ tags: [stack, tooling, configuration, technical]
 category: docs
 -->
 
-<!-- markdownlint-disable MD041 -->
 <div align="center">
 
 # 📝 TECHNOLOGY STACK & TOOLING

@@ -1,0 +1,12 @@
+{
+  "//": "Repository-wide markdownlint rules. Discovered by mechanism, which is why this lives at the root.",
+
+  "//MD013": "Line length. Prose here wraps at a readable width by hand rather than a fixed column, and tables do not wrap at all.",
+  "MD013": false,
+
+  "//MD033": "Inline HTML. Every document uses <div align=\"center\"> for its header and footer, which is the one layout GitHub honours.",
+  "MD033": false,
+
+  "//MD041": "First line must be a top-level heading. Every document opens with an HTML frontmatter comment instead, so this was disabled inline in ten files. One rule in one place replaces ten copies.",
+  "MD041": false
+}

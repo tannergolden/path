@@ -5,7 +5,6 @@ tags: [database, modeling, entities, schema]
 category: docs
 -->
 
-<!-- markdownlint-disable MD041 -->
 <div align="center">
 
 # 📝 DATA MODELS & ENTITIES

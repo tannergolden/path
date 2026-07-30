@@ -8,7 +8,6 @@ focus: '[One line: the question this report answers]'
 decision: '[The ADR or record this fed, as a markdown link - or - while it stands as background]'
 -->
 
-<!-- markdownlint-disable MD041 -->
 <div align="center">
 
 # 🔎 RESEARCH LOG TEMPLATE

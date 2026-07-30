@@ -5,7 +5,6 @@ tags: [formatting, standards, style, interface]
 category: docs
 -->
 
-<!-- markdownlint-disable MD041 -->
 <div align="center">
 
 # 📐 FORMATTING & STANDARDS

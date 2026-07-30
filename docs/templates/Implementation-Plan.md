@@ -5,7 +5,6 @@ tags: [template, planning, implementation, delivery]
 category: docs
 -->
 
-<!-- markdownlint-disable MD041 -->
 <div align="center">
 
 # 📜 IMPLEMENTATION PLAN TEMPLATE

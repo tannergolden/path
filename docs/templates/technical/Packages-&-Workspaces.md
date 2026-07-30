@@ -5,7 +5,6 @@ tags: [monorepo, packages, architecture, workspaces]
 category: docs
 -->
 
-<!-- markdownlint-disable MD041 -->
 
 <div align="center">
 

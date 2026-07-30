@@ -5,7 +5,6 @@ tags: [database, migrations, policy, schema]
 category: docs
 -->
 
-<!-- markdownlint-disable MD041 -->
 <div align="center">
 
 # 🔄 MIGRATION POLICIES

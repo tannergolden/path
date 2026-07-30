@@ -5,7 +5,6 @@ tags: [api, standards, backend, rest]
 category: docs
 -->
 
-<!-- markdownlint-disable MD041 -->
 <div align="center">
 
 # 📡 API DESIGN STANDARDS

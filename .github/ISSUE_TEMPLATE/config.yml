@@ -24,6 +24,17 @@ blank_issues_enabled: false
 contact_links:
   # 💬 Questions belong in Discussions. With blank issues disabled, this is
   # the chooser's path for how-to asks (SUPPORT.md routes them here too).
+  #
+  # ⚠️ `about:` IS RENDERED TO EVERY REPORTER, under the link, in the chooser.
+  # It is not a comment. Keep maintainer instructions up here, where they are
+  # read by the person who can act on them - the two sentences that used to
+  # sit in `about` told the public to replace a placeholder they cannot see
+  # and to change a repository setting they do not have.
+  #
+  # What to do, both in this file:
+  #   1. Replace OWNER/REPOSITORY in the url below.
+  #   2. If the link 404s, enable Discussions under
+  #      Settings → General → Features.
   - name: 💬 Questions, Ideas & Support (Discussions)
     url: 'https://github.com/OWNER/REPOSITORY/discussions'
-    about: 'How-to questions, tooling setup, and ideas belong in Discussions. Replace OWNER/REPOSITORY above. If this link 404s, enable Discussions under Settings → General → Features.'
+    about: 'How-to questions, tooling setup, and ideas belong in Discussions rather than the issue tracker.'

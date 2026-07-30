@@ -95,7 +95,7 @@ This is a **mandated policy**, not a preference:
 
 - **Naming**: `kebab-case.yml`; emoji-prefixed job names; explicit `on:` triggers.
 - **Security**: pin third-party actions to a full commit SHA or a stable tag; declare a top-level `permissions: {}` and grant scopes per job; never print secrets.
-- **Reliability**: set `timeout-minutes` on every job; use `concurrency` groups; keep workflow logic short - anything longer than a few lines belongs in a script or a shared action rather than inline YAML.
+- **Reliability**: set `timeout-minutes` on every job that has `steps:` - GitHub does not accept it on a job that calls a reusable workflow, so a stub cannot carry one and the callee sets its own. Use `concurrency` groups. Keep workflow logic short: anything longer than a few lines belongs in a script under `.github/scripts/`, where it can be tested, rather than inline YAML where it cannot.
 
 ---
 

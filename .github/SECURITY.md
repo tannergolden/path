@@ -72,7 +72,7 @@ We **credit every reporter** who responsibly discloses a valid vulnerability. Un
 The Golden Path template includes pre-configured settings for the following GitHub security features:
 
 - **Secret Scanning**: Automated secret detection (Gitleaks) runs on pushes and pull requests to catch committed credentials - a **required merge check** under the shipped rulesets.
-- **Dependabot**: Set up for weekly dependency checks with automated pull requests for known security updates.
+- **Dependabot**: Monthly grouped checks of the `github-actions` ecosystem, with automated pull requests for known security updates. Enable the ecosystem matching your language in `.github/dependabot.yml` as you add manifests.
 - **CodeQL Analysis**: An integrated GitHub Actions workflow for static analysis of common coding patterns (an advisory scan; add its check to the ruleset's required contexts to make it merge-blocking).
 - **Dependency Review**: An advisory CI scan that flags vulnerabilities in newly introduced packages during the PR process (public repositories; not in the shipped ruleset's required checks - add it there to make it a hard gate).
 

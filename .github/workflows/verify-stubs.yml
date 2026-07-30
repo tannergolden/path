@@ -93,31 +93,73 @@ jobs:
           HERE   = pathlib.Path('.github/workflows')
           PINNED = pathlib.Path('.standards/.github/workflows')
           LATEST = pathlib.Path('.standards-latest/.github/workflows')
-          CALL   = re.compile(r'tannergolden/standards/\.github/workflows/([\w.-]+\.yml)@(\S+)')
+          CALL   = re.compile(r'tannergolden/standards/\.github/workflows/([\w.-]+\.ya?ml)@(\S+)')
 
           def load(path):
               return yaml.safe_load(path.read_text(encoding='utf-8')) if path.is_file() else None
+
+          # GitHub accepts `permissions: read-all` / `write-all` as shorthand
+          # for every scope, and `permissions: {}` for none. Both are legal in
+          # a callee and neither is a mapping, so calling .items() on one used
+          # to raise AttributeError - a raw traceback here, caused by somebody
+          # reformatting a workflow in another repository.
+          ALL_SCOPES = (
+              'actions', 'attestations', 'checks', 'contents', 'deployments',
+              'discussions', 'id-token', 'issues', 'packages', 'pages',
+              'pull-requests', 'repository-projects', 'security-events',
+              'statuses',
+          )
+
+          def permissions_of(node):
+              perms = (node or {}).get('permissions')
+              if perms is None:
+                  return None                       # inherit; not "declares none"
+              if isinstance(perms, str):
+                  level = perms.replace('-all', '')
+                  return {} if level == 'none' else {s: level for s in ALL_SCOPES}
+              return dict(perms)
 
           def ceiling_of(doc):
               # The union of what the callee's own jobs ask for. write beats
               # read wherever both appear, so the result does not depend on
               # the order the jobs are declared.
+              #
+              # A job with no block of its own inherits the workflow-level one,
+              # which is a legal and common style. Reading only the job blocks
+              # made such a callee look like it wanted nothing, and every stub
+              # calling it was then reported "wider than declared" - telling
+              # the maintainer to remove a ceiling the callee actually needs,
+              # which is the startup failure this whole check exists to prevent.
+              top = permissions_of(doc) or {}
               want = {}
               for inner in (doc.get('jobs') or {}).values():
-                  for scope, level in (inner.get('permissions') or {}).items():
+                  for scope, level in (permissions_of(inner) or top).items():
                       if want.get(scope) != 'write':
                           want[scope] = level
               return want
 
           def inputs_of(doc):
-              # A bare `workflow_call:` parses as None, not {}.
-              spec = ((doc.get(True) or doc.get('on')) or {}).get('workflow_call') or {}
+              # A bare `workflow_call:` parses as None, not {}. So does a bare
+              # `on: workflow_call` written inline, which makes the outer
+              # lookup return a string rather than a mapping.
+              on = doc.get(True) or doc.get('on') or {}
+              if isinstance(on, str):
+                  on = {on: {}}
+              if isinstance(on, list):
+                  on = {k: {} for k in on}
+              spec = on.get('workflow_call') or {}
               return set(spec.get('inputs') or {})
 
           broken, pending, checked = [], [], 0
           comparable = LATEST.is_dir()
 
-          for f in sorted(HERE.glob('*.yml')):
+          # Both extensions, on both sides. GitHub accepts .yaml for a stub and
+          # for a reusable workflow alike; globbing only *.yml meant renaming a
+          # stub silently dropped it from the check while this job still
+          # reported green.
+          stubs = sorted(set(HERE.glob('*.yml')) | set(HERE.glob('*.yaml')))
+
+          for f in stubs:
               doc = yaml.safe_load(f.read_text(encoding='utf-8')) or {}
               for job_id, job in (doc.get('jobs') or {}).items():
                   m = CALL.search(str(job.get('uses', '')))
@@ -158,7 +200,11 @@ jobs:
                               f"{name} does not accept - the run fails, it is not ignored.")
 
                   want = ceiling_of(pinned)
-                  have = job.get('permissions') or {}
+                  # Same inheritance rule on this side: a stub job with no
+                  # block of its own is capped by the workflow-level one.
+                  have = permissions_of(job)
+                  if have is None:
+                      have = permissions_of(doc) or {}
                   if have != want:
                       if latest is not None and have == ceiling_of(latest):
                           pending.append(

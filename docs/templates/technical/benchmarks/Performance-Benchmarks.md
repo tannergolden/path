@@ -59,6 +59,11 @@ Performance is a feature with a budget. This document records **what we measure,
 
 Store each run as a dated entry using the [&#x1F50E; Research Log template](../../Research-Log.md): environment, commit SHA, scenario, raw numbers, and the conclusion drawn.
 
+### 🔗 See also
+
+> [!TIP]
+> Every canonical guide is indexed in the [&#x1F4DA; Standards Index](https://github.com/tannergolden/standards/blob/Development/docs/README.md). If you rename or move a file, update every reference to it across the repository to prevent link drift.
+
 ---
 
 <div align="center">

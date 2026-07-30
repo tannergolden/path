@@ -34,17 +34,19 @@ We believe that the "Why" is as important as the "What". Our goal is to maintain
 
 ## 🟢 The Decision Index
 
-This table is **generated** from each ADR's frontmatter (`status`, `date`, `evidence`), newest decision first. Copy the [ADR format](https://github.com/tannergolden/standards/blob/Development/docs/templates/ADR.md) to `docs/adrs/ADR-NNNN-Short-Slug.md`, set its frontmatter, and it appears on the next `make docs-index` - there is no row to add by hand, and `--check` fails CI if the table ever drifts.
+Copy the [ADR template](../templates/ADR.md) to `docs/adrs/ADR-NNNN-Short-Slug.md`, set its frontmatter (`status`, `date`, `evidence`), and **add a row below**, newest decision first.
 
-Read a row in four moves: **Decision** links the record (its number and title); **Status** is Proposed, Accepted, Superseded, or Deprecated; **Date** is when it was decided; **Evidence** is the research report(s) that informed it (or `-`) - the trail an ADR draws back to the shelf, the reverse of the shelf's Decision column.
+> [!NOTE]
+> **The table is maintained by hand, and nothing checks it.** This scaffold
+> ships no index generator and no CI job that would notice the table drifting
+> from the files beside it. If you want that, build it and say so here - until
+> then, adding the record and forgetting the row is a silent gap.
 
-<!-- AUTO-INDEX:BEGIN dir=adrs style=records fields=status,date,evidence headers=Decision,Status,Date,Evidence sort=date:desc -->
+Read a row in four moves: **Decision** links the record (its number and title); **Status** is Proposed, Accepted, Superseded, or Deprecated; **Date** is when it was decided; **Evidence** is the research report(s) that informed it, or `-`.
 
 | Decision   | Status | Date | Evidence |
 | :--------- | :----- | :--- | :------- |
 | _none yet_ | -      | -    | -        |
-
-<!-- AUTO-INDEX:END -->
 
 ---
 
@@ -56,7 +58,7 @@ Read a row in four moves: **Decision** links the record (its number and title); 
 ### 🔗 See also
 
 > [!TIP]
-> This repository's own documentation is indexed in [&#x1F4DA; Standards Index](https://github.com/tannergolden/standards/blob/Development/docs/README.md); the canonical engineering standards are linked from this project's agent instructions.
+> This project's own documents are indexed in the [&#x1F4DA; Documentation index](../README.md); the canonical engineering standards live in the [&#x1F4DA; Standards Index](https://github.com/tannergolden/standards/blob/Development/docs/README.md).
 
 ---
 

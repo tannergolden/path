@@ -1,10 +1,10 @@
 <!--
 title: '🔎 RESEARCH LOG TEMPLATE'
-description: 'The format for a filed research report: a dated, sourced, claim-by-claim investigation that the shelf lifecycle keeps current.'
+description: 'The format for a filed research report: a dated, sourced, claim-by-claim investigation kept current by its verification window.'
 tags: [template, research, log, evidence]
 category: docs
 verified: '[YYYY-MM-DD]'
-focus: '[One line: the question this report answers - the generated index shows this]'
+focus: '[One line: the question this report answers]'
 decision: '[The ADR or record this fed, as a markdown link - or - while it stands as background]'
 -->
 
@@ -24,13 +24,13 @@ _Every claim sourced. Every finding dated. Nothing trusted past its window._
 ---
 
 > [!TIP]
-> **How to use**: copy this file to `docs/technical/research/<Topic>.md` (keep this template pristine) and fill in every section, including the `focus` and `decision` frontmatter. The `docs/technical/research/` (create it when this project starts keeping research) is generated from the report files, so there is no row to add by hand - your report appears on the next `make docs-index`. Delete a prompt once you have satisfied it; mark a section `N/A` only when it genuinely does not apply.
+> **How to use**: copy this file to `docs/technical/research/<Topic>.md` (keep this template pristine) and fill in every section, including the `focus` and `decision` frontmatter. Reports live under `docs/technical/research/` - create it when this project starts keeping them. Delete a prompt once you have satisfied it; mark a section `N/A` only when it genuinely does not apply.
 >
-> **The clock**: the `verified:` frontmatter date is the single source of the report's age, and it MUST equal the date of your newest `## 📅 Log Entry:` heading - the lifecycle reads only that field, and the shelf's integrity check rejects a verified date with no matching dated entry. Filing sets both; a reverification appends a new entry and bumps both.
+> **The clock**: the `verified:` frontmatter date is the single source of the report's age, and it MUST equal the date of your newest `## 📅 Log Entry:` heading - nothing enforces that, so keeping the two in step is on you. Filing sets both; a reverification appends a new entry and bumps both.
 >
 > **Provenance is part of the finding**: a claim rests on a source, and a source you could not fetch directly is weaker than one you read. Tag every source's fetch status and say so - an unverifiable claim that hides its provenance is worse than one that admits it.
 >
-> **Lifecycle** (the full contract lives in the `docs/technical/research/` (create it when this project starts keeping research)): under 3 months a report is trusted; at 3 months it is listed as due for reverification; at 6 months it is auto-pruned through a pull request unless reverified first.
+> **Lifecycle**, as a convention rather than a mechanism - nothing here automates it: under 3 months a report is trusted; at 3 months it is due for reverification; past 6 months treat it as stale and either reverify or remove it.
 
 ---
 
@@ -117,7 +117,7 @@ _Each finding is a discrete claim a future reverification can re-check on its ow
 ## ♻️ Reverification
 
 > [!NOTE]
-> A report is trusted only inside its verification window. To reverify: re-check each claim against its cited source and the current state of the repository, then **append** a new dated entry below (never edit a past one) and bump the `verified:` frontmatter to that date (the generated index picks it up on the next `make docs-index`) - or, if the findings no longer hold, supersede or remove the report.
+> A report is trusted only inside its verification window. To reverify: re-check each claim against its cited source and the current state of the repository, then **append** a new dated entry below (never edit a past one) and bump the `verified:` frontmatter to that date - or, if the findings no longer hold, supersede or remove the report.
 
 Append a reverification entry in this shape:
 

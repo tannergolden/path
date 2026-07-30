@@ -49,9 +49,10 @@ docs/templates/technical/backend/API-Design-Standards.md
 docs/technical/backend/API-Design-Standards.md
 ```
 
-Look for `[REPLACE_ME]` placeholders and `[Option A | Option B]` choices - those
-mark the decisions that are yours. A file still carrying them has not been
-adopted yet.
+**Anything in `[square brackets]` is yours to replace** - a bare `[REPLACE_ME]`,
+a choice list like `[REST | GraphQL | gRPC]`, or a prompt like `[why]`. One
+rule, because the seeds use all three forms. A file still carrying brackets
+has not been adopted yet.
 
 Nothing syncs these and nothing overwrites them. From the moment this repository
 was generated they are ordinary files in your tree.
@@ -90,6 +91,6 @@ docs/
 
 <br />
 
-Built with ❤️ by [@tannergolden](https://github.com/tannergolden). Distributed under the MIT License.
+Built with ❤️ by the Engineering Team. Distributed under the MIT License.
 
 </div>

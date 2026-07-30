@@ -9,7 +9,7 @@ category: docs
 
 <div align="center">
 
-# 📦 SOURCE CODE
+# 💻 SOURCE CODE
 
 <a name="top"></a>
 
@@ -59,6 +59,11 @@ Dependencies must point inward - the domain never imports from delivery or infra
 - **Naming & style**: kebab-case files, formatter-enforced layout - see [Repository Hygiene](https://github.com/tannergolden/standards/blob/Development/docs/operations/Repository-Hygiene.md).
 - **Tests live beside the layer they verify** and follow [Unit Test Standards](testing/Unit-Test-Standards.md).
 - **Comments explain _why_**, decisions get an [ADR](../../adrs/Architecture-Decision-Records.md).
+
+### 🔗 See also
+
+> [!TIP]
+> Every canonical guide is indexed in the [&#x1F4DA; Standards Index](https://github.com/tannergolden/standards/blob/Development/docs/README.md). If you rename or move a file, update every reference to it across the repository to prevent link drift.
 
 ---
 

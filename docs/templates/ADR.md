@@ -24,7 +24,7 @@ _Formalized rationale. Transparent intent. Auditable evolution._
 ---
 
 > [!TIP]
-> **How to use**: copy this file to `docs/adrs/ADR-NNNN-Short-Slug.md` using the next sequential number (Capitalized-Kebab, keep this template itself pristine) and fill in every section. Set `status`, `date`, and `evidence` in the frontmatter above - the [ADR index](../adrs/Architecture-Decision-Records.md) is generated from them, so there is no row to add by hand. Link the new record from the pull request that implements the decision. One decision per record; supersede rather than rewrite.
+> **How to use**: copy this file to `docs/adrs/ADR-NNNN-Short-Slug.md` using the next sequential number (Capitalized-Kebab, keep this template itself pristine) and fill in every section. Set `status`, `date`, and `evidence` in the frontmatter above, then add a row to the [ADR index](../adrs/Architecture-Decision-Records.md) - it is maintained by hand, so the row is yours to add. Link the new record from the pull request that implements the decision. One decision per record; supersede rather than rewrite.
 
 ---
 

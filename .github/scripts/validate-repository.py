@@ -48,12 +48,34 @@ def report(path: pathlib.Path, line: int | None, message: str) -> None:
         print(f'::error file={rel}{pos}::{message}')
 
 
+class GitUnavailable(Exception):
+    """git could not answer, so nothing below it can be trusted."""
+
+
+def git(*args: str, stdin: str | None = None) -> str:
+    """Run git, failing the way this script fails everywhere else.
+
+    Every other failure mode here prints one line saying what went wrong.
+    These two calls raised instead, so running outside a checkout - or on a
+    runner where the checkout step failed - produced a Python traceback where
+    every neighbouring error produces a sentence.
+    """
+    try:
+        return subprocess.run(
+            ['git', *args],
+            cwd=ROOT, input=stdin, check=True, capture_output=True, text=True,
+        ).stdout
+    except FileNotFoundError:
+        raise GitUnavailable('git is not on PATH')
+    except subprocess.CalledProcessError as exc:
+        detail = (exc.stderr or '').strip().splitlines()
+        raise GitUnavailable(
+            f"`git {' '.join(args)}` failed: {detail[0] if detail else 'no output'}"
+        )
+
+
 def tracked_files() -> list[pathlib.Path]:
-    out = subprocess.run(
-        ['git', 'ls-files', '-z'],
-        cwd=ROOT, check=True, capture_output=True, text=True,
-    ).stdout
-    return [ROOT / p for p in out.split('\0') if p]
+    return [ROOT / p for p in git('ls-files', '-z').split('\0') if p]
 
 
 def attributes(paths: list[pathlib.Path]) -> dict[str, dict[str, str]]:
@@ -72,11 +94,8 @@ def attributes(paths: list[pathlib.Path]) -> dict[str, dict[str, str]]:
     if not paths:
         return {}
     rels = [p.relative_to(ROOT).as_posix() for p in paths]
-    out = subprocess.run(
-        ['git', 'check-attr', '--stdin', '-z', 'text', 'eol'],
-        cwd=ROOT, input='\0'.join(rels) + '\0',
-        check=True, capture_output=True, text=True,
-    ).stdout
+    out = git('check-attr', '--stdin', '-z', 'text', 'eol',
+              stdin='\0'.join(rels) + '\0')
     fields = out.split('\0')
     found: dict[str, dict[str, str]] = {}
     for i in range(0, len(fields) - 2, 3):
@@ -269,12 +288,17 @@ def main() -> int:
         )
         return 1
 
-    tracked = [p for p in tracked_files() if p.is_file()]
+    try:
+        tracked = [p for p in tracked_files() if p.is_file()]
+        attrs = attributes(tracked)
+    except GitUnavailable as exc:
+        print(f'::error::{exc}. Nothing was checked, so treat this run as '
+              'unverified rather than clean.')
+        return 1
+
     if not tracked:
         print('::error::git reported no tracked files, so nothing was checked.')
         return 1
-
-    attrs = attributes(tracked)
     files = []
 
     for path in tracked:

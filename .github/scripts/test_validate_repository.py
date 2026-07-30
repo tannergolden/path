@@ -277,5 +277,26 @@ class TestBinaryFiles(ValidatorTestCase):
         self.assertFinding(self.repo.run(), 'not valid UTF-8')
 
 
+class TestGitUnavailable(unittest.TestCase):
+    """A git that cannot answer must say so, not raise."""
+
+    def test_outside_a_checkout_it_explains_itself(self) -> None:
+        root = pathlib.Path(tempfile.mkdtemp(prefix='validate-nogit-'))
+        self.addCleanup(shutil.rmtree, root, True)
+        scripts = root / '.github/scripts'
+        scripts.mkdir(parents=True)
+        (scripts / 'validate-repository.py').write_text(
+            SCRIPT.read_text(encoding='utf-8'), encoding='utf-8')
+
+        result = subprocess.run(
+            [sys.executable, '.github/scripts/validate-repository.py'],
+            cwd=root, capture_output=True, text=True,
+        )
+        self.assertEqual(result.returncode, 1)
+        self.assertNotIn('Traceback', result.stderr)
+        self.assertIn('::error::', result.stdout)
+        self.assertIn('unverified rather than clean', result.stdout)
+
+
 if __name__ == '__main__':
     unittest.main(verbosity=2)

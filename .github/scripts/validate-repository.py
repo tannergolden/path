@@ -163,12 +163,29 @@ def check_pins(path: pathlib.Path, text: str) -> None:
             report(path, number, f'`{ref}` is pinned to a branch: use a tag or a commit')
 
 
+# The two exemptions this repository's OWN configuration requires.
+#
+# .gitattributes forces `eol=crlf` on Windows scripts, so git checks them out
+# with CRLF on the runner. Failing them demanded a file that cannot exist:
+# satisfying the linter violated .gitattributes, and satisfying .gitattributes
+# reddened the required `ci` check, with no way to have both.
+CRLF_SUFFIXES = {'.bat', '.cmd', '.ps1'}
+
+# .editorconfig sets `[*.md] trim_trailing_whitespace = false`, because two
+# trailing spaces are Markdown's hard line break. There they are syntax, not
+# noise - and every seeded document is Markdown.
+TRAILING_WS_EXEMPT_SUFFIXES = {'.md', '.markdown'}
+
+
 def check_whitespace(path: pathlib.Path, text: str) -> None:
     """The parts of .editorconfig a parser cannot enforce on its own."""
-    if '\r\n' in text:
+    suffix = path.suffix.lower()
+    if '\r\n' in text and suffix not in CRLF_SUFFIXES:
         report(path, None, 'CRLF line endings; this repository is LF only')
     if text and not text.endswith('\n'):
         report(path, len(text.splitlines()), 'no newline at end of file')
+    if suffix in TRAILING_WS_EXEMPT_SUFFIXES:
+        return
     for number, line in enumerate(text.splitlines(), start=1):
         if line != line.rstrip():
             report(path, number, 'trailing whitespace')

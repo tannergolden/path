@@ -85,6 +85,18 @@ class TestLineEndings(ValidatorTestCase):
         self.repo.write('notes.txt', 'a\nb\n', newline='\r\n')
         self.assertFinding(self.repo.run(), 'CRLF')
 
+    def test_crlf_is_permitted_where_gitattributes_requires_it(self) -> None:
+        # .gitattributes forces `eol=crlf` on these, so git checks them out
+        # with CRLF on the runner. Failing them demands a file that cannot
+        # exist: satisfying the linter violates .gitattributes, and vice versa.
+        for name in ('build.bat', 'run.cmd', 'deploy.ps1'):
+            self.repo.write(name, 'echo hello\n', newline='\r\n')
+        self.assertClean(self.repo.run())
+
+    def test_crlf_is_still_reported_in_a_nested_windows_lookalike(self) -> None:
+        self.repo.write('scripts/build.bat.md', 'a\nb\n', newline='\r\n')
+        self.assertFinding(self.repo.run(), 'CRLF')
+
     def test_lf_in_a_windows_script_is_still_fine(self) -> None:
         self.repo.write('build.bat', 'echo hello\n')
         self.assertClean(self.repo.run())
@@ -96,6 +108,13 @@ class TestTrailingWhitespace(ValidatorTestCase):
     def test_trailing_whitespace_is_reported(self) -> None:
         self.repo.write('config.yml', 'key: value   \n')
         self.assertFinding(self.repo.run(), 'trailing whitespace')
+
+    def test_a_markdown_hard_line_break_is_permitted(self) -> None:
+        # Two trailing spaces are Markdown's hard line break, and
+        # .editorconfig sets `[*.md] trim_trailing_whitespace = false`
+        # precisely so they survive.
+        self.repo.write('NOTES.md', 'line one  \nline two\n')
+        self.assertClean(self.repo.run())
 
     def test_markdown_is_still_checked_for_everything_else(self) -> None:
         self.repo.write('NOTES.md', 'no newline at the end')

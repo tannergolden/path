@@ -21,7 +21,7 @@ _Strategic depth. Clear architecture. Long-term scale._
 ---
 
 > [!IMPORTANT]
-> **How to use**: copy this file to `docs/technical/designs/<short-slug>.md`, keep this template pristine, and update the design as decisions evolve. Record each significant pivot as an [ADR](/docs/templates/ADR.md) and link it here.
+> **How to use**: copy this file to `docs/technical/designs/<short-slug>.md`, keep this template pristine, and update the design as decisions evolve. Record each significant pivot as an [ADR](ADR.md) and link it here.
 
 ---
 

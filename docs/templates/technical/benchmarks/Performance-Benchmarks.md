@@ -48,7 +48,7 @@ Performance is a feature with a budget. This document records **what we measure,
 1. **Baseline**: benchmark `Development` HEAD before optimizing; commit the numbers with the change that motivated them.
 2. **Load**: ramp to expected peak for `[REPLACE_ME]` minutes; record p50/p95/p99, error rate, and saturation point.
 3. **Soak** (optional): hold moderate load for `[REPLACE_ME]` hours to surface leaks and drift.
-4. **Compare**: a change that worsens a budgeted metric needs either a fix or an [ADR](/docs/adrs/Architecture-Decision-Records.md) accepting the new budget.
+4. **Compare**: a change that worsens a budgeted metric needs either a fix or an [ADR](../../../adrs/Architecture-Decision-Records.md) accepting the new budget.
 
 > [!IMPORTANT]
 > Wire the suite into the Makefile (e.g., `make bench`) and keep scenario scripts in this directory so results are reproducible by any contributor - numbers without a committed script are anecdotes.
@@ -57,7 +57,7 @@ Performance is a feature with a budget. This document records **what we measure,
 
 ## 🗃️ Recording Results
 
-Store each run as a dated entry using the [&#x1F50E; Research Log template](/docs/templates/Research-Log.md): environment, commit SHA, scenario, raw numbers, and the conclusion drawn.
+Store each run as a dated entry using the [&#x1F50E; Research Log template](../../Research-Log.md): environment, commit SHA, scenario, raw numbers, and the conclusion drawn.
 
 ---
 

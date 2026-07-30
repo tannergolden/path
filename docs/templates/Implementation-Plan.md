@@ -21,7 +21,7 @@ _Structured strategy. Reduced risk. Clear implementation._
 ---
 
 > [!NOTE]
-> **How to use**: copy this file to `docs/technical/plans/<short-slug>.md` (keep this template pristine) and replace the bracketed placeholders. It bridges the [Technical Design](/docs/templates/Technical-Design.md) and the code - small enough to review, complete enough to execute.
+> **How to use**: copy this file to `docs/technical/plans/<short-slug>.md` (keep this template pristine) and replace the bracketed placeholders. It bridges the [Technical Design](Technical-Design.md) and the code - small enough to review, complete enough to execute.
 
 ---
 

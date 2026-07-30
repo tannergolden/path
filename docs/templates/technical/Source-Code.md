@@ -57,8 +57,8 @@ Dependencies must point inward - the domain never imports from delivery or infra
 ## 📏 Quality Bar
 
 - **Naming & style**: kebab-case files, formatter-enforced layout - see [Repository Hygiene](https://github.com/tannergolden/standards/blob/Development/docs/operations/Repository-Hygiene.md).
-- **Tests live beside the layer they verify** and follow [Unit Test Standards](/docs/templates/technical/testing/Unit-Test-Standards.md).
-- **Comments explain _why_**, decisions get an [ADR](/docs/adrs/Architecture-Decision-Records.md).
+- **Tests live beside the layer they verify** and follow [Unit Test Standards](testing/Unit-Test-Standards.md).
+- **Comments explain _why_**, decisions get an [ADR](../../adrs/Architecture-Decision-Records.md).
 
 ---
 

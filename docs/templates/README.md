@@ -24,7 +24,7 @@ _Structured excellence. Rapid documentation. Unified standards._
 > Use these standardized templates to bootstrap your technical work. They are designed to meet the repository's professional standards.
 
 > [!IMPORTANT]
-> **Where a project gives its agents instructions, these templates are binding rather than optional.** The convention is that an agent fills in the [📜 Implementation Plan](/docs/templates/Implementation-Plan.md) to be filled in and **delivered to the user as a report before any non-trivial change**, and the other templates to be used at the moments they help the user steer - research before direction, design before build, post-mortem after failure.
+> **Where a project gives its agents instructions, these templates are binding rather than optional.** The convention is that an agent fills in the [📜 Implementation Plan](Implementation-Plan.md) to be filled in and **delivered to the user as a report before any non-trivial change**, and the other templates to be used at the moments they help the user steer - research before direction, design before build, post-mortem after failure.
 
 ---
 
@@ -32,13 +32,13 @@ _Structured excellence. Rapid documentation. Unified standards._
 
 | Template                                                                | Purpose                                                | Copy to                                             |
 | :---------------------------------------------------------------------- | :----------------------------------------------------- | :-------------------------------------------------- |
-| [&#x1F4D0; Technical Design](/docs/templates/Technical-Design.md)       | High-level system architecture and trade-offs.         | `docs/technical/designs/<slug>.md`                  |
-| [&#x1F4DC; Implementation Plan](/docs/templates/Implementation-Plan.md) | Concrete changes, sequencing, and verification.        | `docs/technical/plans/<slug>.md`                    |
-| [&#x1F464; User Story](/docs/templates/User-Story.md)                   | Requirements from the user's perspective.              | `docs/<area>/stories/<slug>.md` (or your tracker)   |
-| [&#x1F50E; Research Log](/docs/templates/Research-Log.md)               | Discovery evidence and recommendations.                | `docs/technical/research/<topic>.md`                |
-| [&#x1F4C9; Post-Mortem](/docs/templates/Post-Mortem.md)                 | Blameless incident and outcome analysis.               | `docs/operations/post-mortems/YYYY-MM-DD-<slug>.md` |
-| [&#x1F4C4; ADR](/docs/templates/ADR.md)                                 | One architecture decision, recorded durably.           | `docs/adrs/NNNN-<slug>.md` (next number)            |
-| [&#x1F4AC; Communication](/docs/templates/Communication.md)             | Meeting notes, status heartbeats, stakeholder updates. | reuse in issues, discussions, and reviews           |
+| [&#x1F4D0; Technical Design](Technical-Design.md)       | High-level system architecture and trade-offs.         | `docs/technical/designs/<slug>.md`                  |
+| [&#x1F4DC; Implementation Plan](Implementation-Plan.md) | Concrete changes, sequencing, and verification.        | `docs/technical/plans/<slug>.md`                    |
+| [&#x1F464; User Story](User-Story.md)                   | Requirements from the user's perspective.              | `docs/<area>/stories/<slug>.md` (or your tracker)   |
+| [&#x1F50E; Research Log](Research-Log.md)               | Discovery evidence and recommendations.                | `docs/technical/research/<topic>.md`                |
+| [&#x1F4C9; Post-Mortem](Post-Mortem.md)                 | Blameless incident and outcome analysis.               | `docs/operations/post-mortems/YYYY-MM-DD-<slug>.md` |
+| [&#x1F4C4; ADR](ADR.md)                                 | One architecture decision, recorded durably.           | `docs/adrs/NNNN-<slug>.md` (next number)            |
+| [&#x1F4AC; Communication](Communication.md)             | Meeting notes, status heartbeats, stakeholder updates. | reuse in issues, discussions, and reviews           |
 
 ## Fill-In Technical Standards
 
@@ -46,12 +46,12 @@ Every document here is one you complete: either a **fill-in standard** carrying 
 
 | Area                                                                              | Templates                                                                                                                                                                                                                                                                                                                                                                                                                               |
 | :-------------------------------------------------------------------------------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **Stack & Source** | [&#x1F527; Technology Stack & Tooling](/docs/templates/technical/Technology-Stack-&-Tooling.md), [&#x1F4BB; Source Code](/docs/templates/technical/Source-Code.md), [&#x1F4E6; Packages & Workspaces](/docs/templates/technical/Packages-&-Workspaces.md)                                                                                                                                                                               |
-| **Interface** | [&#x1F4D0; Formatting & Standards](/docs/templates/technical/interface/Formatting-&-Standards.md), [&#x1F58C;&#xFE0F; Styling & Theming](/docs/templates/technical/interface/Styling-&-Theming.md), [&#x1F6E0;&#xFE0F; UI Setup & Environment](/docs/templates/technical/interface/UI-Setup-&-Environment.md)                  |
-| **Backend** | [&#x1F4E1; API Design Standards](/docs/templates/technical/backend/API-Design-Standards.md), [&#x1F512; Authentication & Security](/docs/templates/technical/backend/Authentication-&-Security.md), [&#x1F4CB; Schema & Validation](/docs/templates/technical/backend/Schema-&-Validation.md)                                |
-| **Database** | [&#x1F5C4;&#xFE0F; Data Models & Entities](/docs/templates/technical/database/Data-Models-&-Entities.md), [&#x1F504; Migration Policies](/docs/templates/technical/database/Migration-Policies.md)                                                                                                                                          |
-| **Infrastructure** | [&#x2601;&#xFE0F; Environment Configuration](/docs/templates/technical/infrastructure/Environment-Configuration.md), [&#x1F504; CI CD Pipelines](/docs/templates/technical/infrastructure/CI-CD-Pipelines.md), [&#x1F680; Deployment Protocols](/docs/templates/technical/infrastructure/Deployment-Protocols.md) |
-| **Testing** | [&#x1F9E9; Unit Test Standards](/docs/templates/technical/testing/Unit-Test-Standards.md), [&#x1F3AD; E2E Testing](/docs/templates/technical/testing/E2E-Testing.md), [&#x26A1; Performance Benchmarks](/docs/templates/technical/benchmarks/Performance-Benchmarks.md)                                                                        |
+| **Stack & Source** | [&#x1F527; Technology Stack & Tooling](technical/Technology-Stack-&-Tooling.md), [&#x1F4BB; Source Code](technical/Source-Code.md), [&#x1F4E6; Packages & Workspaces](technical/Packages-&-Workspaces.md)                                                                                                                                                                               |
+| **Interface** | [&#x1F4D0; Formatting & Standards](technical/interface/Formatting-&-Standards.md), [&#x1F58C;&#xFE0F; Styling & Theming](technical/interface/Styling-&-Theming.md), [&#x1F6E0;&#xFE0F; UI Setup & Environment](technical/interface/UI-Setup-&-Environment.md)                  |
+| **Backend** | [&#x1F4E1; API Design Standards](technical/backend/API-Design-Standards.md), [&#x1F512; Authentication & Security](technical/backend/Authentication-&-Security.md), [&#x1F4CB; Schema & Validation](technical/backend/Schema-&-Validation.md)                                |
+| **Database** | [&#x1F5C4;&#xFE0F; Data Models & Entities](technical/database/Data-Models-&-Entities.md), [&#x1F504; Migration Policies](technical/database/Migration-Policies.md)                                                                                                                                          |
+| **Infrastructure** | [&#x2601;&#xFE0F; Environment Configuration](technical/infrastructure/Environment-Configuration.md), [&#x1F504; CI CD Pipelines](technical/infrastructure/CI-CD-Pipelines.md), [&#x1F680; Deployment Protocols](technical/infrastructure/Deployment-Protocols.md) |
+| **Testing** | [&#x1F9E9; Unit Test Standards](technical/testing/Unit-Test-Standards.md), [&#x1F3AD; E2E Testing](technical/testing/E2E-Testing.md), [&#x26A1; Performance Benchmarks](technical/benchmarks/Performance-Benchmarks.md)                                                                        |
 
 ## How to Use
 

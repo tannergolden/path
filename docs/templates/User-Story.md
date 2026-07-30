@@ -46,7 +46,7 @@ Verifiable outcomes - each one testable, none about implementation detail:
 ## 🎨 Wireframes/Mockups
 
 - [Link to Figma/Design]
-- [User Interface conventions](/docs/templates/technical/interface/Formatting-&-Standards.md) - the fill-in standard for this project's interface rules
+- [User Interface conventions](technical/interface/Formatting-&-Standards.md) - the fill-in standard for this project's interface rules
 
 ## 🔗 Dependencies
 

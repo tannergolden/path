@@ -52,7 +52,7 @@ Stay single-package until you have a concrete second consumer. Adopt a workspace
 1. **Packages never import from `apps/`** - dependencies flow from apps down into packages.
 2. **Cross-package imports go through the public entry point** (`exports` in `package.json`), never deep paths.
 3. **One lockfile at the root**; per-package lockfiles are forbidden to keep installs deterministic.
-4. **Versioning strategy**: `[fixed/lockstep | independent (changesets)]` - record the decision in an [ADR](/docs/adrs/Architecture-Decision-Records.md).
+4. **Versioning strategy**: `[fixed/lockstep | independent (changesets)]` - record the decision in an [ADR](../../adrs/Architecture-Decision-Records.md).
 
 > [!IMPORTANT]
 > The unified commands must keep working from the repository root: lint, test, and build should fan out across workspaces (e.g., `npm run build --workspaces --if-present`) so CI never needs package-specific knowledge.

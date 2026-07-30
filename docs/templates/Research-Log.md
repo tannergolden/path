@@ -104,7 +104,7 @@ _Each finding is a discrete claim a future reverification can re-check on its ow
 
 ### 🏁 Conclusion / Recommendation
 
-`[The recommendation the evidence supports, tied back to the objective and the alternatives above.]` If it settles an architectural choice, record the decision as an [ADR](/docs/templates/ADR.md), cite this report as its evidence, and note the ADR in the meta table.
+`[The recommendation the evidence supports, tied back to the objective and the alternatives above.]` If it settles an architectural choice, record the decision as an [ADR](ADR.md), cite this report as its evidence, and note the ADR in the meta table.
 
 ### ✅ Confidence & Caveats
 
@@ -140,7 +140,7 @@ Append a reverification entry in this shape:
 ### 🔗 See also
 
 > [!TIP]
-> Research reports live under `docs/technical/research/` - create it when this project starts keeping them. Durable decisions graduate to the [📝 ADR index](/docs/adrs/Architecture-Decision-Records.md). Every canonical guide is indexed in the [📚 Standards Index](https://github.com/tannergolden/standards/blob/Development/docs/README.md).
+> Research reports live under `docs/technical/research/` - create it when this project starts keeping them. Durable decisions graduate to the [📝 ADR index](../adrs/Architecture-Decision-Records.md). Every canonical guide is indexed in the [📚 Standards Index](https://github.com/tannergolden/standards/blob/Development/docs/README.md).
 
 ---
 

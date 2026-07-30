@@ -77,10 +77,17 @@ def ceiling_of(doc):
     # "wider than declared" - telling the maintainer to remove a ceiling the
     # callee actually needs, which is the startup failure this check exists to
     # prevent.
+    # ABSENT and EMPTY are different answers, so the test is `is None` and
+    # never truthiness. A job writing `permissions: {}` has declared it wants
+    # nothing; `or top` made that fall through to the workflow-level block,
+    # so the checker demanded those scopes from every stub calling it - which
+    # is advice to GRANT a job privileges it explicitly refused. The stub side
+    # below already reads it this way; this side did not.
     top = permissions_of(doc) or {}
     want = {}
     for inner in (doc.get('jobs') or {}).values():
-        for scope, level in (permissions_of(inner) or top).items():
+        declared = permissions_of(inner)
+        for scope, level in (top if declared is None else declared).items():
             if want.get(scope) != 'write':
                 want[scope] = level
     return want

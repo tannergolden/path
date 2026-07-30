@@ -72,6 +72,18 @@ class TestCeilingOf(unittest.TestCase):
         doc = {'permissions': {'contents': 'read'}, 'jobs': {'j': {}}}
         self.assertEqual(check.ceiling_of(doc), {'contents': 'read'})
 
+    def test_an_explicit_empty_block_does_not_inherit(self) -> None:
+        # THE ONE THAT MATTERS. A job saying `permissions: {}` has declared it
+        # wants nothing. Treating that as "inherit" makes the checker demand
+        # the workflow-level scopes from every stub calling it - telling the
+        # maintainer to GRANT contents:write to a job that asked for none.
+        doc = {'permissions': {'contents': 'write'}, 'jobs': {'j': {'permissions': {}}}}
+        self.assertEqual(check.ceiling_of(doc), {})
+
+    def test_an_explicit_none_does_not_inherit(self) -> None:
+        doc = {'permissions': {'contents': 'write'}, 'jobs': {'j': {'permissions': 'none'}}}
+        self.assertEqual(check.ceiling_of(doc), {})
+
     def test_one_job_inheriting_and_one_narrowing(self) -> None:
         doc = {
             'permissions': {'contents': 'read'},

@@ -190,9 +190,12 @@ publishes nothing.
 4. **Apply the settings, then the protection** - run **🎯 Apply Standards**
    from the Actions tab. `apply-settings` writes the repository settings
    (squash-only merges, head branches deleted on merge, auto-merge, the
-   security features); `apply-rulesets` writes branch protection. Both preview
-   by default and change nothing until you turn `dry-run` off. Do settings
-   first: they are checkboxes, while a wrong ruleset blocks every merge. See the token note below before you do.
+   security features); `apply-rulesets` writes branch protection.
+   **Both ship switched OFF, and `dry-run` ships on.** Turning `dry-run` off
+   on its own applies only the labels, on a green run that looks like it did
+   everything - so tick the job you want as well. Do settings first: they are
+   checkboxes, while a wrong ruleset blocks every merge. See the token note
+   below before you do.
 5. **Enable private vulnerability reporting** under Settings → Security. The
    issue chooser gains a "Report a vulnerability" entry automatically, which is
    why no security contact link is hard-coded.

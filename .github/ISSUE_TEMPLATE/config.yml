@@ -31,10 +31,14 @@ contact_links:
   # sit in `about` told the public to replace a placeholder they cannot see
   # and to change a repository setting they do not have.
   #
-  # What to do, both in this file:
-  #   1. Replace OWNER/REPOSITORY in the url below.
-  #   2. If the link 404s, enable Discussions under
-  #      Settings → General → Features.
+  # The url below is rewritten for you: it carries a placeholder that
+  # initialisation substitutes for this repository, because GitHub itself
+  # substitutes nothing in a contact link and there is no expression syntax
+  # here to do it with.
+  #
+  # What IS left for you: if the link 404s, enable Discussions under
+  # Settings → General → Features. That is a repository setting rather than
+  # a file, so no workflow can switch it on.
   - name: 💬 Questions, Ideas & Support (Discussions)
     url: 'https://github.com/OWNER/REPOSITORY/discussions'
     about: 'How-to questions, tooling setup, and ideas belong in Discussions rather than the issue tracker.'

@@ -56,6 +56,75 @@ something reaches in and rewrites your tree.
 
 ---
 
+## 🔀 Fork, Or "Use This Template"
+
+Both buttons hand you every file in this repository. They differ in exactly one
+thing: whether your copy keeps a **link back to this one**.
+
+**Fork it** when you want to pull later changes to the scaffold back down. A
+fork remembers where it came from, so `Sync fork` and `git pull upstream` both
+work.
+
+**Click "Use this template"** when you want the current version as a starting
+point and nothing more. You get a clean repository with a single
+`Initial commit`, no parent, and no sync button. It is the route this template
+is built for, and the one **🚀 The First Five Minutes** assumes further down.
+
+|                              | Fork                                              | "Use this template"  |
+| :--------------------------- | :------------------------------------------------ | :------------------- |
+| **Link back to here**        | Kept - `Sync fork` works                          | None                 |
+| **History**                  | Every commit this repository has                  | One `Initial commit` |
+| **Actions**                  | **Disabled until you enable them**, per GitHub    | On from the start    |
+| **Issues**                   | Off by default                                    | On                   |
+| **A new pull request**       | Defaults to targeting **this** repository         | Targets yours        |
+| **Visibility**               | Public, and a fork's visibility cannot be changed | Yours to choose      |
+| **Your contributions graph** | Commits to a fork do not count                    | They count           |
+
+### What a fork actually buys you
+
+Less than it looks, and it is worth knowing why before choosing it. **The
+standards reach both routes identically.** Every `uses:` in these workflows
+points at `tannergolden/standards@v1`, a moving major tag, so every fix in the
+v1 line arrives the moment it is published whether you forked or generated -
+which is what **Staying current takes no effort** describes further down.
+Forking does not make you more current; that part is already free.
+
+What a fork does sync is the **scaffold**: the twelve stub workflows, the
+directory layout, the seeded documents. Real, but thin, and changed rarely.
+
+> [!IMPORTANT]
+> **Initialisation and `Sync fork` want opposite things.** Once Actions are
+> running, the `init` job claims the repository - it rewrites the identity to
+> your account and **force-pushes the default branch**. That force-push is the
+> moment your history stops being a fast-forward of this one's, so `Sync fork`
+> begins offering to discard your commits rather than catch you up.
+>
+> Neither is misbehaving: a fork wants a shared history, and initialisation
+> deliberately rewrites one. If you want the fork **and** the shared history,
+> delete `.github/TEMPLATE_INIT` before enabling Actions. That skips
+> initialisation entirely, and the file itself lists what you then set by hand.
+
+> [!TIP]
+> **There is a third route, and it is usually the better one.** Generate with
+> "Use this template", then add this repository as a second remote:
+>
+> ```bash
+> git remote add template https://github.com/tannergolden/path
+> git fetch template
+> ```
+>
+> Cherry-pick whatever you want from it, whenever you want it, with none of the
+> fork's costs - no disabled Actions, no force-push collision, and no pull
+> request that opens against somebody else's repository by mistake.
+
+> [!NOTE]
+> **Whichever route you take, check the template flag.** Every workflow stub
+> here is guarded by `!github.event.repository.is_template`, so not one of them
+> runs in a repository still carrying it. If yours arrived flagged, clear
+> **Template repository** under Settings.
+
+---
+
 ## ⚠️ CI Is Green, And Only Half Configured
 
 The `ci` job in `checks.yml` runs the commands **you** give it, and it **fails when every stage

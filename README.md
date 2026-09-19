@@ -118,10 +118,10 @@ directory layout, the seeded documents. Real, but thin, and changed rarely.
 > request that opens against somebody else's repository by mistake.
 
 > [!NOTE]
-> **Whichever route you take, check the template flag.** Every workflow stub
-> here is guarded by `!github.event.repository.is_template`, so not one of them
-> runs in a repository still carrying it. If yours arrived flagged, clear
-> **Template repository** under Settings.
+> **Neither route carries the template flag over.** Every workflow stub here is
+> guarded by `!github.event.repository.is_template`, which is what keeps them
+> silent in this repository - and a fork inherits that flag no more than a
+> generated repository does. They come alive in your copy either way.
 
 ---
 

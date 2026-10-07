@@ -37,6 +37,19 @@ why they ship as seed content rather than as law.
 
 ---
 
+## 📝 File Log
+
+| Entry                               | Holds                                                                  |
+| :---------------------------------- | :--------------------------------------------------------------------- |
+| [`adrs/`](adrs/README.md)           | The architecture decision register, and how a record is added to it    |
+| [`templates/`](templates/README.md) | The seed documents: work-product forms and fill-in technical standards |
+| [`README.md`](README.md)            | This page                                                              |
+
+Every folder below this one carries a `README.md` that logs the files inside it,
+so the tree reads one level at a time.
+
+---
+
 ## 🌱 Using A Template
 
 Copy it out of `docs/templates/` to the matching path **without** `templates/`,
@@ -72,6 +85,9 @@ docs/
 
 Nothing belongs in it until you put something there, and `templates/` is not
 copied across - the seeds stay where they are and you take what you want.
+
+Give each folder you add a `README.md` that logs its files, the way every
+seeded folder does, and update it in the same change that adds a file.
 
 ---
 

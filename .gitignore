@@ -111,11 +111,14 @@ firebase-debug.log
 # The four VS Code files a team shares. `tasks.json` belongs with the other
 # three - it is where build, test and run tasks are defined, so leaving it out
 # meant `git add -A` silently dropped it and teammates never got the tasks.
+# The README beside them logs the folder, and without a line of its own here
+# it would be dropped the same silent way.
 .vscode/*
 !.vscode/extensions.json
 !.vscode/settings.json
 !.vscode/launch.json
 !.vscode/tasks.json
+!.vscode/README.md
 .idea/
 *.swp
 *.swo

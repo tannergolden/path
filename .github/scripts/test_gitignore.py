@@ -149,7 +149,7 @@ class TestEnvironmentFiles(GitignoreTestCase):
 
 
 class TestEditorConfiguration(GitignoreTestCase):
-    """The four VS Code files a team shares, and nothing else."""
+    """The four VS Code files a team shares, the README logging them, and nothing else."""
 
     def test_the_shared_four_are_tracked(self) -> None:
         self.assertTracked(
@@ -158,6 +158,9 @@ class TestEditorConfiguration(GitignoreTestCase):
             '.vscode/launch.json',
             '.vscode/tasks.json',
         )
+
+    def test_the_folder_log_is_tracked(self) -> None:
+        self.assertTracked('.vscode/README.md')
 
     def test_everything_else_under_vscode_is_ignored(self) -> None:
         self.assertIgnored('.vscode/private.json', '.vscode/ipch/x')

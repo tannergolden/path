@@ -29,6 +29,9 @@ on:
       # broken since the last time it ran.
       - '🎯 Standards Lifecycle'
       - '🖌️ Code Style Formatter'
+      # Indexes are redrawn after a merge, where a failure blocks nothing
+      # and so says nothing unless it is watched.
+      - '🗂️ Machined Indexes'
       # The three schedule-driven checks. Nothing about these blocks a merge,
       # so a failure produces no signal at all unless it is watched: the stub
       # verifier runs daily, the pruner weekly, and a preview deploy fails on

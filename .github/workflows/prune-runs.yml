@@ -11,11 +11,12 @@
 # A schedule or a manual dispatch is NOT commit-triggered, deliberately. A
 # nightly job that ran 300 times says nothing a single kept run does not.
 #
-# ⚠️ THIS RUNS IN THE TEMPLATE ITSELF, and it is one of only two that do
-# (the other is 🔬 Verify Stub Ceilings). A template accumulates run history
-# the same way any repository does, and nothing else would ever clear it.
+# ⚠️ THIS RUNS IN THE TEMPLATE ITSELF, and it is one of only three that do
+# (the others are 🔬 Verify Stub Ceilings and 🗂️ Machined Indexes). A
+# template accumulates run history the same way any repository does, and
+# nothing else would ever clear it.
 #
-# 🎯 Apply Standards is NOT the other one. It carries `!is_template` like
+# 🎯 Apply Standards is NOT one of them. It carries `!is_template` like
 # every other stub, so its single job is skipped here - a dispatch with
 # dry-run off applies nothing and still reports green.
 #

@@ -22,23 +22,27 @@ _Empty on purpose. Yours to fill._
 
 ## 📁 What Goes Where
 
-| Folder      | Put here                                                        |
-| :---------- | :-------------------------------------------------------------- |
-| `branding/` | Logos, icons, colour palettes, typography specimens             |
-| `images/`   | General project imagery, screenshots, product shots             |
-| `docs/`     | Diagrams and figures embedded in documents under `docs/`        |
-| `badges/`   | Badge artwork and the definitions a generator reads             |
+| Folder                            | Put here                                                         |
+| :-------------------------------- | :--------------------------------------------------------------- |
+| [`branding/`](branding/README.md) | Logos, icons, colour palettes, typography specimens              |
+| [`images/`](images/README.md)     | General project imagery, screenshots, product shots              |
+| [`docs/`](docs/README.md)         | Diagrams and figures embedded in documents under `docs/`         |
+| [`badges/`](badges/README.md)     | Badge artwork, drawn as SVGs by the badge kit from one data file |
+| [`README.md`](README.md)          | This page                                                        |
 
-`badges/` has two homes of its own: `static/` for badges committed as finished
-SVGs and served straight from the repository, and `dynamic/` for the
-definitions a generator reads to produce a badge when it runs. Both are empty
-until that generator lands.
+`badges/` has two homes of its own, both filled by the badge kit from
+`.github/badges.yml`: `static/` for ordinary badges, and `dynamic/` for the
+gold-label health badges whose colour reports a live status. Both hold only
+their README until the kit is wired in.
+
+Every folder here carries a `README.md` that logs the files inside it, so a
+file added to a folder gets a row in that folder's log in the same change.
 
 The first three folders are what every project needs, and `badges/` is the one
 here that precedes its contents on purpose, because its shape is already
 decided. Add your own - `mockups/`, `diagrams/`, `video/` - as soon as you have
-something to put in them. An empty folder invented ahead of a need is a folder
-nobody uses.
+something to put in them, each with a README of its own. An empty folder
+invented ahead of a need is a folder nobody uses.
 
 ---
 

@@ -1,6 +1,6 @@
 <!--
 title: '✒️ BRANDING'
-description: 'Logs the logos, icons, colour palettes, and typography specimens that make up the visual identity of this project.'
+description: 'The logos, icons, colour palettes, and typography specimens that make up the visual identity of this project.'
 tags: [branding, assets, identity, design]
 category: docs
 -->
@@ -34,12 +34,17 @@ here, as the [assets guide](../README.md) explains.
 
 ## 📝 File Log
 
-| File                     | Purpose  |
-| :----------------------- | :------- |
-| [`README.md`](README.md) | This log |
+<!-- AUTO-INDEX:BEGIN dir=. style=log -->
 
-Add a row here in the same change that adds a file, saying what it is and where
-it is used.
+| Entry                    | Purpose    |
+| :----------------------- | :--------- |
+| [`README.md`](README.md) | This file. |
+
+<!-- AUTO-INDEX:END -->
+
+🗂️ Machined Indexes redraws this log after every push. A logo cannot describe
+itself, so write what each file is and where it is used in its row: regeneration
+keeps it.
 
 ---
 

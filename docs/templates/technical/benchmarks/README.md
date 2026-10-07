@@ -1,6 +1,6 @@
 <!--
 title: '⚡ BENCHMARK TEMPLATES'
-description: 'Logs the fill-in standard for performance budgets, the methodology behind the numbers, and how each run is recorded.'
+description: 'Fill-in standard for performance budgets, the methodology behind the numbers, and how each run is recorded.'
 tags: [templates, benchmarks, performance, budgets]
 category: docs
 -->
@@ -34,12 +34,17 @@ always ends at a dated, sourced number.
 
 ## 📝 File Log
 
-| File                                                     | Decides                                                                                                 |
-| :------------------------------------------------------- | :------------------------------------------------------------------------------------------------------ |
-| [`Performance-Benchmarks.md`](Performance-Benchmarks.md) | The budget for each critical path, the measurement methodology, and how each run's results are recorded |
-| [`README.md`](README.md)                                 | This log. It is not a seed, and is not copied out                                                       |
+<!-- AUTO-INDEX:BEGIN dir=. style=log -->
 
-Add a row here in the same change that adds a file.
+| Entry                                                    | Purpose                                                   |
+| :------------------------------------------------------- | :-------------------------------------------------------- |
+| [`Performance-Benchmarks.md`](Performance-Benchmarks.md) | Reference data and methodologies for performance testing. |
+| [`README.md`](README.md)                                 | This file.                                                |
+
+<!-- AUTO-INDEX:END -->
+
+🗂️ Machined Indexes redraws this log after every push, from each template's own
+frontmatter.
 
 ---
 

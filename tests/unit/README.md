@@ -1,6 +1,6 @@
 <!--
 title: '🧩 UNIT TESTS'
-description: 'Logs the unit tests: fast, isolated checks of one piece of logic each, run on every push.'
+description: 'Unit tests: fast, isolated checks of one piece of logic each, run on every push.'
 tags: [testing, unit-tests, test-suites, quality]
 category: docs
 -->
@@ -36,12 +36,17 @@ the fill-in [Unit Test Standards](../../docs/templates/technical/testing/Unit-Te
 
 ## 📝 File Log
 
-| File                     | Purpose  |
-| :----------------------- | :------- |
-| [`README.md`](README.md) | This log |
+<!-- AUTO-INDEX:BEGIN dir=. style=log -->
 
-Add a row here in the same change that adds a file. Once this folder holds more
-than a screenful, log its subfolders instead and give each a README of its own.
+| Entry                    | Purpose    |
+| :----------------------- | :--------- |
+| [`README.md`](README.md) | This file. |
+
+<!-- AUTO-INDEX:END -->
+
+🗂️ Machined Indexes redraws this log after every push, from what each file says
+about itself. A subfolder appears as one row, so give it a README of its own and
+its row links to that.
 
 ---
 

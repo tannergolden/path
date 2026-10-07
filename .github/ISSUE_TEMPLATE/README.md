@@ -1,6 +1,6 @@
 <!--
 title: '📥 ISSUE FORMS'
-description: 'Logs the issue forms a reporter chooses from and the chooser configuration beside them, and explains why this README is never offered as a form.'
+description: 'The issue forms a reporter chooses from, and the chooser configuration that offers them.'
 tags: [issues, issue-forms, triage, community]
 category: docs
 -->
@@ -33,19 +33,24 @@ Discussions as the only ways in.
 
 ## 📝 File Log
 
-| File                                                     | Shows as                | For                                                                             |
-| :------------------------------------------------------- | :---------------------- | :------------------------------------------------------------------------------ |
-| [`Accessibility-Report.yaml`](Accessibility-Report.yaml) | ♿ Accessibility Report | Barriers to inclusive use: contrast, keyboard access, focus, screen readers     |
-| [`Bug-Report.yaml`](Bug-Report.yaml)                     | 🐛 Bug Report           | A defect or regression, with what it takes to reproduce it                      |
-| [`Documentation-Report.yaml`](Documentation-Report.yaml) | 📚 Documentation Report | Gaps, inaccuracies, outdated sections, or unclear passages in the documentation |
-| [`Feature-Request.yaml`](Feature-Request.yaml)           | ✨ Feature Request      | New functionality, with acceptance criteria, rationale, and success metrics     |
-| [`Feedback-Report.yaml`](Feedback-Report.yaml)           | 📝 Feedback Report      | Suggestions and usability insights that are not a defect                        |
-| [`Performance-Report.yaml`](Performance-Report.yaml)     | 🚀 Performance Report   | Slow pages, latency, memory spikes, and other inefficiencies, with measurements |
-| [`Vulnerability-Report.yaml`](Vulnerability-Report.yaml) | 🛡️ Vulnerability Report | A suspected vulnerability, on a **private** repository only                     |
-| [`config.yml`](config.yml)                               | -                       | Switches blank issues off and adds the one contact link, to Discussions         |
-| [`README.md`](README.md)                                 | -                       | This log. GitHub never offers it as a form                                      |
+<!-- AUTO-INDEX:BEGIN dir=. style=log fields=name -->
 
-Add a row here in the same change that adds a form.
+| Entry                                                    | Name                                   | Purpose                                                                                                                                    |
+| :------------------------------------------------------- | :------------------------------------- | :----------------------------------------------------------------------------------------------------------------------------------------- |
+| [`Accessibility-Report.yaml`](Accessibility-Report.yaml) | &#x267F; Accessibility Report          | &#x26D1;&#xFE0F; Report accessibility issues to improve compliance and inclusive User Experience (UX).                                     |
+| [`Bug-Report.yaml`](Bug-Report.yaml)                     | &#x1F41B; Bug Report                   | &#x1F41E; Report a defect, regression, or unexpected behavior so we can reproduce and fix it quickly.                                      |
+| [`config.yml`](config.yml)                               | -                                      | Steer reporters into the right template, and keep vulnerability reports PRIVATE.                                                           |
+| [`Documentation-Report.yaml`](Documentation-Report.yaml) | &#x1F4DA; Documentation Report         | &#x1F4D6; Report documentation gaps, inaccuracies, outdated sections, or clarity issues so we can correct and improve them.                |
+| [`Feature-Request.yaml`](Feature-Request.yaml)           | &#x2728; Feature Request               | &#x1FA84; Propose new functionality or enhancements with clear acceptance criteria, rationale, and success metrics.                        |
+| [`Feedback-Report.yaml`](Feedback-Report.yaml)           | &#x1F4DD; Feedback Report              | &#x1F4A1; Share feedback, suggestions, or usability insights to help us improve the project.                                               |
+| [`Performance-Report.yaml`](Performance-Report.yaml)     | &#x1F680; Performance Report           | &#x26A1;&#xFE0F; Report slow pages, high latency, memory spikes, or inefficiencies so we can measure, reproduce, and optimize performance. |
+| [`README.md`](README.md)                                 | -                                      | This file.                                                                                                                                 |
+| [`Vulnerability-Report.yaml`](Vulnerability-Report.yaml) | &#x1F6E1;&#xFE0F; Vulnerability Report | PRIVATE repos only: report suspected vulnerabilities here. For PUBLIC repos, do not open an issue - use SECURITY.md for private reporting. |
+
+<!-- AUTO-INDEX:END -->
+
+🗂️ Machined Indexes redraws this log after every push, from each form's own
+`name:` and `description:`.
 
 > [!IMPORTANT]
 > **Never give this README YAML front matter.** GitHub lists a Markdown file in

@@ -1,6 +1,6 @@
 <!--
 title: '🗄️ DATABASE TEMPLATES'
-description: 'Logs the fill-in standards for data models and entities, and for writing, running, and rolling back schema migrations.'
+description: 'Fill-in standards for data models and entities, and for writing, running, and rolling back schema migrations.'
 tags: [templates, database, data-models, migrations]
 category: docs
 -->
@@ -33,13 +33,18 @@ every bracket. The seed here stays pristine.
 
 ## 📝 File Log
 
-| File                                                     | Decides                                                                                                    |
-| :------------------------------------------------------- | :--------------------------------------------------------------------------------------------------------- |
-| [`Data-Models-&-Entities.md`](Data-Models-&-Entities.md) | The persistence stack, the core entities, their relationships, indexing, and where data sits in the system |
-| [`Migration-Policies.md`](Migration-Policies.md)         | How migrations are managed and run, the breaking-change protocol, seed data, and backup and recovery       |
-| [`README.md`](README.md)                                 | This log. It is not a seed, and is not copied out                                                          |
+<!-- AUTO-INDEX:BEGIN dir=. style=log -->
 
-Add a row here in the same change that adds a file.
+| Entry                                                    | Purpose                                                              |
+| :------------------------------------------------------- | :------------------------------------------------------------------- |
+| [`Data-Models-&-Entities.md`](Data-Models-&-Entities.md) | Standards for modeling entities and their relationships.             |
+| [`Migration-Policies.md`](Migration-Policies.md)         | Policies for writing, reviewing, and rolling back schema migrations. |
+| [`README.md`](README.md)                                 | This file.                                                           |
+
+<!-- AUTO-INDEX:END -->
+
+🗂️ Machined Indexes redraws this log after every push, from each template's own
+frontmatter.
 
 ---
 

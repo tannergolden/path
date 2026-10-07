@@ -22,21 +22,25 @@ _Empty on purpose. Yours to fill._
 
 ## 📁 What Goes Where
 
-| Folder                            | Put here                                                         |
-| :-------------------------------- | :--------------------------------------------------------------- |
-| [`branding/`](branding/README.md) | Logos, icons, colour palettes, typography specimens              |
-| [`images/`](images/README.md)     | General project imagery, screenshots, product shots              |
-| [`docs/`](docs/README.md)         | Diagrams and figures embedded in documents under `docs/`         |
-| [`badges/`](badges/README.md)     | Badge artwork, drawn as SVGs by the badge kit from one data file |
-| [`README.md`](README.md)          | This page                                                        |
+<!-- AUTO-INDEX:BEGIN dir=. style=log -->
+
+| Entry                             | Purpose                                                                                                       |
+| :-------------------------------- | :------------------------------------------------------------------------------------------------------------ |
+| [`badges/`](badges/README.md)     | Badge artwork the badge kit draws from one data file, in a static and a dynamic folder.                       |
+| [`branding/`](branding/README.md) | The logos, icons, colour palettes, and typography specimens that make up the visual identity of this project. |
+| [`docs/`](docs/README.md)         | The diagrams and figures embedded in the documents of this project.                                           |
+| [`images/`](images/README.md)     | General project imagery: screenshots, product shots, and illustrations.                                       |
+| [`README.md`](README.md)          | This file.                                                                                                    |
+
+<!-- AUTO-INDEX:END -->
 
 `badges/` has two homes of its own, both filled by the badge kit from
 `.github/badges.yml`: `static/` for ordinary badges, and `dynamic/` for the
 gold-label health badges whose colour reports a live status. Both hold only
 their README until the kit is wired in.
 
-Every folder here carries a `README.md` that logs the files inside it, so a
-file added to a folder gets a row in that folder's log in the same change.
+🗂️ Machined Indexes redraws this table after every push, and every folder here
+carries a `README.md` that logs the files inside it in the same way.
 
 The first three folders are what every project needs, and `badges/` is the one
 here that precedes its contents on purpose, because its shape is already

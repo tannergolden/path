@@ -1,6 +1,6 @@
 <!--
 title: '🧭 ARCHITECTURE DECISIONS'
-description: 'Logs the folder holding the architecture decision register, and says where each record goes and how it is added.'
+description: 'The architecture decision register, and the records it lists.'
 tags: [adr, architecture, decisions, index]
 category: docs
 -->
@@ -34,14 +34,18 @@ per decision.
 
 ## 📝 File Log
 
-| File                                                                   | Purpose                                                                                                |
-| :--------------------------------------------------------------------- | :----------------------------------------------------------------------------------------------------- |
-| [`Architecture-Decision-Records.md`](Architecture-Decision-Records.md) | The register: how decisions are recorded, and the Decision Index that lists every record, newest first |
-| [`README.md`](README.md)                                               | This log                                                                                               |
+<!-- AUTO-INDEX:BEGIN dir=. style=log -->
 
-**The records themselves are logged in the register, not here.** Its Decision
-Index already gives each one a row with its status, date, and evidence, and a
-second list beside it would only drift from the first.
+| Entry                                                                  | Purpose                                                                      |
+| :--------------------------------------------------------------------- | :--------------------------------------------------------------------------- |
+| [`Architecture-Decision-Records.md`](Architecture-Decision-Records.md) | How architecture decisions are recorded, plus the index of accepted records. |
+| [`README.md`](README.md)                                               | This file.                                                                   |
+
+<!-- AUTO-INDEX:END -->
+
+**A record added to this folder needs no row typed by hand.** It appears in this
+log and in the register's Decision Index on the next push, both drawn by 🗂️
+Machined Indexes, the register's from the record's own frontmatter.
 
 ---
 

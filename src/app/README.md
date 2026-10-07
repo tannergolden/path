@@ -1,6 +1,6 @@
 <!--
 title: '🚀 APPLICATION LAYER'
-description: 'Logs the application layer: the entry points and use cases that orchestrate the domain and receive infrastructure through injection.'
+description: 'The application layer: entry points and use cases that orchestrate the domain and receive infrastructure through injection.'
 tags: [source, application-layer, use-cases, architecture]
 category: docs
 -->
@@ -34,12 +34,17 @@ composition root that wires the two together at startup.
 
 ## 📝 File Log
 
-| File                     | Purpose  |
-| :----------------------- | :------- |
-| [`README.md`](README.md) | This log |
+<!-- AUTO-INDEX:BEGIN dir=. style=log -->
 
-Add a row here in the same change that adds a file. Once this folder holds more
-than a screenful, log its subfolders instead and give each a README of its own.
+| Entry                    | Purpose    |
+| :----------------------- | :--------- |
+| [`README.md`](README.md) | This file. |
+
+<!-- AUTO-INDEX:END -->
+
+🗂️ Machined Indexes redraws this log after every push, from what each file says
+about itself. A subfolder appears as one row, so give it a README of its own and
+its row links to that.
 
 ---
 

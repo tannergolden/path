@@ -1,6 +1,6 @@
 <!--
 title: '🖼️ IMAGES'
-description: 'Logs the general imagery this project keeps: screenshots, product shots, and illustrations, each with the page that shows it.'
+description: 'General project imagery: screenshots, product shots, and illustrations.'
 tags: [images, screenshots, assets, documentation]
 category: docs
 -->
@@ -34,12 +34,16 @@ stay out, as the [assets guide](../README.md) explains.
 
 ## 📝 File Log
 
-| File                     | Purpose  |
-| :----------------------- | :------- |
-| [`README.md`](README.md) | This log |
+<!-- AUTO-INDEX:BEGIN dir=. style=log -->
 
-Add a row here in the same change that adds an image, naming the page that shows
-it.
+| Entry                    | Purpose    |
+| :----------------------- | :--------- |
+| [`README.md`](README.md) | This file. |
+
+<!-- AUTO-INDEX:END -->
+
+🗂️ Machined Indexes redraws this log after every push. An image cannot describe
+itself, so name the page that shows it in its row: regeneration keeps it.
 
 ---
 

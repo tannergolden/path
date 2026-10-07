@@ -37,12 +37,17 @@ out of a source tarball. It is for developing the project, not for shipping it.
 
 ## 📝 File Log
 
-| File                                     | Purpose                                                                                                      |
-| :--------------------------------------- | :----------------------------------------------------------------------------------------------------------- |
-| [`devcontainer.json`](devcontainer.json) | The container itself: base image, features, editor extensions, and the commented-out toolchains to switch on |
-| [`README.md`](README.md)                 | This log                                                                                                     |
+<!-- AUTO-INDEX:BEGIN dir=. style=log -->
 
-Add a row here in the same change that adds a file.
+| Entry                                    | Purpose                                                |
+| :--------------------------------------- | :----------------------------------------------------- |
+| [`devcontainer.json`](devcontainer.json) | Development container - deliberately language-neutral. |
+| [`README.md`](README.md)                 | This file.                                             |
+
+<!-- AUTO-INDEX:END -->
+
+🗂️ Machined Indexes redraws this log after every push, from what each file says
+about itself.
 
 ---
 

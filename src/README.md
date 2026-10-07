@@ -1,6 +1,6 @@
 <!--
 title: '💻 APPLICATION SOURCE'
-description: 'Logs the three layers the application source is split into, and the rule that keeps their dependencies pointing inward.'
+description: 'The application source, split into three layers whose dependencies point inward.'
 tags: [source, architecture, layers, scaffold]
 category: docs
 -->
@@ -34,15 +34,19 @@ engine to protect it from.
 
 ## 📝 File Log
 
-| Entry                         | Put (and look for)                                                        |
-| :---------------------------- | :------------------------------------------------------------------------ |
-| [`app/`](app/README.md)       | The application layer: entry points, use cases, orchestration             |
-| [`domain/`](domain/README.md) | The domain layer: entities, business rules, pure logic with no I/O        |
-| [`infra/`](infra/README.md)   | The infrastructure layer: persistence, transport, adapters to the outside |
-| [`README.md`](README.md)      | This log                                                                  |
+<!-- AUTO-INDEX:BEGIN dir=. style=log -->
 
-Add a row here in the same change that adds a file or a folder at this level.
-Each layer logs its own files.
+| Entry                         | Purpose                                                                                                                     |
+| :---------------------------- | :-------------------------------------------------------------------------------------------------------------------------- |
+| [`app/`](app/README.md)       | The application layer: entry points and use cases that orchestrate the domain and receive infrastructure through injection. |
+| [`domain/`](domain/README.md) | The domain layer: entities, business rules, and pure logic that import nothing outside themselves.                          |
+| [`infra/`](infra/README.md)   | The infrastructure layer: adapters that implement the domain interfaces against databases, networks, and outside services.  |
+| [`README.md`](README.md)      | This file.                                                                                                                  |
+
+<!-- AUTO-INDEX:END -->
+
+🗂️ Machined Indexes redraws this log after every push. Each layer logs its own
+files.
 
 ---
 

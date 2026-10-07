@@ -33,19 +33,23 @@ We believe that the "Why" is as important as the "What". Our goal is to maintain
 
 ## 🟢 The Decision Index
 
-Copy the [ADR template](../templates/ADR.md) to `docs/adrs/ADR-NNNN-Short-Slug.md`, set its frontmatter (`status`, `date`, `evidence`), and **add a row below**, newest decision first.
+Copy the [ADR template](../templates/ADR.md) to `docs/adrs/ADR-NNNN-Short-Slug.md`, set its frontmatter (`status`, `date`, `evidence`), and its row appears below on the next push, newest decision first.
 
 > [!NOTE]
-> **The table is maintained by hand, and nothing checks it.** This scaffold
-> ships no index generator and no CI job that would notice the table drifting
-> from the files beside it. If you want that, build it and say so here - until
-> then, adding the record and forgetting the row is a silent gap.
+> **The table is generated, never typed.** 🗂️ Machined Indexes redraws it
+> after every push from each record's own frontmatter, newest decision first,
+> so a record cannot land without its row. Keep `status`, `date` and
+> `evidence` current in the record itself.
 
 Read a row in four moves: **Decision** links the record (its number and title); **Status** is Proposed, Accepted, Superseded, or Deprecated; **Date** is when it was decided; **Evidence** is the research report(s) that informed it, or `-`.
+
+<!-- AUTO-INDEX:BEGIN dir=. style=records fields=status,date,evidence headers=Decision,Status,Date,Evidence sort=date:desc -->
 
 | Decision   | Status | Date | Evidence |
 | :--------- | :----- | :--- | :------- |
 | _none yet_ | -      | -    | -        |
+
+<!-- AUTO-INDEX:END -->
 
 ---
 

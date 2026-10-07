@@ -1,6 +1,6 @@
 <!--
 title: '📡 BACKEND TEMPLATES'
-description: 'Logs the fill-in standards for backend services: API design, authentication and security, and schemas and validation.'
+description: 'Fill-in standards for backend services: API design, authentication and security, schemas and validation.'
 tags: [templates, backend, api, security]
 category: docs
 -->
@@ -32,14 +32,19 @@ every bracket. The seed here stays pristine.
 
 ## 📝 File Log
 
-| File                                                           | Decides                                                                                                  |
-| :------------------------------------------------------------- | :------------------------------------------------------------------------------------------------------- |
-| [`API-Design-Standards.md`](API-Design-Standards.md)           | Protocol and interface specification, data representation, endpoint strategy, errors, limits, versioning |
-| [`Authentication-&-Security.md`](Authentication-&-Security.md) | Authentication, token and session lifecycle, authorization, perimeter and transport security, auditing   |
-| [`Schema-&-Validation.md`](Schema-&-Validation.md)             | Where validation runs, domain property rules, sanitization, input and output schemas, localization       |
-| [`README.md`](README.md)                                       | This log. It is not a seed, and is not copied out                                                        |
+<!-- AUTO-INDEX:BEGIN dir=. style=log -->
 
-Add a row here in the same change that adds a file.
+| Entry                                                          | Purpose                                                                        |
+| :------------------------------------------------------------- | :----------------------------------------------------------------------------- |
+| [`API-Design-Standards.md`](API-Design-Standards.md)           | Standards for designing consistent, versioned APIs.                            |
+| [`Authentication-&-Security.md`](Authentication-&-Security.md) | Authentication, authorization, and security requirements for backend services. |
+| [`README.md`](README.md)                                       | This file.                                                                     |
+| [`Schema-&-Validation.md`](Schema-&-Validation.md)             | Standards for schemas and input validation at service boundaries.              |
+
+<!-- AUTO-INDEX:END -->
+
+🗂️ Machined Indexes redraws this log after every push, from each template's own
+frontmatter.
 
 ---
 

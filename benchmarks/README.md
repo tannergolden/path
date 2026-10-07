@@ -1,6 +1,6 @@
 <!--
 title: '⚡ BENCHMARKS'
-description: 'Logs the benchmark suites and recorded results kept here, and points at the fill-in standard that sets the budgets they defend.'
+description: 'The benchmark suites and recorded results that defend the performance budgets of this project.'
 tags: [benchmarks, performance, measurement, scaffold]
 category: docs
 -->
@@ -39,12 +39,17 @@ write to it or delete from it.
 
 ## 📝 File Log
 
-| File                     | Purpose  |
-| :----------------------- | :------- |
-| [`README.md`](README.md) | This log |
+<!-- AUTO-INDEX:BEGIN dir=. style=log -->
 
-Add a row here in the same change that adds a suite, naming the critical path it
-measures and the budget it defends.
+| Entry                    | Purpose    |
+| :----------------------- | :--------- |
+| [`README.md`](README.md) | This file. |
+
+<!-- AUTO-INDEX:END -->
+
+🗂️ Machined Indexes redraws this log after every push, from what each script and
+result says about itself: open each suite with a comment naming the critical
+path it measures and the budget it defends.
 
 ---
 

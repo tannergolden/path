@@ -1,6 +1,6 @@
 <!--
 title: '🧪 TESTING TEMPLATES'
-description: 'Logs the fill-in standards for unit tests and end-to-end tests, inside the canonical testing strategy.'
+description: 'Fill-in standards for unit tests and end-to-end tests, inside the canonical testing strategy.'
 tags: [templates, testing, unit-tests, e2e]
 category: docs
 -->
@@ -38,13 +38,18 @@ area, in [`../benchmarks/`](../benchmarks/README.md).
 
 ## 📝 File Log
 
-| File                                               | Decides                                                                                                                |
-| :------------------------------------------------- | :--------------------------------------------------------------------------------------------------------------------- |
-| [`E2E-Testing.md`](E2E-Testing.md)                 | The automation framework, the critical user journeys, the execution environment, diagnostics, and flakiness guardrails |
-| [`Unit-Test-Standards.md`](Unit-Test-Standards.md) | The test runner, coverage targets, naming and layout, Arrange-Act-Assert, isolation and mocking, and speed             |
-| [`README.md`](README.md)                           | This log. It is not a seed, and is not copied out                                                                      |
+<!-- AUTO-INDEX:BEGIN dir=. style=log -->
 
-Add a row here in the same change that adds a file.
+| Entry                                              | Purpose                                             |
+| :------------------------------------------------- | :-------------------------------------------------- |
+| [`E2E-Testing.md`](E2E-Testing.md)                 | How end-to-end tests are organized and executed.    |
+| [`README.md`](README.md)                           | This file.                                          |
+| [`Unit-Test-Standards.md`](Unit-Test-Standards.md) | Standards and coverage expectations for unit tests. |
+
+<!-- AUTO-INDEX:END -->
+
+🗂️ Machined Indexes redraws this log after every push, from each template's own
+frontmatter.
 
 ---
 

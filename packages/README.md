@@ -1,6 +1,6 @@
 <!--
 title: '📦 PACKAGES'
-description: 'Logs the workspace packages kept here, one folder each, and says when a project should start using this folder at all.'
+description: 'Workspace packages, one folder each, for when a second consumer needs shared code.'
 tags: [packages, workspaces, monorepo, scaffold]
 category: docs
 -->
@@ -38,12 +38,17 @@ write to it or delete from it.
 
 ## 📝 File Log
 
-| Entry                    | Purpose  |
-| :----------------------- | :------- |
-| [`README.md`](README.md) | This log |
+<!-- AUTO-INDEX:BEGIN dir=. style=log -->
 
-Log each package here as one row, linked to its folder, and give the package a
-README of its own for the files inside it.
+| Entry                    | Purpose    |
+| :----------------------- | :--------- |
+| [`README.md`](README.md) | This file. |
+
+<!-- AUTO-INDEX:END -->
+
+🗂️ Machined Indexes redraws this log after every push: a package appears the
+moment its folder exists, described by the README that package carries for its
+own files.
 
 ---
 

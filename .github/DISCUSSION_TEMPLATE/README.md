@@ -1,6 +1,6 @@
 <!--
 title: '💬 DISCUSSION FORMS'
-description: 'Logs the discussion category forms, the category each one is bound to by its file name, and which of those categories must be created first.'
+description: 'The discussion category forms, each bound by its file name to the category it shapes.'
 tags: [discussions, discussion-forms, community, triage]
 category: docs
 -->
@@ -34,21 +34,26 @@ Discussions must be switched on first, under <kbd>Settings</kbd> →
 
 ## 📝 File Log
 
-| File                                                               | Category       | For                                                                                           |
-| :----------------------------------------------------------------- | :------------- | :-------------------------------------------------------------------------------------------- |
-| [`accessibility.yaml`](accessibility.yaml)                         | Create it      | Contrast, keyboard navigation, focus order, and screen readers                                |
-| [`announcements.yaml`](announcements.yaml)                         | GitHub default | Official updates: releases, deprecations, and roadmap notes. Maintainers post here            |
-| [`community.yaml`](community.yaml)                                 | Create it      | Introductions, meetups, and topics no other category fits                                     |
-| [`ideas.yaml`](ideas.yaml)                                         | GitHub default | Early ideas, worked through before they become a formal Feature Request                       |
-| [`internationalization-i18n.yaml`](internationalization-i18n.yaml) | Create it      | Translation, localization, and locale problems                                                |
-| [`polls.yaml`](polls.yaml)                                         | GitHub default | Time-boxed polls for lightweight decisions such as priorities and naming                      |
-| [`q-a.yaml`](q-a.yaml)                                             | GitHub default | "How do I...?" questions, with the best answer marked once solved                             |
-| [`roadmap.yaml`](roadmap.yaml)                                     | Create it      | High-level plans and milestones, linked to the issues and pull requests that track them       |
-| [`showcase.yaml`](showcase.yaml)                                   | Create it      | Demos, prototypes, case studies, and lessons learned                                          |
-| [`tooling-setup.yaml`](tooling-setup.yaml)                         | Create it      | Editors, runtimes, package managers, linters, CI runners, and dev containers. Adds `area: dx` |
-| [`README.md`](README.md)                                           | -              | This log. GitHub reads only the YAML forms here                                               |
+<!-- AUTO-INDEX:BEGIN dir=. style=log -->
 
-Add a row here in the same change that adds a form.
+| Entry                                                              | Purpose                                                                                                                                          |
+| :----------------------------------------------------------------- | :----------------------------------------------------------------------------------------------------------------------------------------------- |
+| [`accessibility.yaml`](accessibility.yaml)                         | Accessibility feedback - contrast, keyboard navigation, focus order, screen readers.                                                             |
+| [`announcements.yaml`](announcements.yaml)                         | Official updates such as releases, deprecations, and roadmap notes.                                                                              |
+| [`community.yaml`](community.yaml)                                 | General discussion, introductions, meetups, and topics that don&#x2019;t fit other categories.                                                   |
+| [`ideas.yaml`](ideas.yaml)                                         | Brainstorm features or improvements before opening a formal Feature Request.                                                                     |
+| [`internationalization-i18n.yaml`](internationalization-i18n.yaml) | Translation and localization topics, language-specific feedback, and locale issues.                                                              |
+| [`polls.yaml`](polls.yaml)                                         | Run time-boxed surveys to gather community sentiment and make lightweight decisions (priorities, roadmap themes, release timing, naming).        |
+| [`q-a.yaml`](q-a.yaml)                                             | Ask &#x201C;how do I&#x2026;?&#x201D; questions and get help from maintainers and the community.                                                 |
+| [`README.md`](README.md)                                           | This file.                                                                                                                                       |
+| [`roadmap.yaml`](roadmap.yaml)                                     | High-level plans and milestones. Link to Issues and Pull Requests for tracking.                                                                  |
+| [`showcase.yaml`](showcase.yaml)                                   | Share demos, prototypes, case studies, success stories, and lessons learned.                                                                     |
+| [`tooling-setup.yaml`](tooling-setup.yaml)                         | Developer environment topics - IDEs, Node.js versions, package managers, linters, CI runners, containers/devcontainers, and local configuration. |
+
+<!-- AUTO-INDEX:END -->
+
+🗂️ Machined Indexes redraws this log after every push, from the prose each form
+opens with.
 
 > [!IMPORTANT]
 > **A form applies only to a category whose slug matches its file name.** Four

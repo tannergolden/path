@@ -1,6 +1,6 @@
 <!--
 title: '🧪 TESTS'
-description: 'Logs the three test suites this project keeps, from isolated units to whole user journeys, and how CI comes to run them.'
+description: 'The test suites, from isolated units to whole user journeys, and how CI comes to run them.'
 tags: [testing, test-suites, ci, scaffold]
 category: docs
 -->
@@ -40,15 +40,19 @@ engine to protect it from.
 
 ## 📝 File Log
 
-| Entry                                   | Put (and look for)                                                           |
-| :-------------------------------------- | :--------------------------------------------------------------------------- |
-| [`unit/`](unit/README.md)               | Fast, isolated tests of pure logic. Co-locating them with source is fine too |
-| [`integration/`](integration/README.md) | Tests that cross a real boundary: database, filesystem, HTTP                 |
-| [`e2e/`](e2e/README.md)                 | Full user-journey tests against a running system                             |
-| [`README.md`](README.md)                | This log                                                                     |
+<!-- AUTO-INDEX:BEGIN dir=. style=log -->
 
-Add a row here in the same change that adds a file or a folder at this level.
-Each suite logs its own files.
+| Entry                                   | Purpose                                                                                                         |
+| :-------------------------------------- | :-------------------------------------------------------------------------------------------------------------- |
+| [`e2e/`](e2e/README.md)                 | End-to-end tests: whole user journeys driven against a running system, gating promotion to Preview and Release. |
+| [`integration/`](integration/README.md) | Integration tests: checks that cross a real boundary such as a database, the filesystem, or an HTTP service.    |
+| [`unit/`](unit/README.md)               | Unit tests: fast, isolated checks of one piece of logic each, run on every push.                                |
+| [`README.md`](README.md)                | This file.                                                                                                      |
+
+<!-- AUTO-INDEX:END -->
+
+🗂️ Machined Indexes redraws this log after every push. Each suite logs its own
+files.
 
 ---
 

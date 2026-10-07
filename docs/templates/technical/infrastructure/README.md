@@ -1,6 +1,6 @@
 <!--
 title: '☁️ INFRASTRUCTURE TEMPLATES'
-description: 'Logs the fill-in standards for environment configuration, the delivery pipelines, and deploying and rolling back releases.'
+description: 'Fill-in standards for environment configuration, the delivery pipelines, and deploying and rolling back releases.'
 tags: [templates, infrastructure, ci-cd, deployment]
 category: docs
 -->
@@ -37,14 +37,19 @@ cannot know for you: where it is hosted, and how it recovers.
 
 ## 📝 File Log
 
-| File                                                           | Decides                                                                                                   |
-| :------------------------------------------------------------- | :-------------------------------------------------------------------------------------------------------- |
-| [`CI-CD-Pipelines.md`](CI-CD-Pipelines.md)                     | The CI platform, the integration and delivery phases, the artifact lifecycle, and quality-gate thresholds |
-| [`Deployment-Protocols.md`](Deployment-Protocols.md)           | Hosting, the release methodology, the deploy lifecycle, observability, and recovery and rollback          |
-| [`Environment-Configuration.md`](Environment-Configuration.md) | Infrastructure as code, networking, resource sizing, configuration and secrets, and resilience            |
-| [`README.md`](README.md)                                       | This log. It is not a seed, and is not copied out                                                         |
+<!-- AUTO-INDEX:BEGIN dir=. style=log -->
 
-Add a row here in the same change that adds a file.
+| Entry                                                          | Purpose                                                                                   |
+| :------------------------------------------------------------- | :---------------------------------------------------------------------------------------- |
+| [`CI-CD-Pipelines.md`](CI-CD-Pipelines.md)                     | How the CI and delivery pipelines are structured and what each stage enforces.            |
+| [`Deployment-Protocols.md`](Deployment-Protocols.md)           | The protocol for promoting and deploying releases across environments.                    |
+| [`Environment-Configuration.md`](Environment-Configuration.md) | Managing configuration and secrets across development, preview, and release environments. |
+| [`README.md`](README.md)                                       | This file.                                                                                |
+
+<!-- AUTO-INDEX:END -->
+
+🗂️ Machined Indexes redraws this log after every push, from each template's own
+frontmatter.
 
 ---
 

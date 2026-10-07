@@ -1,6 +1,6 @@
 <!--
 title: '🖌️ INTERFACE TEMPLATES'
-description: 'Logs the fill-in standards for the user interface: formatting rules, styling and theming, and the frontend development environment.'
+description: 'Fill-in standards for the user interface: formatting, styling and theming, and the frontend development environment.'
 tags: [templates, interface, frontend, design-system]
 category: docs
 -->
@@ -33,14 +33,19 @@ every bracket. The seed here stays pristine.
 
 ## 📝 File Log
 
-| File                                                     | Decides                                                                                             |
-| :------------------------------------------------------- | :-------------------------------------------------------------------------------------------------- |
-| [`Formatting-&-Standards.md`](Formatting-&-Standards.md) | Syntax and style, naming conventions, directory layout, automated quality gates, and documentation  |
-| [`Styling-&-Theming.md`](Styling-&-Theming.md)           | Design tokens, typography, accessibility, layout and device adaptation, core components, and motion |
-| [`UI-Setup-&-Environment.md`](UI-Setup-&-Environment.md) | Prerequisites, installation, configuration and secrets, the local development loop, and the build   |
-| [`README.md`](README.md)                                 | This log. It is not a seed, and is not copied out                                                   |
+<!-- AUTO-INDEX:BEGIN dir=. style=log -->
 
-Add a row here in the same change that adds a file.
+| Entry                                                    | Purpose                                                  |
+| :------------------------------------------------------- | :------------------------------------------------------- |
+| [`Formatting-&-Standards.md`](Formatting-&-Standards.md) | Formatting standards for content in the interface layer. |
+| [`README.md`](README.md)                                 | This file.                                               |
+| [`Styling-&-Theming.md`](Styling-&-Theming.md)           | Standards for styling and theming user interfaces.       |
+| [`UI-Setup-&-Environment.md`](UI-Setup-&-Environment.md) | Setting up the frontend development environment.         |
+
+<!-- AUTO-INDEX:END -->
+
+🗂️ Machined Indexes redraws this log after every push, from each template's own
+frontmatter.
 
 ---
 

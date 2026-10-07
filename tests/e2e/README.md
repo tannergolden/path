@@ -1,6 +1,6 @@
 <!--
 title: '🎭 END-TO-END TESTS'
-description: 'Logs the end-to-end tests: whole user journeys driven against a running system, gating promotion to Preview and Release.'
+description: 'End-to-end tests: whole user journeys driven against a running system, gating promotion to Preview and Release.'
 tags: [testing, e2e, test-suites, quality]
 category: docs
 -->
@@ -39,12 +39,17 @@ guardrails against flakiness belong in the fill-in
 
 ## 📝 File Log
 
-| File                     | Purpose  |
-| :----------------------- | :------- |
-| [`README.md`](README.md) | This log |
+<!-- AUTO-INDEX:BEGIN dir=. style=log -->
 
-Add a row here in the same change that adds a file. Once this folder holds more
-than a screenful, log its subfolders instead and give each a README of its own.
+| Entry                    | Purpose    |
+| :----------------------- | :--------- |
+| [`README.md`](README.md) | This file. |
+
+<!-- AUTO-INDEX:END -->
+
+🗂️ Machined Indexes redraws this log after every push, from what each file says
+about itself. A subfolder appears as one row, so give it a README of its own and
+its row links to that.
 
 ---
 

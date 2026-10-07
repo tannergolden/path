@@ -1,6 +1,6 @@
 <!--
 title: '🔬 REPOSITORY SCRIPTS'
-description: 'The checks this repository runs on its own configuration, the tests that guard them, and which workflow runs each one.'
+description: 'The checks this repository runs on its own configuration, and the tests that guard them.'
 tags: [scripts, validation, testing, python]
 category: docs
 -->
@@ -33,18 +33,26 @@ only Python 3, plus PyYAML for the ones that read YAML.
 
 ## 📝 File Log
 
-| File                                                           | Run by                                         | Does                                                                                                                                                     |
-| :------------------------------------------------------------- | :--------------------------------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [`validate-repository.py`](validate-repository.py)             | `checks.yml`, as the `ci` job's `lint-command` | Checks what nothing else parses: YAML and JSON load, every workflow `uses:` is pinned to a tag or a commit, and text is UTF-8, LF, and ends in a newline |
-| [`verify-stub-ceilings.py`](verify-stub-ceilings.py)           | `verify-stubs.yml`                             | Compares each stub's `permissions:` ceiling and inputs with the workflow it calls, at `v1` and at the standards' default branch                          |
-| [`test_gitignore.py`](test_gitignore.py)                       | `checks.yml`, as the `ci` job's `test-command` | Runs the real `.gitignore` through `git check-ignore`: source directories survive, secrets and build output do not                                       |
-| [`test_validate_repository.py`](test_validate_repository.py)   | `checks.yml`, as the `ci` job's `test-command` | Runs the validator against throwaway repositories and checks what it reports                                                                             |
-| [`test_verify_stub_ceilings.py`](test_verify_stub_ceilings.py) | `checks.yml`, as the `ci` job's `test-command` | Tests the permission arithmetic the ceiling check depends on                                                                                             |
-| [`README.md`](README.md)                                       | -                                              | This log                                                                                                                                                 |
+<!-- AUTO-INDEX:BEGIN dir=. style=log -->
 
-Add a row here in the same change that adds a script. The `test-command`
-discovers every `test_*.py` in this folder, so a test added beside a new script
-runs without anyone remembering to list it.
+| Entry                                                          | Purpose                                                              |
+| :------------------------------------------------------------- | :------------------------------------------------------------------- |
+| [`README.md`](README.md)                                       | This file.                                                           |
+| [`test_gitignore.py`](test_gitignore.py)                       | Tests for this repository's .gitignore.                              |
+| [`test_validate_repository.py`](test_validate_repository.py)   | Tests for the repository validator.                                  |
+| [`test_verify_stub_ceilings.py`](test_verify_stub_ceilings.py) | Tests for the stub ceiling checker.                                  |
+| [`validate-repository.py`](validate-repository.py)             | Validate this repository's own configuration.                        |
+| [`verify-stub-ceilings.py`](verify-stub-ceilings.py)           | Check every stub's permission ceiling against the workflow it calls. |
+
+<!-- AUTO-INDEX:END -->
+
+🗂️ Machined Indexes redraws this log after every push, from each docstring. Who
+runs them:
+
+- `checks.yml` runs `validate-repository.py` as the `ci` job's `lint-command`,
+  and every `test_*.py` here as its `test-command`. That discovers a test
+  added beside a new script without anyone remembering to list it.
+- `verify-stubs.yml` runs `verify-stub-ceilings.py`.
 
 > [!NOTE]
 > **The tests keep their underscores on purpose.** `unittest` imports each

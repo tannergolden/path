@@ -39,14 +39,19 @@ why they ship as seed content rather than as law.
 
 ## 📝 File Log
 
-| Entry                               | Holds                                                                  |
-| :---------------------------------- | :--------------------------------------------------------------------- |
-| [`adrs/`](adrs/README.md)           | The architecture decision register, and how a record is added to it    |
-| [`templates/`](templates/README.md) | The seed documents: work-product forms and fill-in technical standards |
-| [`README.md`](README.md)            | This page                                                              |
+<!-- AUTO-INDEX:BEGIN dir=. style=log -->
 
-Every folder below this one carries a `README.md` that logs the files inside it,
-so the tree reads one level at a time.
+| Entry                               | Purpose                                                            |
+| :---------------------------------- | :----------------------------------------------------------------- |
+| [`adrs/`](adrs/README.md)           | The architecture decision register, and the records it lists.      |
+| [`templates/`](templates/README.md) | Index of the reusable document templates and when to use each one. |
+| [`README.md`](README.md)            | This file.                                                         |
+
+<!-- AUTO-INDEX:END -->
+
+🗂️ Machined Indexes redraws this log after every push. Every folder below this
+one carries a `README.md` that logs the files inside it, so the tree reads one
+level at a time.
 
 ---
 

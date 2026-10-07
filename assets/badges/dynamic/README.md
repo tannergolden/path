@@ -1,6 +1,6 @@
 <!--
 title: '🔄 DYNAMIC BADGES'
-description: 'Logs the gold-label health badges the badge kit draws into this folder, and the traffic-light rule their message colours obey.'
+description: 'Gold-label health badges the badge kit draws, whose colour reports a live status.'
 tags: [badges, health, assets, automation]
 category: docs
 -->
@@ -34,15 +34,19 @@ shows has changed.
 
 ## 📝 File Log
 
-| File                     | Holds                                                                                     |
-| :----------------------- | :---------------------------------------------------------------------------------------- |
-| `<name>.svg`             | One per gold-label entry in `.github/badges.yml`, named after the entry, drawn by the kit |
-| [`README.md`](README.md) | This log                                                                                  |
+<!-- AUTO-INDEX:BEGIN dir=. style=log exclude=*.svg -->
 
-**The badges are logged by their data file, not row by row here.** Each SVG is
-drawn from one entry, and the kit deletes any SVG no entry names, so the data
-file is always the exact list of what this folder holds. Add a row here only for
-a file the kit did not draw.
+| Entry                    | Purpose    |
+| :----------------------- | :--------- |
+| [`README.md`](README.md) | This file. |
+
+<!-- AUTO-INDEX:END -->
+
+**The badges themselves are logged by their data file, not here.** Each SVG is
+drawn from one gold-label entry in `.github/badges.yml` and named after it, and
+the kit deletes any SVG no entry names, so the data file is always the exact
+list. 🗂️ Machined Indexes redraws this log after every push and lists everything
+else.
 
 ---
 

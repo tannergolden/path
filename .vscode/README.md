@@ -34,14 +34,18 @@ one. Your language's extension supplies it.
 
 ## 📝 File Log
 
-| File                                 | Purpose                                                                                                                                                  |
-| :----------------------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [`extensions.json`](extensions.json) | The extensions VS Code offers to install: EditorConfig, GitLens, Error Lens, Code Spell Checker, Markdown All in One, markdownlint, and Even Better TOML |
-| [`settings.json`](settings.json)     | Format and fix on save, a final newline, trimmed whitespace, telemetry set off, version-control clutter hidden, and the spell checker's project words    |
-| [`README.md`](README.md)             | This log                                                                                                                                                 |
+<!-- AUTO-INDEX:BEGIN dir=. style=log -->
 
-Add a row here in the same change that adds a file, and read the next section
-before you do.
+| Entry                                | Purpose                                                                                                                                     |
+| :----------------------------------- | :------------------------------------------------------------------------------------------------------------------------------------------ |
+| [`extensions.json`](extensions.json) | Language-neutral recommendations only. Add the extension for whatever you end up writing; this scaffold cannot know what that is.           |
+| [`README.md`](README.md)             | This file.                                                                                                                                  |
+| [`settings.json`](settings.json)     | Formatting on save is universal. WHICH formatter is a per-language choice, so no default is set here - your language extension supplies it. |
+
+<!-- AUTO-INDEX:END -->
+
+🗂️ Machined Indexes redraws this log after every push, from what each file says
+about itself. Read the next section before you add one.
 
 ---
 

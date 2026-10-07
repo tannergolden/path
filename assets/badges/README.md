@@ -1,6 +1,6 @@
 <!--
 title: '🏅 BADGES'
-description: 'Logs the two badge folders, explains how the badge kit fills them from one data file, and says how a document should reference a badge.'
+description: 'Badge artwork the badge kit draws from one data file, in a static and a dynamic folder.'
 tags: [badges, assets, documentation, automation]
 category: docs
 -->
@@ -35,13 +35,17 @@ and a workflow stub, so both folders hold only their README for now.
 
 ## 📝 File Log
 
-| Entry                           | Holds                                                             |
-| :------------------------------ | :---------------------------------------------------------------- |
-| [`dynamic/`](dynamic/README.md) | Gold-label badges, whose message colour reports a live status     |
-| [`static/`](static/README.md)   | Every other badge: status, role, context, licence, and navigation |
-| [`README.md`](README.md)        | This log                                                          |
+<!-- AUTO-INDEX:BEGIN dir=. style=log -->
 
-Add a row here in the same change that adds a file or a folder.
+| Entry                           | Purpose                                                                                   |
+| :------------------------------ | :---------------------------------------------------------------------------------------- |
+| [`dynamic/`](dynamic/README.md) | Gold-label health badges the badge kit draws, whose colour reports a live status.         |
+| [`static/`](static/README.md)   | Fixed-message badges the badge kit draws: status, role, context, licence, and navigation. |
+| [`README.md`](README.md)        | This file.                                                                                |
+
+<!-- AUTO-INDEX:END -->
+
+🗂️ Machined Indexes redraws this log after every push.
 
 ---
 

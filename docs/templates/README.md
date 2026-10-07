@@ -38,13 +38,13 @@ _Structured excellence. Rapid documentation. Unified standards._
 | [&#x1F4C9; Post-Mortem](Post-Mortem.md)                 | Blameless incident and outcome analysis.               | `docs/operations/post-mortems/YYYY-MM-DD-<slug>.md` |
 | [&#x1F4C4; ADR](ADR.md)                                 | One architecture decision, recorded durably.           | `docs/adrs/ADR-NNNN-Short-Slug.md` (next number)            |
 | [&#x1F4AC; Communication](Communication.md)             | Meeting notes, status heartbeats, stakeholder updates. | reuse in issues, discussions, and reviews           |
-| [&#x1F4DD; ADR index](../adrs/Architecture-Decision-Records.md) | The register every ADR is listed in.                   | already in place; add a row per decision            |
+| [&#x1F4DD; ADR index](../adrs/Architecture-Decision-Records.md) | The register every ADR is listed in.                   | already in place; each record's row is generated    |
 
 ## Fill-In Technical Standards
 
 The fill-in standards live in [`technical/`](technical/README.md), one folder per area, and each folder logs its own files.
 
-Every document here other than the `README.md` logs is one you complete: either a **fill-in standard** whose decisions are marked by `[square brackets]` - a bare `[REPLACE_ME]`, a choice list like `[REST | GraphQL | gRPC]`, or a prompt like `[why]` - or a **work-product form** whose blank sections you write under (an ADR, a post-mortem, a user story). Each folder also carries a `README.md` that logs the files in it and links one level down; those logs are navigation, not seeds, and are never copied out. This catalogue stays the one place that says when to reach for each template, so adding or renaming one means updating its row here and its folder's log in the same change. A fill-in standard's destination **mirrors its path minus `templates/`**: `docs/templates/technical/backend/API-Design-Standards.md` instantiates as `docs/technical/backend/API-Design-Standards.md`. **Living inside `docs/templates/` is what marks them all as seed content**, with no in-file directive needed. Everything in this folder is **yours from the moment the repository is generated**: nothing syncs it, nothing overwrites it, and editing a file here has no upstream consequence.
+Every document here other than the `README.md` logs is one you complete: either a **fill-in standard** whose decisions are marked by `[square brackets]` - a bare `[REPLACE_ME]`, a choice list like `[REST | GraphQL | gRPC]`, or a prompt like `[why]` - or a **work-product form** whose blank sections you write under (an ADR, a post-mortem, a user story). Each folder also carries a `README.md` that logs the files in it and links one level down; those logs are generated, are navigation rather than seeds, and are never copied out. This catalogue stays the one place that says when to reach for each template, so adding or renaming one means updating its row here; the folder logs redraw themselves. A fill-in standard's destination **mirrors its path minus `templates/`**: `docs/templates/technical/backend/API-Design-Standards.md` instantiates as `docs/technical/backend/API-Design-Standards.md`. **Living inside `docs/templates/` is what marks them all as seed content**, with no in-file directive needed. Everything in this folder is **yours from the moment the repository is generated**: nothing syncs it, nothing overwrites it, and editing a file here has no upstream consequence.
 
 | Area                                                                              | Templates                                                                                                                                                                                                                                                                                                                                                                                                                               |
 | :-------------------------------------------------------------------------------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -60,6 +60,27 @@ Every document here other than the `README.md` logs is one you complete: either 
 1. **Copy** the template to its destination above - never fill in the template file itself; your `docs/templates/` copies are seeded once and stay pristine as long as you copy rather than edit them, and the canonical originals remain in the template home (later template improvements are never re-shipped over your seeded copies, so consult upstream for the newest form).
 2. **Replace** every bracketed placeholder; delete sections that genuinely don't apply.
 3. **Link** the document from the pull request (or issue) it supports, so decisions stay traceable.
+
+## 📝 File Log
+
+<!-- AUTO-INDEX:BEGIN dir=. style=log -->
+
+| Entry                                              | Purpose                                                                                                                         |
+| :------------------------------------------------- | :------------------------------------------------------------------------------------------------------------------------------ |
+| [`technical/`](technical/README.md)                | Fill-in technical standards: the stack, source and package layout, and one folder per technical area.                           |
+| [`ADR.md`](ADR.md)                                 | The standard template for recording an architecture decision.                                                                   |
+| [`Communication.md`](Communication.md)             | Channels, expectations, and etiquette for communicating across issues, discussions, and reviews.                                |
+| [`Implementation-Plan.md`](Implementation-Plan.md) | Reusable template for planning an implementation in small, reviewable slices.                                                   |
+| [`Post-Mortem.md`](Post-Mortem.md)                 | Blameless post-mortem template for capturing incidents and their lessons.                                                       |
+| [`README.md`](README.md)                           | This file.                                                                                                                      |
+| [`Research-Log.md`](Research-Log.md)               | The format for a filed research report: a dated, sourced, claim-by-claim investigation kept current by its verification window. |
+| [`Technical-Design.md`](Technical-Design.md)       | Template for proposing and reviewing a technical design.                                                                        |
+| [`User-Story.md`](User-Story.md)                   | Template for writing user stories with clear acceptance criteria.                                                               |
+
+<!-- AUTO-INDEX:END -->
+
+🗂️ Machined Indexes redraws this log after every push, from each template's own
+frontmatter.
 
 ### 🔗 See also
 

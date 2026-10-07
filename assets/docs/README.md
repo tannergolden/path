@@ -1,6 +1,6 @@
 <!--
 title: '📊 DOCUMENT FIGURES'
-description: 'Logs the diagrams and figures embedded in the documents of this project, and says how a document should reference one.'
+description: 'The diagrams and figures embedded in the documents of this project.'
 tags: [diagrams, figures, assets, documentation]
 category: docs
 -->
@@ -34,12 +34,17 @@ sits, with alt text. From `docs/technical/Architecture.md`, that is
 
 ## 📝 File Log
 
-| File                     | Purpose  |
-| :----------------------- | :------- |
-| [`README.md`](README.md) | This log |
+<!-- AUTO-INDEX:BEGIN dir=. style=log -->
 
-Add a row here in the same change that adds a figure, naming the document that
-embeds it, so a figure nothing uses any more is easy to find and delete.
+| Entry                    | Purpose    |
+| :----------------------- | :--------- |
+| [`README.md`](README.md) | This file. |
+
+<!-- AUTO-INDEX:END -->
+
+🗂️ Machined Indexes redraws this log after every push. A figure cannot describe
+itself, so name the document that embeds it in its row, where regeneration keeps
+it and a figure nothing uses any more is easy to find.
 
 ---
 

@@ -294,20 +294,40 @@ publishes nothing.
 
 ## 📦 What's Inside
 
-| Path                         | Purpose                                                                    |
-| :--------------------------- | :------------------------------------------------------------------------- |
-| `.github/workflows/`         | Twelve trigger workflows. The logic lives in the standards repository      |
-| `.github/`                   | Community health files, CODEOWNERS, Dependabot, release notes config       |
-| `.github/scripts/`           | The repository validator the `ci` job runs until you point it at your own  |
-| `docs/templates/`            | Fill-in project documents, copied out and edited as your project's own law |
-| `src/`, `tests/`             | Empty structure, ready for your first file                                 |
-| `assets/`                    | Logos, images, and diagrams this project owns. Empty, with a layout        |
-| `packages/`, `benchmarks/`   | Reserved, empty                                                            |
-| `.devcontainer/`, `.vscode/` | A working development container and editor defaults                        |
+| Path                                                                         | Purpose                                                                    |
+| :--------------------------------------------------------------------------- | :------------------------------------------------------------------------- |
+| [`.github/workflows/`](.github/workflows/README.md)                          | Twelve trigger workflows. The logic lives in the standards repository      |
+| `.github/`                                                                   | Community health files, CODEOWNERS, Dependabot, release notes config       |
+| [`.github/scripts/`](.github/scripts/README.md)                              | The repository validator the `ci` job runs until you point it at your own  |
+| [`docs/templates/`](docs/templates/README.md)                                | Fill-in project documents, copied out and edited as your project's own law |
+| [`src/`](src/README.md), [`tests/`](tests/README.md)                         | Structure with no code in it yet, ready for your first file                |
+| [`assets/`](assets/README.md)                                                | Logos, images, and diagrams this project owns. A layout, waiting for files |
+| [`packages/`](packages/README.md), [`benchmarks/`](benchmarks/README.md)     | Reserved, holding nothing but their logs                                   |
+| [`.devcontainer/`](.devcontainer/README.md), [`.vscode/`](.vscode/README.md) | A working development container and editor defaults                        |
 
 The root carries only what a tool discovers there by mechanism: `.editorconfig`,
 `.gitattributes`, `.gitignore`, `.markdownlint.json`, `.env.example`, `LICENSE`,
 and this file.
+
+**Every folder carries a `README.md` that logs each file inside it**, with one
+exception. GitHub shows a README in `.github/` in place of this page, so that
+folder's own files are logged here instead:
+
+| In `.github/`                                                   | Purpose                                                                        |
+| :-------------------------------------------------------------- | :----------------------------------------------------------------------------- |
+| [`CODE_OF_CONDUCT.md`](.github/CODE_OF_CONDUCT.md)              | The code of conduct governing participation in this project                    |
+| [`CONTRIBUTING.md`](.github/CONTRIBUTING.md)                    | How to contribute: branching, commits, code style, testing, and pull requests  |
+| [`GOVERNANCE.md`](.github/GOVERNANCE.md)                        | How the project is led, who decides what, and the standards every change meets |
+| [`SECURITY.md`](.github/SECURITY.md)                            | Supported versions, and how to report a vulnerability privately                |
+| [`SUPPORT.md`](.github/SUPPORT.md)                              | Where to get help, and the right channel for each kind of question             |
+| [`CODEOWNERS`](.github/CODEOWNERS)                              | Ownership rules, every one commented out until you name an owner               |
+| [`FUNDING.yml`](.github/FUNDING.yml)                            | The sponsor button's target, rewritten to yours by initialisation              |
+| [`TEMPLATE_INIT`](.github/TEMPLATE_INIT)                        | The sentinel that lets initialisation run once, and is deleted when it does    |
+| [`dependabot.yml`](.github/dependabot.yml)                      | Dependabot's version updates, with only `github-actions` switched on           |
+| [`pull_request_template.md`](.github/pull_request_template.md)  | The sections every new pull request description opens with                     |
+| [`release.yml`](.github/release.yml)                            | How generated release notes group merged pull requests by label                |
+| [`ISSUE_TEMPLATE/`](.github/ISSUE_TEMPLATE/README.md)           | The issue forms and the chooser configuration, logged by their own README      |
+| [`DISCUSSION_TEMPLATE/`](.github/DISCUSSION_TEMPLATE/README.md) | The discussion category forms, logged by their own README                      |
 
 ---
 

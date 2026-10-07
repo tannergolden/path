@@ -1,6 +1,6 @@
 <!--
 title: '🧭 ARCHITECTURE DECISIONS'
-description: 'The architecture decision register, and the records it lists.'
+description: 'Architecture decision records, one file per decision, each logged with its status, date and evidence.'
 tags: [adr, architecture, decisions, index]
 category: docs
 -->
@@ -11,7 +11,7 @@ category: docs
 
 <a name="top"></a>
 
-**The home of the decision register, and the rule for adding a record to it.**
+**Every significant decision this project has made, and why, one record each.**
 
 _One decision per record. One row per decision._
 
@@ -23,43 +23,62 @@ _One decision per record. One row per decision._
 
 An architecture decision record (ADR) captures one significant decision: the
 context it was made in, the options weighed, and the consequences accepted.
-This folder holds the **register** that lists every one of them.
+Every record lives in this folder, one file per decision, and the log below is
+their index.
 
-The register is a living record, not a fill-in form. It arrives with no
-decisions in it and gains one row each time a record is written. Records go to
-`docs/adrs/`, the path the register and the ADR template both name, one file
-per decision.
+The folder is a living record, not a fill-in form, and it is **yours from the
+first commit**: nothing syncs it and nothing overwrites it. It arrives with no
+decisions in it and gains a row each time a record is written.
+
+---
+
+## 🎯 Why Decisions Are Recorded
+
+The _why_ matters as much as the _what_. An auditable record of how the system
+evolved lets every later contributor, human or AI, see the constraints and
+trade-offs that shaped it before changing it.
+
+- **Traceability**: every major architectural pivot is documented and numbered.
+- **Context**: each decision is recorded with the situation it was made in.
+- **Consequences**: the benefits and the technical debt are both written down.
 
 ---
 
 ## 📝 File Log
 
-<!-- AUTO-INDEX:BEGIN dir=. style=log -->
+<!-- AUTO-INDEX:BEGIN dir=. style=log fields=status,date,evidence -->
 
-| Entry                                                                  | Purpose                                                                      |
-| :--------------------------------------------------------------------- | :--------------------------------------------------------------------------- |
-| [`Architecture-Decision-Records.md`](Architecture-Decision-Records.md) | How architecture decisions are recorded, plus the index of accepted records. |
-| [`README.md`](README.md)                                               | This file.                                                                   |
+| Entry                    | Status | Date | Evidence | Purpose    |
+| :----------------------- | :----- | :--- | :------- | :--------- |
+| [`README.md`](README.md) | -      | -    | -        | This file. |
 
 <!-- AUTO-INDEX:END -->
 
-**A record added to this folder needs no row typed by hand.** It appears in this
-log and in the register's Decision Index on the next push, both drawn by 🗂️
-Machined Indexes, the register's from the record's own frontmatter.
+**This log is the decision index, and nobody types its rows.** 🗂️ Machined
+Indexes redraws it after every push from each record's own frontmatter.
+**Status** is Proposed, Accepted, Superseded, or Deprecated; **Date** is when
+the decision was made; **Evidence** links the research report(s) that informed
+it, or reads N/A.
 
 ---
 
 ## 🌿 Adding A Decision
 
-- [ ] Copy the [ADR template](../templates/ADR.md) to
-      `docs/adrs/ADR-NNNN-Short-Slug.md`, taking the next number.
+- [ ] Copy the [ADR template](../templates/ADR.md) into this folder as
+      `ADR-NNNN-Short-Slug.md`, taking the next number.
 - [ ] Set `status`, `date`, and `evidence` in its frontmatter, and write every
       section.
-- [ ] Add its row to the top of the register's Decision Index.
 - [ ] Propose it in a pull request. Once merged, it is **Accepted**.
 
 A later decision supersedes an earlier one rather than rewriting it: mark the
 old record **Superseded** and link the new one.
+
+---
+
+## 🔗 See also
+
+- [Documentation index](../README.md) - every document this project keeps
+- [Standards Index](https://github.com/tannergolden/standards/blob/Development/docs/README.md) - the canonical engineering standards
 
 ---
 

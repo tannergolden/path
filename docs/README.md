@@ -41,11 +41,11 @@ why they ship as seed content rather than as law.
 
 <!-- AUTO-INDEX:BEGIN dir=. style=log -->
 
-| Entry                               | Purpose                                                            |
-| :---------------------------------- | :----------------------------------------------------------------- |
-| [`adrs/`](adrs/README.md)           | The architecture decision register, and the records it lists.      |
-| [`templates/`](templates/README.md) | Index of the reusable document templates and when to use each one. |
-| [`README.md`](README.md)            | This file.                                                         |
+| Entry                               | Purpose                                                                                               |
+| :---------------------------------- | :---------------------------------------------------------------------------------------------------- |
+| [`adrs/`](adrs/README.md)           | Architecture decision records, one file per decision, each logged with its status, date and evidence. |
+| [`templates/`](templates/README.md) | Index of the reusable document templates and when to use each one.                                    |
+| [`README.md`](README.md)            | This file.                                                                                            |
 
 <!-- AUTO-INDEX:END -->
 

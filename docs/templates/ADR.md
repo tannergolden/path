@@ -23,14 +23,14 @@ _Formalized rationale. Transparent intent. Auditable evolution._
 ---
 
 > [!TIP]
-> **How to use**: copy this file to `docs/adrs/ADR-NNNN-Short-Slug.md` using the next sequential number (Capitalized-Kebab, keep this template itself pristine) and fill in every section. Set `status`, `date`, and `evidence` in the frontmatter above, and its row in the [ADR index](../adrs/Architecture-Decision-Records.md) is drawn from that frontmatter on the next push. Link the new record from the pull request that implements the decision. One decision per record; supersede rather than rewrite.
+> **How to use**: copy this file to `docs/adrs/ADR-NNNN-Short-Slug.md` using the next sequential number (Capitalized-Kebab, keep this template itself pristine) and fill in every section. Set `status`, `date`, and `evidence` in the frontmatter above, and its row in the [ADR index](../adrs/README.md) is drawn from that frontmatter on the next push. Link the new record from the pull request that implements the decision. One decision per record; supersede rather than rewrite.
 
 ---
 
 ## 📋 Meta Information
 
 > [!NOTE]
-> **Status**, **Date**, and **Evidence** live in the frontmatter above - they feed the generated [ADR index](../adrs/Architecture-Decision-Records.md), so they are recorded once. This table records who was involved.
+> **Status**, **Date**, and **Evidence** live in the frontmatter above - they feed the generated [ADR index](../adrs/README.md), so they are recorded once. This table records who was involved.
 
 | Attribute     | Specification                               |
 | :------------ | :------------------------------------------ |

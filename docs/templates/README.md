@@ -38,7 +38,7 @@ _Structured excellence. Rapid documentation. Unified standards._
 | [&#x1F4C9; Post-Mortem](Post-Mortem.md)                 | Blameless incident and outcome analysis.               | `docs/operations/post-mortems/YYYY-MM-DD-<slug>.md` |
 | [&#x1F4C4; ADR](ADR.md)                                 | One architecture decision, recorded durably.           | `docs/adrs/ADR-NNNN-Short-Slug.md` (next number)            |
 | [&#x1F4AC; Communication](Communication.md)             | Meeting notes, status heartbeats, stakeholder updates. | reuse in issues, discussions, and reviews           |
-| [&#x1F4DD; ADR index](../adrs/Architecture-Decision-Records.md) | The register every ADR is listed in.                   | already in place; each record's row is generated    |
+| [&#x1F9ED; ADR index](../adrs/README.md)                | The folder log every ADR is listed in.                 | already in place; each record's row is generated    |
 
 ## Fill-In Technical Standards
 

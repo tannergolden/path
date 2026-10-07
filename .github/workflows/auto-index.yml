@@ -1,7 +1,7 @@
 # Installed from tannergolden/standards. Edit freely: this file is YOURS.
 #
 # Keeps every machined index in this repository current: each folder's
-# README log, the decision register, and the indexes in README.md. The
+# README log, the decision index among them, and the indexes in README.md. The
 # generator, the action that ships it and the workflow that runs it all live
 # in the standards, so a fix to how an index is drawn arrives here without a
 # pull request.

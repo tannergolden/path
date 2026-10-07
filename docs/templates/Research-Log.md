@@ -139,7 +139,7 @@ Append a reverification entry in this shape:
 ### 🔗 See also
 
 > [!TIP]
-> Research reports live under `docs/technical/research/` - create it when this project starts keeping them. Durable decisions graduate to the [📝 ADR index](../adrs/Architecture-Decision-Records.md). Every canonical guide is indexed in the [📚 Standards Index](https://github.com/tannergolden/standards/blob/Development/docs/README.md).
+> Research reports live under `docs/technical/research/` - create it when this project starts keeping them. Durable decisions graduate to the [🧭 ADR index](../adrs/README.md). Every canonical guide is indexed in the [📚 Standards Index](https://github.com/tannergolden/standards/blob/Development/docs/README.md).
 
 ---
 

@@ -33,9 +33,11 @@ on:
   workflow_dispatch:
 
 concurrency:
-  # In-progress runs are never cancelled: a half-written sync branch is worse
-  # than a queued run, and the next one starts from whatever this one left.
-  group: ${{ github.workflow }}-${{ github.ref }}
+  # One queue per event, so a push - which skips at once here - can never take
+  # the place of a sync you asked for that is waiting its turn. In-progress
+  # runs are never cancelled: a half-written sync branch is worse than a
+  # queued run, and the next one starts from whatever this one left.
+  group: ${{ github.workflow }}-${{ github.ref }}-${{ github.event_name }}
   cancel-in-progress: false
 
 # ⚠️ THE `permissions:` BELOW IS A CEILING, NOT A GRANT. For a job that calls a

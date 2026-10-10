@@ -1,6 +1,6 @@
 <!--
 title: '🔄 TEMPLATE SYNC'
-description: 'How this repository keeps receiving its template''s fixes, what you control, and what waits on you.'
+description: 'How this repository takes its template''s later fixes when you run 🔄 Template Sync, what you control, and what waits on you.'
 tags: [template, sync, automation, workflows]
 category: docs
 -->
@@ -62,13 +62,13 @@ is called, never copied, so a fix to how syncing works reaches this repository o
 
 **A line naming a path keeps it current. `#/path` - a hash with no space - leaves it to you.**
 
-| You want                                      | Do this                                                        |
-| :-------------------------------------------- | :------------------------------------------------------------- |
-| To keep a file as your own from now on        | Put a `#` in front of its line                                 |
-| The template to keep it current again         | Take the `#` away                                              |
-| To stop a whole folder                        | Add a rule under **Your rules**, such as `!/docs/templates/**` |
-| A file the template left to you, kept current | Take the `#` away from its line                                |
-| To stop syncing altogether                    | Delete `.github/workflows/template-sync.yml`                   |
+| You want                                      | Do this                                                       |
+| :-------------------------------------------- | :------------------------------------------------------------ |
+| To keep a file as your own from now on        | Put a `#` in front of its line                                |
+| The template to keep it current again         | Take the `#` away                                             |
+| To stop a whole folder                        | Add a rule under **Your rules**, such as `!/.devcontainer/**` |
+| A file the template left to you, kept current | Take the `#` away from its line                               |
+| To stop syncing altogether                    | Delete `.github/workflows/template-sync.yml`                  |
 
 Changes to the list take effect on the next sync you run. A few things worth knowing:
 
@@ -96,6 +96,7 @@ Changes to the list take effect on the next sync you run. A few things worth kno
 | 📌 Kept as yours after the template removed it | You had changed it, so it stays - yours from now on                     |
 | 🙈 Switched off, because you deleted it        | It stays deleted, and its line in the list gains a `#`                  |
 | ♻️ Switched back on and restored               | You took the `#` away from a file you had deleted, so it is back        |
+| ✋ Held off, as you chose                      | The template reshaped its list; your choice is written back by name     |
 | ⚠️ Needs you                                   | A conflict - see below                                                  |
 | ⏸️ Waiting on a token                          | A workflow file - see below                                             |
 | ⛔ Skipped as unsafe                           | A path that would reach outside this repository, so it is never written |
@@ -109,8 +110,10 @@ holder is you, and links to the shared repositories the template relies on stay 
 
 **A conflict** means you and the template changed the same lines. Your file is left exactly as it
 was - no conflict markers, nothing half-merged - and the pull request shows the template's change.
-Apply what you want of it by hand, and the next sync stops asking. Or put a `#` in front of the file
-in the list to keep your version for good.
+Make the lines it changed match the template's, and the next sync stops asking; or put a `#` in
+front of the file in the list to keep your version for good. Make that change on your default
+branch, never on `chore/template-sync`: each sync rewrites that branch from your default branch, and
+what was committed to it goes with it.
 
 **A workflow file** under `.github/workflows/` cannot be written with the default token. It waits,
 named, until a `BOT_ACCESS_TOKEN` secret exists - see below.
@@ -137,7 +140,8 @@ closes it.
 `BOT_ACCESS_TOKEN` is the same secret every automation pull request here uses: a token with the
 `repo` and `workflow` scopes, or a fine-grained one with **Contents**, **Pull requests**, **Issues**
 and **Workflows** write on this repository - and **Contents** read on the template, when the
-template is private.
+template is private. A token with the `repo` scope but not `workflow` counts as none for workflow
+files: they wait, and everything else arrives.
 
 ---
 
@@ -153,9 +157,13 @@ never followed on its own: change `ref:` in `.github/workflows/template-sync.yml
 
 - **Run without you.** There is no schedule: it starts only when you run it.
 - **Write a conflict marker**, or touch a file it could not merge cleanly.
-- **Re-create a file you deleted**, under its old name or a new one.
+- **Re-create a file you deleted**, under its old name or a new one - unless you take the `#` off
+  its line again.
+- **Go backwards.** A repository generated between a change to the template and the release after it
+  already holds that change, so it is left alone until the template releases past it.
 - **Touch a file the template does not ship**, or one your list leaves to you.
-- **Push to your branch.** It proposes; you merge.
+- **Push to your branch.** It proposes; you merge - unless you set `automerge: true` in the stub,
+  which merges a sync with nothing waiting once its checks pass.
 - **Re-run initialisation**, write outside this repository, or write through a symlink.
 
 ---
@@ -171,14 +179,17 @@ the template reaches a generated repository only once a release moves `v1`.
 
 ## 🩺 When Something Looks Wrong
 
-| You see                        | What to do                                                        |
-| :----------------------------- | :---------------------------------------------------------------- |
-| "has not published `v1` yet"   | Nothing: the template has no release yet                          |
-| "has not been initialised yet" | Let initialisation finish, or dispatch **🎯 Standards Lifecycle** |
-| Workflow files keep waiting    | Add a `BOT_ACCESS_TOKEN` with the workflow scope                  |
-| "Could not fetch" the template | The template is private: the token must be able to read it        |
-| The same conflict on every run | It is waiting on you: apply the change, or put a `#` before it    |
-| The lock is refused            | It was edited by hand: restore it from history                    |
+| You see                           | What to do                                                                                                                                            |
+| :-------------------------------- | :---------------------------------------------------------------------------------------------------------------------------------------------------- |
+| "has not published `v1` yet"      | Nothing: the template has no release yet                                                                                                              |
+| "has not been initialised yet"    | Let initialisation finish, or dispatch **🎯 Standards Lifecycle**                                                                                     |
+| Workflow files keep waiting       | Add a `BOT_ACCESS_TOKEN` with the workflow scope                                                                                                      |
+| "Failed to push branch"           | A fine-grained token needs **Workflows** write; or branch protection blocks `chore/template-sync`                                                     |
+| "Could not open the pull request" | Turn on **Allow GitHub Actions to create and approve pull requests**, or add a `BOT_ACCESS_TOKEN`                                                     |
+| "Could not fetch" the template    | The token cannot read it: a private template needs read access, and an expired `BOT_ACCESS_TOKEN` fails even for a public one. Renew it, or delete it |
+| "already holds a newer version"   | Nothing: this repository is ahead of the template's last release                                                                                      |
+| The same conflict on every run    | It is waiting on you: make its lines match the template's, or put a `#` before it                                                                     |
+| The lock is refused               | It was edited by hand: restore it from history                                                                                                        |
 
 The full standard - how each file is decided, how it is tested, what template authors must do - is
 [🔄 Template Sync](https://github.com/tannergolden/standards/blob/Development/docs/distribution/automation/Template-Sync.md)

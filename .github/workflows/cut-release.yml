@@ -4,12 +4,14 @@
 # moving `vX` that every repository generated from it follows through
 # 🔄 Template Sync. A merge to the default branch reaches no generated
 # repository until a release moves the major, so this is the moment a change
-# to the template becomes a change to everything built from it.
+# to the template becomes available to everything built from it - and each
+# repository takes it when its owner next runs 🔄 Template Sync.
 #
 # ⚠️ IT RUNS ONLY IN THE TEMPLATE. A repository generated from the template is
 # not consumed by tag, so the job is inert there - and `.github/template-sync`
-# leaves this file out of every sync. Delete it, or keep it if your own
-# repository comes to be consumed by tag.
+# leaves this file out of every sync. Delete it - or, if your own repository
+# comes to be consumed by tag, keep it, remove the `if:` guard, and set
+# `required-files` and `check-command` for what your repository ships.
 #
 # A change that renames a file a generated repository depends on, or reshapes
 # a stub in a way a merge cannot carry, is BREAKING: release it as a new

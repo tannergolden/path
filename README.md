@@ -59,7 +59,8 @@ whose owner never runs it never changes. Nothing is pushed to your branch,
 nothing you deleted comes back, and editing anything after generating has no
 upstream consequence. [`.github/template-sync`](.github/template-sync) names
 every file it may touch: put a `#` in front of a line to keep that file yours.
-The structure folders are never on that list.
+The structure folders are on it switched off, so a sync never touches them
+unless you take the `#` away.
 [How it works](.github/template-sync.md).
 
 ---
@@ -101,9 +102,10 @@ which is what **Staying current takes no effort** describes further down.
 Forking does not make you more current; that part is already free.
 
 What a fork does sync is the **scaffold**: the fifteen stub workflows, the
-directory layout, the seeded documents. A generated repository can take those
-fixes too, whenever you run 🔄 Template Sync, so what a fork adds is the shared
-history - and with it, every change at once or none. In a fork, delete
+directory layout, the seeded documents. A generated repository can take the
+stub and seed fixes too - every stub but `cut-release.yml`, while the layout
+stays yours - whenever you run 🔄 Template Sync, so what a fork adds is the
+shared history - and with it, every change at once or none. In a fork, delete
 `.github/workflows/template-sync.yml`: `Sync fork` already carries the same
 changes, and two routes to them would only collide.
 
@@ -120,8 +122,8 @@ changes, and two routes to them would only collide.
 > initialisation entirely, and the file itself lists what you then set by hand.
 
 > [!TIP]
-> **There is a third route, and it is usually the better one.** Generate with
-> "Use this template", then add this repository as a second remote:
+> **There is a third route.** Generate with "Use this template", then add this
+> repository as a second remote:
 >
 > ```bash
 > git remote add template https://github.com/tannergolden/path
@@ -130,13 +132,18 @@ changes, and two routes to them would only collide.
 >
 > Cherry-pick whatever you want from it, whenever you want it, with none of the
 > fork's costs - no disabled Actions, no force-push collision, and no pull
-> request that opens against somebody else's repository by mistake.
+> request that opens against somebody else's repository by mistake. For the
+> template's own fixes, prefer 🔄 Template Sync: a cherry-pick arrives in the
+> template author's identity, unmerged with your edits.
 
 > [!NOTE]
-> **Neither route carries the template flag over.** Every workflow stub here is
-> guarded by `!github.event.repository.is_template`, which is what keeps them
-> silent in this repository - and a fork inherits that flag no more than a
-> generated repository does. They come alive in your copy either way.
+> **Neither route carries the template flag over.** Ten of the fifteen stubs
+> are guarded by `!github.event.repository.is_template`, and 🏷️ Cut Release by
+> its inverse - which is what keeps those ten silent here and Cut Release silent
+> everywhere else. `prune-runs.yml`, `verify-stubs.yml` and `auto-index.yml` run
+> on both sides, and 🔄 Template Sync reads the same flag to decide whether to
+> check its list or to sync. A fork inherits that flag no more than a generated
+> repository does, so your copy lands on the right side of every guard.
 
 ---
 
@@ -348,25 +355,25 @@ tables after every push:
 
 <!-- AUTO-INDEX:BEGIN dir=./.github style=log -->
 
-| Entry                                                           | Purpose                                                                                                                    |
-| :-------------------------------------------------------------- | :------------------------------------------------------------------------------------------------------------------------- |
-| [`DISCUSSION_TEMPLATE/`](.github/DISCUSSION_TEMPLATE/README.md) | The discussion category forms, each bound by its file name to the category it shapes.                                      |
-| [`ISSUE_TEMPLATE/`](.github/ISSUE_TEMPLATE/README.md)           | The issue forms a reporter chooses from, and the chooser configuration that offers them.                                   |
-| [`scripts/`](.github/scripts/README.md)                         | The checks this repository runs on its own configuration, and the tests that guard them.                                   |
-| [`workflows/`](.github/workflows/README.md)                     | Every workflow in this repository: the name it shows in the Actions tab, what triggers it, and what it does.               |
-| [`CODE_OF_CONDUCT.md`](.github/CODE_OF_CONDUCT.md)              | The code of conduct governing participation in this project.                                                               |
-| [`CODEOWNERS`](.github/CODEOWNERS)                              | CODEOWNERS - Folder-based ownership rules                                                                                  |
-| [`CONTRIBUTING.md`](.github/CONTRIBUTING.md)                    | How to contribute, covering branching, commits, code style, testing, and the pull-request process.                         |
-| [`dependabot.yml`](.github/dependabot.yml)                      | Dependabot - automated dependency updates                                                                                  |
-| [`FUNDING.yml`](.github/FUNDING.yml)                            | &#x1F496; Funding Options                                                                                                  |
-| [`GOVERNANCE.md`](.github/GOVERNANCE.md)                        | How this project is led, who decides what, how access continues, and the review and security standards every change meets. |
-| [`pull_request_template.md`](.github/pull_request_template.md)  | This template becomes the body of your pull request.                                                                       |
-| [`release.yml`](.github/release.yml)                            | GitHub auto-generated release notes configuration.                                                                         |
-| [`SECURITY.md`](.github/SECURITY.md)                            | Supported versions and how to report vulnerabilities privately.                                                            |
-| [`SUPPORT.md`](.github/SUPPORT.md)                              | Where to get help with this repository - the right channel for every kind of question.                                     |
-| [`template-sync`](.github/template-sync)                        | Every path tannergolden/path ships, and whether &#x1F504; Template Sync keeps it current in this repository.               |
-| [`template-sync.md`](.github/template-sync.md)                  | How this repository keeps receiving its template's fixes, what you control, and what waits on you.                         |
-| [`TEMPLATE_INIT`](.github/TEMPLATE_INIT)                        | This repository has not been initialised yet.                                                                              |
+| Entry                                                           | Purpose                                                                                                                             |
+| :-------------------------------------------------------------- | :---------------------------------------------------------------------------------------------------------------------------------- |
+| [`DISCUSSION_TEMPLATE/`](.github/DISCUSSION_TEMPLATE/README.md) | The discussion category forms, each bound by its file name to the category it shapes.                                               |
+| [`ISSUE_TEMPLATE/`](.github/ISSUE_TEMPLATE/README.md)           | The issue forms a reporter chooses from, and the chooser configuration that offers them.                                            |
+| [`scripts/`](.github/scripts/README.md)                         | The checks this repository runs on its own configuration, and the tests that guard them.                                            |
+| [`workflows/`](.github/workflows/README.md)                     | Every workflow in this repository: the name it shows in the Actions tab, what triggers it, and what it does.                        |
+| [`CODE_OF_CONDUCT.md`](.github/CODE_OF_CONDUCT.md)              | The code of conduct governing participation in this project.                                                                        |
+| [`CODEOWNERS`](.github/CODEOWNERS)                              | CODEOWNERS - Folder-based ownership rules                                                                                           |
+| [`CONTRIBUTING.md`](.github/CONTRIBUTING.md)                    | How to contribute, covering branching, commits, code style, testing, and the pull-request process.                                  |
+| [`dependabot.yml`](.github/dependabot.yml)                      | Dependabot - automated dependency updates                                                                                           |
+| [`FUNDING.yml`](.github/FUNDING.yml)                            | &#x1F496; Funding Options                                                                                                           |
+| [`GOVERNANCE.md`](.github/GOVERNANCE.md)                        | How this project is led, who decides what, how access continues, and the review and security standards every change meets.          |
+| [`pull_request_template.md`](.github/pull_request_template.md)  | This template becomes the body of your pull request.                                                                                |
+| [`release.yml`](.github/release.yml)                            | GitHub auto-generated release notes configuration.                                                                                  |
+| [`SECURITY.md`](.github/SECURITY.md)                            | Supported versions and how to report vulnerabilities privately.                                                                     |
+| [`SUPPORT.md`](.github/SUPPORT.md)                              | Where to get help with this repository - the right channel for every kind of question.                                              |
+| [`template-sync`](.github/template-sync)                        | Every path tannergolden/path ships, and whether &#x1F504; Template Sync, when you run it, keeps it current in this repository.      |
+| [`template-sync.md`](.github/template-sync.md)                  | How this repository takes its template's later fixes when you run &#x1F504; Template Sync, what you control, and what waits on you. |
+| [`TEMPLATE_INIT`](.github/TEMPLATE_INIT)                        | This repository has not been initialised yet.                                                                                       |
 
 <!-- AUTO-INDEX:END -->
 
@@ -491,7 +498,7 @@ any other. If you never run it, nothing in this repository ever changes.
 | Merges rather than overwrites    | Each file is merged with whatever you changed in it, by the same three-way merge git uses                      |
 | Writes in your identity          | The template is rewritten exactly as initialisation rewrote it, so footers and contact links stay yours        |
 | Leaves a conflict untouched      | A file you and the template changed in the same place stays as you have it; the pull request shows the change |
-| Respects a deletion              | A file you delete is switched off for good, and never comes back under its old name or a new one               |
+| Respects a deletion              | A file you delete is switched off, under its old name or a new one, until you take the `#` off its line again  |
 | Leaves your structure alone      | `src/`, `tests/`, `packages/`, `benchmarks/`, `assets/`, this README and the licence start switched off        |
 
 Three files describe it, and only one of them is yours to edit:

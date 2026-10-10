@@ -1,7 +1,8 @@
 # --- 🔄 Template Sync ---
 #
-# Every path tannergolden/path ships, and whether 🔄 Template Sync keeps it current
-# in this repository. How it all works: .github/template-sync.md, beside this.
+# Every path tannergolden/path ships, and whether 🔄 Template Sync, when you run
+# it, keeps it current in this repository. How it all works:
+# .github/template-sync.md, beside this.
 #
 # A line naming a path keeps it current. A `#` with no space before a path -
 # `#/README.md` - leaves that path to you. A line starting `# ` is a note.

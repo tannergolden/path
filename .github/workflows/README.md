@@ -77,7 +77,8 @@ its `on:` events and its opening comment.
   `!github.event.repository.is_template` does nothing in the template and comes
   alive in every repository generated from it. `prune-runs.yml`,
   `verify-stubs.yml` and `auto-index.yml` carry no such guard and run in the
-  template as well.
+  template as well; `template-sync.yml` checks its list here, and
+  `cut-release.yml` runs only here.
 - **Three job ids are check names.** `ci` and `secrets` in `checks.yml`, and
   `pr` in `governance.yml`, report as `<job id> / <job name>`, which is what
   branch protection requires. Rename one and every pull request waits on a

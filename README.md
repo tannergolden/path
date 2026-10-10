@@ -225,9 +225,11 @@ The `init` job in `lifecycle.yml` fixes that on its own, once. It rewrites the i
 Commit describing the new repository, and then deletes `.github/TEMPLATE_INIT`,
 which is what stops it ever running again.
 
-Two things it deliberately leaves alone: references to
-`tannergolden/standards`, which are the shared workflows every repository calls
-and are correct for everyone, and your email address, which GitHub keeps
+Two things it deliberately leaves alone. The first is any reference to a
+repository on the template's account - `tannergolden/standards`, whose shared
+workflows every repository calls, the agent instruction publisher, and this
+template itself - because each belongs to that account rather than yours, so it
+is correct for everyone. The second is your email address, which GitHub keeps
 private. Commits use the `noreply` form, which always routes to you and
 publishes nothing.
 

@@ -26,10 +26,11 @@ the documentation footer in README.md yourself - plus the placeholder in
 .github/ISSUE_TEMPLATE/config.yml, which the search below does not match. To
 find every one of the rest:
 
-    git grep -n tannergolden | grep -v tannergolden/standards \
-                             | grep -v tannergolden/intelligence \
-                             | grep -v tannergolden/markdown
+    git grep -nE 'tannergolden([^/]|$)'
 
-Those three are links to the shared repositories every generated repository
-calls, and are correct for everyone - which is why they are filtered out
-rather than replaced.
+That skips every `tannergolden/<repository>` address - the shared standards
+every generated repository calls, the agent instruction publisher, the
+Markdown Kit, and this template itself - because each belongs to that
+account rather than yours, so it is correct for everyone. Only the handle on
+its own is an identity to replace, which is the same line initialisation
+draws.

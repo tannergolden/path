@@ -1,6 +1,6 @@
 <!--
 title: '🏷️ STATIC BADGES'
-description: 'Fixed-message badges the badge kit draws: status, role, context, licence, and navigation.'
+description: 'Badges that say what their author wrote: identity, navigation and posture, never under the gold label.'
 tags: [badges, identity, assets, automation]
 category: docs
 -->
@@ -21,17 +21,22 @@ _Identity, drawn once._
 
 ## 💡 What This Folder Is For
 
-The badge kit writes every badge whose label is **not** gold here: the identity
-row a header carries (status, role, context, licence) and any navigation badge
-that links somewhere. Their message never changes on its own, so their colours
-are free, apart from the meanings the standards fix: a role is pink, a context
-purple, a licence yellow.
+The kit writes every badge without a `measure:` here: the identity row a header
+carries (status, role, context, licence), any navigation badge that links
+somewhere, and posture badges, a steady state written by hand. Their message
+never changes on its own, so their colours are free, apart from the meanings the
+standards fix (a role is pink, a context purple, a licence yellow) and one rule:
+never the gold label, which only a live badge wears.
+
+A badge drawn as a plate in a print adds `NAME-dark.svg` for the night theme,
+and `localized/` holds the shields.io badges the kit draws from the repository's
+Markdown.
 
 ---
 
 ## 📝 File Log
 
-<!-- AUTO-INDEX:BEGIN dir=. style=log exclude=*.svg -->
+<!-- AUTO-INDEX:BEGIN dir=. style=log exclude=*.svg,localized -->
 
 | Entry                    | Purpose    |
 | :----------------------- | :--------- |
@@ -39,18 +44,17 @@ purple, a licence yellow.
 
 <!-- AUTO-INDEX:END -->
 
-**The badges themselves are logged by their data file, not here.** Each SVG is
-drawn from one entry in `.github/badges.yml` without a gold label and named
-after it, and the kit deletes any SVG no entry names, so the data file is always
-the exact list. 🗂️ Machined Indexes redraws this log after every push and lists
-everything else.
+**The badges themselves are listed by the settings, not here.** Each SVG is
+drawn from one entry under `badges:` and named after it, and the kit deletes any
+SVG no entry names, so the settings are always the exact list. 🗂️ Machined
+Indexes lists everything else.
 
 ---
 
 ## 🔗 See also
 
 - [Badges](../README.md) - both badge folders, and how to reference a badge
-- [Dynamic badges](../dynamic/README.md) - the gold labels, and the colours they may use
+- [Dynamic badges](../dynamic/README.md) - the live badges, and the colours they may use
 
 ---
 
@@ -62,6 +66,6 @@ everything else.
 
 <br />
 
-Built with ❤️ by the Engineering Team. Distributed under the MIT License.
+Built with ❤️ by the Engineering Team. Distributed under the terms in [LICENSE](../../../LICENSE).
 
 </div>

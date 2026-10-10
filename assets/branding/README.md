@@ -1,6 +1,6 @@
 <!--
 title: '✒️ BRANDING'
-description: 'The logos, icons, colour palettes, and typography specimens that make up the visual identity of this project.'
+description: 'The marks, colours and type that identify this project: logo, mark, wordmark, app icon, favicon, palette and type specimen.'
 tags: [branding, assets, identity, design]
 category: docs
 -->
@@ -21,14 +21,22 @@ _Keep the source. Export the sizes._
 
 ## 💡 What This Folder Is For
 
-Logos, icons, colour palettes, and typography specimens: the identity this
-project presents everywhere it appears. Keep the **source** artwork here - the
-SVG, or the layered original - and export each size you need from it, so a
-change to the mark is made once and every export can be regenerated.
+The project's identity: the logo (`logo.svg`, and `logo-dark.svg` for the night
+theme), the mark alone (`mark.svg`), the wordmark (`wordmark.svg`), the app icon
+and the sizes exported from it (`icon.svg`, `icon-512.png`), the favicon
+(`favicon.svg`, `favicon.ico`), the palette (`palette.svg`, with its tokens in
+`palette.json`), the type specimen (`typography.svg`) and a brand guide when
+there is one (`brand-guide.pdf`).
 
-Empty but for this log until the first mark arrives. Build output, files too
-large for git, and anything you lack the rights to redistribute do not belong
-here, as the [assets guide](../README.md) explains.
+Keep the **source** artwork here, the SVG or the layered original, and export
+every size from it, so a change to the mark is made once and every export can be
+drawn again. The typefaces the marks are set in live in
+[`../fonts/`](../fonts/README.md).
+
+> [!IMPORTANT]
+> **A logo is a trademark as well as artwork.** The licence that covers this
+> repository does not grant anyone the right to use the project's name or marks.
+> Say here what others may do with them, if anything.
 
 ---
 
@@ -56,6 +64,6 @@ keeps it.
 
 <br />
 
-Built with ❤️ by the Engineering Team. Distributed under the MIT License.
+Built with ❤️ by the Engineering Team. Distributed under the terms in [LICENSE](../../LICENSE).
 
 </div>

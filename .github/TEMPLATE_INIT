@@ -22,13 +22,14 @@ twice is harmless.
 
 Deleting this file by hand skips initialisation entirely. You would then set
 the licence holder in LICENSE, the funding target in .github/FUNDING.yml, and
-the documentation footers in README.md and assets/README.md yourself - plus
-the placeholder in .github/ISSUE_TEMPLATE/config.yml, which the search below
-does not match. To find every one of the rest:
+the documentation footer in README.md yourself - plus the placeholder in
+.github/ISSUE_TEMPLATE/config.yml, which the search below does not match. To
+find every one of the rest:
 
     git grep -n tannergolden | grep -v tannergolden/standards \
-                             | grep -v tannergolden/intelligence
+                             | grep -v tannergolden/intelligence \
+                             | grep -v tannergolden/markdown
 
-Those two are links to the shared repositories every generated repository
+Those three are links to the shared repositories every generated repository
 calls, and are correct for everyone - which is why they are filtered out
 rather than replaced.

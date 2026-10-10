@@ -1,6 +1,6 @@
 <!--
 title: '🔄 DYNAMIC BADGES'
-description: 'Gold-label health badges the badge kit draws, whose colour reports a live status.'
+description: 'Live badges: values the Markdown Kit measures or a workflow sets, the only ones under the gold label.'
 tags: [badges, health, assets, automation]
 category: docs
 -->
@@ -21,14 +21,15 @@ _Gold on the label. Traffic lights on the message._
 
 ## 💡 What This Folder Is For
 
-The badge kit writes every badge with a **gold** label (`C0A062`) here. A gold
-label marks live data - a build status, the age of the last commit, a score -
-so its message colour is not decoration. It is restricted to the traffic-light
-triad: **green** healthy, **yellow** degraded, **red** failing, and **slate**
-for nothing measured yet. The kit refuses any other colour on a gold label.
+The kit writes every badge with a `measure:` here: what it measures itself on
+every run, like a workflow's last run, the last commit or the latest release,
+and what another workflow measures and writes with `markdown-kit set`, like a
+coverage figure or a test count.
 
-Each time the kit runs it redraws these, and it commits only when something it
-shows has changed.
+These are the only badges that may wear the **gold** label (`C0A062`), and under
+it the message colour is not decoration. It is a state: **green** healthy,
+**yellow** degraded, **red** failing, and **slate** for nothing measured yet.
+Each run redraws them, and commits only when something they show has changed.
 
 ---
 
@@ -42,18 +43,16 @@ shows has changed.
 
 <!-- AUTO-INDEX:END -->
 
-**The badges themselves are logged by their data file, not here.** Each SVG is
-drawn from one gold-label entry in `.github/badges.yml` and named after it, and
-the kit deletes any SVG no entry names, so the data file is always the exact
-list. 🗂️ Machined Indexes redraws this log after every push and lists everything
-else.
+**The badges themselves are listed by the settings, not here.** Each SVG is
+drawn from one entry with a `measure:` and named after it, and the kit deletes
+any SVG no entry names. 🗂️ Machined Indexes lists everything else.
 
 ---
 
 ## 🔗 See also
 
 - [Badges](../README.md) - both badge folders, and how to reference a badge
-- [Static badges](../static/README.md) - the label colours that are not gold
+- [Static badges](../static/README.md) - the badges that say what their author wrote
 
 ---
 
@@ -65,6 +64,6 @@ else.
 
 <br />
 
-Built with ❤️ by the Engineering Team. Distributed under the MIT License.
+Built with ❤️ by the Engineering Team. Distributed under the terms in [LICENSE](../../../LICENSE).
 
 </div>

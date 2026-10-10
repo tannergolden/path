@@ -71,8 +71,11 @@ a choice list like `[REST | GraphQL | gRPC]`, or a prompt like `[why]`. One
 rule, because the seeds use all three forms. A file still carrying brackets
 has not been adopted yet.
 
-Nothing syncs these and nothing overwrites them. From the moment this repository
-was generated they are ordinary files in your tree.
+Whenever you run 🔄 Template Sync, it brings the seeds themselves up to date: each
+improvement arrives as a pull request, merged with anything you changed in them.
+It never touches a document you copied out - from the moment you make it, that
+copy is an ordinary file in your tree. Put a `#` in front of a seed's line in `.github/template-sync`
+to keep that seed exactly as it is.
 
 ---
 

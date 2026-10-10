@@ -1,0 +1,131 @@
+# --- 🔄 Template Sync ---
+#
+# Every path tannergolden/path ships, and whether 🔄 Template Sync keeps it current
+# in this repository. How it all works: .github/template-sync.md, beside this.
+#
+# A line naming a path keeps it current. A `#` with no space before a path -
+# `#/README.md` - leaves that path to you. A line starting `# ` is a note.
+#
+# To keep a file as yours, put a `#` in front of its line; to have the
+# template keep it current again, take the `#` away. Rules of your own - a
+# pattern like `!/docs/**` to stop a whole folder - go under "Your rules" at
+# the end, and win over everything above them. Each sync redraws this file
+# from the template's latest list and keeps every choice you made in it.
+
+# --- Kept current -------------------------------------------------------------
+/.devcontainer/README.md
+/.devcontainer/devcontainer.json
+
+/.editorconfig
+/.env.example
+/.gitattributes
+
+/.github/CODE_OF_CONDUCT.md
+/.github/CONTRIBUTING.md
+/.github/DISCUSSION_TEMPLATE/README.md
+/.github/DISCUSSION_TEMPLATE/accessibility.yaml
+/.github/DISCUSSION_TEMPLATE/announcements.yaml
+/.github/DISCUSSION_TEMPLATE/community.yaml
+/.github/DISCUSSION_TEMPLATE/ideas.yaml
+/.github/DISCUSSION_TEMPLATE/internationalization-i18n.yaml
+/.github/DISCUSSION_TEMPLATE/polls.yaml
+/.github/DISCUSSION_TEMPLATE/q-a.yaml
+/.github/DISCUSSION_TEMPLATE/roadmap.yaml
+/.github/DISCUSSION_TEMPLATE/showcase.yaml
+/.github/DISCUSSION_TEMPLATE/tooling-setup.yaml
+/.github/GOVERNANCE.md
+/.github/ISSUE_TEMPLATE/Accessibility-Report.yaml
+/.github/ISSUE_TEMPLATE/Bug-Report.yaml
+/.github/ISSUE_TEMPLATE/Documentation-Report.yaml
+/.github/ISSUE_TEMPLATE/Feature-Request.yaml
+/.github/ISSUE_TEMPLATE/Feedback-Report.yaml
+/.github/ISSUE_TEMPLATE/Performance-Report.yaml
+/.github/ISSUE_TEMPLATE/README.md
+/.github/ISSUE_TEMPLATE/Vulnerability-Report.yaml
+/.github/ISSUE_TEMPLATE/config.yml
+/.github/SECURITY.md
+/.github/SUPPORT.md
+/.github/dependabot.yml
+/.github/pull_request_template.md
+/.github/release.yml
+/.github/scripts/README.md
+/.github/scripts/test_gitignore.py
+/.github/scripts/test_validate_repository.py
+/.github/scripts/test_verify_stub_ceilings.py
+/.github/scripts/validate-repository.py
+/.github/scripts/verify-stub-ceilings.py
+/.github/template-sync.md
+/.github/workflows/README.md
+/.github/workflows/apply-standards.yml
+/.github/workflows/auto-format.yml
+/.github/workflows/auto-index.yml
+/.github/workflows/checks.yml
+/.github/workflows/ci-failure-alert.yml
+/.github/workflows/dependabot-automerge.yml
+/.github/workflows/governance.yml
+/.github/workflows/lifecycle.yml
+/.github/workflows/maintenance.yml
+/.github/workflows/preview-deploy.yml
+/.github/workflows/prune-runs.yml
+/.github/workflows/release.yml
+/.github/workflows/template-sync.yml
+/.github/workflows/verify-stubs.yml
+
+/.gitignore
+/.markdownlint.json
+
+/.vscode/README.md
+/.vscode/extensions.json
+/.vscode/settings.json
+
+/docs/README.md
+/docs/adrs/README.md
+/docs/templates/ADR.md
+/docs/templates/Communication.md
+/docs/templates/Implementation-Plan.md
+/docs/templates/Post-Mortem.md
+/docs/templates/README.md
+/docs/templates/Research-Log.md
+/docs/templates/Technical-Design.md
+/docs/templates/User-Story.md
+/docs/templates/technical/Packages-&-Workspaces.md
+/docs/templates/technical/README.md
+/docs/templates/technical/Source-Code.md
+/docs/templates/technical/Technology-Stack-&-Tooling.md
+/docs/templates/technical/backend/API-Design-Standards.md
+/docs/templates/technical/backend/Authentication-&-Security.md
+/docs/templates/technical/backend/README.md
+/docs/templates/technical/backend/Schema-&-Validation.md
+/docs/templates/technical/benchmarks/Performance-Benchmarks.md
+/docs/templates/technical/benchmarks/README.md
+/docs/templates/technical/database/Data-Models-&-Entities.md
+/docs/templates/technical/database/Migration-Policies.md
+/docs/templates/technical/database/README.md
+/docs/templates/technical/infrastructure/CI-CD-Pipelines.md
+/docs/templates/technical/infrastructure/Deployment-Protocols.md
+/docs/templates/technical/infrastructure/Environment-Configuration.md
+/docs/templates/technical/infrastructure/README.md
+/docs/templates/technical/interface/Formatting-&-Standards.md
+/docs/templates/technical/interface/README.md
+/docs/templates/technical/interface/Styling-&-Theming.md
+/docs/templates/technical/interface/UI-Setup-&-Environment.md
+/docs/templates/technical/testing/E2E-Testing.md
+/docs/templates/technical/testing/README.md
+/docs/templates/technical/testing/Unit-Test-Standards.md
+
+# --- Yours: seeded once, never synced -----------------------------------------
+#/README.md
+#/LICENSE
+#/.github/CODEOWNERS
+#/.github/FUNDING.yml
+#/assets/**
+#/benchmarks/**
+#/packages/**
+#/src/**
+#/tests/**
+
+# --- Only ever in the template ----------------------------------------------
+#/.github/TEMPLATE_INIT
+#/.github/workflows/cut-release.yml
+
+# --- Your rules ---------------------------------------------------------------

@@ -59,6 +59,10 @@ composer.lock      linguist-generated=true -diff
 Gemfile.lock       linguist-generated=true -diff
 go.sum             linguist-generated=true -diff
 
+# Template sync's lock is machine-written: collapsed in pull requests, but
+# still diffable, so a reviewer can see which baselines moved.
+.github/template-sync.lock  linguist-generated=true
+
 # Vendored dependencies are somebody else's code.
 vendor/**       linguist-vendored=true
 third_party/**  linguist-vendored=true

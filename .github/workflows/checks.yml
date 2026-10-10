@@ -58,31 +58,36 @@ jobs:
     permissions:
       contents: read # read the repository
     uses: tannergolden/standards/.github/workflows/ci.yml@v1
+    # Tell CI how your project builds. The job FAILS when every stage
+    # resolves to nothing, rather than reporting a green check that checked
+    # nothing - so one real command is always enough.
+    #
+    # Until you have a linter, `lint-command` validates the repository's OWN
+    # configuration: every YAML and JSON file parses, every workflow `uses:`
+    # is pinned to a tag or a commit, no stray whitespace or CRLF. That is a
+    # real check on files that exist from day one, which is why this gate is
+    # honestly green before you have written any code.
+    #
+    # `test-command` runs the tests of the scripts under .github/scripts/,
+    # the only gates a fresh repository has, so they are the code here that
+    # must not regress silently. Discovery rather than a list: a `test_*.py`
+    # added next to a new script is picked up without anyone naming it.
+    #
+    # Replace them when your project has its own, and add the third as it
+    # becomes true:
+    #
+    #   lint-command: 'golangci-lint run'
+    #   test-command: 'go test ./...'
+    #   build-command: 'go build ./...'
+    #
+    # ⚠️ YOUR SETTINGS GO BELOW, EACH ON A LINE OF ITS OWN, AND NO NOTES
+    # BETWEEN THEM. 🔄 Template Sync merges the template's changes to this
+    # file with yours, line by line. Notes up here and settings down there,
+    # a blank line apart, means a change to one never lands next to a change
+    # to the other - which is what turns a merge into a conflict.
     with:
-      # Tell CI how your project builds. The job FAILS when every stage
-      # resolves to nothing, rather than reporting a green check that checked
-      # nothing - so one real command is always enough.
-      #
-      # Until you have a linter, this one validates the repository's OWN
-      # configuration: every YAML and JSON file parses, every workflow `uses:`
-      # is pinned to a tag or a commit, no stray whitespace or CRLF. That is a
-      # real check on files that exist from day one, which is why this gate is
-      # honestly green before you have written any code.
-      #
-      # Replace them when your project has its own, and add the third as it
-      # becomes true:
-      #
-      #   lint-command: 'golangci-lint run'
-      #   test-command: 'go test ./...'
-      #   build-command: 'go build ./...'
       lint-command: 'python3 .github/scripts/validate-repository.py'
-      # The scripts under .github/scripts/ are the only gates a fresh
-      # repository has, so they are the code here that must not regress
-      # silently. Their tests ship beside them and run on every push - a suite
-      # nothing executes is not a regression net, it only looks like one.
-      #
-      # Discovery rather than a list: a `test_*.py` added next to a new script
-      # is picked up without anyone remembering to name it here.
+
       test-command: "python3 -m unittest discover -s .github/scripts -p 'test_*.py'"
 
   # RULESET-LOAD-BEARING JOB ID: reports as 'secrets / 🔍 Scan for Secrets'.

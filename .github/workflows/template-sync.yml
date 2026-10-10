@@ -1,0 +1,74 @@
+# Installed from tannergolden/standards. Edit freely: this file is YOURS.
+#
+# Brings this repository up to date with the template it was generated from
+# WHEN YOU ASK, and never otherwise: run 🔄 Template Sync from the Actions tab.
+# Nothing here runs on a schedule, so a repository whose owner never runs it
+# never changes.
+#
+# Each run proposes the template's latest release as one pull request on
+# `chore/template-sync` - the stubs, the repository scripts, the seeded
+# documents, each file merged with whatever you changed, in your identity -
+# and never pushes to your branch. One issue stays open while a file waits
+# on you, and closes itself on the run that finds none does.
+#
+# `.github/template-sync` names every path the template ships: put a `#` in
+# front of one to keep it as yours. `.github/template-sync.md` explains the
+# rest. Delete this file to remove the option altogether.
+#
+# ⚠️ IN THE TEMPLATE ITSELF THIS CHECKS INSTEAD. Every file the template ships
+# must be named in its list, so nothing reaches a generated repository
+# unannounced. That job runs there on every pull request and default-branch
+# push; here those events start a run that skips at once.
+#
+# ⚠️ A BOT_ACCESS_TOKEN IS WHAT LETS IT UPDATE WORKFLOWS. The default token
+# cannot write anything under .github/workflows/, so without the secret those
+# files wait - named in the pull request and in the issue, never dropped. The
+# same secret must be able to read the template when the template is private.
+
+name: '🔄 Template Sync'
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+concurrency:
+  # In-progress runs are never cancelled: a half-written sync branch is worse
+  # than a queued run, and the next one starts from whatever this one left.
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: false
+
+# ⚠️ THE `permissions:` BELOW IS A CEILING, NOT A GRANT. For a job that calls a
+# reusable workflow, the caller's permissions cap what the called workflow may
+# request. Anything it asks for beyond them fails the run before a single job
+# starts: a startup failure, with no job, no step, and no log to read.
+#
+# They are written out rather than left to this repository's DEFAULT token
+# permissions, because a repository set to read-only - now the common default -
+# caps every write scope the same invisible way.
+#
+# The list is the union of what the called workflow's own jobs ask for, and
+# each of those jobs still narrows it further from there. Widen it only to
+# match a scope the called workflow actually declares.
+
+permissions: {}
+
+jobs:
+  sync:
+    # In a repository generated from the template: only when you run it by
+    # hand. In the template: on every pull request, and on a push to the
+    # default branch, WHATEVER IT IS CALLED - resolved at run time rather
+    # than written here.
+    if: ${{ (github.event.repository.is_template && (github.event_name != 'push' || github.ref_name == github.event.repository.default_branch)) || (!github.event.repository.is_template && github.event_name == 'workflow_dispatch') }}
+    permissions:
+      contents: write # push the sync branch (PR-only flow)
+      issues: write # keep the waiting-files issue current
+      pull-requests: write # open or update the sync pull request
+    uses: tannergolden/standards/.github/workflows/template-sync.yml@v1
+    secrets: inherit # zizmor: ignore[secrets-inherit] - first-party callee at the ref pinned above.
+    # Uncomment to follow a new major of the template - a decision, never
+    # automatic - or to merge clean syncs once their checks pass:
+    #
+    # with:
+    #   ref: 'v2'
+    #   automerge: true

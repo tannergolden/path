@@ -14,7 +14,7 @@ category: docs
 
 **The paved road to a new repository.**
 
-_Scaffold here. Standards by link. No engine._
+_Scaffold here. Standards by link. Template fixes when you ask._
 
 </div>
 
@@ -49,10 +49,18 @@ moment you have a reason to.
 What it deliberately does **not** decide is the language: no build system, no
 package manager, no toolchain. A structure is universal; a build is not.
 
-There is also **no sync engine**. Nothing here phones home, nothing overwrites
-your files later, and editing anything after generating has no upstream
-consequence. The standards stay current because they are linked, not because
-something reaches in and rewrites your tree.
+**Nothing reaches in and rewrites your tree, and the scaffold can still keep
+up - when you ask.** The standards stay current because they are linked. The
+files copied here - the workflow stubs, the repository scripts, the seeded
+documents - are brought up to date only when you run **🔄 Template Sync** from
+the Actions tab: it proposes the template's later fixes as one pull request,
+merged with whatever you changed. It never runs on its own, so a repository
+whose owner never runs it never changes. Nothing is pushed to your branch,
+nothing you deleted comes back, and editing anything after generating has no
+upstream consequence. [`.github/template-sync`](.github/template-sync) names
+every file it may touch: put a `#` in front of a line to keep that file yours.
+The structure folders are never on that list.
+[How it works](.github/template-sync.md).
 
 ---
 
@@ -61,24 +69,27 @@ something reaches in and rewrites your tree.
 Both buttons hand you every file in this repository. They differ in exactly one
 thing: whether your copy keeps a **link back to this one**.
 
-**Fork it** when you want to pull later changes to the scaffold back down. A
-fork remembers where it came from, so `Sync fork` and `git pull upstream` both
-work.
+**Fork it** when you want this repository's history, and to pull later changes
+back down through git. A fork remembers where it came from, so `Sync fork` and
+`git pull upstream` both work.
 
 **Click "Use this template"** when you want the current version as a starting
-point and nothing more. You get a clean repository with a single
-`Initial commit`, no parent, and no sync button. It is the route this template
-is built for, and the one **🚀 The First Five Minutes** assumes further down.
+point. You get a clean repository with a single `Initial commit` and no parent,
+and later fixes to the scaffold can still reach it - whenever you run
+**🔄 Template Sync**, as a pull request, one file at a time, merged with your
+changes. It is the route this template is built for, and the one
+**🚀 The First Five Minutes** assumes further down.
 
-|                              | Fork                                              | "Use this template"  |
-| :--------------------------- | :------------------------------------------------ | :------------------- |
-| **Link back to here**        | Kept - `Sync fork` works                          | None                 |
-| **History**                  | Every commit this repository has                  | One `Initial commit` |
-| **Actions**                  | **Disabled until you enable them**, per GitHub    | On from the start    |
-| **Issues**                   | Off by default                                    | On                   |
-| **A new pull request**       | Defaults to targeting **this** repository         | Targets yours        |
-| **Visibility**               | Public, and a fork's visibility cannot be changed | Yours to choose      |
-| **Your contributions graph** | Commits to a fork do not count                    | They count           |
+|                              | Fork                                              | "Use this template"                     |
+| :--------------------------- | :------------------------------------------------ | :-------------------------------------- |
+| **Link back to here**        | Kept - `Sync fork` works                          | None                                    |
+| **Later scaffold fixes**     | `Sync fork`: every change, or none                | 🔄 Template Sync: per file, as a PR     |
+| **History**                  | Every commit this repository has                  | One `Initial commit`                    |
+| **Actions**                  | **Disabled until you enable them**, per GitHub    | On from the start                       |
+| **Issues**                   | Off by default                                    | On                                      |
+| **A new pull request**       | Defaults to targeting **this** repository         | Targets yours                           |
+| **Visibility**               | Public, and a fork's visibility cannot be changed | Yours to choose                         |
+| **Your contributions graph** | Commits to a fork do not count                    | They count                              |
 
 ### What a fork actually buys you
 
@@ -89,8 +100,12 @@ v1 line arrives the moment it is published whether you forked or generated -
 which is what **Staying current takes no effort** describes further down.
 Forking does not make you more current; that part is already free.
 
-What a fork does sync is the **scaffold**: the thirteen stub workflows, the
-directory layout, the seeded documents. Real, but thin, and changed rarely.
+What a fork does sync is the **scaffold**: the fifteen stub workflows, the
+directory layout, the seeded documents. A generated repository can take those
+fixes too, whenever you run 🔄 Template Sync, so what a fork adds is the shared
+history - and with it, every change at once or none. In a fork, delete
+`.github/workflows/template-sync.yml`: `Sync fork` already carries the same
+changes, and two routes to them would only collide.
 
 > [!IMPORTANT]
 > **Initialisation and `Sync fork` want opposite things.** Once Actions are
@@ -274,7 +289,12 @@ publishes nothing.
    access is a GitHub error, which is why every rule ships commented out.
 7. **Enable ecosystems in `.github/dependabot.yml`** as you add manifests. Only
    `github-actions` is on, because it is the only one guaranteed to apply.
-8. **Replace this README.** Everything above describes the template, not your
+8. **Add a `BOT_ACCESS_TOKEN` secret** so 🔄 Template Sync, whenever you run
+   it, can update the workflow stubs too - the default token cannot write
+   `.github/workflows/`, so without it those files wait in an issue instead.
+   While you are there, put a `#` in front of anything in
+   `.github/template-sync` you want to own outright.
+9. **Replace this README.** Everything above describes the template, not your
    project. Nothing rewrites it for you, because only you know what this
    repository is for. The sections worth keeping are the workflow table and
    the token note; the rest is scaffolding that has done its job.
@@ -344,6 +364,8 @@ tables after every push:
 | [`release.yml`](.github/release.yml)                            | GitHub auto-generated release notes configuration.                                                                         |
 | [`SECURITY.md`](.github/SECURITY.md)                            | Supported versions and how to report vulnerabilities privately.                                                            |
 | [`SUPPORT.md`](.github/SUPPORT.md)                              | Where to get help with this repository - the right channel for every kind of question.                                     |
+| [`template-sync`](.github/template-sync)                        | Every path tannergolden/path ships, and whether &#x1F504; Template Sync keeps it current in this repository.               |
+| [`template-sync.md`](.github/template-sync.md)                  | How this repository keeps receiving its template's fixes, what you control, and what waits on you.                         |
 | [`TEMPLATE_INIT`](.github/TEMPLATE_INIT)                        | This repository has not been initialised yet.                                                                              |
 
 <!-- AUTO-INDEX:END -->
@@ -355,7 +377,7 @@ tables after every push:
 Your repository holds **triggers**. The logic lives in
 [`tannergolden/standards`](https://github.com/tannergolden/standards) and is
 pulled in by `uses:`. GitHub only runs a workflow that lives in the repository
-being pushed to, which is why these thirteen small files exist here at all. They
+being pushed to, which is why these fifteen small files exist here at all. They
 are grouped by what they do - everything that verifies a change in one file,
 everything that reacts to humans in another - so one push produces one run
 with every check in it, not four runs to read separately.
@@ -375,6 +397,8 @@ with every check in it, not four runs to read separately.
 | `preview-deploy.yml`       | Deploys pushes to a preview target, once one is configured        |
 | `verify-stubs.yml`         | Proves every job's permission ceiling matches its called workflow |
 | `auto-index.yml`           | Redraws every folder log and index after a push, as a pull request |
+| `template-sync.yml`        | Proposes the template's later fixes as one pull request, when run |
+| `cut-release.yml`          | Template only. Publishes the releases generated repositories follow |
 
 **Do not rename the job ids** `ci` and `secrets` (in `checks.yml`) or `pr`
 (in `governance.yml`). A called workflow reports its checks as
@@ -383,13 +407,17 @@ job lives in does not matter, but its id does.
 
 Every workflow ships installed, and **almost all of them are inert here on
 purpose**: nearly every job carries an `is_template` guard, so it is silent
-in this template and comes alive in every repository generated from it. Only
-three jobs run in the template itself - `prune-runs.yml`, because a template
-accumulates run history like any other repository, `verify-stubs.yml`,
+in this template and comes alive in every repository generated from it. Three
+run in the template exactly as they will in yours - `prune-runs.yml`, because a
+template accumulates run history like any other repository, `verify-stubs.yml`,
 because a stub with a wrong ceiling should be caught here rather than
 downstream, and `auto-index.yml`, because the template's own folder logs need
-keeping too. Delete any file that does not fit your project - each one is
-yours, and nothing reinstalls it.
+keeping too. Two more run here differently: `template-sync.yml` checks that the
+template's list names every file it ships instead of syncing, and
+`cut-release.yml` runs only here, publishing the releases your copy follows.
+Delete any file that does not fit your project - each one is yours, and nothing
+reinstalls it: 🔄 Template Sync switches a deleted file off rather than bringing
+it back.
 
 > [!IMPORTANT]
 > **The guard covers the required checks too.** `ci`, `secrets` and `pr` -
@@ -412,6 +440,10 @@ it: when `v2` is published it opens **one issue** telling you, and changes
 nothing. Adopting a
 major is a decision, not a chore.
 
+The files copied here - the stubs themselves among them - cannot follow a tag.
+They keep up a different way, and only when you ask: see
+**🔄 Template Sync: Fixes When You Ask** below.
+
 Almost nothing here pins a third-party action, either. Every `uses:` in the
 stubs points at `tannergolden/standards`, so the SHA pins behind them are
 maintained once, there, rather than in every repository built from this one.
@@ -425,8 +457,8 @@ from the moment it is generated.
 > **If this repository goes quiet for 60 days, GitHub disables its scheduled
 > workflows.** That is a platform rule for public repositories, not something a
 > workflow can opt out of, and it takes the weekly checks sweep, the governance
-> sweep, and the new-major alarm in `lifecycle.yml` with it. GitHub emails you when it
-> happens, and one commit or a manual dispatch turns them back on.
+> sweep, and the new-major alarm in `lifecycle.yml` with it. GitHub emails you
+> when it happens, and one commit or a manual dispatch turns them back on.
 >
 > The safety net is that **Dependabot is not subject to that rule**. It keeps
 > reading `.github/dependabot.yml`, and because a moving major tag only changes
@@ -438,6 +470,53 @@ If you would rather pin exact versions (`@v1.4.2`) for an auditable record of
 what ran when, do that instead - Dependabot updates reusable-workflow
 references natively, and the `dependabot-automerge` stub will merge them on
 green CI.
+
+---
+
+## 🔄 Template Sync: Fixes When You Ask
+
+This template keeps improving after you generate from it - a stub gains a
+guard, the repository validator learns a check, a seeded document gets
+clearer. **🔄 Template Sync** is how those fixes reach your copy, and it runs
+only when you run it.
+
+**Nothing happens on its own.** There is no schedule. When you want the
+template's latest release, run **🔄 Template Sync** from the Actions tab: it
+compares this repository with that release and proposes whatever changed as
+**one pull request** on `chore/template-sync`, which you review and merge like
+any other. If you never run it, nothing in this repository ever changes.
+
+| It always...                     | Because                                                                                                        |
+| :------------------------------- | :------------------------------------------------------------------------------------------------------------- |
+| Merges rather than overwrites    | Each file is merged with whatever you changed in it, by the same three-way merge git uses                      |
+| Writes in your identity          | The template is rewritten exactly as initialisation rewrote it, so footers and contact links stay yours        |
+| Leaves a conflict untouched      | A file you and the template changed in the same place stays as you have it; the pull request shows the change |
+| Respects a deletion              | A file you delete is switched off for good, and never comes back under its old name or a new one               |
+| Leaves your structure alone      | `src/`, `tests/`, `packages/`, `benchmarks/`, `assets/`, this README and the licence start switched off        |
+
+Three files describe it, and only one of them is yours to edit:
+
+| File                                                   | What it is                                                                                         |
+| :----------------------------------------------------- | :------------------------------------------------------------------------------------------------- |
+| [`.github/template-sync`](.github/template-sync)       | Every path the template ships, in `.gitignore` syntax. Put a `#` in front of a line to keep that file as yours |
+| `.github/template-sync.lock`                           | Where each file was last synced from. Written by the sync alone; never edit it                     |
+| [`.github/template-sync.md`](.github/template-sync.md) | The full explanation: every outcome, every option, and what to do when something waits on you      |
+
+> [!IMPORTANT]
+> **Workflow files need a `BOT_ACCESS_TOKEN`.** GitHub's default token cannot
+> write anything under `.github/workflows/`, so without the secret those files
+> wait - named in the pull request and in one issue, never dropped - while
+> everything else arrives. With it, they arrive like any other file, and CI
+> runs on the pull request.
+
+**You follow a major, and a new one is your decision.** This template publishes
+versions with 🏷️ Cut Release, moving `v1` to each new one, and a sync takes
+whatever `v1` points at. A breaking change ships as `v2`, which nothing follows
+until you change `ref:` in `.github/workflows/template-sync.yml`. To remove the
+option altogether, delete that file.
+
+The engine lives in [`tannergolden/standards`](https://github.com/tannergolden/standards/blob/Development/docs/distribution/automation/Template-Sync.md),
+called rather than copied, like every other workflow here.
 
 ---
 

@@ -34,3 +34,7 @@ Markdown Kit, and this template itself - because each belongs to that
 account rather than yours, so it is correct for everyone. Only the handle on
 its own is an identity to replace, which is the same line initialisation
 draws.
+
+Template sync works either way. Without initialisation it takes each file's
+starting point from this repository's first commit, and anything it cannot
+merge cleanly is shown to you in its pull request rather than overwritten.

@@ -1,0 +1,51 @@
+# Installed from tannergolden/standards. Edit freely: this file is YOURS.
+#
+# Publishes this template's releases: `vX.Y.Z` for the version, and the
+# moving `vX` that every repository generated from it follows through
+# 🔄 Template Sync. A merge to the default branch reaches no generated
+# repository until a release moves the major, so this is the moment a change
+# to the template becomes a change to everything built from it.
+#
+# ⚠️ IT RUNS ONLY IN THE TEMPLATE. A repository generated from the template is
+# not consumed by tag, so the job is inert there - and `.github/template-sync`
+# leaves this file out of every sync. Delete it, or keep it if your own
+# repository comes to be consumed by tag.
+#
+# A change that renames a file a generated repository depends on, or reshapes
+# a stub in a way a merge cannot carry, is BREAKING: release it as a new
+# major, which nothing follows until its owner decides to.
+
+name: '🏷️ Cut Release'
+
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: 'Version to publish, as vX.Y.Z'
+        required: true
+        type: string
+      move-major:
+        description: 'Also move the major tag (vX) to this release'
+        required: false
+        type: boolean
+        default: true
+
+concurrency:
+  group: ${{ github.workflow }}
+  cancel-in-progress: false
+
+permissions: {}
+
+jobs:
+  release:
+    if: ${{ github.event.repository.is_template }}
+    permissions:
+      contents: write # create tags, publish the release, prune superseded pages
+    uses: tannergolden/standards/.github/workflows/release.yml@v1
+    with:
+      version: ${{ inputs.version }}
+      move-major: ${{ inputs.move-major }}
+      # A release no generated repository could sync from is refused here,
+      # rather than discovered by the first sync that tries.
+      required-files: '.github/template-sync .github/workflows/template-sync.yml'
+      check-command: 'python3 .github/scripts/validate-repository.py'

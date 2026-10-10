@@ -33,8 +33,8 @@ the fill-in standards under `docs/templates/technical/testing/` are seeded for
 your own conventions inside it.
 
 This directory is **yours from the first commit**. Nothing here syncs, and
-nothing upstream will ever write to it or delete from it - there is no sync
-engine to protect it from.
+nothing upstream will ever write to it or delete from it: 🔄 Template Sync
+leaves this whole folder to you, this README included.
 
 ---
 

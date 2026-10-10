@@ -1,6 +1,6 @@
 <!--
 title: '🎨 ASSETS'
-description: 'Where this project keeps everything that presents it: a folder for every kind of asset, the rules every file follows, and what lives somewhere else.'
+description: 'Where this project keeps what presents it: three folders nearly every project needs, a name ready for every other kind, and the rules every file follows.'
 tags: [assets, branding, images, documentation]
 category: docs
 -->
@@ -11,9 +11,9 @@ category: docs
 
 <a name="top"></a>
 
-**A home for every kind of asset this project owns, and one set of rules for all of them.**
+**What this project shows the world, and one set of rules for all of it.**
 
-_Filed by kind. Named in kebab-case. Logged where it lives._
+_Three folders to start. A name ready for the rest._
 
 </div>
 
@@ -23,48 +23,75 @@ _Filed by kind. Named in kebab-case. Logged where it lives._
 something to show: a logo, a screenshot, a diagram. And every repository that
 draws its README with the [Markdown
 Kit](https://github.com/tannergolden/markdown) needs a home for each file the
-kit generates. So `assets/` is here from the first commit, with a folder for
-every kind of asset, and a file never has to wonder where it goes.
+kit generates. So `assets/` is here from the first commit, holding only what
+nearly every project needs, and a file never has to wonder where it goes.
 
 ---
 
 ## 📁 What Goes Where
 
-<!-- AUTO-INDEX:BEGIN dir=. style=log -->
+<!-- AUTO-INDEX:BEGIN dir=. style=log exclude=banners,badges,trophies,elements -->
 
-| Entry                                       | Purpose                                                                                                                             |
-| :------------------------------------------ | :---------------------------------------------------------------------------------------------------------------------------------- |
-| [`animations/`](animations/README.md)       | Looping demos that play inline: GIFs, and the terminal recordings they are made from.                                               |
-| [`audio/`](audio/README.md)                 | Sound the project presents itself with: podcast clips, trailers, voice-overs and sound design.                                      |
-| [`badges/`](badges/README.md)               | Badges the Markdown Kit draws: static ones in static/, live ones in dynamic/.                                                       |
-| [`banners/`](banners/README.md)             | The header, footer and link buttons the Markdown Kit draws for the README.                                                          |
-| [`branding/`](branding/README.md)           | The marks, colours and type that identify this project: logo, mark, wordmark, app icon, favicon, palette and type specimen.         |
-| [`diagrams/`](diagrams/README.md)           | Architecture, flow, sequence and data drawings that Mermaid in the text cannot express.                                             |
-| [`elements/`](elements/README.md)           | The drawings the Markdown Kit places in the README's body: schematics, instruments, milestones, rosters, certificates and placards. |
-| [`fonts/`](fonts/README.md)                 | The typefaces the brand, diagrams and graphics are set in, each with its licence.                                                   |
-| [`html/`](html/README.md)                   | Standalone HTML pages: previews, demos, prototypes and embeds that open in a browser.                                               |
-| [`icons/`](icons/README.md)                 | Small symbols for the docs: feature icons, and third-party logos used under their owners' terms.                                    |
-| [`illustrations/`](illustrations/README.md) | Drawn artwork: hero art, empty states, spot illustrations and mascots.                                                              |
-| [`mockups/`](mockups/README.md)             | Wireframes, design comps and exported prototype screens: what the product will look like, before it does.                           |
-| [`photos/`](photos/README.md)               | Photographs: hardware, setups, people and events.                                                                                   |
-| [`print/`](print/README.md)                 | Material made to be printed or handed out: datasheets, one-pagers, posters and stickers.                                            |
-| [`screenshots/`](screenshots/README.md)     | Captures of the product and the terminal, in day and night pairs, for the README and the docs.                                      |
-| [`slides/`](slides/README.md)               | Decks and talk material about the project, exported to PDF.                                                                         |
-| [`social/`](social/README.md)               | The images the project is shown by off-site: the repository's social preview, Open Graph cards and launch graphics.                 |
-| [`trophies/`](trophies/README.md)           | The trophy case the Markdown Kit draws: the tiered trophies, the level and next-up cards, and the achievements.                     |
-| [`video/`](video/README.md)                 | Demos, walkthroughs and talks too long or too large to play inline.                                                                 |
-| [`README.md`](README.md)                    | This file.                                                                                                                          |
+| Entry                                   | Purpose                                                                                                                            |
+| :-------------------------------------- | :--------------------------------------------------------------------------------------------------------------------------------- |
+| [`branding/`](branding/README.md)       | The marks, colours and type that identify this project: logo, mark, wordmark, icon, favicon, palette, and the social preview card. |
+| [`diagrams/`](diagrams/README.md)       | Architecture, flow, sequence and data drawings that Mermaid in the text cannot express.                                            |
+| [`screenshots/`](screenshots/README.md) | Captures of the product and the terminal, still or moving, in day and night pairs, for the README and the docs.                    |
+| [`README.md`](README.md)                | This file.                                                                                                                         |
 
 <!-- AUTO-INDEX:END -->
 
-Fifteen folders are yours, one for every kind of asset a repository presents
-itself with. Each holds only its README until its first file arrives, so the
-next file always has an obvious home. The other four are the Markdown Kit's: it
-draws `banners/`, `badges/`, `trophies/` and `elements/` on every run of the
-page's stub, and keeps them current.
+Three folders ship, because nearly every project fills them: `branding/` for who
+it is, `screenshots/` for what it looks like, and `diagrams/` for how it works.
+Each holds only its README until its first file arrives.
 
 🗂️ Machined Indexes redraws this table after every push, and every folder here
 carries a `README.md` that logs the files inside it in the same way.
+
+---
+
+## ➕ When You Need Another
+
+Nothing else ships, so nobody scrolls past folders their project will never use.
+When the first file of another kind arrives, make its folder under the name
+below, beside the three, and give it a `README.md` that logs it the way theirs
+do.
+
+| Folder           | For                                                                                  |
+| :--------------- | :----------------------------------------------------------------------------------- |
+| `illustrations/` | Drawn artwork: hero art, empty states, spot illustrations, a mascot                  |
+| `photos/`        | Photographs of hardware, setups, people and events, resized and stripped of metadata |
+| `icons/`         | An icon set the pages use, beyond the project's own icon in `branding/`              |
+| `video/`         | Demos and walkthroughs, through Git LFS or a release asset rather than plain git     |
+| `audio/`         | Sound the project ships or demonstrates, through Git LFS like video                  |
+| `fonts/`         | Typefaces the artwork is set in, each beside its licence                             |
+| `mockups/`       | Wireframes and design comps, from before a feature was built                         |
+| `slides/`        | Talks and decks, the source beside a PDF export                                      |
+| `print/`         | Stickers, posters and swag, at print resolution, with the bleed marked               |
+| `html/`          | Self-contained pages that open in a browser: previews, demos, embeds                 |
+
+---
+
+## 🧩 Drawn By The Markdown Kit
+
+A page drawn with the [Markdown Kit](https://github.com/tannergolden/markdown)
+gets these too. The kit makes each folder the first time it draws into it, so a
+repository that never uses the kit never sees them, and a README log leaves them
+out.
+
+| Folder            | Holds                                                                                      |
+| :---------------- | :----------------------------------------------------------------------------------------- |
+| `banners/`        | The header, the footer and the row of links under it                                       |
+| `badges/static/`  | Every badge whose value the settings write, and the shields.io badges localized            |
+| `badges/dynamic/` | Every live badge, measured by the kit or set by a workflow: the only ones in gold          |
+| `trophies/`       | The trophy case: the level and next-up cards, the trophies and the achievements            |
+| `elements/`       | The body's drawings: the schematic, instruments, milestones, roster, certificate, placards |
+
+> [!NOTE]
+> **The kit owns the SVGs, not the folder.** It redraws them on every run and
+> takes away any it no longer draws, and leaves every other file here alone,
+> this README included. Change `.github/markdown.yaml` and let it redraw: a
+> hand-edited SVG is overwritten on the next run.
 
 ---
 

@@ -1,6 +1,6 @@
 <!--
 title: '✒️ BRANDING'
-description: 'The marks, colours and type that identify this project: logo, mark, wordmark, app icon, favicon, palette and type specimen.'
+description: 'The marks, colours and type that identify this project: logo, mark, wordmark, icon, favicon, palette, and the social preview card.'
 tags: [branding, assets, identity, design]
 category: docs
 -->
@@ -22,16 +22,19 @@ _Keep the source. Export the sizes._
 ## 💡 What This Folder Is For
 
 The project's identity: the logo (`logo.svg`, and `logo-dark.svg` for the night
-theme), the mark alone (`mark.svg`), the wordmark (`wordmark.svg`), the app icon
-and the sizes exported from it (`icon.svg`, `icon-512.png`), the favicon
+theme), the mark alone (`mark.svg`), the wordmark (`wordmark.svg`), the icon and
+the sizes exported from it (`icon.svg`, `icon-512.png`), the favicon
 (`favicon.svg`, `favicon.ico`), the palette (`palette.svg`, with its tokens in
-`palette.json`), the type specimen (`typography.svg`) and a brand guide when
-there is one (`brand-guide.pdf`).
+`palette.json`) and a brand guide when there is one (`brand-guide.pdf`).
 
-Keep the **source** artwork here, the SVG or the layered original, and export
-every size from it, so a change to the mark is made once and every export can be
-drawn again. The typefaces the marks are set in live in
-[`../fonts/`](../fonts/README.md).
+The **social preview** a site shows when the repository is linked lives here
+too, as `social-preview.png`: set it under **Settings → General → Social
+preview**, at 1280 × 640 pixels and under 1 MB, with what matters kept clear of
+the edges. GitHub keeps only the upload, so its source stays here.
+
+Keep the **source** artwork, the SVG or the layered original, and export every
+size from it, so a change to the mark is made once and every export can be drawn
+again.
 
 > [!IMPORTANT]
 > **A logo is a trademark as well as artwork.** The licence that covers this

@@ -1,6 +1,6 @@
 <!--
 title: '🖥️ SCREENSHOTS'
-description: 'Captures of the product and the terminal, in day and night pairs, for the README and the docs.'
+description: 'Captures of the product and the terminal, still or moving, in day and night pairs, for the README and the docs.'
 tags: [screenshots, assets, documentation, interface]
 category: docs
 -->
@@ -24,6 +24,10 @@ _Crop to the sentence. Blur the secrets._
 Captures of the interface and the terminal: PNG, taken at 2x and cropped to what
 the sentence beside it describes, in a day and night pair (`dashboard.png`,
 `dashboard-dark.png`) wherever the page shows both themes.
+
+A GIF of the product in motion is a screenshot that moves, and lives here too:
+under 5 MB, a few seconds long, showing one thing. A longer recording belongs in
+a release asset or on a video host, linked from the page.
 
 Before a capture is committed, blur or replace anything that is not public:
 tokens, email addresses, hostnames, other people's names. When the output of a

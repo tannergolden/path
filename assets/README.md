@@ -1,6 +1,6 @@
 <!--
 title: '🎨 ASSETS'
-description: 'Where this project keeps what presents it: three folders nearly every project needs, a name ready for every other kind, and the rules every file follows.'
+description: 'Where this project keeps what presents it: four folders to start, a name ready for every other kind, and the rules every file follows.'
 tags: [assets, branding, images, documentation]
 category: docs
 -->
@@ -13,7 +13,7 @@ category: docs
 
 **What this project shows the world, and one set of rules for all of it.**
 
-_Three folders to start. A name ready for the rest._
+_Four folders to start. A name ready for the rest._
 
 </div>
 
@@ -23,8 +23,8 @@ _Three folders to start. A name ready for the rest._
 something to show: a logo, a screenshot, a diagram. And every repository that
 draws its README with the [Markdown
 Kit](https://github.com/tannergolden/markdown) needs a home for each file the
-kit generates. So `assets/` is here from the first commit, holding only what
-nearly every project needs, and a file never has to wonder where it goes.
+kit generates. So `assets/` is here from the first commit, holding only the
+essentials, and a file never has to wonder where it goes.
 
 ---
 
@@ -36,14 +36,15 @@ nearly every project needs, and a file never has to wonder where it goes.
 | :-------------------------------------- | :--------------------------------------------------------------------------------------------------------------------------------- |
 | [`branding/`](branding/README.md)       | The marks, colours and type that identify this project: logo, mark, wordmark, icon, favicon, palette, and the social preview card. |
 | [`diagrams/`](diagrams/README.md)       | Architecture, flow, sequence and data drawings that Mermaid in the text cannot express.                                            |
+| [`html/`](html/README.md)               | Standalone HTML pages: previews, demos, prototypes and embeds that open in a browser.                                              |
 | [`screenshots/`](screenshots/README.md) | Captures of the product and the terminal, still or moving, in day and night pairs, for the README and the docs.                    |
 | [`README.md`](README.md)                | This file.                                                                                                                         |
 
 <!-- AUTO-INDEX:END -->
 
-Three folders ship, because nearly every project fills them: `branding/` for who
-it is, `screenshots/` for what it looks like, and `diagrams/` for how it works.
-Each holds only its README until its first file arrives.
+Four folders ship: `branding/` for who the project is, `screenshots/` for what
+it looks like, `diagrams/` for how it works, and `html/` for the pages that open
+in a browser. Each holds only its README until its first file arrives.
 
 🗂️ Machined Indexes redraws this table after every push, and every folder here
 carries a `README.md` that logs the files inside it in the same way.
@@ -54,7 +55,7 @@ carries a `README.md` that logs the files inside it in the same way.
 
 Nothing else ships, so nobody scrolls past folders their project will never use.
 When the first file of another kind arrives, make its folder under the name
-below, beside the three, and give it a `README.md` that logs it the way theirs
+below, beside the four, and give it a `README.md` that logs it the way theirs
 do.
 
 | Folder           | For                                                                                  |
@@ -68,7 +69,6 @@ do.
 | `mockups/`       | Wireframes and design comps, from before a feature was built                         |
 | `slides/`        | Talks and decks, the source beside a PDF export                                      |
 | `print/`         | Stickers, posters and swag, at print resolution, with the bleed marked               |
-| `html/`          | Self-contained pages that open in a browser: previews, demos, embeds                 |
 
 ---
 

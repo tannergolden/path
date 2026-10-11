@@ -62,13 +62,14 @@ is called, never copied, so a fix to how syncing works reaches this repository o
 
 **A line naming a path keeps it current. `#/path` - a hash with no space - leaves it to you.**
 
-| You want                                      | Do this                                                       |
-| :-------------------------------------------- | :------------------------------------------------------------ |
-| To keep a file as your own from now on        | Put a `#` in front of its line                                |
-| The template to keep it current again         | Take the `#` away                                             |
-| To stop a whole folder                        | Add a rule under **Your rules**, such as `!/.devcontainer/**` |
-| A file the template left to you, kept current | Take the `#` away from its line                               |
-| To stop syncing altogether                    | Delete `.github/workflows/template-sync.yml`                  |
+| You want                                        | Do this                                                       |
+| :---------------------------------------------- | :------------------------------------------------------------ |
+| To keep a file as your own from now on          | Put a `#` in front of its line                                |
+| To keep your lines in a file, and take the rest | Add `# keep mine: /path/to/file` under **Your rules**         |
+| The template to keep it current again           | Take the `#` away                                             |
+| To stop a whole folder                          | Add a rule under **Your rules**, such as `!/.devcontainer/**` |
+| A file the template left to you, kept current   | Take the `#` away from its line                               |
+| To stop syncing altogether                      | Delete `.github/workflows/template-sync.yml`                  |
 
 Changes to the list take effect on the next sync you run. A few things worth knowing:
 
@@ -86,20 +87,21 @@ Changes to the list take effect on the next sync you run. A few things worth kno
 
 ## 🔀 What The Pull Request Tells You
 
-| In the pull request                            | Means                                                                   |
-| :--------------------------------------------- | :---------------------------------------------------------------------- |
-| ✅ Updated to the template's version           | You had not changed the file, so it takes the template's version        |
-| 🔀 Merged with your changes                    | You both changed it, in different places; both changes are kept         |
-| 🆕 Added                                       | The template added it, written in your identity                         |
-| 🚚 Moved by the template                       | The template moved it; your changes moved with it                       |
-| 🗑️ Removed, as the template removed it         | You had not changed it, so it goes too                                  |
-| 📌 Kept as yours after the template removed it | You had changed it, so it stays - yours from now on                     |
-| 🙈 Switched off, because you deleted it        | It stays deleted, and its line in the list gains a `#`                  |
-| ♻️ Switched back on and restored               | You took the `#` away from a file you had deleted, so it is back        |
-| ✋ Held off, as you chose                      | The template reshaped its list; your choice is written back by name     |
-| ⚠️ Needs you                                   | A conflict - see below                                                  |
-| ⏸️ Waiting on a token                          | A workflow file - see below                                             |
-| ⛔ Skipped as unsafe                           | A path that would reach outside this repository, so it is never written |
+| In the pull request                                    | Means                                                                        |
+| :----------------------------------------------------- | :--------------------------------------------------------------------------- |
+| ✅ Updated to the template's version                   | You had not changed the file, so it takes the template's version             |
+| 🔀 Merged with your changes                            | You both changed it, in different places; both changes are kept              |
+| 🆕 Added                                               | The template added it, written in your identity                              |
+| 🚚 Moved by the template                               | The template moved it; your changes moved with it                            |
+| 🗑️ Removed, as the template removed it                 | You had not changed it, so it goes too                                       |
+| 📌 Kept as yours after the template removed it         | You had changed it, so it stays - yours from now on                          |
+| 🙈 Switched off, because you deleted it                | It stays deleted, and its line in the list gains a `#`                       |
+| ♻️ Switched back on and restored                       | You took the `#` away from a file you had deleted, so it is back             |
+| ✋ Held off, as you chose                              | The template reshaped its list; your choice is written back by name          |
+| 🧷 Merged, your lines kept where you both changed them | Your `# keep mine` note: the rest arrived, the change to your lines is shown |
+| ⚠️ Needs you                                           | A conflict - see below                                                       |
+| ⏸️ Waiting on a token                                  | A workflow file - see below                                                  |
+| ⛔ Skipped as unsafe                                   | A path that would reach outside this repository, so it is never written      |
 
 Files the template added or changed arrive **in your identity**: the footers name you, the licence
 holder is you, and links to the shared repositories the template relies on stay as they are.
@@ -124,6 +126,12 @@ Make the lines it changed match the template's, and the next sync stops asking; 
 front of the file in the list to keep your version for good. Make that change on your default
 branch, never on `chore/template-sync`: each sync rewrites that branch from your default branch, and
 what was committed to it goes with it.
+
+**To keep a line you made your own** - your command in `checks.yml`, say - without giving up the
+template's later fixes to the rest of the file, add a note under **Your rules** in the list:
+`# keep mine: /.github/workflows/checks.yml`. From the next sync on, wherever you and the template
+both changed the same lines, yours stand and the pull request shows what you kept them over; every
+other change still arrives, and nothing waits on you. Delete the note to be asked again.
 
 **A workflow file** under `.github/workflows/` cannot be written with the default token. It waits,
 named, until a `BOT_ACCESS_TOKEN` secret exists - see below.
@@ -198,7 +206,7 @@ the template reaches a generated repository only once a release moves `v1`.
 | "Could not open the pull request" | Turn on **Allow GitHub Actions to create and approve pull requests**, or add a `BOT_ACCESS_TOKEN`                                                     |
 | "Could not fetch" the template    | The token cannot read it: a private template needs read access, and an expired `BOT_ACCESS_TOKEN` fails even for a public one. Renew it, or delete it |
 | "already holds a newer version"   | Nothing: this repository is ahead of the template's last release                                                                                      |
-| The same conflict on every run    | It is waiting on you: make its lines match the template's, or put a `#` before it                                                                     |
+| The same conflict on every run    | It is waiting on you: make its lines match the template's, add `# keep mine: /path` for it under Your rules, or put a `#` before it                   |
 | The lock is refused               | It was edited by hand: restore it from history                                                                                                        |
 
 The full standard - how each file is decided, how it is tested, what template authors must do - is

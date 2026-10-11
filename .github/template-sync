@@ -12,6 +12,11 @@
 # pattern like `!/docs/**` to stop a whole folder - go under "Your rules" at
 # the end, and win over everything above them. Each sync redraws this file
 # from the template's latest list and keeps every choice you made in it.
+#
+# To keep your own lines in one file and still take the template's other
+# changes to it, write a note under "Your rules" naming it, such as
+# `# keep mine: /.github/workflows/checks.yml`. Where you and the template
+# changed the same lines, yours then stand.
 
 # --- Kept current -------------------------------------------------------------
 /.devcontainer/README.md

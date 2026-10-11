@@ -104,6 +104,16 @@ Changes to the list take effect on the next sync you run. A few things worth kno
 Files the template added or changed arrive **in your identity**: the footers name you, the licence
 holder is you, and links to the shared repositories the template relies on stay as they are.
 
+**Folder logs are redrawn, never merged.** A table between `AUTO-INDEX` markers lists the files
+beside it, so a sync never calls it a conflict: it merges the words around the table and redraws
+the table from your tree, as 🗂️ Machined Indexes would.
+
+**Two additions to `.gitignore` in one place are both kept** - the template's first and yours last,
+so yours still win. The same holds in other ignore files and in `.gitattributes`.
+
+**A release that changes nothing you would see opens no pull request** - one that only touches
+files you switched off, say, or the template's own folder logs.
+
 ---
 
 ## ⚠️ When Something Waits On You

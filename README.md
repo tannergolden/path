@@ -245,7 +245,12 @@ holder, funding target, and documentation footers forever.
 The `init` job in `lifecycle.yml` fixes that on its own, once. It rewrites the identity to
 **your** account, rewrites the bare "Initial commit" into a proper Conventional
 Commit describing the new repository, and then deletes `.github/TEMPLATE_INIT`,
-which is what stops it ever running again.
+which is what stops it ever running again. Anything else
+[`.github/template-sync`](.github/template-sync) names under **Only ever in the
+template** - a file that serves the template and nothing generated from it -
+goes with it, and every folder log is redrawn to match. 🏷️ Cut Release is not
+one of them: any repository released by tag can adopt it, so it stays, inert,
+until you adopt it or delete it.
 
 Two things it deliberately leaves alone. The first is any reference to a
 repository on the template's account - `tannergolden/standards`, whose shared
@@ -405,7 +410,7 @@ with every check in it, not four runs to read separately.
 | `verify-stubs.yml`         | Proves every job's permission ceiling matches its called workflow |
 | `auto-index.yml`           | Redraws every folder log and index after a push, as a pull request |
 | `template-sync.yml`        | Proposes the template's later fixes as one pull request, when run |
-| `cut-release.yml`          | Template only. Publishes the releases generated repositories follow |
+| `cut-release.yml`          | Publishes this template's releases. Inert in yours until you adopt it |
 
 **Do not rename the job ids** `ci` and `secrets` (in `checks.yml`) or `pr`
 (in `governance.yml`). A called workflow reports its checks as
@@ -421,7 +426,8 @@ because a stub with a wrong ceiling should be caught here rather than
 downstream, and `auto-index.yml`, because the template's own folder logs need
 keeping too. Two more run here differently: `template-sync.yml` checks that the
 template's list names every file it ships instead of syncing, and
-`cut-release.yml` runs only here, publishing the releases your copy follows.
+`cut-release.yml` runs only here, publishing the releases your copy follows,
+until a repository released by tag adopts it.
 Delete any file that does not fit your project - each one is yours, and nothing
 reinstalls it: 🔄 Template Sync switches a deleted file off rather than bringing
 it back.

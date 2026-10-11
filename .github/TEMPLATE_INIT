@@ -4,7 +4,9 @@ The presence of this file is what permits the `init` job in
 `.github/workflows/lifecycle.yml` to run. That job rewrites the template
 author's identity to yours - the licence holder, the funding target, the
 documentation footers, and the issue chooser's contact link - and then deletes
-this file, which is what stops it ever running again.
+this file, which is what stops it ever running again. Anything else
+.github/template-sync names under "Only ever in the template" goes with it,
+and every folder log is redrawn to match.
 
 ONE THING IT CANNOT DO FOR YOU, and it is not the chooser's link. That link
 carries a placeholder precisely because GitHub substitutes nothing in a

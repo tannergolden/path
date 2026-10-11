@@ -7,11 +7,13 @@
 # to the template becomes available to everything built from it - and each
 # repository takes it when its owner next runs 🔄 Template Sync.
 #
-# ⚠️ IT RUNS ONLY IN THE TEMPLATE. A repository generated from the template is
-# not consumed by tag, so the job is inert there - and `.github/template-sync`
-# leaves this file out of every sync. Delete it - or, if your own repository
-# comes to be consumed by tag, keep it, remove the `if:` guard, and set
-# `required-files` and `check-command` for what your repository ships.
+# ⚠️ IT RUNS ONLY IN THE TEMPLATE, UNTIL YOU ADOPT IT. In a repository
+# generated from the template the job is inert, and initialisation leaves the
+# file where it is: `.github/template-sync` files it with yours, so no sync
+# ever overwrites what you make of it. If your repository is consumed by tag
+# too - an action, or a kit like the Markdown Kit - keep it, remove the `if:`
+# guard, and set `required-files` and `check-command` for what your
+# repository ships. Otherwise delete it.
 #
 # A change that renames a file a generated repository depends on, or reshapes
 # a stub in a way a merge cannot carry, is BREAKING: release it as a new

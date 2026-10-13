@@ -195,7 +195,9 @@ the template reaches a generated repository only once a release moves `v1`.
 
 What only the template needs is named under **Only ever in the template** in the list.
 Initialisation deleted each of those files from this repository and redrew its folder logs, so no
-sync offers one; take the `#` off a line to have the next sync add that file.
+sync offers one; take the `#` off a line to have the next sync add that file. A workflow file there
+is the one it cannot delete, since GitHub lets the workflow token change nothing under
+`.github/workflows/`: the initialisation run names it, for you to delete.
 
 ---
 

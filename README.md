@@ -215,24 +215,27 @@ When you do want it, there are two supported routes and no wrong answer:
 | Route                                                       | You commit                  | Updates arrive by                            |
 | :----------------------------------------------------------- | :-------------------------- | :------------------------------------------- |
 | **By hand**                                                 | the instructions themselves | you editing them                             |
-| **[`tannergolden/intelligence`](https://github.com/tannergolden/intelligence)** | one workflow stub | a release moving a tag, with no pull request |
+| **[`tannergolden/intelligence`](https://github.com/tannergolden/intelligence)** | nothing: the hub opens the pull request | one pull request per release, which you merge |
 
 Writing them by hand suits conventions that are specific to one project. The
-publisher suits several repositories that share one set, for the same reason the
+hub suits several repositories that share one set, for the same reason the
 workflows here are called rather than copied: the law lives in one place, and a
-fix reaches everything pinned to it. Its README carries the stub to copy and the
-version to pin.
+fix reaches every repository at the next release. It writes one root
+`AGENTS.md`, with the universal rules between markers and empty sections for
+your own, and its README explains how a release reaches you.
 
 > [!IMPORTANT]
 > **Whichever route you take, confirm the tools you actually use load what you
-> wrote.** They do not agree on which filename to read, and some will not find a
-> shared file at all unless a small per-tool file points them at it. Instructions
-> nothing loads are worse than none, because they look finished.
+> wrote.** Most now read a root `AGENTS.md`, but not in every case: Claude Code,
+> for one, skips it beside a `CLAUDE.md` unless its settings say otherwise. The
+> hub's loader probe checks this on your own machine. Instructions nothing loads
+> are worse than none, because they look finished.
 
 > [!TIP]
 > **Either route stays reversible.** What you write by hand is yours to delete.
-> What the publisher delivers is listed with digests in a lockfile, so the
-> inventory of what arrived is also the manifest for removing it.
+> What the hub delivers sits between two markers in one file, so removing it is
+> deleting that block, and a `no-intelligence` topic keeps the next release from
+> bringing it back.
 
 ---
 

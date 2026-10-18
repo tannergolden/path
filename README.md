@@ -337,7 +337,7 @@ publishes nothing.
 | Entry                                       | Purpose                                                                                                                                |
 | :------------------------------------------ | :------------------------------------------------------------------------------------------------------------------------------------- |
 | [`.devcontainer/`](.devcontainer/README.md) | The language-neutral development container this repository ships, and how to give it the toolchain your project needs.                 |
-| [`.github/`](.github/)                      | Community health files, forms, CODEOWNERS, Dependabot, scripts and workflows - logged below                                            |
+| [`.github/`](.github/)                      | Community health files, forms, CODEOWNERS, Dependabot, actions, scripts and workflows - logged below                                   |
 | [`.vscode/`](.vscode/README.md)             | The VS Code settings and extension recommendations this repository shares, and why every other file in this folder stays out of git.   |
 | [`assets/`](assets/README.md)               | Where this project keeps what presents it: four folders to start, a name ready for every other kind, and the rules every file follows. |
 | [`benchmarks/`](benchmarks/README.md)       | The benchmark suites and recorded results that defend the performance budgets of this project.                                         |
@@ -366,6 +366,7 @@ tables after every push:
 
 | Entry                                                           | Purpose                                                                                                                             |
 | :-------------------------------------------------------------- | :---------------------------------------------------------------------------------------------------------------------------------- |
+| [`actions/`](.github/actions/README.md)                         | The composite actions this repository keeps for its own workflows, and for any other repository that calls them.                    |
 | [`DISCUSSION_TEMPLATE/`](.github/DISCUSSION_TEMPLATE/README.md) | The discussion category forms, each bound by its file name to the category it shapes.                                               |
 | [`ISSUE_TEMPLATE/`](.github/ISSUE_TEMPLATE/README.md)           | The issue forms a reporter chooses from, and the chooser configuration that offers them.                                            |
 | [`scripts/`](.github/scripts/README.md)                         | The checks this repository runs on its own configuration, and the tests that guard them.                                            |

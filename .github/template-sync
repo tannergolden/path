@@ -124,6 +124,7 @@
 #/LICENSE
 #/.github/CODEOWNERS
 #/.github/FUNDING.yml
+#/.github/actions/**
 #/.github/workflows/cut-release.yml
 #/assets/**
 #/benchmarks/**

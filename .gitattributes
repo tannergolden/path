@@ -130,8 +130,12 @@ docs/**  linguist-documentation=true
 # --- Archive hygiene ---------------------------------------------------------
 #
 # Excluded from `git archive`, so a source tarball carries the project rather
-# than the machinery that develops it.
-.github/       export-ignore
+# than the machinery that develops it. .github/actions/ stays in: GitHub serves
+# a composite action to every repository that calls it from this archive, and
+# an action left out of it cannot be found.
+.github/**     export-ignore
+.github/actions    -export-ignore
+.github/actions/** -export-ignore
 .devcontainer/ export-ignore
 .vscode/       export-ignore
 .gitattributes export-ignore

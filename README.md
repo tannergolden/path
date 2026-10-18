@@ -215,14 +215,15 @@ When you do want it, there are two supported routes and no wrong answer:
 | Route                                                       | You commit                  | Updates arrive by                            |
 | :----------------------------------------------------------- | :-------------------------- | :------------------------------------------- |
 | **By hand**                                                 | the instructions themselves | you editing them                             |
-| **[`tannergolden/intelligence`](https://github.com/tannergolden/intelligence)** | nothing: the hub opens the pull request | one pull request per release, which you merge |
+| **[`tannergolden/intelligence`](https://github.com/tannergolden/intelligence)** | one workflow stub | a pull request each release, which you merge |
 
 Writing them by hand suits conventions that are specific to one project. The
 hub suits several repositories that share one set, for the same reason the
 workflows here are called rather than copied: the law lives in one place, and a
-fix reaches every repository at the next release. It writes one root
-`AGENTS.md`, with the universal rules between markers and empty sections for
-your own, and its README explains how a release reaches you.
+fix reaches every repository at the next release. Its README carries the stub
+to copy. Every Monday, and whenever you run it, the stub proposes the latest
+release as one pull request: one root `AGENTS.md`, with the universal rules
+between markers and empty sections for your own.
 
 > [!IMPORTANT]
 > **Whichever route you take, confirm the tools you actually use load what you
@@ -233,9 +234,9 @@ your own, and its README explains how a release reaches you.
 
 > [!TIP]
 > **Either route stays reversible.** What you write by hand is yours to delete.
-> What the hub delivers sits between two markers in one file, so removing it is
-> deleting that block, and a `no-intelligence` topic keeps the next release from
-> bringing it back.
+> What the hub delivers sits between two markers in one file and arrives
+> through one stub, so removing it is deleting both, and a `no-intelligence`
+> topic keeps the hub's `make sync` from bringing it back.
 
 ---
 

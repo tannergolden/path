@@ -5,7 +5,6 @@ tags: [monorepo, packages, architecture, workspaces]
 category: docs
 -->
 
-
 <div align="center">
 
 # 📦 PACKAGES & WORKSPACES

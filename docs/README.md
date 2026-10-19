@@ -5,7 +5,6 @@ tags: [documentation, index, standards, templates]
 category: docs
 -->
 
-
 <div align="center">
 
 # 📚 DOCUMENTATION

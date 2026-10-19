@@ -1,8 +1,8 @@
 <!--
 title: '📚 DOCUMENTATION'
 description: 'Where this project keeps its own documents, and where the engineering standards it follows actually live.'
-tags: [documentation, index, standards, templates]
-category: docs
+type: index
+keywords: [standards, templates]
 -->
 
 <div align="center">

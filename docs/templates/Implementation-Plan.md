@@ -1,8 +1,8 @@
 <!--
 title: '📜 IMPLEMENTATION PLAN TEMPLATE'
 description: 'Reusable template for planning an implementation in small, reviewable slices.'
-tags: [template, planning, implementation, delivery]
-category: docs
+type: template
+keywords: [planning, delivery]
 -->
 
 <div align="center">

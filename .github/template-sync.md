@@ -1,8 +1,8 @@
 <!--
 title: '🔄 TEMPLATE SYNC'
 description: 'How this repository takes its template''s later fixes when you run 🔄 Template Sync, what you control, and what waits on you.'
-tags: [template, sync, automation, workflows]
-category: docs
+type: guide
+keywords: [automation, workflows]
 -->
 
 <!-- markdownlint-disable MD041 -->

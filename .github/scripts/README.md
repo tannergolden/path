@@ -1,8 +1,8 @@
 <!--
 title: '🔬 REPOSITORY SCRIPTS'
 description: 'The checks this repository runs on its own configuration, and the tests that guard them.'
-tags: [scripts, validation, testing, python]
-category: docs
+type: index
+keywords: [validation, testing, python]
 -->
 
 <div align="center">

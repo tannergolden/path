@@ -1,8 +1,8 @@
 <!--
 title: '⚡ BENCHMARKS'
 description: 'The benchmark suites and recorded results that defend the performance budgets of this project.'
-tags: [benchmarks, performance, measurement, scaffold]
-category: docs
+type: index
+keywords: [performance, measurement, scaffold]
 -->
 
 <div align="center">

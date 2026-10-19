@@ -1,8 +1,8 @@
 <!--
 title: '🗄️ DATABASE TEMPLATES'
 description: 'Fill-in standards for data models and entities, and for writing, running, and rolling back schema migrations.'
-tags: [templates, database, data-models, migrations]
-category: docs
+type: index
+keywords: [data-models, migrations]
 -->
 
 <div align="center">

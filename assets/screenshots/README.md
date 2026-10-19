@@ -1,8 +1,8 @@
 <!--
 title: '🖥️ SCREENSHOTS'
 description: 'Captures of the product and the terminal, still or moving, in day and night pairs, for the README and the docs.'
-tags: [screenshots, assets, documentation, interface]
-category: docs
+type: index
+keywords: [assets, documentation, interface]
 -->
 
 <div align="center">

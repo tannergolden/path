@@ -1,8 +1,8 @@
 <!--
 title: '📜 CODE OF CONDUCT'
 description: 'The code of conduct governing participation in this project.'
-tags: [conduct, community, governance, contributors]
-category: community
+type: standard
+keywords: [community, governance, contributors]
 -->
 
 <div align="center">

@@ -1,8 +1,8 @@
 <!--
 title: '📐 DIAGRAMS'
 description: 'Architecture, flow, sequence and data drawings that Mermaid in the text cannot express.'
-tags: [diagrams, assets, architecture, documentation]
-category: docs
+type: index
+keywords: [assets, architecture, documentation]
 -->
 
 <div align="center">

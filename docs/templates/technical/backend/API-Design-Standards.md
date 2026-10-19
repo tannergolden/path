@@ -1,8 +1,8 @@
 <!--
 title: '📡 API DESIGN STANDARDS'
 description: 'Standards for designing consistent, versioned APIs.'
-tags: [api, standards, backend, rest]
-category: docs
+type: template
+keywords: [backend, rest]
 -->
 
 <div align="center">

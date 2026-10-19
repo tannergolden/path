@@ -1,8 +1,8 @@
 <!--
 title: '📦 PACKAGES & WORKSPACES'
 description: 'Guidelines for monorepo management and package isolation.'
-tags: [monorepo, packages, architecture, workspaces]
-category: docs
+type: template
+keywords: [monorepo, architecture]
 -->
 
 <div align="center">

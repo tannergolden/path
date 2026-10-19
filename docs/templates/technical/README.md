@@ -1,8 +1,8 @@
 <!--
 title: '🛠️ TECHNICAL TEMPLATES'
 description: 'Fill-in technical standards: the stack, source and package layout, and one folder per technical area.'
-tags: [templates, technical, standards, index]
-category: docs
+type: index
+keywords: [standards]
 -->
 
 <div align="center">

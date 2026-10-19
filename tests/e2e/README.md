@@ -1,8 +1,8 @@
 <!--
 title: '🎭 END-TO-END TESTS'
 description: 'End-to-end tests: whole user journeys driven against a running system, gating promotion to Preview and Release.'
-tags: [testing, e2e, test-suites, quality]
-category: docs
+type: index
+keywords: [testing, e2e, test-suites, quality]
 -->
 
 <div align="center">

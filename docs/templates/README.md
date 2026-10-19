@@ -1,8 +1,8 @@
 <!--
 title: '📋 PROJECT TEMPLATES'
 description: 'Index of the reusable document templates and when to use each one.'
-tags: [templates, index, documentation, scaffold]
-category: docs
+type: index
+keywords: [documentation, scaffold]
 -->
 
 <div align="center">
@@ -58,7 +58,7 @@ Every document here other than the `README.md` logs is one you complete: either 
 ## How to Use
 
 1. **Copy** the template to its destination above - never fill in the template file itself; your `docs/templates/` copies stay pristine as long as you copy rather than edit them, and running 🔄 Template Sync brings them to the template's newest form, so every copy you make after it starts from there.
-2. **Replace** every bracketed placeholder; delete sections that genuinely don't apply.
+2. **Replace** every bracketed placeholder, and change the copy's `type` from `template` to its own: `standard` for a fill-in standard, `record` for everything else; delete sections that genuinely don't apply.
 3. **Link** the document from the pull request (or issue) it supports, so decisions stay traceable.
 
 ## 📝 File Log

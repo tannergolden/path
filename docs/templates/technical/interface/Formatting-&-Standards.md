@@ -1,8 +1,8 @@
 <!--
 title: '📐 FORMATTING & STANDARDS'
 description: 'Formatting standards for content in the interface layer.'
-tags: [formatting, standards, style, interface]
-category: docs
+type: template
+keywords: [style, interface]
 -->
 
 <div align="center">

@@ -1,8 +1,8 @@
 <!--
 title: '📦 PACKAGES'
 description: 'Workspace packages, one folder each, for when a second consumer needs shared code.'
-tags: [packages, workspaces, monorepo, scaffold]
-category: docs
+type: index
+keywords: [workspaces, monorepo, scaffold]
 -->
 
 <div align="center">

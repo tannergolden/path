@@ -1,8 +1,8 @@
 <!--
 title: '☁️ ENVIRONMENT CONFIGURATION'
 description: 'Managing configuration and secrets across development, preview, and release environments.'
-tags: [configuration, environments, secrets, infrastructure]
-category: docs
+type: template
+keywords: [environments, secrets, infrastructure]
 -->
 
 <div align="center">

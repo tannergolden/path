@@ -1,8 +1,8 @@
 <!--
 title: '🙋 SUPPORT'
 description: 'Where to get help with this repository - the right channel for every kind of question.'
-tags: [support, community, help, questions]
-category: community
+type: guide
+keywords: [community, help, questions]
 -->
 
 

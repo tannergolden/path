@@ -1,8 +1,8 @@
 <!--
 title: '🚀 DEPLOYMENT PROTOCOLS'
 description: 'The protocol for promoting and deploying releases across environments.'
-tags: [deployment, protocol, releases, infrastructure]
-category: docs
+type: template
+keywords: [protocol, releases, infrastructure]
 -->
 
 <div align="center">

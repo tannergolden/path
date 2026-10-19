@@ -1,8 +1,8 @@
 <!--
 title: '🌐 HTML'
 description: 'Standalone HTML pages: previews, demos, prototypes and embeds that open in a browser.'
-tags: [html, assets, pages, previews]
-category: docs
+type: index
+keywords: [assets, pages, previews]
 -->
 
 <div align="center">

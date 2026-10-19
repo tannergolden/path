@@ -1,8 +1,8 @@
 <!--
 title: '📄 ADR TEMPLATE'
 description: 'The standard template for recording an architecture decision.'
-tags: [adr, template, architecture, decisions]
-category: docs
+type: template
+keywords: [architecture, decisions]
 status: '[Proposed | Accepted | Superseded | Deprecated]'
 date: '[YYYY-MM-DD]'
 evidence: '[Commit-pinned permalink to the research report(s) that informed this, as a markdown link - or N/A]'
@@ -23,7 +23,7 @@ _Formalized rationale. Transparent intent. Auditable evolution._
 ---
 
 > [!TIP]
-> **How to use**: copy this file to `docs/adrs/ADR-NNNN-Short-Slug.md` using the next sequential number (Capitalized-Kebab, keep this template itself pristine) and fill in every section. Set `status`, `date`, and `evidence` in the frontmatter above, and its row in the [ADR index](../adrs/README.md) is drawn from that frontmatter on the next push. Link the new record from the pull request that implements the decision. One decision per record; supersede rather than rewrite.
+> **How to use**: copy this file to `docs/adrs/ADR-NNNN-Short-Slug.md` using the next sequential number (Capitalized-Kebab, keep this template itself pristine) and fill in every section. Set `type` to `record`, and `status`, `date`, and `evidence`, in the frontmatter above, and its row in the [ADR index](../adrs/README.md) is drawn from that frontmatter on the next push. Link the new record from the pull request that implements the decision. One decision per record; supersede rather than rewrite.
 
 ---
 

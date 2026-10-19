@@ -1,8 +1,8 @@
 <!--
 title: '👤 USER STORY TEMPLATE'
 description: 'Template for writing user stories with clear acceptance criteria.'
-tags: [template, user-story, product, requirements]
-category: docs
+type: template
+keywords: [product, requirements]
 -->
 
 <div align="center">

@@ -1,8 +1,8 @@
 <!--
 title: '📋 SCHEMA & VALIDATION'
 description: 'Standards for schemas and input validation at service boundaries.'
-tags: [schema, validation, backend, data]
-category: docs
+type: template
+keywords: [backend, data]
 -->
 
 <div align="center">

@@ -1,8 +1,8 @@
 <!--
 title: '📝 DATA MODELS & ENTITIES'
 description: 'Standards for modeling entities and their relationships.'
-tags: [database, modeling, entities, schema]
-category: docs
+type: template
+keywords: [database, modeling, schema]
 -->
 
 <div align="center">

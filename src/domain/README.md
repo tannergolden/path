@@ -1,8 +1,8 @@
 <!--
 title: '🧠 DOMAIN LAYER'
 description: 'The domain layer: entities, business rules, and pure logic that import nothing outside themselves.'
-tags: [source, domain-layer, business-rules, architecture]
-category: docs
+type: index
+keywords: [source, business-rules, architecture]
 -->
 
 <div align="center">

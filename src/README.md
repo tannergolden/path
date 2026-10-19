@@ -1,8 +1,8 @@
 <!--
 title: '💻 APPLICATION SOURCE'
 description: 'The application source, split into three layers whose dependencies point inward.'
-tags: [source, architecture, layers, scaffold]
-category: docs
+type: index
+keywords: [architecture, layers, scaffold]
 -->
 
 <div align="center">

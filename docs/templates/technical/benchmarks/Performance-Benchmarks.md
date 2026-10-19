@@ -1,8 +1,8 @@
 <!--
 title: '⚡ PERFORMANCE BENCHMARKS'
 description: 'Reference data and methodologies for performance testing.'
-tags: [performance, benchmarks, metrics, testing]
-category: docs
+type: template
+keywords: [metrics, testing]
 -->
 
 <div align="center">

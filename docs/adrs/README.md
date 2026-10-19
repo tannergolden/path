@@ -1,8 +1,8 @@
 <!--
 title: '🧭 ARCHITECTURE DECISIONS'
 description: 'Architecture decision records, one file per decision, each logged with its status, date and evidence.'
-tags: [adr, architecture, decisions, index]
-category: docs
+type: index
+keywords: [adr]
 -->
 
 <div align="center">
@@ -68,7 +68,7 @@ it, or reads N/A.
 
 - [ ] Copy the [ADR template](../templates/ADR.md) into this folder as
       `ADR-NNNN-Short-Slug.md`, taking the next number.
-- [ ] Set `status`, `date`, and `evidence` in its frontmatter, and write every
+- [ ] Set `type: record`, `status`, `date`, and `evidence` in its frontmatter, and write every
       section.
 - [ ] Propose it in a pull request. Once merged, it is **Accepted**.
 

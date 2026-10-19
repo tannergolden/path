@@ -1,8 +1,8 @@
 <!--
 title: '🖌️ INTERFACE TEMPLATES'
 description: 'Fill-in standards for the user interface: formatting, styling and theming, and the frontend development environment.'
-tags: [templates, interface, frontend, design-system]
-category: docs
+type: index
+keywords: [frontend, design-system]
 -->
 
 <div align="center">

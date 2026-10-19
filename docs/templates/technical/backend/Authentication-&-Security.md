@@ -1,8 +1,8 @@
 <!--
 title: '🔐 AUTHENTICATION & SECURITY'
 description: 'Authentication, authorization, and security requirements for backend services.'
-tags: [authentication, security, backend, authorization]
-category: docs
+type: template
+keywords: [backend, authorization]
 -->
 
 <div align="center">

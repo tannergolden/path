@@ -1,8 +1,8 @@
 <!--
 title: '📉 POST-MORTEM TEMPLATE'
 description: 'Blameless post-mortem template for capturing incidents and their lessons.'
-tags: [template, post-mortem, incidents, operations]
-category: docs
+type: template
+keywords: [incidents, operations]
 -->
 
 <div align="center">

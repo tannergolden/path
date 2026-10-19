@@ -1,8 +1,8 @@
 <!--
 title: '🐳 DEVELOPMENT CONTAINER'
 description: 'The language-neutral development container this repository ships, and how to give it the toolchain your project needs.'
-tags: [devcontainer, development-environment, configuration, onboarding]
-category: docs
+type: index
+keywords: [devcontainer, development-environment, configuration, onboarding]
 -->
 
 <div align="center">

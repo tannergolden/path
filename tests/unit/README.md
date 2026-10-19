@@ -1,8 +1,8 @@
 <!--
 title: '🧩 UNIT TESTS'
 description: 'Unit tests: fast, isolated checks of one piece of logic each, run on every push.'
-tags: [testing, unit-tests, test-suites, quality]
-category: docs
+type: index
+keywords: [testing, test-suites, quality]
 -->
 
 <div align="center">

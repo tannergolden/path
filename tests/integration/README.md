@@ -1,8 +1,8 @@
 <!--
 title: '🔗 INTEGRATION TESTS'
 description: 'Integration tests: checks that cross a real boundary such as a database, the filesystem, or an HTTP service.'
-tags: [testing, integration-tests, test-suites, quality]
-category: docs
+type: index
+keywords: [testing, test-suites, quality]
 -->
 
 <div align="center">

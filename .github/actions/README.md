@@ -1,8 +1,8 @@
 <!--
 title: '🎬 REPOSITORY ACTIONS'
 description: 'The composite actions this repository keeps for its own workflows, and for any other repository that calls them.'
-tags: [github-actions, composite-action, workflows, automation]
-category: docs
+type: index
+keywords: [github-actions, composite-action, workflows, automation]
 -->
 
 <div align="center">

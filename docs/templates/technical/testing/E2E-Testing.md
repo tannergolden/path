@@ -1,8 +1,8 @@
 <!--
 title: '🎭 E2E TESTING'
 description: 'How end-to-end tests are organized and executed.'
-tags: [testing, e2e, quality, automation]
-category: docs
+type: template
+keywords: [quality, automation]
 -->
 
 <div align="center">

@@ -1,8 +1,8 @@
 <!--
 title: '📝 UI SETUP & ENVIRONMENT'
 description: 'Setting up the frontend development environment.'
-tags: [frontend, setup, tooling, interface]
-category: docs
+type: template
+keywords: [frontend, tooling, interface]
 -->
 
 <div align="center">

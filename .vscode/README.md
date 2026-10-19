@@ -1,8 +1,8 @@
 <!--
 title: '⚙️ EDITOR SETTINGS'
 description: 'The VS Code settings and extension recommendations this repository shares, and why every other file in this folder stays out of git.'
-tags: [vscode, editor, configuration, onboarding]
-category: docs
+type: index
+keywords: [vscode, configuration, onboarding]
 -->
 
 <div align="center">

@@ -1,8 +1,8 @@
 <!--
 title: '🧪 TESTS'
 description: 'The test suites, from isolated units to whole user journeys, and how CI comes to run them.'
-tags: [testing, test-suites, ci, scaffold]
-category: docs
+type: index
+keywords: [testing, test-suites, ci, scaffold]
 -->
 
 <div align="center">

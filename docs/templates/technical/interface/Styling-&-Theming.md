@@ -1,8 +1,8 @@
 <!--
 title: '📝 STYLING & THEMING'
 description: 'Standards for styling and theming user interfaces.'
-tags: [styling, theming, css, interface]
-category: docs
+type: template
+keywords: [css, interface]
 -->
 
 <div align="center">

@@ -1,8 +1,8 @@
 <!--
 title: '🧪 TESTING TEMPLATES'
 description: 'Fill-in standards for unit tests and end-to-end tests, inside the canonical testing strategy.'
-tags: [templates, testing, unit-tests, e2e]
-category: docs
+type: index
+keywords: [unit-tests, e2e]
 -->
 
 <div align="center">

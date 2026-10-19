@@ -1,8 +1,8 @@
 <!--
 title: '🔄 MIGRATION POLICIES'
 description: 'Policies for writing, reviewing, and rolling back schema migrations.'
-tags: [database, migrations, policy, schema]
-category: docs
+type: template
+keywords: [database, migrations, policy, schema]
 -->
 
 <div align="center">

@@ -1,8 +1,8 @@
 <!--
 title: '☁️ INFRASTRUCTURE TEMPLATES'
 description: 'Fill-in standards for environment configuration, the delivery pipelines, and deploying and rolling back releases.'
-tags: [templates, infrastructure, ci-cd, deployment]
-category: docs
+type: index
+keywords: [ci-cd, deployment]
 -->
 
 <div align="center">

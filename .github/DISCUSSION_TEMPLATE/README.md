@@ -1,8 +1,8 @@
 <!--
 title: '💬 DISCUSSION FORMS'
 description: 'The discussion category forms, each bound by its file name to the category it shapes.'
-tags: [discussions, discussion-forms, community, triage]
-category: docs
+type: index
+keywords: [discussions, community, triage]
 -->
 
 <div align="center">

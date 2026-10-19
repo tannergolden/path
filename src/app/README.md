@@ -1,8 +1,8 @@
 <!--
 title: '🚀 APPLICATION LAYER'
 description: 'The application layer: entry points and use cases that orchestrate the domain and receive infrastructure through injection.'
-tags: [source, application-layer, use-cases, architecture]
-category: docs
+type: index
+keywords: [source, use-cases, architecture]
 -->
 
 <div align="center">

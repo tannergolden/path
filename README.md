@@ -138,12 +138,14 @@ changes, and two routes to them would only collide.
 
 > [!NOTE]
 > **Neither route carries the template flag over.** Ten of the fifteen stubs
-> are guarded by `!github.event.repository.is_template`, and 🏷️ Cut Release by
-> its inverse - which is what keeps those ten silent here and Cut Release silent
-> everywhere else. `prune-runs.yml`, `verify-stubs.yml` and `auto-index.yml` run
-> on both sides, and 🔄 Template Sync reads the same flag to decide whether to
-> check its list or to sync. A fork inherits that flag no more than a generated
-> repository does, so your copy lands on the right side of every guard.
+> are silent here: nine in the two golden path templates alone, and
+> `release.yml`, with initialisation, in every template.
+> 🏷️ Cut Release runs only in a template. `prune-runs.yml`, `verify-stubs.yml`
+> and `auto-index.yml` run on both sides, and 🔄 Template Sync reads the same
+> flag to decide whether to check its list or to sync. A fork inherits that
+> flag no more than a generated repository does, so your copy lands on the right
+> side of every guard - and made a template of its own, it keeps its checks and
+> still syncs from here.
 
 ---
 
@@ -423,8 +425,9 @@ with every check in it, not four runs to read separately.
 job lives in does not matter, but its id does.
 
 Every workflow ships installed, and **almost all of them are inert here on
-purpose**: nearly every job carries an `is_template` guard, so it is silent
-in this template and comes alive in every repository generated from it. Three
+purpose**: nearly every job is silent in the two golden path templates and
+comes alive in every repository generated from this one, even one you make a
+template of its own. Three
 run in the template exactly as they will in yours - `prune-runs.yml`, because a
 template accumulates run history like any other repository, `verify-stubs.yml`,
 because a stub with a wrong ceiling should be caught here rather than

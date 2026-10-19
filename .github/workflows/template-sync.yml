@@ -18,7 +18,11 @@
 # ⚠️ IN THE TEMPLATE ITSELF THIS CHECKS INSTEAD. Every file the template ships
 # must be named in its list, so nothing reaches a generated repository
 # unannounced. That job runs there on every pull request and default-branch
-# push; here those events start a run that skips at once.
+# push; here those events start a run that skips at once. Make this
+# repository a template of its own and it does both: it checks its own list
+# on those events, and a dispatch still syncs it from the template it came
+# from, through `.github/template-derive.json`, as `.github/template-sync.md`
+# explains.
 #
 # ⚠️ A BOT_ACCESS_TOKEN IS WHAT LETS IT UPDATE WORKFLOWS. The default token
 # cannot write anything under .github/workflows/, so without the secret those

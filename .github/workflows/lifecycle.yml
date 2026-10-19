@@ -46,6 +46,10 @@ jobs:
     # branch's content there. A manual dispatch is exempt because the operator
     # chose the ref themselves. The weekly cron belongs to the version check
     # below, not to this.
+    #
+    # NEVER IN A TEMPLATE, a derived one included, although most stubs here
+    # are silent only in the two golden path templates: a template never
+    # initialises itself.
     if: ${{ !github.event.repository.is_template && (github.event_name != 'schedule' && (github.event_name == 'workflow_dispatch' || github.ref_name == github.event.repository.default_branch)) }}
     permissions:
       contents: write # rewrite the identity and push the result
@@ -60,7 +64,7 @@ jobs:
     # The version check runs on its schedule and on request - never on every
     # push, which would be noise and API calls for an answer that changes at
     # most once per major.
-    if: ${{ !github.event.repository.is_template && (github.event_name == 'schedule' || github.event_name == 'workflow_dispatch') }}
+    if: ${{ !(github.event.repository.is_template && contains(fromJSON('["repo", "path"]'), github.event.repository.name)) && (github.event_name == 'schedule' || github.event_name == 'workflow_dispatch') }}
     permissions:
       contents: read # read this repository's own stubs
       issues: write # open the one notice

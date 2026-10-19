@@ -199,6 +199,16 @@ sync offers one; take the `#` off a line to have the next sync add that file. A 
 is the one it cannot delete, since GitHub lets the workflow token change nothing under
 `.github/workflows/`: the initialisation run names it, for you to delete.
 
+### A template of your own
+
+Make this repository a template too - a vault, a kit, a service skeleton - and it does both: it
+checks its own list on every change, as its template does, and a dispatch of **🔄 Template Sync**
+still syncs it from the template it came from, as a mapped sync. Write that mapping in
+`.github/template-derive.json`, record its lock once, at the commit this repository was generated
+from, and name every file it ships in `.github/template-sync`: the standards' Template Sync guide
+shows how. Its other workflows keep running, since they are silent only in the two golden path
+templates; initialisation never runs in a template, and it releases with **🏷️ Cut Release**.
+
 ---
 
 ## 🩺 When Something Looks Wrong

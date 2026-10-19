@@ -40,7 +40,7 @@ permissions: {}
 
 jobs:
   dependabot:
-    if: ${{ !github.event.repository.is_template }}
+    if: ${{ !(github.event.repository.is_template && contains(fromJSON('["repo", "path"]'), github.event.repository.name)) }}
     permissions:
       contents: write # allow the squash merge once required checks pass
       pull-requests: write # approve the pull request

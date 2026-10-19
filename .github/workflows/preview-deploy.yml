@@ -39,10 +39,10 @@ permissions: {}
 
 jobs:
   deploy:
-    # Inert in a template repository, live in every repository generated
-    # from one. `is_template` is true only in the template itself, which
-    # is the same signal init-template.yml guards on.
-    if: ${{ !github.event.repository.is_template }}
+    # Inert in the two golden path templates, and live in every other
+    # repository, a template derived from one included: `is_template` alone
+    # is true there too, so the guard names the two.
+    if: ${{ !(github.event.repository.is_template && contains(fromJSON('["repo", "path"]'), github.event.repository.name)) }}
     permissions:
       contents: read # check out the ref being previewed
       id-token: write # OIDC token for keyless auth to the deploy target

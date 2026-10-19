@@ -54,7 +54,7 @@ permissions: {}
 jobs:
   # RULESET-LOAD-BEARING JOB ID: reports as 'pr / ✍️ DCO Sign-Off'.
   pr:
-    if: ${{ !github.event.repository.is_template && (github.event_name == 'pull_request_target') }}
+    if: ${{ !(github.event.repository.is_template && contains(fromJSON('["repo", "path"]'), github.event.repository.name)) && (github.event_name == 'pull_request_target') }}
     permissions:
       pull-requests: read # read the PR title under validation
       statuses: write # publish the semantic-title status check on the PR
@@ -64,7 +64,7 @@ jobs:
     # Everything except comments, which belong to issue-ops below. The
     # called workflow gates its own jobs by event: triage on pull requests,
     # onboarding on first interactions, the stale sweep on the schedule.
-    if: ${{ !github.event.repository.is_template && (github.event_name != 'issue_comment') }}
+    if: ${{ !(github.event.repository.is_template && contains(fromJSON('["repo", "path"]'), github.event.repository.name)) && (github.event_name != 'issue_comment') }}
     permissions:
       contents: read # read the labeler rules
       issues: write # post the welcome on issues
@@ -75,10 +75,10 @@ jobs:
     # Slash commands in issue comments - /assign, /label, /close and the
     # rest. Anything unrecognised is left alone.
     #
-    # Inert in a template repository, live in every repository generated
-    # from one. `is_template` is true only in the template itself, which
-    # is the same signal init-template.yml guards on.
-    if: ${{ github.event_name == 'issue_comment' && !github.event.repository.is_template }}
+    # Inert in the two golden path templates, and live in every other
+    # repository, a template derived from one included: `is_template` alone
+    # is true there too, so the guard names the two.
+    if: ${{ github.event_name == 'issue_comment' && !(github.event.repository.is_template && contains(fromJSON('["repo", "path"]'), github.event.repository.name)) }}
     permissions:
       issues: write # apply the command's label and assignment changes
     uses: tannergolden/standards/.github/workflows/issue-ops.yml@v1

@@ -54,7 +54,7 @@ jobs:
     # written into this file, so renaming your default branch cannot
     # silently stop this workflow. It also stops a branch with an open
     # pull request running everything twice.
-    if: ${{ !github.event.repository.is_template && (github.event_name != 'push' || github.ref_name == github.event.repository.default_branch) }}
+    if: ${{ !(github.event.repository.is_template && contains(fromJSON('["repo", "path"]'), github.event.repository.name)) && (github.event_name != 'push' || github.ref_name == github.event.repository.default_branch) }}
     permissions:
       contents: read # read the repository
     uses: tannergolden/standards/.github/workflows/ci.yml@v1
@@ -92,7 +92,7 @@ jobs:
 
   # RULESET-LOAD-BEARING JOB ID: reports as 'secrets / 🔍 Scan for Secrets'.
   secrets:
-    if: ${{ !github.event.repository.is_template && (github.event_name != 'push' || github.ref_name == github.event.repository.default_branch) }}
+    if: ${{ !(github.event.repository.is_template && contains(fromJSON('["repo", "path"]'), github.event.repository.name)) && (github.event_name != 'push' || github.ref_name == github.event.repository.default_branch) }}
     permissions:
       contents: read # full-history checkout for the secret scan
       issues: write # one-time escalation issue when scanning is silently off
@@ -100,12 +100,12 @@ jobs:
     secrets: inherit # zizmor: ignore[secrets-inherit] - first-party callee at the ref pinned above.
 
   codeql:
-    # INERT IN A TEMPLATE REPOSITORY. `is_template` is true only in the
-    # template itself, which holds no source code, so a weekly sweep there
-    # would analyse an empty tree forever. It is false in every repository
-    # generated from the template, where this same file runs normally - the
-    # same signal init-template.yml guards on, rather than a repository name.
-    if: ${{ !github.event.repository.is_template && (github.event_name != 'push' || github.ref_name == github.event.repository.default_branch) }}
+    # INERT IN THE TWO GOLDEN PATH TEMPLATES. They hold no source code, so a
+    # weekly sweep there would analyse an empty tree forever. Every other
+    # repository runs this same file normally, a template derived from one
+    # of them included: `is_template` alone is true there too, so every job
+    # here also names the two.
+    if: ${{ !(github.event.repository.is_template && contains(fromJSON('["repo", "path"]'), github.event.repository.name)) && (github.event_name != 'push' || github.ref_name == github.event.repository.default_branch) }}
     permissions:
       actions: read # CodeQL resolves workflow run metadata during analysis
       contents: read # walk the checkout to build the language matrix
@@ -117,7 +117,7 @@ jobs:
     # with the rest of the checks - actionlint and zizmor over a stub set
     # take seconds, and a finding can appear without a workflow file
     # changing when the shared configuration behind them moves.
-    if: ${{ !github.event.repository.is_template && (github.event_name != 'push' || github.ref_name == github.event.repository.default_branch) }}
+    if: ${{ !(github.event.repository.is_template && contains(fromJSON('["repo", "path"]'), github.event.repository.name)) && (github.event_name != 'push' || github.ref_name == github.event.repository.default_branch) }}
     permissions:
       contents: read # read the repository
     uses: tannergolden/standards/.github/workflows/lint-workflows.yml@v1

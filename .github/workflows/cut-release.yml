@@ -13,7 +13,9 @@
 # ever overwrites what you make of it. If your repository is consumed by tag
 # too - an action, or a kit like the Markdown Kit - keep it, remove the `if:`
 # guard, and set `required-files` and `check-command` for what your
-# repository ships. Otherwise delete it.
+# repository ships. Make your repository a template of its own and it runs
+# as it is, publishing the releases its own generated repositories follow.
+# Otherwise delete it.
 #
 # A change that renames a file a generated repository depends on, or reshapes
 # a stub in a way a merge cannot carry, is BREAKING: release it as a new

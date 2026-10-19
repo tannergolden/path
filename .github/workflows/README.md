@@ -73,13 +73,15 @@ its `on:` events and its opening comment.
 
 ## ⚠️ Before You Change One
 
-- **Most of these are silent in the template.** A job guarded by
-  `!github.event.repository.is_template` does nothing in the template and comes
-  alive in every repository generated from it. `prune-runs.yml`,
-  `verify-stubs.yml` and `auto-index.yml` carry no such guard and run in the
-  template as well; `template-sync.yml` checks its list here, and
-  `cut-release.yml` runs only here until a repository released by tag
-  adopts it.
+- **Most of these are silent in the two golden path templates.** A job whose
+  guard names them alongside `is_template` does nothing in either and comes
+  alive in every other repository, a template derived from one of them
+  included. Initialisation and `release.yml` stay silent in every
+  template: a template never initialises itself, and releases with
+  `cut-release.yml`. `prune-runs.yml`, `verify-stubs.yml` and `auto-index.yml`
+  carry no such guard and run in the template as well; `template-sync.yml`
+  checks its list here, and `cut-release.yml` runs only in a template until a
+  repository released by tag adopts it.
 - **Three job ids are check names.** `ci` and `secrets` in `checks.yml`, and
   `pr` in `governance.yml`, report as `<job id> / <job name>`, which is what
   branch protection requires. Rename one and every pull request waits on a

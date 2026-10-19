@@ -56,9 +56,10 @@ concurrency:
 permissions: {}
 
 jobs:
-  # Every job here is inert in a template repository, live in every
-  # repository generated from one. `is_template` is true only in the
-  # template itself - the same signal init-template.yml guards on.
+  # Every job here is inert in every template, a template derived from a
+  # golden path one included, and live in every other repository: a
+  # template releases with 🏷️ Cut Release instead, which the repositories
+  # generated from it follow.
   notes:
     if: ${{ !github.event.repository.is_template && (github.event_name == 'schedule' || (github.event_name == 'workflow_dispatch' && inputs.task == 'notes')) }}
     permissions:

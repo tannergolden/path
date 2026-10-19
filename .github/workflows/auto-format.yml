@@ -37,7 +37,7 @@ jobs:
     # A direct push runs only on the default branch, WHATEVER IT IS
     # CALLED - resolved at run time rather than written into this file, so
     # renaming your default branch cannot silently stop this workflow.
-    if: ${{ !github.event.repository.is_template && (github.event_name != 'push' || github.ref_name == github.event.repository.default_branch) }}
+    if: ${{ !(github.event.repository.is_template && contains(fromJSON('["repo", "path"]'), github.event.repository.name)) && (github.event_name != 'push' || github.ref_name == github.event.repository.default_branch) }}
     permissions:
       contents: write # push the fixed topic branch (PR-only flow)
       pull-requests: write # open or update the auto-format pull request

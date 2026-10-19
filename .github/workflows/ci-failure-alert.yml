@@ -66,7 +66,7 @@ permissions: {}
 
 jobs:
   alert:
-    if: ${{ !github.event.repository.is_template }}
+    if: ${{ !(github.event.repository.is_template && contains(fromJSON('["repo", "path"]'), github.event.repository.name)) }}
     permissions:
       issues: write # open the escalation issue, and close it on recovery
     uses: tannergolden/standards/.github/workflows/ci-failure-alert.yml@v1

@@ -35,7 +35,7 @@ Stay single-package until you have a concrete second consumer. Adopt a workspace
 - **Manifest**: `[package.json "workspaces" | pnpm-workspace.yaml]`
 - **Layout**:
 
-```txt
+```bash
 / (repo root)
 ├── apps/
 │   └── [app-name]/          # Deployable applications

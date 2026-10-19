@@ -58,7 +58,7 @@ Standardizing the language of our codebase.
 
 The physical organization of the client-side domain.
 
-```txt
+```bash
 /src
 ├── components/    # Reusable, atomic UI elements.
 ├── features/      # Business logic and domain modules.

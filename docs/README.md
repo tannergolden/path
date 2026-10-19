@@ -83,7 +83,7 @@ to keep that seed exactly as it is.
 `docs/` is where your instantiated documents go - the tree you build by copying
 seeds out, not the tree they sit in. A conventional shape, none of it mandatory:
 
-```txt
+```bash
 docs/
 ├── technical/           # architecture, backend, database, interface, testing
 ├── adrs/                # architecture decision records

@@ -56,7 +56,7 @@ jobs:
       contents: read # read this repository's workflows
     steps:
       - name: '🛡️ Harden Runner'
-        uses: tannergolden/standards/actions/harden@v1
+        uses: tannergolden/standards/.github/actions/harden@v1
         with:
           egress-policy: audit
           notice: '🔬 Verifying that every stub asks for what its called workflow declares.'

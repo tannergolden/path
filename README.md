@@ -374,7 +374,7 @@ tables after every push:
 | [`scripts/`](.github/scripts/README.md)                         | The checks this repository runs on its own configuration, and the tests that guard them.                                            |
 | [`workflows/`](.github/workflows/README.md)                     | Every workflow in this repository: the name it shows in the Actions tab, what triggers it, and what it does.                        |
 | [`CODE_OF_CONDUCT.md`](.github/CODE_OF_CONDUCT.md)              | The code of conduct governing participation in this project.                                                                        |
-| [`CODEOWNERS`](.github/CODEOWNERS)                              | CODEOWNERS - Folder-based ownership rules                                                                                           |
+| [`CODEOWNERS`](.github/CODEOWNERS)                              | Folder-based ownership rules                                                                                                        |
 | [`CONTRIBUTING.md`](.github/CONTRIBUTING.md)                    | How to contribute, covering branching, commits, code style, testing, and the pull-request process.                                  |
 | [`dependabot.yml`](.github/dependabot.yml)                      | Dependabot - automated dependency updates                                                                                           |
 | [`FUNDING.yml`](.github/FUNDING.yml)                            | &#x1F496; Funding Options                                                                                                           |

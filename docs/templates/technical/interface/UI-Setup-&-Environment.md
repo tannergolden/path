@@ -13,7 +13,7 @@ category: docs
 
 **Setting up the frontend development environment.**
 
-_Deterministic environments. Parity-first. Streamlined onboarding._
+_Deterministic environments. Parity-first. Fast onboarding._
 
 </div>
 

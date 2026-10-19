@@ -24,7 +24,7 @@ _Type-safe. Validated perimeters. Hermetic sanitization._
 We treat data validation as our primary defensive layer. Our goal is to ensure that no malformed or malicious data ever penetrates our service boundaries, maintaining a consistent and reliable internal state.
 
 - **Defensive at the Edge**: All external inputs are validated before they reach business logic.
-- **Strictly Typed**: We utilize strong type systems to catch structural errors at compile-time.
+- **Strictly Typed**: We use strong type systems to catch structural errors at compile-time.
 - **Fail-Fast**: Invalid data results in immediate, descriptive rejections to the consumer.
 
 ---

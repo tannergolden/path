@@ -25,7 +25,7 @@ We adhere to a **Universal Technology Stack** philosophy. This allows for flexib
 
 - **Standardized Interop**: Regardless of the tool, it must integrate with our Makefile and CI standards.
 - **Traceability**: Every pivot or architectural change must be recorded in this document.
-- **AI-Augmented**: We leverage modern AI builders and IDEs to accelerate delivery without sacrificing quality.
+- **AI-Augmented**: We use modern AI builders and IDEs to accelerate delivery without sacrificing quality.
 
 ---
 

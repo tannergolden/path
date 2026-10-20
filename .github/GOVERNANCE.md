@@ -11,7 +11,7 @@ keywords: [roles, continuity, maintainers]
 
 <a name="top"></a>
 
-**How this project is led, who decides what, and how access and quality survive any single person leaving.**
+**How this project is led, who decides, and how it survives any one person leaving.**
 
 _Decisions in the open. Access that outlives individuals._
 
@@ -31,11 +31,11 @@ This project uses a **lightweight maintainer model**. A small group of **Maintai
 
 ## 👥 Roles & Responsibilities
 
-| Role                   | Who they are                                 | Responsibilities                                                                                    |
-| :--------------------- | :------------------------------------------- | :-------------------------------------------------------------------------------------------------- |
-| **Maintainer**         | Named in [`CODEOWNERS`](CODEOWNERS) | Review and merge PRs, cut releases, steward security response, administer repository settings.      |
-| **Contributor**        | Anyone who opens a PR or issue               | Follow the [Contributing Guidelines](CONTRIBUTING.md); respond to review feedback.         |
-| **Security responder** | A Maintainer on rotation                     | Triage private reports per the [Security Policy](SECURITY.md) within the stated timelines. |
+| Role                   | Who they are                        | Responsibilities                                                                               |
+| :--------------------- | :---------------------------------- | :--------------------------------------------------------------------------------------------- |
+| **Maintainer**         | Named in [`CODEOWNERS`](CODEOWNERS) | Review and merge PRs, cut releases, steward security response, administer repository settings. |
+| **Contributor**        | Anyone who opens a PR or issue      | Follow the [Contributing Guidelines](CONTRIBUTING.md); respond to review feedback.             |
+| **Security responder** | A Maintainer on rotation            | Triage private reports per the [Security Policy](SECURITY.md) within the stated timelines.     |
 
 Maintainers are added by consensus of the existing Maintainers after a sustained record of quality contributions, and are recorded in `CODEOWNERS` - once populated, that file is the single source of truth for who currently holds authority (the template ships it commented out; list your maintainers there as one of your first governance acts).
 

@@ -5,7 +5,6 @@ type: guide
 keywords: [community, help, questions]
 -->
 
-
 <div align="center">
 
 # 🙋 SUPPORT
@@ -31,12 +30,16 @@ _Ask once. Ask in the right place._
 | A security vulnerability   | 🛡️ **[SECURITY.md](SECURITY.md)** - private disclosure only, never a public issue |
 | A setup or tooling problem | 🧰 **Discussions → Tooling & Setup**                                              |
 
+---
+
 ## 📚 Self-Serve First
 
 - **[README](../README.md)** - quick start and repository map.
 - **[Documentation index](https://github.com/tannergolden/standards/blob/Development/docs/README.md)** - every canonical guide, from branching to releases (lives in the template home).
 - **[Troubleshooting](https://github.com/tannergolden/standards/blob/Development/docs/operations/Troubleshooting.md)** - the 90-second triage for common failures.
 - **[Contributing guide](CONTRIBUTING.md)** - standards for changes and pull requests.
+
+---
 
 ## ⏱️ What to Expect
 

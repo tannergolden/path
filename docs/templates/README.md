@@ -23,11 +23,11 @@ _Structured excellence. Rapid documentation. Unified standards._
 > Use these standardized templates to bootstrap your technical work. They are designed to meet the repository's professional standards.
 
 > [!IMPORTANT]
-> **Where a project gives its agents instructions, these templates are binding rather than optional.** The convention is that an agent fills in the [📜 Implementation Plan](Implementation-Plan.md) to be filled in and **delivered to the user as a report before any non-trivial change**, and the other templates to be used at the moments they help the user steer - research before direction, design before build, post-mortem after failure.
+> **Where a project gives its agents instructions, these templates are binding rather than optional.** The convention is that an agent fills in the [📜 Implementation Plan](Implementation-Plan.md) and **delivers it to the user as a report before any non-trivial change**, and uses the other templates at the moments they help the user steer - research before direction, design before build, post-mortem after failure.
 
 ---
 
-## Available Templates
+## 📋 Available Templates
 
 | Template                                                | Purpose                                                | Copy to                                             |
 | :------------------------------------------------------ | :----------------------------------------------------- | :-------------------------------------------------- |
@@ -40,7 +40,9 @@ _Structured excellence. Rapid documentation. Unified standards._
 | [&#x1F4AC; Communication](Communication.md)             | Meeting notes, status heartbeats, stakeholder updates. | reuse in issues, discussions, and reviews           |
 | [&#x1F9ED; ADR index](../adrs/README.md)                | The folder log every ADR is listed in.                 | already in place; each record's row is generated    |
 
-## Fill-In Technical Standards
+---
+
+## 🧩 Fill-In Technical Standards
 
 The fill-in standards live in [`technical/`](technical/README.md), one folder per area, and each folder logs its own files.
 
@@ -55,11 +57,15 @@ Every document here other than the `README.md` logs is one you complete: either 
 | **Infrastructure** | [&#x2601;&#xFE0F; Environment Configuration](technical/infrastructure/Environment-Configuration.md), [&#x1F504; CI CD Pipelines](technical/infrastructure/CI-CD-Pipelines.md), [&#x1F680; Deployment Protocols](technical/infrastructure/Deployment-Protocols.md) |
 | **Testing**        | [&#x1F9E9; Unit Test Standards](technical/testing/Unit-Test-Standards.md), [&#x1F3AD; E2E Testing](technical/testing/E2E-Testing.md), [&#x26A1; Performance Benchmarks](technical/benchmarks/Performance-Benchmarks.md)                                           |
 
-## How to Use
+---
+
+## 🚀 How To Use
 
 1. **Copy** the template to its destination above - never fill in the template file itself; your `docs/templates/` copies stay pristine as long as you copy rather than edit them, and running 🔄 Template Sync brings them to the template's newest form, so every copy you make after it starts from there.
 2. **Replace** every bracketed placeholder, and change the copy's `type` from `template` to its own: `standard` for a fill-in standard, `record` for everything else; delete sections that genuinely don't apply.
 3. **Link** the document from the pull request (or issue) it supports, so decisions stay traceable.
+
+---
 
 ## 📝 File Log
 

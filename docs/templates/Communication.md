@@ -39,6 +39,8 @@ Use this format for recording meeting outcomes.
   - [ ] @user1: Complete [Task]
   - [ ] @user2: Review [Document]
 
+---
+
 ## 📢 Project Heartbeats / Status Updates
 
 Standardized weekly update format:
@@ -50,11 +52,15 @@ Standardized weekly update format:
 - **Focus**: What is the priority for next week.
 - **Blockers**: Anything preventing progress.
 
+---
+
 ## 🤝 Stakeholder Communication
 
 - **Updates**: Provide bi-weekly summaries to stakeholders.
 - **Escalation**: If a project is at risk, notify stakeholders immediately with a mitigation plan.
 - **Transparency**: Keep all technical decisions documented in ADRs (Architecture Decision Records).
+
+---
 
 ## 🧰 Tools
 

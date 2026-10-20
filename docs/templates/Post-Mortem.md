@@ -11,7 +11,7 @@ keywords: [incidents, operations]
 
 <a name="top"></a>
 
-**Records an incident or project outcome blamelessly - impact, timeline, root cause, and the actions that prevent a repeat.**
+**A blameless account of an incident or outcome, and the actions that prevent a repeat.**
 
 _Continuous learning. Radical transparency. Future focus._
 
@@ -33,9 +33,13 @@ _Continuous learning. Radical transparency. Future focus._
 | **Duration**          | [Detection → resolution, e.g. 2h 15m] |
 | **Affected**          | [Users/systems impacted and how]      |
 
+---
+
 ## 📝 Summary
 
 A brief overview of the project outcome or incident.
+
+---
 
 ## ⏱️ Timeline (for incidents)
 
@@ -44,15 +48,21 @@ A brief overview of the project outcome or incident.
 - `[HH:MM]` - Mitigated (what stopped the bleeding)
 - `[HH:MM]` - Resolved (fully recovered)
 
+---
+
 ## 📈 What Went Well
 
 - Success 1
 - Success 2
 
+---
+
 ## 📉 What Could Be Improved
 
 - Challenge 1
 - Challenge 2
+
+---
 
 ## 🛠️ Root Cause Analysis (for incidents)
 
@@ -60,10 +70,14 @@ A brief overview of the project outcome or incident.
 - Why wasn't it caught earlier? (tests, review, monitoring)
 - How was it detected?
 
+---
+
 ## 📝 Lessons Learned
 
 - Key takeaway 1
 - Key takeaway 2
+
+---
 
 ## ✅ Action Items
 

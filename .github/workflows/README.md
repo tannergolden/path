@@ -71,6 +71,39 @@ its `on:` events and its opening comment.
 
 ---
 
+## 🛡️ The Secrets They Read
+
+These are every secret the stubs here pass on, through `secrets: inherit`, to
+the workflows they call. None is created for you. Add each under
+<kbd>Settings</kbd> → <kbd>Secrets and variables</kbd> → <kbd>Actions</kbd>,
+except the one the table files under Dependabot.
+
+| Secret                                     | Read by                                                           | Add it when                                                                                 | Without it                                                                                                                                                                                               |
+| :----------------------------------------- | :---------------------------------------------------------------- | :------------------------------------------------------------------------------------------ | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `ADMIN_TOKEN`                              | 🎯 Apply Standards                                                | You write the settings or the rulesets with it                                              | Those two jobs stop and name the missing token; the labels still apply                                                                                                                                   |
+| `BOT_ACCESS_TOKEN`                         | 🔄 Template Sync, 🗂️ Machined Indexes and 🖌️ Code Style Formatter | You want their pull requests to run CI and carry workflow files, or the template is private | Each opens its pull request with the built-in token, so no check starts on it by itself, and holds back what it changed under `.github/workflows/`; Template Sync cannot fetch a private template at all |
+| `BOT_ACCESS_TOKEN`, as a Dependabot secret | 🦾 Automate Dependabot                                            | **Allow GitHub Actions to create and approve pull requests** is off                         | The approval falls back to the built-in token, which GitHub refuses with that setting off                                                                                                                |
+| `GITLEAKS_LICENSE`                         | 🚦 Checks, `secrets` job                                          | An organization owns this repository; the key is free                                       | The scan is skipped, the required check stays green, and one issue says so                                                                                                                               |
+| `DEPLOY_TOKEN`                             | 🚀 Preview Deploy                                                 | Your `deploy-command` needs a credential                                                    | The command finds `$DEPLOY_TOKEN` empty                                                                                                                                                                  |
+| `NPM_TOKEN`                                | 📦 Release, `package` job, `npm: true`                            | You publish for real, not as a dry run                                                      | The npm job fails rather than skip                                                                                                                                                                       |
+| `PYPI_API_TOKEN`                           | 📦 Release, `package` job, `pypi: true`                           | PyPI has no trusted publisher for this repository                                           | The job tries Trusted Publishing over OIDC instead                                                                                                                                                       |
+| `CARGO_REGISTRY_TOKEN`                     | 📦 Release, `package` job, `crates: true`                         | You publish for real, not as a dry run                                                      | The crates.io job fails                                                                                                                                                                                  |
+| `REGISTRY_USERNAME`, `REGISTRY_PASSWORD`   | 📦 Release, `package` job, `container: true`                      | You push to a registry other than GHCR                                                      | GHCR signs in with the built-in token; any other registry fails                                                                                                                                          |
+
+**A Dependabot run reads only Dependabot's secrets**, under <kbd>Settings</kbd>
+→ <kbd>Secrets and variables</kbd> → <kbd>Dependabot</kbd>, so a
+`BOT_ACCESS_TOKEN` kept under Actions alone is empty there. `DEPLOY_TOKEN` may
+live in the `preview` environment instead, beside that environment's
+reviewers, since the deploy job runs in it.
+
+What each token must be allowed to do: `ADMIN_TOKEN` in the standards'
+[Creating the ADMIN_TOKEN](https://github.com/tannergolden/standards/blob/Development/docs/operations/Branch-Protection.md#-creating-the-admin_token),
+and `BOT_ACCESS_TOKEN` in [The Token](../template-sync.md#-the-token). Each
+called workflow declares the secrets it reads under `secrets:` in its
+`workflow_call` block, which is where to look when a stub changes.
+
+---
+
 ## ⚠️ Before You Change One
 
 - **Most of these are silent in the two golden path templates.** A job whose

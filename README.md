@@ -5,7 +5,6 @@ type: index
 keywords: [template, scaffold, ci-cd, engineering-standards]
 -->
 
-
 <div align="center">
 
 # 🛤️ GOLDEN PATH
@@ -81,16 +80,16 @@ and later fixes to the scaffold can still reach it - whenever you run
 changes. It is the route this template is built for, and the one
 **🚀 The First Five Minutes** assumes further down.
 
-|                              | Fork                                              | "Use this template"                     |
-| :--------------------------- | :------------------------------------------------ | :-------------------------------------- |
-| **Link back to here**        | Kept - `Sync fork` works                          | None                                    |
-| **Later scaffold fixes**     | `Sync fork`: every change, or none                | 🔄 Template Sync: per file, as a PR     |
-| **History**                  | Every commit this repository has                  | One `Initial commit`                    |
-| **Actions**                  | **Disabled until you enable them**, per GitHub    | On from the start                       |
-| **Issues**                   | Off by default                                    | On                                      |
-| **A new pull request**       | Defaults to targeting **this** repository         | Targets yours                           |
-| **Visibility**               | Public, and a fork's visibility cannot be changed | Yours to choose                         |
-| **Your contributions graph** | Commits to a fork do not count                    | They count                              |
+|                              | Fork                                              | "Use this template"                 |
+| :--------------------------- | :------------------------------------------------ | :---------------------------------- |
+| **Link back to here**        | Kept - `Sync fork` works                          | None                                |
+| **Later scaffold fixes**     | `Sync fork`: every change, or none                | 🔄 Template Sync: per file, as a PR |
+| **History**                  | Every commit this repository has                  | One `Initial commit`                |
+| **Actions**                  | **Disabled until you enable them**, per GitHub    | On from the start                   |
+| **Issues**                   | Off by default                                    | On                                  |
+| **A new pull request**       | Defaults to targeting **this** repository         | Targets yours                       |
+| **Visibility**               | Public, and a fork's visibility cannot be changed | Yours to choose                     |
+| **Your contributions graph** | Commits to a fork do not count                    | They count                          |
 
 ### What a fork actually buys you
 
@@ -214,10 +213,10 @@ additive, and so is taking it away.
 
 When you do want it, there are two supported routes and no wrong answer:
 
-| Route                                                       | You commit                  | Updates arrive by                            |
-| :----------------------------------------------------------- | :-------------------------- | :------------------------------------------- |
-| **By hand**                                                 | the instructions themselves | you editing them                             |
-| **[`tannergolden/intelligence`](https://github.com/tannergolden/intelligence)** | one workflow stub | a pull request each release, which you merge |
+| Route                                                                           | You commit                  | Updates arrive by                            |
+| :------------------------------------------------------------------------------ | :-------------------------- | :------------------------------------------- |
+| **By hand**                                                                     | the instructions themselves | you editing them                             |
+| **[`tannergolden/intelligence`](https://github.com/tannergolden/intelligence)** | one workflow stub           | a pull request each release, which you merge |
 
 Writing them by hand suits conventions that are specific to one project. The
 hub suits several repositories that share one set, for the same reason the
@@ -401,23 +400,23 @@ are grouped by what they do - everything that verifies a change in one file,
 everything that reacts to humans in another - so one push produces one run
 with every check in it, not four runs to read separately.
 
-| Workflow                   | Gives you                                                         |
-| :------------------------- | :---------------------------------------------------------------- |
-| `checks.yml`               | The gates: lint/test/build, secret scan, CodeQL, workflow lint    |
+| Workflow                   | Gives you                                                                |
+| :------------------------- | :----------------------------------------------------------------------- |
+| `checks.yml`               | The gates: lint/test/build, secret scan, CodeQL, workflow lint           |
 | `governance.yml`           | PR title and DCO checks, onboarding, triage, stale sweep, slash commands |
-| `release.yml`              | Draft notes, publish assets, registries, prune superseded releases |
-| `maintenance.yml`          | Prunes stale deployments; deletes draft releases on request        |
-| `prune-runs.yml`           | Prunes workflow run history, with its logs and artifacts          |
-| `lifecycle.yml`            | Claims this repository once; tells you when a new major exists    |
-| `dependabot-automerge.yml` | Approves and queues Dependabot's patch and minor updates          |
-| `ci-failure-alert.yml`     | Opens an issue when a watched workflow fails, closes it on green  |
-| `apply-standards.yml`      | Dispatch-only. The label taxonomy and branch protection           |
-| `auto-format.yml`          | Formats what a push touched                                       |
-| `preview-deploy.yml`       | Deploys pushes to a preview target, once one is configured        |
-| `verify-stubs.yml`         | Proves every job's permission ceiling matches its called workflow |
-| `auto-index.yml`           | Redraws every folder log and index after a push, as a pull request |
-| `template-sync.yml`        | Proposes the template's later fixes as one pull request, when run |
-| `cut-release.yml`          | Publishes this template's releases. Inert in yours until you adopt it |
+| `release.yml`              | Draft notes, publish assets, registries, prune superseded releases       |
+| `maintenance.yml`          | Prunes stale deployments; deletes draft releases on request              |
+| `prune-runs.yml`           | Prunes workflow run history, with its logs and artifacts                 |
+| `lifecycle.yml`            | Claims this repository once; tells you when a new major exists           |
+| `dependabot-automerge.yml` | Approves and queues Dependabot's patch and minor updates                 |
+| `ci-failure-alert.yml`     | Opens an issue when a watched workflow fails, closes it on green         |
+| `apply-standards.yml`      | Dispatch-only. The label taxonomy and branch protection                  |
+| `auto-format.yml`          | Formats what a push touched                                              |
+| `preview-deploy.yml`       | Deploys pushes to a preview target, once one is configured               |
+| `verify-stubs.yml`         | Proves every job's permission ceiling matches its called workflow        |
+| `auto-index.yml`           | Redraws every folder log and index after a push, as a pull request       |
+| `template-sync.yml`        | Proposes the template's later fixes as one pull request, when run        |
+| `cut-release.yml`          | Publishes this template's releases. Inert in yours until you adopt it    |
 
 **Do not rename the job ids** `ci` and `secrets` (in `checks.yml`) or `pr`
 (in `governance.yml`). A called workflow reports its checks as
@@ -507,21 +506,21 @@ compares this repository with that release and proposes whatever changed as
 **one pull request** on `chore/template-sync`, which you review and merge like
 any other. If you never run it, nothing in this repository ever changes.
 
-| It always...                     | Because                                                                                                        |
-| :------------------------------- | :------------------------------------------------------------------------------------------------------------- |
-| Merges rather than overwrites    | Each file is merged with whatever you changed in it, by the same three-way merge git uses                      |
-| Writes in your identity          | The template is rewritten exactly as initialisation rewrote it, so footers and contact links stay yours        |
-| Leaves a conflict untouched      | A file you and the template changed in the same place stays as you have it; the pull request shows the change |
-| Respects a deletion              | A file you delete is switched off, under its old name or a new one, until you take the `#` off its line again  |
-| Leaves your structure alone      | `src/`, `tests/`, `packages/`, `benchmarks/`, `assets/`, this README and the licence start switched off        |
+| It always...                  | Because                                                                                                       |
+| :---------------------------- | :------------------------------------------------------------------------------------------------------------ |
+| Merges rather than overwrites | Each file is merged with whatever you changed in it, by the same three-way merge git uses                     |
+| Writes in your identity       | The template is rewritten exactly as initialisation rewrote it, so footers and contact links stay yours       |
+| Leaves a conflict untouched   | A file you and the template changed in the same place stays as you have it; the pull request shows the change |
+| Respects a deletion           | A file you delete is switched off, under its old name or a new one, until you take the `#` off its line again |
+| Leaves your structure alone   | `src/`, `tests/`, `packages/`, `benchmarks/`, `assets/`, this README and the licence start switched off       |
 
 Three files describe it, and only one of them is yours to edit:
 
-| File                                                   | What it is                                                                                         |
-| :----------------------------------------------------- | :------------------------------------------------------------------------------------------------- |
+| File                                                   | What it is                                                                                                     |
+| :----------------------------------------------------- | :------------------------------------------------------------------------------------------------------------- |
 | [`.github/template-sync`](.github/template-sync)       | Every path the template ships, in `.gitignore` syntax. Put a `#` in front of a line to keep that file as yours |
-| `.github/template-sync.lock`                           | Where each file was last synced from. Written by the sync alone; never edit it                     |
-| [`.github/template-sync.md`](.github/template-sync.md) | The full explanation: every outcome, every option, and what to do when something waits on you      |
+| `.github/template-sync.lock`                           | Where each file was last synced from. Written by the sync alone; never edit it                                 |
+| [`.github/template-sync.md`](.github/template-sync.md) | The full explanation: every outcome, every option, and what to do when something waits on you                  |
 
 > [!IMPORTANT]
 > **Workflow files need a `BOT_ACCESS_TOKEN`.** GitHub's default token cannot
@@ -538,6 +537,59 @@ option altogether, delete that file.
 
 The engine lives in [`tannergolden/standards`](https://github.com/tannergolden/standards/blob/Development/docs/distribution/automation/Template-Sync.md),
 called rather than copied, like every other workflow here.
+
+---
+
+## 🧰 Maintaining This Template
+
+This section is for whoever changes the template itself, rather than a
+repository generated from it.
+
+**A pull request here runs two checks.** The guard that keeps most stubs
+silent in the two golden path templates covers the gates too, so what checks
+a change on its way in is 🔄 Template Sync, which holds `.github/template-sync`
+to the files this template ships, and 🔬 Verify Stub Ceilings, when a workflow
+changed. 🗂️ Machined Indexes redraws the folder logs after the merge, as a
+pull request, and 🎯 Apply Standards is silent here as well: a dispatch
+applies nothing and still reports green. Nothing here tests the scripts in
+`.github/scripts/`, runs the repository validator before 🏷️ Cut Release does,
+or checks a document's frontmatter at all, so run the gates yourself before a
+push, from the root, with the standards cloned beside this repository:
+
+```bash
+git clone --depth 1 --branch v1 https://github.com/tannergolden/standards ../standards
+
+python3 .github/scripts/validate-repository.py
+python3 -m unittest discover -s .github/scripts -p 'test_*.py'
+python3 ../standards/.github/scripts/template-sync.py check --repo-dir .
+python3 ../standards/.github/scripts/update-doc-indexes.py --check --tree
+python3 ../standards/.github/scripts/check-frontmatter.py --mode enforce
+```
+
+The frontmatter check matters most for the seeds: every generated
+repository's `ci` job runs it with `frontmatter: 'enforce'`, so a seed that
+fails it here fails that required check in each repository that syncs it.
+
+**A new file needs a line in `.github/template-sync`**, in the section that
+says what a generated repository does with it. The standards'
+[For Template Authors](https://github.com/tannergolden/standards/blob/Development/docs/distribution/automation/Template-Sync.md#-for-template-authors)
+sets out each section.
+
+**A merge reaches nobody until a release.** Generated repositories follow
+`v1`, so dispatch 🏷️ Cut Release from the default branch with the next
+`vX.Y.Z` and `move-major` left on. It refuses a version that is not a new
+`vX.Y.Z` above the last one, a commit that is not on the default branch, a
+tree missing `.github/template-sync` or `.github/workflows/template-sync.yml`,
+and one the repository validator fails; otherwise it tags the version, moves
+its major tag to it, publishes the release and prunes the one it superseded.
+A change that renames a file a generated repository depends on, or reshapes a
+stub in a way a merge cannot carry, is breaking: release it as `v2`, which no
+repository follows until its owner changes `ref:`.
+
+**The guards know this template by name.** Each job that is silent only in
+the two golden path templates names them by repository name in its `if:`, and
+so does the standards' own Template Sync. Rename this repository and those
+jobs start running in it.
 
 ---
 

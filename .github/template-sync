@@ -86,6 +86,12 @@
 
 /docs/README.md
 /docs/adrs/README.md
+/docs/distribution/README.md
+/docs/introduction/README.md
+/docs/library/README.md
+/docs/operations/README.md
+/docs/references/README.md
+/docs/technical/README.md
 /docs/templates/ADR.md
 /docs/templates/Communication.md
 /docs/templates/Implementation-Plan.md

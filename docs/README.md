@@ -40,11 +40,17 @@ why they ship as seed content rather than as law.
 
 <!-- AUTO-INDEX:BEGIN dir=. style=log -->
 
-| Entry                               | Purpose                                                                                               |
-| :---------------------------------- | :---------------------------------------------------------------------------------------------------- |
-| [`adrs/`](adrs/README.md)           | Architecture decision records, one file per decision, each logged with its status, date and evidence. |
-| [`templates/`](templates/README.md) | Index of the reusable document templates and when to use each one.                                    |
-| [`README.md`](README.md)            | This file.                                                                                            |
+| Entry                                     | Purpose                                                                                                                                                     |
+| :---------------------------------------- | :---------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [`adrs/`](adrs/README.md)                 | Architecture decision records, one file per decision, each logged with its status, date and evidence.                                                       |
+| [`distribution/`](distribution/README.md) | From a branch to a release: how a change moves through this project and how a release reaches its users, wherever this project adds to the shared workflow. |
+| [`introduction/`](introduction/README.md) | Where to start: what this project is and how its parts fit together, the principles it holds to, how to get ready to work on it, and where it is going.     |
+| [`library/`](library/README.md)           | What to learn, and where: guides, background and further reading for anyone new to this project's domain or its tools.                                      |
+| [`operations/`](operations/README.md)     | Keeping this project healthy and safe once it runs: runbooks, incident response, post-mortems, security, and the risks it still carries.                    |
+| [`references/`](references/README.md)     | Things to look up: the glossary, catalogues, settings and formats, the pages this project consults rather than reads through.                               |
+| [`technical/`](technical/README.md)       | How this project is built: its architecture, stack and source, one document for each part that needs one, and the designs, plans and research behind them.  |
+| [`templates/`](templates/README.md)       | Index of the reusable document templates and when to use each one.                                                                                          |
+| [`README.md`](README.md)                  | This file.                                                                                                                                                  |
 
 <!-- AUTO-INDEX:END -->
 
@@ -78,23 +84,31 @@ to keep that seed exactly as it is.
 
 ---
 
-## 📁 This Folder As You Grow
+## 📁 The Seven Folders
 
-`docs/` is where your instantiated documents go - the tree you build by copying
-seeds out, not the tree they sit in. A conventional shape, none of it mandatory:
+`docs/` is where your own documents go: the pages you write and the seeds you
+copy out, not the tree the seeds sit in. It arrives in the same seven folders
+as the standards' own documentation, so every repository on the standards
+reads the same way:
 
 ```bash
 docs/
-├── technical/           # architecture, backend, database, interface, testing
+├── introduction/        # where to start: overview, principles, setup, roadmap
+├── distribution/        # from a branch to a release: releasing, delivery
+├── technical/           # how it is built: architecture, source, designs, plans
+├── operations/          # keeping it healthy and safe: runbooks, post-mortems
+├── references/          # things to look up: glossary, catalogues, formats
+├── library/             # what to learn: guides, background, further reading
 ├── adrs/                # architecture decision records
-└── operations/          # runbooks, on-call, incident response
+└── templates/           # the seeds, copied out into the folders above
 ```
 
-Nothing belongs in it until you put something there, and `templates/` is not
-copied across - the seeds stay where they are and you take what you want.
-
-Give each folder you add a `README.md` that logs its files, the way every
-seeded folder does, and update it in the same change that adds a file.
+Each folder arrives empty but for a `README.md` that says what belongs in it
+and logs its files. Put each document you write in the folder its kind names,
+and add folders below them as you grow: give each one a `README.md` that logs
+its files, the way every seeded folder does, and update it in the same change
+that adds a file. `templates/` is not copied across: the seeds stay where they
+are and you take what you want.
 
 ---
 

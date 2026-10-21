@@ -44,6 +44,10 @@ on:
       # ⚠️ NEVER ADD THIS WORKFLOW TO ITS OWN LIST. It cannot escalate its
       # own failure, and listing it only produces a loop.
     types: [completed]
+    # Only a run on a branch that escalates starts one here. The alert acts
+    # on Development alone (see `branches` below), so a run on any other
+    # branch would start one that does nothing. Widen both together.
+    branches: [Development]
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.event.workflow_run.name }}-${{ github.event.workflow_run.head_branch }}

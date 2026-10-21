@@ -2,7 +2,6 @@
 title: '🔗 INTEGRATION TESTS'
 description: 'Integration tests: checks that cross a real boundary such as a database, the filesystem, or an HTTP service.'
 type: index
-keywords: [testing, test-suites, quality]
 -->
 
 <div align="center">

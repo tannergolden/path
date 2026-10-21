@@ -2,7 +2,6 @@
 title: '📖 LIBRARY'
 description: 'What to learn, and where: guides, background and further reading for anyone new to this project''s domain or its tools.'
 type: index
-keywords: [learning, guides]
 -->
 
 <div align="center">

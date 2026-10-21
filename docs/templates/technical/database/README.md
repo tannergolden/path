@@ -2,7 +2,6 @@
 title: '🗄️ DATABASE TEMPLATES'
 description: 'Fill-in standards for data models and entities, and for writing, running, and rolling back schema migrations.'
 type: index
-keywords: [data-models, migrations]
 -->
 
 <div align="center">

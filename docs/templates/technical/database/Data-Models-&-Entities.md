@@ -2,7 +2,6 @@
 title: '📝 DATA MODELS & ENTITIES'
 description: 'Standards for modeling entities and their relationships.'
 type: template
-keywords: [database, modeling, schema]
 -->
 
 <div align="center">

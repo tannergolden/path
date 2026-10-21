@@ -2,7 +2,6 @@
 title: '🔄 CI / CD PIPELINES'
 description: 'How the CI and delivery pipelines are structured and what each stage enforces.'
 type: template
-keywords: [automation, infrastructure]
 -->
 
 <div align="center">

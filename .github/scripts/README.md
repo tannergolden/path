@@ -2,7 +2,6 @@
 title: '🔬 REPOSITORY SCRIPTS'
 description: 'The checks this repository runs on its own configuration, and the tests that guard them.'
 type: index
-keywords: [validation, testing, python]
 -->
 
 <div align="center">

@@ -2,7 +2,6 @@
 title: '📐 TECHNICAL DESIGN TEMPLATE'
 description: 'Template for proposing and reviewing a technical design.'
 type: template
-keywords: [architecture, engineering]
 -->
 
 <div align="center">

@@ -2,7 +2,6 @@
 title: '☁️ INFRASTRUCTURE TEMPLATES'
 description: 'Fill-in standards for environment configuration, the delivery pipelines, and deploying and rolling back releases.'
 type: index
-keywords: [ci-cd, deployment]
 -->
 
 <div align="center">

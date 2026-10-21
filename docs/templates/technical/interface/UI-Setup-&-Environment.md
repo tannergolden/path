@@ -2,7 +2,6 @@
 title: '📝 UI SETUP & ENVIRONMENT'
 description: 'Setting up the frontend development environment.'
 type: template
-keywords: [frontend, tooling, interface]
 -->
 
 <div align="center">

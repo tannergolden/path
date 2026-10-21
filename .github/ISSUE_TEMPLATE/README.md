@@ -2,7 +2,6 @@
 title: '📥 ISSUE FORMS'
 description: 'The issue forms a reporter chooses from, and the chooser configuration that offers them.'
 type: index
-keywords: [issues, triage, community]
 -->
 
 <div align="center">

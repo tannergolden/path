@@ -2,7 +2,6 @@
 title: '📡 API DESIGN STANDARDS'
 description: 'Standards for designing consistent, versioned APIs.'
 type: template
-keywords: [backend, rest]
 -->
 
 <div align="center">

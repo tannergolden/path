@@ -2,7 +2,6 @@
 title: '📦 PACKAGES & WORKSPACES'
 description: 'Guidelines for monorepo management and package isolation.'
 type: template
-keywords: [monorepo, architecture]
 -->
 
 <div align="center">

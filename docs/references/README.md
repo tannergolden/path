@@ -2,7 +2,6 @@
 title: '📚 REFERENCES'
 description: 'Things to look up: the glossary, catalogues, settings and formats, the pages this project consults rather than reads through.'
 type: index
-keywords: [reference, glossary]
 -->
 
 <div align="center">

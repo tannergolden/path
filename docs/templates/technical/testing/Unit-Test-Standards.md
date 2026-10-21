@@ -2,7 +2,6 @@
 title: '🧩 UNIT TEST STANDARDS'
 description: 'Standards and coverage expectations for unit tests.'
 type: template
-keywords: [testing, unit-tests, quality]
 -->
 
 <div align="center">

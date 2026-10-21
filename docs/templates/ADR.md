@@ -2,7 +2,6 @@
 title: '📄 ADR TEMPLATE'
 description: 'The standard template for recording an architecture decision.'
 type: template
-keywords: [architecture, decisions]
 status: '[Proposed | Accepted | Superseded | Deprecated]'
 date: '[YYYY-MM-DD]'
 evidence: '[Commit-pinned permalink to the research report(s) that informed this, as a markdown link - or N/A]'

@@ -2,7 +2,6 @@
 title: '🛠️ TECHNICAL'
 description: 'How this project is built: its architecture, stack and source, one document for each part that needs one, and the designs, plans and research behind them.'
 type: index
-keywords: [architecture, design]
 -->
 
 <div align="center">

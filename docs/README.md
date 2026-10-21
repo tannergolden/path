@@ -2,7 +2,6 @@
 title: '📚 DOCUMENTATION'
 description: 'Where this project keeps its own documents, and where the engineering standards it follows actually live.'
 type: index
-keywords: [standards, templates]
 -->
 
 <div align="center">

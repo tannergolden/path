@@ -2,7 +2,6 @@
 title: '🌿 TRIGGER WORKFLOWS'
 description: 'Every workflow in this repository: the name it shows in the Actions tab, what triggers it, and what it does.'
 type: index
-keywords: [github-actions, ci-cd, automation]
 -->
 
 <div align="center">

@@ -2,7 +2,6 @@
 title: '🖌️ INTERFACE TEMPLATES'
 description: 'Fill-in standards for the user interface: formatting, styling and theming, and the frontend development environment.'
 type: index
-keywords: [frontend, design-system]
 -->
 
 <div align="center">

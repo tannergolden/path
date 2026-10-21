@@ -2,7 +2,6 @@
 title: '📡 BACKEND TEMPLATES'
 description: 'Fill-in standards for backend services: API design, authentication and security, schemas and validation.'
 type: index
-keywords: [api, security]
 -->
 
 <div align="center">

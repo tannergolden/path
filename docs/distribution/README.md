@@ -2,7 +2,6 @@
 title: '🌿 DISTRIBUTION & WORKFLOW'
 description: 'From a branch to a release: how a change moves through this project and how a release reaches its users, wherever this project adds to the shared workflow.'
 type: index
-keywords: [workflow, releases]
 -->
 
 <div align="center">

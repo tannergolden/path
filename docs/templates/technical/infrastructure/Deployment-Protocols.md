@@ -2,7 +2,6 @@
 title: '🚀 DEPLOYMENT PROTOCOLS'
 description: 'The protocol for promoting and deploying releases across environments.'
 type: template
-keywords: [protocol, releases, infrastructure]
 -->
 
 <div align="center">

@@ -2,7 +2,6 @@
 title: '📉 POST-MORTEM TEMPLATE'
 description: 'Blameless post-mortem template for capturing incidents and their lessons.'
 type: template
-keywords: [incidents, operations]
 -->
 
 <div align="center">

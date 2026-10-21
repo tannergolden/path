@@ -2,7 +2,6 @@
 title: '💻 APPLICATION SOURCE'
 description: 'The application source, split into three layers whose dependencies point inward.'
 type: index
-keywords: [architecture, layers, scaffold]
 -->
 
 <div align="center">

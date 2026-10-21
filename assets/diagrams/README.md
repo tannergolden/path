@@ -2,7 +2,6 @@
 title: '📐 DIAGRAMS'
 description: 'Architecture, flow, sequence and data drawings that Mermaid in the text cannot express.'
 type: index
-keywords: [assets, architecture, documentation]
 -->
 
 <div align="center">

@@ -2,7 +2,6 @@
 title: '🎭 E2E TESTING'
 description: 'How end-to-end tests are organized and executed.'
 type: template
-keywords: [quality, automation]
 -->
 
 <div align="center">

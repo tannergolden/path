@@ -2,7 +2,6 @@
 title: '🧩 UNIT TESTS'
 description: 'Unit tests: fast, isolated checks of one piece of logic each, run on every push.'
 type: index
-keywords: [testing, test-suites, quality]
 -->
 
 <div align="center">

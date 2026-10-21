@@ -2,7 +2,6 @@
 title: '⚡ BENCHMARKS'
 description: 'The benchmark suites and recorded results that defend the performance budgets of this project.'
 type: index
-keywords: [performance, measurement, scaffold]
 -->
 
 <div align="center">

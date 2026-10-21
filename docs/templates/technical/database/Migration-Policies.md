@@ -2,7 +2,6 @@
 title: '🔄 MIGRATION POLICIES'
 description: 'Policies for writing, reviewing, and rolling back schema migrations.'
 type: template
-keywords: [database, migrations, policy, schema]
 -->
 
 <div align="center">

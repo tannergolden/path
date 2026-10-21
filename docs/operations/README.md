@@ -2,7 +2,6 @@
 title: '🛡️ OPERATIONS & SECURITY'
 description: 'Keeping this project healthy and safe once it runs: runbooks, incident response, post-mortems, security, and the risks it still carries.'
 type: index
-keywords: [operations, security]
 -->
 
 <div align="center">

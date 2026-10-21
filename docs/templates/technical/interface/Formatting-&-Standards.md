@@ -2,7 +2,6 @@
 title: '📐 FORMATTING & STANDARDS'
 description: 'Formatting standards for content in the interface layer.'
 type: template
-keywords: [style, interface]
 -->
 
 <div align="center">

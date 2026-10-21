@@ -2,7 +2,6 @@
 title: '☁️ ENVIRONMENT CONFIGURATION'
 description: 'Managing configuration and secrets across development, preview, and release environments.'
 type: template
-keywords: [environments, secrets, infrastructure]
 -->
 
 <div align="center">

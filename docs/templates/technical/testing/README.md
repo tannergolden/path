@@ -2,7 +2,6 @@
 title: '🧪 TESTING TEMPLATES'
 description: 'Fill-in standards for unit tests and end-to-end tests, inside the canonical testing strategy.'
 type: index
-keywords: [unit-tests, e2e]
 -->
 
 <div align="center">

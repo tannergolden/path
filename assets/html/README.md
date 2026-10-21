@@ -2,7 +2,6 @@
 title: '🌐 HTML'
 description: 'Standalone HTML pages: previews, demos, prototypes and embeds that open in a browser.'
 type: index
-keywords: [assets, pages, previews]
 -->
 
 <div align="center">

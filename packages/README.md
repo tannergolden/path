@@ -2,7 +2,6 @@
 title: '📦 PACKAGES'
 description: 'Workspace packages, one folder each, for when a second consumer needs shared code.'
 type: index
-keywords: [workspaces, monorepo, scaffold]
 -->
 
 <div align="center">

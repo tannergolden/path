@@ -2,7 +2,6 @@
 title: '🧭 ARCHITECTURE DECISIONS'
 description: 'Architecture decision records, one file per decision, each logged with its status, date and evidence.'
 type: index
-keywords: [adr]
 -->
 
 <div align="center">

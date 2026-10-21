@@ -2,7 +2,6 @@
 title: '🛤️ GOLDEN PATH'
 description: 'A language-agnostic scaffold. Structure, community health files, and workflow triggers, with every standard followed by link rather than copied.'
 type: index
-keywords: [template, scaffold, ci-cd, engineering-standards]
 -->
 
 <div align="center">

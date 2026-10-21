@@ -2,7 +2,6 @@
 title: '📋 SCHEMA & VALIDATION'
 description: 'Standards for schemas and input validation at service boundaries.'
 type: template
-keywords: [backend, data]
 -->
 
 <div align="center">

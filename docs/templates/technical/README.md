@@ -2,7 +2,6 @@
 title: '🛠️ TECHNICAL TEMPLATES'
 description: 'Fill-in technical standards: the stack, source and package layout, and one folder per technical area.'
 type: index
-keywords: [standards]
 -->
 
 <div align="center">

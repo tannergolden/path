@@ -2,7 +2,6 @@
 title: '🛡️ SECURITY POLICY'
 description: 'Supported versions and how to report vulnerabilities privately.'
 type: guide
-keywords: [disclosure, vulnerabilities]
 -->
 
 <div align="center">

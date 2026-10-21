@@ -2,7 +2,6 @@
 title: '💬 DISCUSSION FORMS'
 description: 'The discussion category forms, each bound by its file name to the category it shapes.'
 type: index
-keywords: [discussions, community, triage]
 -->
 
 <div align="center">

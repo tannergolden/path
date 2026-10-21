@@ -2,7 +2,6 @@
 title: '📝 TECHNOLOGY STACK & TOOLING'
 description: 'Declares the technology stack and maps it to the universal make interface.'
 type: template
-keywords: [configuration, technical]
 -->
 
 <div align="center">

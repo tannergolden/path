@@ -2,7 +2,6 @@
 title: '🤝 CONTRIBUTING GUIDELINES'
 description: 'How to contribute, covering branching, commits, code style, testing, and the pull-request process.'
 type: guide
-keywords: [standards, workflow, community]
 -->
 
 <div align="center">

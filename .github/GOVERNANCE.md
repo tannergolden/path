@@ -2,7 +2,6 @@
 title: '🏛️ PROJECT GOVERNANCE'
 description: 'How this project is led, who decides what, how access continues, and the review and security standards every change meets.'
 type: standard
-keywords: [roles, continuity, maintainers]
 -->
 
 <div align="center">

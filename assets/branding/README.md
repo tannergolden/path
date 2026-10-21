@@ -2,7 +2,6 @@
 title: '✒️ BRANDING'
 description: 'The marks, colours and type that identify this project: logo, mark, wordmark, icon, favicon, palette, and the social preview card.'
 type: index
-keywords: [assets, identity, design]
 -->
 
 <div align="center">

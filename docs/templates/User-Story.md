@@ -2,7 +2,6 @@
 title: '👤 USER STORY TEMPLATE'
 description: 'Template for writing user stories with clear acceptance criteria.'
 type: template
-keywords: [product, requirements]
 -->
 
 <div align="center">

@@ -2,7 +2,6 @@
 title: '🎨 ASSETS'
 description: 'Where this project keeps what presents it: four folders to start, a name ready for every other kind, and the rules every file follows.'
 type: index
-keywords: [branding, images, documentation]
 -->
 
 <div align="center">

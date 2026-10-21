@@ -2,7 +2,6 @@
 title: '⚡ PERFORMANCE BENCHMARKS'
 description: 'Reference data and methodologies for performance testing.'
 type: template
-keywords: [metrics, testing]
 -->
 
 <div align="center">

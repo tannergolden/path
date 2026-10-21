@@ -2,7 +2,6 @@
 title: '📜 IMPLEMENTATION PLAN TEMPLATE'
 description: 'Reusable template for planning an implementation in small, reviewable slices.'
 type: template
-keywords: [planning, delivery]
 -->
 
 <div align="center">

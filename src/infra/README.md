@@ -2,7 +2,6 @@
 title: '🔌 INFRASTRUCTURE LAYER'
 description: 'The infrastructure layer: adapters that implement the domain interfaces against databases, networks, and outside services.'
 type: index
-keywords: [source, adapters, architecture]
 -->
 
 <div align="center">

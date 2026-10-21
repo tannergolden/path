@@ -2,7 +2,6 @@
 title: '💬 COMMUNICATION GUIDELINES'
 description: 'Channels, expectations, and etiquette for communicating across issues, discussions, and reviews.'
 type: template
-keywords: [community, etiquette]
 -->
 
 <div align="center">

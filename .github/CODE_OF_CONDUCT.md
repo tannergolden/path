@@ -2,7 +2,6 @@
 title: '📜 CODE OF CONDUCT'
 description: 'The code of conduct governing participation in this project.'
 type: standard
-keywords: [community, governance, contributors]
 -->
 
 <div align="center">

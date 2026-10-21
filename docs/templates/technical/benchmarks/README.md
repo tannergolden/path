@@ -2,7 +2,6 @@
 title: '⚡ BENCHMARK TEMPLATES'
 description: 'Fill-in standard for performance budgets, the methodology behind the numbers, and how each run is recorded.'
 type: index
-keywords: [benchmarks, performance, budgets]
 -->
 
 <div align="center">

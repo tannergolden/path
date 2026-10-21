@@ -2,7 +2,6 @@
 title: '📝 STYLING & THEMING'
 description: 'Standards for styling and theming user interfaces.'
 type: template
-keywords: [css, interface]
 -->
 
 <div align="center">

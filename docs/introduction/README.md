@@ -2,7 +2,6 @@
 title: '🧭 INTRODUCTION'
 description: 'Where to start: what this project is and how its parts fit together, the principles it holds to, how to get ready to work on it, and where it is going.'
 type: index
-keywords: [onboarding, overview]
 -->
 
 <div align="center">

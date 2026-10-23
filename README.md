@@ -286,7 +286,10 @@ publishes nothing.
 2. **Sign your commits off.** `git commit -s` adds the `Signed-off-by` trailer
    that the DCO check requires. Once branch protection is on, a commit without
    it blocks the merge. `git config alias.ci 'commit -s'` and forget about it.
-3. **Configure the `ci` job in `checks.yml`**, as above, once you have
+3. **Fit your project in, and configure the `ci` job in `checks.yml`.** The
+   prompt in [Integrating Your Project](docs/introduction/Integrating-Your-Project.md)
+   has an AI agent move your project into the folders here and point the `ci`
+   job at its commands. Or configure the job by hand, as above, once you have
    something to build.
 4. **Apply the settings, then the protection** - run **🎯 Apply Standards**
    from the Actions tab. `apply-settings` writes the repository settings

@@ -190,10 +190,11 @@ changes, and two routes to them would only collide.
 > template author's identity, unmerged with your edits.
 
 > [!NOTE]
-> **Neither route carries the template flag over.** Some jobs read it: the
-> governance and housekeeping jobs are silent in the two golden path
+> **Neither route carries the template flag over.** Some jobs read it: most
+> of the jobs that act on a repository are silent in the two golden path
 > templates, `release.yml` and initialisation are silent in every template,
-> and 🏷️ Cut Release runs only in one. The checks run on both sides. The
+> and 🏷️ Cut Release runs only in one. The checks, the run-history prune and
+> the index redraw run on both sides. The
 > table under **How The Workflows Work** says which is which, and
 > 🔄 Template Sync reads the same flag to decide whether to check its list or
 > to sync. A fork inherits that flag no more than a generated repository does,
@@ -243,7 +244,7 @@ Any language, any tool. A few starting points:
 You do not have to fill in all of them - one real command is enough.
 
 > [!TIP]
-> Prefer a `Makefile`? Add one with `lint`, `test`, `build`, and `docs` targets,
+> Prefer a `Makefile`? Add one with `setup`, `lint`, `test` and `build` targets,
 > then delete the `with:` block entirely: the `ci` job falls back to `make <target>`
 > whenever no explicit command is given.
 
@@ -304,8 +305,8 @@ between markers and empty sections for your own.
 ## 🎉 What Happens On Its Own
 
 **"Use this template" substitutes nothing.** GitHub copies every file verbatim,
-so a generated repository would otherwise carry the template author's licence
-holder, funding target, and documentation footers forever.
+so a generated repository would otherwise carry the template author as its
+licence holder, funding target, maintainer and README credit forever.
 
 The `init` job in `lifecycle.yml` fixes that on its own, once. It rewrites the identity to
 **your** account, rewrites the bare "Initial commit" into a proper Conventional
@@ -343,9 +344,10 @@ publishes nothing.
 ## 🚀 The First Five Minutes
 
 > [!TIP]
-> Every step below, plus signing and the token, is kept as one canonical
-> checklist in the standards:
+> The steps by hand that every repository on the standards shares, signing
+> and the admin token among them, are kept as one checklist in the standards:
 > [🙋 What You Do By Hand](https://github.com/tannergolden/standards/blob/Development/docs/introduction/What-You-Do-By-Hand.md).
+> The steps below are this template's own, and add what only it needs.
 
 1. **Check that init ran** - `.github/TEMPLATE_INIT` should be gone and the
    `LICENSE` should carry your name and the current year. If not, dispatch
@@ -378,15 +380,18 @@ publishes nothing.
    everything - so tick the job you want as well. Do settings first: they are
    checkboxes, while a wrong ruleset blocks every merge. See the token note
    below before you do. On a public repository the settings also include the
-   Actions event policy that keeps `governance.yml`'s pull request triage
-   running once GitHub starts blocking `pull_request_target` by default, on
-   2 December 2026.
+   Actions event policy that keeps `governance.yml`'s pull request triage and
+   first-time welcome running once GitHub's default policy blocks
+   `pull_request_target`, on 2 December 2026 at the latest.
 5. **Check the private channels reach you.** The settings switch on private
-   vulnerability reporting, which adds "Report a vulnerability" to the issue
-   chooser; without `ADMIN_TOKEN`, switch it on under Settings → Advanced
-   Security. Then, under Settings → Moderation options → Reported content,
-   accept content reports, which is how the code of conduct asks people to
-   report behaviour to you.
+   vulnerability reporting, which puts **Report a vulnerability** on the
+   Security tab; without `ADMIN_TOKEN`, switch it on under Settings → Advanced
+   Security. A conduct report needs a private route too. On a public
+   repository an organization owns, accept content reports under Settings →
+   Moderation options → Reported content. A personal account has no such
+   setting, and its content reports reach GitHub alone, so give each
+   maintainer a private contact in the Maintainers table of
+   `.github/GOVERNANCE.md`.
 6. **Use your account's community health files, if you keep them.** When your
    account's public `.github` repository holds a code of conduct, a
    contributing guide, a security policy and the rest for every repository, the
@@ -426,9 +431,9 @@ publishes nothing.
 > need a token with administration write as `ADMIN_TOKEN`. Without it, those
 > jobs stop with a sentence naming the missing token instead of a bare `403`.
 >
-> A fine-grained token scoped to your repositories generated from the
-> templates, with **Administration: Read and write** and nothing else, is all
-> it needs. Step-by-step:
+> A fine-grained token with **Administration: Read and write**, and
+> **Contents: Read-only**, which a private repository needs, is all it needs.
+> Step-by-step:
 > [Creating the ADMIN_TOKEN](https://github.com/tannergolden/standards/blob/Development/docs/operations/Branch-Protection.md#-creating-the-admin_token).
 > You can skip it entirely by applying the settings and rulesets yourself,
 > where your own rights are already enough.
@@ -538,10 +543,12 @@ job lives in does not matter, but its id does.
 Every workflow ships installed. **The checks run everywhere, the two golden
 path templates included**: what a template ships - the scripts, the workflows,
 the seeded documents - is exactly what every generated repository's required
-checks run against, so it is checked before it ships. **The jobs that act on a
+checks run against, so it is checked before it ships. **Most jobs that act on a
 repository are silent in the two templates** and come alive in every
 repository generated from this one, even one you make a template of its own:
-triage, housekeeping, releases, settings. `template-sync.yml` checks the
+triage, the welcome, releases, settings and most housekeeping. The run-history
+prune and the index redraw run in the templates as well, which need them as
+much. `template-sync.yml` checks the
 template's list instead of syncing there, and `cut-release.yml` runs only in a
 template, publishing the releases your copy follows, until a repository
 released by tag adopts it. Delete any file that does not fit your project -
@@ -580,7 +587,7 @@ Almost nothing here pins a third-party action, either. Every `uses:` in the
 stubs points at `tannergolden/standards`, so the SHA pins behind them are
 maintained once, there, rather than in every repository built from this one.
 The exceptions are `verify-stubs.yml` and `scorecard.yml`, which run steps of
-their own and pin each action they use to a commit. Those pins are why
+their own and pin each third-party action they use to a commit. Those pins are why
 `.github/dependabot.yml` ships with `github-actions` enabled: it keeps them
 current. It also keeps the development container's features and the
 repository scripts' one Python requirement current, the other two manifests
@@ -599,10 +606,19 @@ every generated repository starts with.
 > when the major changes, a `v2` still arrives as a pull request even with
 > every cron asleep. So a dormant repository still finds out; it just finds out
 > through Dependabot instead of through an issue.
+>
+> Dependabot has a dormancy rule of its own, though: once one of its pull
+> requests has been open for more than 90 days, and in that time nobody has
+> merged or closed any of them, edited `.github/dependabot.yml` or run an
+> update by hand, it pauses. It then opens no pull request at all, security
+> updates included, until someone does. Merge or close what it opens, and the
+> safety net holds.
 
-If you would rather pin exact versions (`@v1.4.2`) for an auditable record of
-what ran when, do that instead - Dependabot updates reusable-workflow
-references natively, and the `dependabot-automerge` stub will merge them on
+If you would rather pin an exact version for an auditable record of what ran
+when, pin its commit, as `@<sha> # v1.4.2`, not the version tag: the standards
+delete each version's tag when the next is cut, and a stub pinned to a tag
+that is gone stops running. Dependabot updates commit pins and their version
+comments natively, and the `dependabot-automerge` stub will merge them on
 green CI.
 
 ---
@@ -665,9 +681,10 @@ repository generated from it.
 **A pull request here runs the same checks as anywhere else.** 🚦 Checks
 lints the configuration, runs the scripts' tests, enforces every document's
 frontmatter, scans for secrets and runs CodeQL and the workflow lint; ✍️ the
-`pr` check holds the title, the commit messages and the sign-off; 🔄 Template
-Sync holds `.github/template-sync` to the files this template ships; and
-🔬 Verify Stub Ceilings runs when a workflow changed. 🗂️ Machined Indexes
+`pr` check holds the title, the branch name, the commit messages and the
+sign-off; 🔄 Template Sync holds `.github/template-sync` to the files this
+template ships; and 🔬 Verify Stub Ceilings runs when a workflow, the checker
+or its requirements changed. 🗂️ Machined Indexes
 redraws the folder logs after the merge, as a pull request, and
 🛡️ OpenSSF Scorecard rescores the default branch. 🎯 Apply Standards is silent
 here: a dispatch applies nothing and still reports green.

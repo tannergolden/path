@@ -120,8 +120,9 @@ Changes to the list take effect on the next sync you run. A few things worth kno
 | ⏸️ Waiting on a token                                  | A workflow file - see below                                                  |
 | ⛔ Skipped as unsafe                                   | A path that would reach outside this repository, so it is never written      |
 
-Files the template added or changed arrive **in your identity**: the footers name you, the licence
-holder is you, and links to the shared repositories the template relies on stay as they are.
+Files the template added or changed arrive **in your identity**: the licence holder, funding
+target, maintainer and README credit name you, a link meant as this repository names yours, and
+links to the shared repositories the template relies on stay as they are.
 
 **Folder logs are redrawn, never merged.** A table between `AUTO-INDEX` markers lists the files
 beside it, so a sync never calls it a conflict: it merges the words around the table and redraws
@@ -166,11 +167,11 @@ closes it.
 
 ## 🔑 The Token
 
-| Without a `BOT_ACCESS_TOKEN`                                       | With one                         |
-| :----------------------------------------------------------------- | :------------------------------- |
-| Files under `.github/workflows/` wait, named in the issue          | They arrive like any other file  |
-| The pull request cannot start required checks; re-run them by hand | CI runs on it                    |
-| A private template cannot be fetched at all                        | It can, if the token can read it |
+| Without a `BOT_ACCESS_TOKEN`                                                             | With one                         |
+| :--------------------------------------------------------------------------------------- | :------------------------------- |
+| Files under `.github/workflows/` wait, named in the issue                                | They arrive like any other file  |
+| The pull request's checks wait until someone with write access approves them on its page | CI runs on it                    |
+| A private template cannot be fetched at all                                              | It can, if the token can read it |
 
 `BOT_ACCESS_TOKEN` is the same secret every automation pull request here uses: a token with the
 `repo` and `workflow` scopes, or a fine-grained one with **Contents**, **Pull requests**, **Issues**
@@ -209,7 +210,7 @@ The same stub runs differently in the template: there it **checks** that `.githu
 names every file the template ships, and fails a pull request that adds a file without a line for
 it. Template releases are cut with **🏷️ Cut Release**, which only runs in the template; a merge to
 the template reaches a generated repository only once a release moves `v1`. What each release
-changed is in the template's own `CHANGELOG.md`, which initialisation deleted from this repository:
+changed is in the template's own `CHANGELOG.md`, which stays on the template and is never synced:
 read it [on the template](https://github.com/tannergolden/path/blob/Development/CHANGELOG.md) before
 you run a sync.
 

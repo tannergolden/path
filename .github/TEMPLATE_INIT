@@ -3,8 +3,8 @@ This repository has not been initialised yet.
 The presence of this file is what permits the `init` job in
 `.github/workflows/lifecycle.yml` to run. That job rewrites the template
 author's identity to yours - the licence holder, the funding target, the
-documentation footers, and the issue chooser's contact link - and then deletes
-this file, which is what stops it ever running again. Anything else
+maintainer, the README credit, and the issue chooser's contact link - and then
+deletes this file, which is what stops it ever running again. Anything else
 .github/template-sync names under "Only ever in the template" goes with it,
 and every folder log is redrawn to match. On a public repository it also
 deletes the Vulnerability Report issue form, because a vulnerability there is

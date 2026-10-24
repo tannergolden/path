@@ -35,6 +35,9 @@ stub checker, the commit-message hook and their tests. So the container
 installs Python and the scripts' one requirement, PyYAML, and switches on the
 [git hooks](../.github/scripts/hooks/README.md) when it is created. A
 container that cannot run those checks cannot tell you whether CI will pass.
+It also installs gitleaks from Ubuntu's archive, so the `pre-commit` hook
+scans what you stage for secrets. That release trails gitleaks itself, and CI
+scans every pull request with the current one.
 
 `.gitattributes` marks this folder `export-ignore`, so `git archive` leaves it
 out of a source tarball. It is for developing the project, not for shipping it.

@@ -43,7 +43,7 @@ git config core.hooksPath .github/scripts/hooks
 ```
 
 The [development container](../../../.devcontainer/README.md) runs that for
-you when it is created. `pre-commit` scans only when
+you when it is created, and installs gitleaks. `pre-commit` scans only when
 [gitleaks](https://github.com/gitleaks/gitleaks) is installed, and says so when
 it is not.
 

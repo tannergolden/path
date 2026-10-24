@@ -121,7 +121,9 @@ initialisation deletes.
 - **Footers name no licence.** Each links to `LICENSE` from the repository
   root, so a repository that chooses a different licence edits nothing else,
   and a document copied to another folder, as every seed is, still reaches it.
-- The development container installs Python and the scripts' requirements.
+- The development container installs Python and the scripts' requirements,
+  and gitleaks from Ubuntu's archive, so the `pre-commit` hook scans what is
+  staged.
 - 🔬 Verify Stub Ceilings installs the pinned requirements before it runs,
   and runs when the checker or its requirements change.
 - The CI failure alert watches the Scorecard workflow, and starts only for

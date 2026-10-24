@@ -1,0 +1,95 @@
+# Installed from tannergolden/path. Edit freely: this file is YOURS.
+#
+# Scores this repository's supply-chain security with OpenSSF Scorecard -
+# branch protection, pinned dependencies, token permissions, dangerous
+# workflow patterns, signed releases and the rest - and files every finding
+# under Security → Code scanning, where it is tracked like any other alert.
+#
+# ⚠️ THIS IS A WHOLE WORKFLOW, NOT A STUB, like 🔬 Verify Stub Ceilings.
+# Publishing a score is only accepted from a workflow that keeps to
+# Scorecard's own rules, and a call into another repository's workflow
+# cannot show that it does. The rules, enforced when the result is
+# published:
+#
+#   * no top-level `env:` or `defaults:`, and no write permission at the
+#     top level;
+#   * only the scoring job holds `id-token: write`;
+#   * that job has no `env:`, `defaults:`, `container:` or `services:`,
+#     runs on a GitHub-hosted Ubuntu runner, and uses only checkout,
+#     upload-artifact, upload-sarif, the Scorecard action and harden-runner.
+#
+# Break one and the publish is refused and the run fails. That is also why
+# the actions are pinned here by commit, and kept current by the
+# `github-actions` ecosystem in `.github/dependabot.yml`.
+#
+# PUBLIC REPOSITORIES ONLY. A score is published for public repositories,
+# and code scanning is free only there, so on a private repository the job
+# is skipped. It runs in the two golden path templates as it does
+# everywhere else: their score is the one generated repositories inherit.
+#
+# Expect Pinned-Dependencies to mark down every `@v1` in the other stubs.
+# The moving major tag is how a fix in the standards reaches every
+# repository without a pull request; that trade is deliberate.
+#
+# Once results are published, the badge for your README is:
+#
+#   [![OpenSSF Scorecard](https://api.scorecard.dev/projects/github.com/OWNER/REPOSITORY/badge)](https://scorecard.dev/viewer/?uri=github.com/OWNER/REPOSITORY)
+
+name: '🛡️ OpenSSF Scorecard'
+
+on:
+  # Scorecard supports `push` and `schedule`; both are filtered to the
+  # default branch below, whatever it is called.
+  push:
+  schedule:
+    # Weekly, at minute 00 on an hour no other schedule here takes, as the
+    # standards' on-the-hour rule asks, so a dormant repository keeps a
+    # current score.
+    - cron: '0 2 * * 1'
+  # Re-score when branch protection changes, one of the checks Scorecard
+  # weighs most.
+  branch_protection_rule:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions: {}
+
+jobs:
+  analysis:
+    name: '🛡️ Score the Supply Chain'
+    if: ${{ !github.event.repository.private && (github.event_name != 'push' || github.ref_name == github.event.repository.default_branch) }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    permissions:
+      actions: read # read workflow runs for the CI-Tests and SAST checks
+      checks: read # read check runs on merged pull requests
+      contents: read # check out the repository
+      id-token: write # prove the result came from this workflow when publishing
+      issues: read # read issue activity for the Maintained check
+      pull-requests: read # read reviews for the Code-Review check
+      security-events: write # upload the findings to code scanning
+    steps:
+      - name: '🛡️ Harden Runner'
+        uses: step-security/harden-runner@e14015d583714f6e62063499dc959a02595150a1 # v2.21.1
+        with:
+          egress-policy: audit
+
+      - name: '📂 Checkout'
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+
+      - name: '🛡️ Run Scorecard'
+        uses: ossf/scorecard-action@fa7117db83c52d787ae5a89f350999701505d78e # v2.5.0
+        with:
+          results_file: results.sarif
+          results_format: sarif
+          publish_results: true
+
+      - name: '📤 Upload to code scanning'
+        uses: github/codeql-action/upload-sarif@2892aa5e19bbd11bc0cff5427e3b750a04d9e3c2 # v4.38.2
+        with:
+          sarif_file: results.sarif
+          category: scorecard

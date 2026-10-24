@@ -11,15 +11,16 @@
 # A schedule or a manual dispatch is NOT commit-triggered, deliberately. A
 # nightly job that ran 300 times says nothing a single kept run does not.
 #
-# ⚠️ THIS RUNS IN THE TEMPLATE ITSELF, and it is one of three that run there
-# exactly as elsewhere (the others are 🔬 Verify Stub Ceilings and 🗂️
-# Machined Indexes); 🔄 Template Sync and 🏷️ Cut Release also run there,
+# ⚠️ THIS RUNS IN THE TEMPLATE ITSELF, exactly as elsewhere, like the
+# checks, 🔬 Verify Stub Ceilings, 🗂️ Machined Indexes and 🛡️ OpenSSF
+# Scorecard; 🔄 Template Sync and 🏷️ Cut Release also run there,
 # differently. A template accumulates run history the same way any
 # repository does, and nothing else would ever clear it.
 #
-# 🎯 Apply Standards is NOT one of them. Like most stubs, it is silent in the
-# two golden path templates, so its single job is skipped here - a dispatch
-# with dry-run off applies nothing and still reports green.
+# 🎯 Apply Standards is NOT one of them. Like every job that acts on a
+# repository, it is silent in the two golden path templates, so its single
+# job is skipped here - a dispatch with dry-run off applies nothing and still
+# reports green.
 #
 # Deleting a run removes its logs and artifacts too. In-flight runs are
 # never deleted, so this can never delete the job it is executing in.

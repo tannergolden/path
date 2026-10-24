@@ -74,6 +74,7 @@
 /.github/workflows/preview-deploy.yml
 /.github/workflows/prune-runs.yml
 /.github/workflows/release.yml
+/.github/workflows/scorecard.yml
 /.github/workflows/template-sync.yml
 /.github/workflows/verify-stubs.yml
 

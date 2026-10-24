@@ -45,9 +45,9 @@ capture the terminal when its look is the point.
 
 <!-- AUTO-INDEX:END -->
 
-🗂️ Machined Indexes redraws this log after every push. A screenshot cannot
-describe itself, so name the page that shows it in its row: regeneration keeps
-it, and a capture nothing shows any more is easy to find.
+🗂️ Machined Indexes redraws this log after every push to the default branch. A
+screenshot cannot describe itself, so name the page that shows it in its row:
+regeneration keeps it, and a capture nothing shows any more is easy to find.
 
 ---
 

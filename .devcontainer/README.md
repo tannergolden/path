@@ -52,8 +52,8 @@ out of a source tarball. It is for developing the project, not for shipping it.
 
 <!-- AUTO-INDEX:END -->
 
-🗂️ Machined Indexes redraws this log after every push, from what each file says
-about itself.
+🗂️ Machined Indexes redraws this log after every push to the default branch,
+from what each file says about itself.
 
 ---
 

@@ -71,8 +71,8 @@ and a `squash!` are left alone, since a rebase folds the last two away; an
 
 <!-- AUTO-INDEX:END -->
 
-🗂️ Machined Indexes redraws this log after every push, from the comment each
-hook opens with.
+🗂️ Machined Indexes redraws this log after every push to the default branch,
+from the comment each hook opens with.
 
 ---
 

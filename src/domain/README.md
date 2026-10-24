@@ -42,9 +42,9 @@ the outside world, it declares an interface, and
 
 <!-- AUTO-INDEX:END -->
 
-🗂️ Machined Indexes redraws this log after every push, from what each file says
-about itself. A subfolder appears as one row, so give it a README of its own and
-its row links to that.
+🗂️ Machined Indexes redraws this log after every push to the default branch,
+from what each file says about itself. A subfolder appears as one row, so give
+it a README of its own and its row links to that.
 
 ---
 

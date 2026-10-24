@@ -149,6 +149,8 @@ initialisation deletes.
 - The workflow comments, the seeds and the Template Sync guide no longer
   misstate which jobs run in a template, what a release carries, what
   initialisation rewrites, or whether a sync pull request's checks run.
+- The folder READMEs said 🗂️ Machined Indexes redraws their logs after every
+  push. It runs after a push to the default branch.
 
 ### Security
 

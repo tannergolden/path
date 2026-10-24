@@ -478,7 +478,7 @@ The root carries only what a tool discovers there by mechanism.
 **Every folder carries a `README.md` that logs each file inside it**, with one
 exception. GitHub shows a README in `.github/` in place of this page, so that
 folder's own files are logged here instead. 🗂️ Machined Indexes redraws both
-tables after every push:
+tables after every push to the default branch:
 
 <!-- AUTO-INDEX:BEGIN dir=./.github style=log -->
 

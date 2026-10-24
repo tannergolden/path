@@ -72,8 +72,8 @@ means it can also be run by hand from the Actions tab.
 
 <!-- AUTO-INDEX:END -->
 
-🗂️ Machined Indexes redraws this log after every push, from each file's `name:`,
-its `on:` events and its opening comment.
+🗂️ Machined Indexes redraws this log after every push to the default branch,
+from each file's `name:`, its `on:` events and its opening comment.
 
 ---
 

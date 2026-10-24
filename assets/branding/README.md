@@ -52,9 +52,9 @@ again.
 
 <!-- AUTO-INDEX:END -->
 
-🗂️ Machined Indexes redraws this log after every push. A logo cannot describe
-itself, so write what each file is and where it is used in its row: regeneration
-keeps it.
+🗂️ Machined Indexes redraws this log after every push to the default branch. A
+logo cannot describe itself, so write what each file is and where it is used in
+its row: regeneration keeps it.
 
 ---
 

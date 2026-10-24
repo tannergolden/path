@@ -94,8 +94,8 @@ Every document here other than the `README.md` logs is one you complete: either 
 
 <!-- AUTO-INDEX:END -->
 
-🗂️ Machined Indexes redraws this log after every push, from each template's own
-frontmatter.
+🗂️ Machined Indexes redraws this log after every push to the default branch,
+from each template's own frontmatter.
 
 ### 🔗 See also
 

@@ -46,9 +46,9 @@ write to it or delete from it.
 
 <!-- AUTO-INDEX:END -->
 
-🗂️ Machined Indexes redraws this log after every push, from what each script and
-result says about itself: open each suite with a comment naming the critical
-path it measures and the budget it defends.
+🗂️ Machined Indexes redraws this log after every push to the default branch,
+from what each script and result says about itself: open each suite with a
+comment naming the critical path it measures and the budget it defends.
 
 ---
 

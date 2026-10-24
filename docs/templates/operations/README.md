@@ -48,8 +48,8 @@ left is the part only your project knows.
 
 <!-- AUTO-INDEX:END -->
 
-🗂️ Machined Indexes redraws this log after every push, from each template's own
-frontmatter.
+🗂️ Machined Indexes redraws this log after every push to the default branch,
+from each template's own frontmatter.
 
 ---
 

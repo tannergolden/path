@@ -59,7 +59,8 @@ trade-offs that shaped it before changing it.
 <!-- AUTO-INDEX:END -->
 
 **This log is the decision index, and nobody types its rows.** 🗂️ Machined
-Indexes redraws it after every push from each record's own frontmatter.
+Indexes redraws it after every push to the default branch, from each record's
+own frontmatter.
 **Status** is Proposed, Accepted, Superseded, or Deprecated; **Date** is when
 the decision was made; **Evidence** links the research report(s) that informed
 it, or reads N/A.

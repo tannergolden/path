@@ -53,8 +53,8 @@ request is not the first place you hear about them.
 
 <!-- AUTO-INDEX:END -->
 
-🗂️ Machined Indexes redraws this log after every push, from each docstring. Who
-runs them:
+🗂️ Machined Indexes redraws this log after every push to the default branch,
+from each docstring. Who runs them:
 
 - `checks.yml` runs `validate-repository.py` as the `ci` job's `lint-command`,
   and every `test_*.py` here as its `test-command`. That discovers a test

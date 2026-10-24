@@ -41,8 +41,9 @@ capture in [`../screenshots/`](../screenshots/README.md).
 
 <!-- AUTO-INDEX:END -->
 
-🗂️ Machined Indexes redraws this log after every push. Name what each page shows
-and where it is linked from in its row: regeneration keeps it.
+🗂️ Machined Indexes redraws this log after every push to the default branch.
+Name what each page shows and where it is linked from in its row: regeneration
+keeps it.
 
 ---
 

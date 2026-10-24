@@ -45,9 +45,9 @@ write to it or delete from it.
 
 <!-- AUTO-INDEX:END -->
 
-🗂️ Machined Indexes redraws this log after every push: a package appears the
-moment its folder exists, described by the README that package carries for its
-own files.
+🗂️ Machined Indexes redraws this log after every push to the default branch: a
+package appears the moment its folder exists, described by the README that
+package carries for its own files.
 
 ---
 

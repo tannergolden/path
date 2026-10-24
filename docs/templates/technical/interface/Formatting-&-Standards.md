@@ -74,7 +74,7 @@ Ensuring that human error is caught by machine logic.
 
 - **Linter Engine**: `[ESLint | SwiftLint | RuboCop]`
 - **Formatting Engine**: `[Prettier | Black | ClangFormat]`
-- **Pre-commit Gate**: `[Husky | lint-staged enforcement]`
+- **Pre-commit Gate**: `[The hooks in .github/scripts/hooks | Husky | lint-staged | pre-commit]`
 
 ---
 

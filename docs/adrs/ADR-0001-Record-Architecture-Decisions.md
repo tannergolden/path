@@ -103,8 +103,14 @@ rather than which alternatives were rejected.
 ### Option B: Issues, pull requests or a wiki
 
 - ✅ No new file to write.
-- ❌ The reasoning lives apart from the code, and a wiki is neither versioned nor
-  reviewed.
+- ❌ The reasoning lives apart from the code: a wiki keeps a history of its own,
+  and no pull request reviews a change to it.
+
+### Option C: No formal record
+
+- ✅ Nothing to write beyond the code and its commit messages.
+- ❌ A commit message says what changed, not which alternatives were rejected,
+  so the reasoning leaves with the people who held it.
 
 ---
 

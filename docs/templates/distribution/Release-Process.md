@@ -111,7 +111,7 @@ A published release is never edited to undo it, and its tag is never moved or re
 
 ## 🗂️ 8. The Notes Are The Changelog
 
-This project keeps no separate changelog file. Each release page carries the notes for its version, the credit for any vulnerability it fixed, and its assets, provenance and SBOM, so release pages are kept.
+This project keeps no separate changelog file. Each release page carries the notes for its version, the credit for any vulnerability it fixed, and its assets, the SBOM among them, so release pages are kept.
 
 - The `prune` task of 📦 Release deletes old release pages, and runs only when someone dispatches it. Run it first with `dry-run` on: it lists what it would delete and deletes nothing. Then run it again with `dry-run` off.
 - It keeps the newest `[1]` release (`keep` in the stub), leaves drafts and pre-releases alone, and never deletes a tag, so anything pinned to a version keeps working.

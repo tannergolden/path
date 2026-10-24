@@ -109,7 +109,7 @@ Run these from the repository root, in this order. Each must be the same command
 | :--------------------------------------------------- | :------------------------------------------------------------ | :----------------------------------------------------------------- |
 | `[command not found: tool]`                          | `[The toolchain is missing, or not on PATH]`                  | `[Install the version in Prerequisites, or use the dev container]` |
 | The `commit-msg` hook rejects a commit               | The message is not `type(scope): subject`, or has no sign-off | Reword it, and commit with `git commit -s`                         |
-| The `pre-commit` hook says gitleaks is not installed | Staged changes were not scanned for secrets                   | Install gitleaks; CI scans every push either way                   |
+| The `pre-commit` hook says gitleaks is not installed | Staged changes were not scanned for secrets                   | Install gitleaks; CI scans every pull request either way           |
 | `[Tests pass locally and fail in CI]`                | `[A different runtime version, or an uncommitted lockfile]`   | `[Match the version in Prerequisites; commit the lockfile]`        |
 | `[REPLACE_ME]`                                       | `[REPLACE_ME]`                                                | `[REPLACE_ME]`                                                     |
 

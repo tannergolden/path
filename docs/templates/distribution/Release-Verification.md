@@ -25,7 +25,7 @@ _Trust the signature, not the link._
 
 ## 📦 1. What A Release Carries
 
-Every release that 📦 Release publishes carries these files:
+Every release that 📦 Release publishes carries these files. The build archive is the exception: it is attached only when the build leaves output in `[dist | the artifact-path set in .github/workflows/release.yml]`.
 
 | Asset                 | What it is                                                                                                        | Attested                                            |
 | :-------------------- | :---------------------------------------------------------------------------------------------------------------- | :-------------------------------------------------- |
@@ -85,7 +85,7 @@ gh release download <tag> --repo OWNER/REPOSITORY --pattern 'sbom-*.cdx.json'
 jq -r '.components[] | "\(.name) \(.version)"' sbom-<tag>.cdx.json
 ```
 
-The SBOM is CycloneDX JSON. Each entry under `components` is one dependency, with its name, its version and its package URL (`purl`). Read it with any JSON tool, as above, or load it into `[a scanner or inventory that reads CycloneDX: REPLACE_ME]` to see whether a release contains a dependency with a known vulnerability. A release built from a tree with no manifests or lockfiles has no SBOM.
+The SBOM is CycloneDX JSON. Each entry under `components` is one dependency, with its name, its version and its package URL (`purl`). Read it with any JSON tool, as above, or load it into `[a scanner or inventory that reads CycloneDX: REPLACE_ME]` to see whether a release contains a dependency with a known vulnerability. A release built from a tree with no manifests or lockfiles still carries one, and it lists no components.
 
 The SBOM is not attested: it lists what the release was built from, and proves nothing about who built it.
 

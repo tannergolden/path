@@ -362,11 +362,12 @@ publishes nothing.
    why no security contact link is hard-coded.
 6. **Use your account's community health files, if you keep them.** When your
    account's public `.github` repository holds a code of conduct, a
-   contributing guide, issue forms and the rest for every repository, the copies
-   here hide them. The prompt in
+   contributing guide, a security policy and the rest for every repository, the
+   copies here hide them. The prompt in
    [Using Your Account Defaults](docs/introduction/Using-Your-Account-Defaults.md)
-   has an AI agent remove the copies, so GitHub shows yours. `README.md` is not
-   one of them: it stays, for you to replace below.
+   has an AI agent ask which copies to remove, then remove them, so GitHub
+   shows yours. `README.md` is never one of them: it stays, for you to replace
+   below.
 7. **Uncomment the rules you want in `.github/CODEOWNERS`**, replacing
    `@your-org/your-team` with a real owner. A rule naming an owner without write
    access is a GitHub error, which is why every rule ships commented out.

@@ -1,7 +1,7 @@
 # Installed from tannergolden/standards. Edit freely: this file is YOURS.
 #
 # Dispatch-only. Run it to apply the shared label taxonomy, and to write the
-# branch and tag rulesets.
+# repository settings and the branch and tag rulesets.
 #
 # ⚠️ IT PREVIEWS BY DEFAULT AND CHANGES NOTHING. `dry-run` starts on, because
 # a ruleset names required status checks and a wrong one blocks every merge in
@@ -58,7 +58,8 @@ permissions: {}
 
 jobs:
   apply:
-    # Silent in the two golden path templates, like most stubs here. A
+    # Silent in the two golden path templates, like most jobs here that act
+    # on a repository. A
     # golden path template ships the WIRING, never the effects: its own
     # labels, settings, and rulesets are not what a generated repository
     # inherits - the files are - so applying them there would change nothing

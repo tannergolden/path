@@ -7,9 +7,10 @@
 #
 # A secret that reaches a commit is compromised the moment it is pushed, and
 # rewriting history does not take it back. The 🔍 Scan for Secrets check in
-# CI is the authority and scans every push; this is the earlier, cheaper
-# catch. Without gitleaks it says so and lets the commit through, because a
-# hook that blocks every commit on a missing tool is a hook people disable.
+# CI is the authority and scans every pull request; this is the earlier,
+# cheaper catch. Without gitleaks it says so and lets the commit through,
+# because a hook that blocks every commit on a missing tool is a hook people
+# disable.
 #
 # Enable it once per clone (the development container does it for you):
 #
@@ -18,7 +19,7 @@
 # `git commit --no-verify` skips it, and CI still scans the result.
 
 if ! command -v gitleaks >/dev/null 2>&1; then
-  echo 'pre-commit: gitleaks is not installed, so the staged changes were not scanned for secrets. CI scans every push; install gitleaks (https://github.com/gitleaks/gitleaks) to catch a secret before it is committed.' >&2
+  echo 'pre-commit: gitleaks is not installed, so the staged changes were not scanned for secrets. CI scans every pull request; install gitleaks (https://github.com/gitleaks/gitleaks) to catch a secret before it is committed.' >&2
   exit 0
 fi
 

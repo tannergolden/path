@@ -22,6 +22,11 @@
 # the actions are pinned here by commit, and kept current by the
 # `github-actions` ecosystem in `.github/dependabot.yml`.
 #
+# ⚠️ AFTER v2.5.0 A REFUSED PUBLISH ONLY WARNS. A later release of the
+# Scorecard action adds `fail_on_publish_error`, off by default. When
+# Dependabot proposes that release, set it to `true` in the Scorecard step,
+# or a broken rule passes unnoticed.
+#
 # PUBLIC REPOSITORIES ONLY. A score is published for public repositories,
 # and code scanning is free only there, so on a private repository the job
 # is skipped. It runs in the two golden path templates as it does
@@ -46,8 +51,9 @@ on:
     # standards' on-the-hour rule asks, so a dormant repository keeps a
     # current score.
     - cron: '0 2 * * 1'
-  # Re-score when branch protection changes, one of the checks Scorecard
-  # weighs most.
+  # Re-score when a classic branch protection rule changes, one of the checks
+  # Scorecard weighs most. A ruleset, which 🎯 Apply Standards writes, raises
+  # no event; the weekly run scores its changes.
   branch_protection_rule:
 
 concurrency:

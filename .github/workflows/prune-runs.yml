@@ -17,7 +17,7 @@
 # differently. A template accumulates run history the same way any
 # repository does, and nothing else would ever clear it.
 #
-# 🎯 Apply Standards is NOT one of them. Like every job that acts on a
+# 🎯 Apply Standards is NOT one of them. Like most jobs that act on a
 # repository, it is silent in the two golden path templates, so its single
 # job is skipped here - a dispatch with dry-run off applies nothing and still
 # reports green.

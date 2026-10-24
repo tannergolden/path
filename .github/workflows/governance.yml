@@ -12,13 +12,16 @@
 # read and write through the API. That is what makes them safe; do not add a
 # job here that checks out a pull request's head.
 #
-# ⚠️ FROM 2 DECEMBER 2026 GITHUB BLOCKS `pull_request_target` IN PUBLIC
-# REPOSITORIES that have no Actions event policy allowing it. Only the pull
-# request triage in the `governance` job uses it, so the required `pr` check
-# is unaffected either way. 🎯 Apply Standards writes the policy with its
+# ⚠️ GITHUB'S DEFAULT POLICY BLOCKS `pull_request_target` IN A PUBLIC
+# REPOSITORY that has no Actions event policy allowing it, from 2 December
+# 2026 at the latest. Only the `governance` job uses it, for the pull request
+# triage and the first-time welcome, so the required `pr` check is
+# unaffected either way. 🎯 Apply Standards writes the policy with its
 # settings job; or add one by hand under Settings → Actions → Policies,
 # scoped to this file. An event rule is an allowlist, so it must name every
-# event in `on:` below - add a trigger here and add it to the policy too.
+# event in `on:` below. Add a trigger here and add it to the policy too,
+# through `actions.event_policy` in a settings override, or the next
+# settings run puts the policy back without it.
 #
 # ⚠️ THE `pr` JOB ID IS A CHECK NAME. It reports as 'pr / ✍️ DCO Sign-Off',
 # which branch protection names. Renaming it leaves every pull request

@@ -16,11 +16,12 @@
 # three, delete its block too.
 #
 # EVERY ECOSYSTEM WAITS THREE DAYS before proposing a new version. That is
-# GitHub's default; `cooldown` states it here so the number is visible and
-# yours to change. A release that turns out to be
-# malicious is usually pulled within hours, and `dependabot-automerge.yml`
-# would otherwise merge a patch the day it appears. Security updates ignore
-# the cooldown and arrive at once.
+# GitHub's default; `cooldown` states it here so the number is visible, yours
+# to change, and kept should the default change. The wait is what stands
+# between a release that turns out to be malicious, which is usually pulled
+# within hours, and `dependabot-automerge.yml`, which would otherwise merge a
+# patch the day it appears. Security updates ignore the cooldown and arrive at
+# once.
 #
 # Pair this with the `dependabot-automerge` stub from tannergolden/standards
 # and patch and minor updates approve and merge themselves once your required

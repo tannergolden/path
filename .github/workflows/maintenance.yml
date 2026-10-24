@@ -1,7 +1,8 @@
 # Installed from tannergolden/standards. Edit freely: this file is YOURS.
 #
-# Scheduled housekeeping, in one file: the weekly prune of workflow runs and
-# stale deployments, and the draft-release cleanup.
+# Scheduled housekeeping, in one file: the weekly prune of stale
+# deployments, and the draft-release cleanup. Workflow runs are pruned by
+# prune-runs.yml instead.
 #
 # The prune still checks WHICH cron fired via `github.event.schedule`, so
 # adding a second schedule later cannot silently start running it.
@@ -19,7 +20,7 @@ name: '🧹 Maintenance'
 
 on:
   schedule:
-    - cron: '0 6 * * 1' # weekly: prune runs and deployments
+    - cron: '0 6 * * 1' # weekly: prune stale deployments
   workflow_dispatch:
     inputs:
       task:

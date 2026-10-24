@@ -61,6 +61,9 @@ runs them:
   added beside a new script without anyone remembering to list it.
 - `verify-stubs.yml` installs `requirements.txt` and runs
   `verify-stub-ceilings.py`.
+- `cut-release.yml` runs `validate-repository.py` before it tags a release, so
+  a release the validator fails is refused. In the template, that includes a
+  change to the owner's half of `docs/Prompts.md`.
 - Git runs the hooks in `hooks/` once `core.hooksPath` points at them, which
   the development container does for you; `test_hooks.py` holds them to the
   same rules CI applies.

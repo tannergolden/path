@@ -336,6 +336,83 @@ class TestBinaryFiles(ValidatorTestCase):
         self.assertFinding(self.repo.run(), 'not valid UTF-8')
 
 
+# The owner's half of docs/Prompts.md exactly as the template ships it, from
+# the comment that closes the Golden Path prompts to the end. It is copied here
+# rather than read from the page, so an owner writing prompts of their own
+# never turns these tests red; a deliberate change to that half updates both.
+OWNER_HALF = '''<!-- The Golden Path prompts end here. Everything below this comment is this repository's own, and no template writes to it. -->
+
+---
+
+## ✍️ This Repository's Prompts
+
+> [!TIP]
+> **Write this repository's own prompts here**: prompts that only make sense in
+> it, such as ones for using it, changing it or understanding how it works. Give
+> each a `###` heading, a **Use when** line, a **Fill in** line if it has
+> placeholders, and the prompt in one `text` block. If you have many, group them
+> under `##` sections of your own after this one. Nothing upstream ever writes
+> here.
+
+---
+
+<div align="center">
+
+**The template's prompts above. Yours below.**
+
+[↑ Back to Top](#top)
+
+<br />
+
+Built with ❤️ by the Engineering Team. Distributed under the MIT License.
+
+</div>
+'''
+GOLDEN_PATH_HALF = '''# Prompts
+
+<!-- The Golden Path prompts start here. Write nothing inside. -->
+
+### Fit My Project Into This Scaffold
+
+**Use when** you have just generated a repository.
+
+'''
+
+
+class TestPromptsPage(ValidatorTestCase):
+    """The owner's half of docs/Prompts.md, held still in the template alone."""
+
+    def setUp(self) -> None:
+        super().setUp()
+        self.page = GOLDEN_PATH_HALF + OWNER_HALF
+        self.repo.write('.github/TEMPLATE_INIT', 'This repository has not been initialised yet.\n')
+
+    def test_the_page_as_shipped_passes(self) -> None:
+        self.repo.write('docs/Prompts.md', self.page)
+        self.assertClean(self.repo.run())
+
+    def test_a_change_to_the_golden_path_prompts_passes(self) -> None:
+        self.repo.write('docs/Prompts.md', self.page.replace(
+            '### Fit My Project Into This Scaffold', '### Fit My Project Into This Layout'))
+        self.assertClean(self.repo.run())
+
+    def test_a_change_to_the_owners_section_is_reported(self) -> None:
+        self.repo.write('docs/Prompts.md', self.page.replace(
+            "Write this repository's own prompts here", 'Write your own prompts here'))
+        self.assertFinding(self.repo.run(), "the owner's section changed")
+
+    def test_a_missing_closing_comment_is_reported(self) -> None:
+        self.repo.write('docs/Prompts.md', self.page.replace(
+            '<!-- The Golden Path prompts end here.', '<!-- The prompts end here.'))
+        self.assertFinding(self.repo.run(), 'one opening and one closing comment')
+
+    def test_an_owner_writing_prompts_after_initialisation_passes(self) -> None:
+        self.repo.write('docs/Prompts.md', self.page.replace(
+            "Write this repository's own prompts here", 'Write our own prompts here'))
+        (self.repo.root / '.github' / 'TEMPLATE_INIT').unlink()
+        self.assertClean(self.repo.run())
+
+
 class TestGitUnavailable(unittest.TestCase):
     """A git that cannot answer must say so, not raise."""
 

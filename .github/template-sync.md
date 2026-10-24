@@ -54,6 +54,11 @@ those files stay current with the template. In the pull request a sync opens:
 - **A file the template removed** is removed too, unless you had changed it.
 - **A folder log** between `AUTO-INDEX` markers is redrawn from your tree.
 
+**One page is shared, in two sections.** `docs/Prompts.md` is the template's down to its
+**✍️ This Repository's Prompts** section, and yours from there to the end. The template never changes
+your section, so a sync only ever brings changes to its own. To keep a change you made to the
+template's section, add `# keep mine: /docs/Prompts.md` under **Your rules**, as above.
+
 A path the list leaves to you, and any file the template does not ship, is never touched. So before
 you run it, look down the **Kept current** section for any file you put to a different use - a folder
 README you rewrote because this repository keeps a layout of its own, say - and put a `#` in front of

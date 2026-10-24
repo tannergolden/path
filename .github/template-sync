@@ -76,6 +76,7 @@
 /.github/workflows/ci-failure-alert.yml
 /.github/workflows/dependabot-automerge.yml
 /.github/workflows/governance.yml
+/.github/workflows/intelligence-sync.yml
 /.github/workflows/lifecycle.yml
 /.github/workflows/maintenance.yml
 /.github/workflows/preview-deploy.yml
@@ -92,6 +93,7 @@
 /.vscode/extensions.json
 /.vscode/settings.json
 
+/docs/Prompts.md
 /docs/README.md
 /docs/adrs/README.md
 /docs/distribution/README.md
@@ -157,8 +159,6 @@
 #/assets/**
 #/benchmarks/**
 #/docs/adrs/ADR-0001-Record-Architecture-Decisions.md
-#/docs/introduction/Integrating-Your-Project.md
-#/docs/introduction/Using-Your-Account-Defaults.md
 #/packages/**
 #/src/**
 #/tests/**

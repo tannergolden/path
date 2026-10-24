@@ -360,20 +360,27 @@ publishes nothing.
 5. **Enable private vulnerability reporting** under Settings → Security. The
    issue chooser gains a "Report a vulnerability" entry automatically, which is
    why no security contact link is hard-coded.
-6. **Uncomment the rules you want in `.github/CODEOWNERS`**, replacing
+6. **Use your account's community health files, if you keep them.** When your
+   account's public `.github` repository holds a code of conduct, a
+   contributing guide, issue forms and the rest for every repository, the copies
+   here hide them. The prompt in
+   [Using Your Account Defaults](docs/introduction/Using-Your-Account-Defaults.md)
+   has an AI agent remove the copies, so GitHub shows yours. `README.md` is not
+   one of them: it stays, for you to replace below.
+7. **Uncomment the rules you want in `.github/CODEOWNERS`**, replacing
    `@your-org/your-team` with a real owner. A rule naming an owner without write
    access is a GitHub error, which is why every rule ships commented out.
-7. **Enable ecosystems in `.github/dependabot.yml`** as you add manifests. Only
+8. **Enable ecosystems in `.github/dependabot.yml`** as you add manifests. Only
    `github-actions` is on, because it is the only one guaranteed to apply.
-8. **Add a `BOT_ACCESS_TOKEN` secret** so 🔄 Template Sync, whenever you run
+9. **Add a `BOT_ACCESS_TOKEN` secret** so 🔄 Template Sync, whenever you run
    it, can update the workflow stubs too - the default token cannot write
    `.github/workflows/`, so without it those files wait in an issue instead.
    While you are there, put a `#` in front of anything in
    `.github/template-sync` you want to own outright.
-9. **Replace this README.** Everything above describes the template, not your
-   project. Nothing rewrites it for you, because only you know what this
-   repository is for. The sections worth keeping are the workflow table and
-   the token note; the rest is scaffolding that has done its job.
+10. **Replace this README.** Everything above describes the template, not your
+    project. Nothing rewrites it for you, because only you know what this
+    repository is for. The sections worth keeping are the workflow table and
+    the token note; the rest is scaffolding that has done its job.
 
 > [!IMPORTANT]
 > **🎯 Apply Standards needs a token for two of its three jobs.** Applying the

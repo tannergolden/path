@@ -135,6 +135,7 @@
 #/assets/**
 #/benchmarks/**
 #/docs/introduction/Integrating-Your-Project.md
+#/docs/introduction/Using-Your-Account-Defaults.md
 #/packages/**
 #/src/**
 #/tests/**

@@ -40,10 +40,11 @@ the folder holds.
 
 <!-- AUTO-INDEX:BEGIN dir=. style=log -->
 
-| Entry                                                        | Purpose                                                                                                                                                                                               |
-| :----------------------------------------------------------- | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [`Integrating-Your-Project.md`](Integrating-Your-Project.md) | A ready-made prompt that has an AI agent fit a new or existing project into the folders this template ships, rather than deleting them. Use it right after generating a repository from the template. |
-| [`README.md`](README.md)                                     | This file.                                                                                                                                                                                            |
+| Entry                                                              | Purpose                                                                                                                                                                                                                                               |
+| :----------------------------------------------------------------- | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [`Integrating-Your-Project.md`](Integrating-Your-Project.md)       | A ready-made prompt that has an AI agent fit a new or existing project into the folders this template ships, rather than deleting them. Use it right after generating a repository from the template.                                                 |
+| [`README.md`](README.md)                                           | This file.                                                                                                                                                                                                                                            |
+| [`Using-Your-Account-Defaults.md`](Using-Your-Account-Defaults.md) | A ready-made prompt that has an AI agent remove the community health files this template ships, so GitHub shows the ones in your account's .github repository instead. Use it once that repository holds the files you want every repository to show. |
 
 <!-- AUTO-INDEX:END -->
 

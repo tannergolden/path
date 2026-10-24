@@ -54,7 +54,7 @@ The same tools, and the commands below, are recorded for the whole project in [T
 ## 📥 2. Get The Code
 
 ```bash
-git clone https://github.com/[OWNER/REPOSITORY].git
+git clone https://github.com/OWNER/REPOSITORY.git
 cd [REPOSITORY]
 ```
 

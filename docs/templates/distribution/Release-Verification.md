@@ -43,13 +43,13 @@ The attestation is a signed statement that names the archive's SHA-256 digest, t
 This one check shows both that the file is intact and where it came from. It needs the GitHub CLI, `gh`, signed in with `gh auth login`.
 
 ```bash
-gh release download <tag> --repo [OWNER/REPOSITORY] --pattern 'build-*.tar.gz'
+gh release download <tag> --repo OWNER/REPOSITORY --pattern 'build-*.tar.gz'
 gh attestation verify build-<tag>.tar.gz \
-  --repo [OWNER/REPOSITORY] \
+  --repo OWNER/REPOSITORY \
   --signer-workflow tannergolden/standards/.github/workflows/release-publish.yml
 ```
 
-- **`--repo [OWNER/REPOSITORY]`** checks that the archive was built from this repository.
+- **`--repo OWNER/REPOSITORY`** checks that the archive was built from this repository.
 - **`--signer-workflow`** pins the identity that signed it. The attestation is made inside the shared reusable workflow `tannergolden/standards/.github/workflows/release-publish.yml`, which this repository's 📦 Release calls, so that workflow is the signer. `gh` needs this flag, or `--signer-repo`, whenever a reusable workflow signs, and with it a valid attestation from any other workflow fails.
 - **A pass**: `gh` says verification succeeded, shows the repository and workflow the attestation names, and exits with status 0. Anything else is a failure.
 - **Stricter**: add `--deny-self-hosted-runners` to also refuse a build made on a self-hosted machine. The shared workflow builds on GitHub-hosted runners, so a genuine release still passes.
@@ -81,7 +81,7 @@ Get-FileHash build-<tag>.tar.gz -Algorithm SHA256
 ## 🧾 4. Inspect The SBOM
 
 ```bash
-gh release download <tag> --repo [OWNER/REPOSITORY] --pattern 'sbom-*.cdx.json'
+gh release download <tag> --repo OWNER/REPOSITORY --pattern 'sbom-*.cdx.json'
 jq -r '.components[] | "\(.name) \(.version)"' sbom-<tag>.cdx.json
 ```
 

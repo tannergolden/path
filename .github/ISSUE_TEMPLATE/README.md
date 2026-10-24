@@ -77,10 +77,11 @@ delete the form yourself.
 
 ## ⚙️ The Discussions Link
 
-The contact link in `config.yml` carries a placeholder, `OWNER/REPOSITORY`,
-because GitHub substitutes nothing in a contact link. Initialisation rewrites
-it for this repository. It still leads nowhere until Discussions is switched on,
-under <kbd>Settings</kbd> → <kbd>General</kbd> → <kbd>Features</kbd>.
+The contact link in `config.yml` points at this repository's Discussions. The
+template ships it with a placeholder for the owner and the repository, because
+GitHub substitutes nothing in a contact link, and initialisation fills it in.
+It still leads nowhere until Discussions is switched on, under
+<kbd>Settings</kbd> → <kbd>General</kbd> → <kbd>Features</kbd>.
 
 Any file in this folder also switches off every default form an account's
 `.github` repository would otherwise supply. It is all or nothing, so a

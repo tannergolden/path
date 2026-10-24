@@ -255,6 +255,11 @@ class TestCleanRepository(ValidatorTestCase):
         self.assertClean(self.repo.run())
 
 
+# Built in halves for the reason the validator gives: initialisation, and
+# Template Sync after it, rewrite the whole placeholder in this file too.
+PLACEHOLDER = 'OWNER' + '/' + 'REPOSITORY'
+
+
 class TestPlaceholders(ValidatorTestCase):
     """A placeholder is expected in the template and a defect after initialisation."""
 
@@ -263,7 +268,7 @@ class TestPlaceholders(ValidatorTestCase):
         'blank_issues_enabled: false\n'
         'contact_links:\n'
         "  - name: Discussions\n"
-        "    url: 'https://github.com/OWNER/REPOSITORY/discussions'\n"
+        f"    url: 'https://github.com/{PLACEHOLDER}/discussions'\n"
         "    about: 'Questions.'\n"
     )
 
@@ -275,14 +280,14 @@ class TestPlaceholders(ValidatorTestCase):
 
     def test_a_contact_link_left_on_the_placeholder_is_reported(self) -> None:
         self.repo.write(self.CONFIG, self.LINK)
-        self.assertFinding(self.repo.run(), 'still names OWNER/REPOSITORY')
+        self.assertFinding(self.repo.run(), f'still names {PLACEHOLDER}')
 
     def test_a_replaced_contact_link_passes(self) -> None:
-        self.repo.write(self.CONFIG, self.LINK.replace('OWNER/REPOSITORY', 'octo/widget'))
+        self.repo.write(self.CONFIG, self.LINK.replace(PLACEHOLDER, 'octo/widget'))
         self.assertClean(self.repo.run())
 
     def test_a_comment_naming_the_placeholder_is_not_a_link(self) -> None:
-        self.repo.write(self.CONFIG, '# Replace OWNER/REPOSITORY below.\nblank_issues_enabled: false\n')
+        self.repo.write(self.CONFIG, f'# Replace {PLACEHOLDER} below.\nblank_issues_enabled: false\n')
         self.assertClean(self.repo.run())
 
     def test_a_codeowners_rule_naming_the_placeholder_team_is_reported(self) -> None:
@@ -293,9 +298,17 @@ class TestPlaceholders(ValidatorTestCase):
         self.repo.write('.github/CODEOWNERS', '# /docs/   @your-org/your-team\n* @octo\n')
         self.assertClean(self.repo.run())
 
+    def test_initialisation_cannot_rewrite_the_check(self) -> None:
+        """The defect: initialisation turned the placeholder in the validator
+        into the repository's name, and the check failed every repository
+        right after initialisation, on the link it had filled in."""
+        here = pathlib.Path(__file__).resolve().parent
+        for name in ('validate-repository.py', 'test_validate_repository.py'):
+            self.assertNotIn(PLACEHOLDER, (here / name).read_text(encoding='utf-8'), name)
+
     def test_the_placeholder_elsewhere_is_not_this_checks_business(self) -> None:
         # A seed or a workflow comment may name it on purpose.
-        self.repo.write('docs/guide.md', 'Run `gh attestation verify --repo OWNER/REPOSITORY`.\n')
+        self.repo.write('docs/guide.md', f'Run `gh attestation verify --repo {PLACEHOLDER}`.\n')
         self.assertClean(self.repo.run())
 
 

@@ -63,7 +63,7 @@ Taking an item off this list needs `[an ADR | a maintainer decision in a Roadmap
 
 ## 🗳️ How An Item Gets On The Roadmap
 
-1. **Propose it** in the **Roadmap** discussion category, at `https://github.com/[OWNER/REPOSITORY]/discussions/categories/roadmap`. Its form, `.github/DISCUSSION_TEMPLATE/roadmap.yaml`, asks for the goals, the deliverables, the risks and the tracking links. GitHub does not create this category for you: create one whose slug comes out as `roadmap`, or the form never appears.
+1. **Propose it** in the **Roadmap** discussion category, at `https://github.com/OWNER/REPOSITORY/discussions/categories/roadmap`. Its form, `.github/DISCUSSION_TEMPLATE/roadmap.yaml`, asks for the goals, the deliverables, the risks and the tracking links. GitHub does not create this category for you: create one whose slug comes out as `roadmap`, or the form never appears.
 2. **Discuss it**: `[the maintainers | the community]` weigh it against the vision and the out-of-scope list.
 3. **Decide**: `[a maintainer | a vote in Polls | the steering group]` places it in Now, Next or Later, or records in the discussion why not. A decision that changes the architecture is also recorded as an ADR.
 4. **Track it**: an item that moves into Now gets an issue or a milestone, linked from its line above.

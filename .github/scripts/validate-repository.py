@@ -23,7 +23,8 @@ covers the gap between them: the configuration files nothing else parses.
 
 It also catches a placeholder the template left for initialisation to
 replace, once initialisation has run and it is still there: a contact link
-naming `OWNER/REPOSITORY`, or a CODEOWNERS rule naming `@your-org/your-team`.
+still naming the owner-and-repository placeholder, or a CODEOWNERS rule
+naming `@your-org/your-team`.
 Each is a broken link or an owner that does not exist, and neither says so
 on its own.
 
@@ -291,15 +292,23 @@ def check_whitespace(path: pathlib.Path, text: str, eol: str) -> None:
 # one left behind is a defect.
 TEMPLATE_INIT = '.github/TEMPLATE_INIT'
 
+# ⚠️ BUILT IN TWO HALVES, ON PURPOSE. Initialisation replaces the contact
+# link's placeholder with this repository's name in every text file it
+# reads, this one included, and 🔄 Template Sync does the same to every file
+# it brings. Written whole here, the placeholder would become the
+# repository's own name, and the check would then fail the link that
+# initialisation filled in correctly.
+CONTACT_PLACEHOLDER = 'OWNER' + '/' + 'REPOSITORY'
+
 
 def check_placeholders(path: pathlib.Path, text: str) -> None:
     rel = path.relative_to(ROOT).as_posix()
     for number, line in enumerate(text.splitlines(), start=1):
         if line.lstrip().startswith('#'):
             continue
-        if rel == '.github/ISSUE_TEMPLATE/config.yml' and 'OWNER/REPOSITORY' in line:
+        if rel == '.github/ISSUE_TEMPLATE/config.yml' and CONTACT_PLACEHOLDER in line:
             report(path, number,
-                   'the contact link still names OWNER/REPOSITORY, so it 404s: '
+                   f'the contact link still names {CONTACT_PLACEHOLDER}, so it 404s: '
                    'put this repository there, as initialisation would have')
         if rel == '.github/CODEOWNERS' and '@your-org/your-team' in line:
             report(path, number,

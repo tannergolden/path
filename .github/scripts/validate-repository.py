@@ -30,6 +30,10 @@ naming `@your-org/your-team`.
 Each is a broken link or an owner that does not exist, and neither says so
 on its own.
 
+And it holds every document's footer to linking its licence from the
+repository root, as `[LICENSE](/LICENSE)`, rather than naming the licence,
+which goes stale the day the licence changes.
+
 Exits non-zero on the first category with findings, listing all of them.
 Annotations are emitted in GitHub's format when running under Actions, so
 findings land on the file and line in the diff.
@@ -319,6 +323,49 @@ def check_placeholders(path: pathlib.Path, text: str) -> None:
                    'name a real @user or @org/team with write access, or comment the rule out')
 
 
+# A FOOTER LINKS ITS LICENCE AND NAMES NONE. "Distributed under the MIT
+# License." is true only until the licence changes, and then it is wrong on
+# every page at once, here and in every repository generated from this one,
+# with nothing to say so. The footer links to the file instead, from the
+# repository root, which GitHub resolves on any branch and from any folder:
+# a seed copied out of docs/templates/ to another depth keeps its link, and
+# the link names no repository, so it holds in a fork or after a rename. The
+# standards' styling guide sets the clause; this holds every page to it.
+LICENCE_CLAUSE = 'Distributed under the terms in [LICENSE](/LICENSE).'
+FOOTER_CLAUSE = re.compile(r'distributed under', re.I)
+ROOT_LICENCE_LINK = re.compile(r'\]\(/(?:LICEN[CS]E|COPYING)[^)/]*\)')
+MARKDOWN_LINK = re.compile(r'\[[^\]]*\]\([^)]*\)')
+NAMED_LICENCE = re.compile(r'\b(?:MIT|Apache|A?GPL|LGPL|BSD|MPL|ISC|Unlicense|CC0|EPL)\b', re.I)
+CODE_FENCE = re.compile(r'^\s*(`{3,}|~{3,})')
+INLINE_CODE = re.compile(r'(`+)(?:(?!\1).)+?\1')
+
+
+def check_footer(path: pathlib.Path, text: str) -> None:
+    """Each line of a Markdown file carrying the licence clause, outside code."""
+    fence = None
+    for number, line in enumerate(text.splitlines(), start=1):
+        marker = CODE_FENCE.match(line)
+        if fence:
+            if marker and marker.group(1)[0] == fence[0] and len(marker.group(1)) >= len(fence):
+                fence = None
+            continue
+        if marker:
+            fence = marker.group(1)
+            continue
+        prose = INLINE_CODE.sub('', line)
+        if not FOOTER_CLAUSE.search(prose):
+            continue
+        named = NAMED_LICENCE.search(MARKDOWN_LINK.sub('', prose))
+        if named:
+            report(path, number,
+                   f'the footer names its licence, {named.group(0)}, which goes stale the day the licence '
+                   f'changes: link the file instead, as `{LICENCE_CLAUSE}`')
+        elif not ROOT_LICENCE_LINK.search(prose):
+            report(path, number,
+                   'the footer does not link its licence from the repository root, the one link that holds '
+                   f'from any folder: write `{LICENCE_CLAUSE}`')
+
+
 # THE OWNER'S HALF OF docs/Prompts.md IS FROZEN IN THE TEMPLATE. The page is
 # the template's down to the comment that closes the Golden Path prompts, and
 # each generated repository's owner's from that comment to the end. Template
@@ -396,6 +443,8 @@ def main() -> int:
         if not (ROOT / TEMPLATE_INIT).exists():
             check_placeholders(path, text)
         suffix = path.suffix.lower()
+        if suffix == '.md':
+            check_footer(path, text)
         if suffix == '.json':
             check_json(path, text)
         elif suffix in ('.yml', '.yaml'):

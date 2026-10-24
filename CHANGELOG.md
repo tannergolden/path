@@ -72,6 +72,10 @@ initialisation deletes.
 - **A placeholder check** in the repository validator: once initialised, a
   contact link still naming the owner-and-repository placeholder, or a
   CODEOWNERS rule naming `@your-org/your-team`, fails the `ci` check.
+- **A footer check** in the repository validator: a document whose footer
+  names its licence, or links it any way but `[LICENSE](/LICENSE)` from the
+  repository root, fails the `ci` check, here and in every generated
+  repository, so no page goes stale when the licence changes.
 - **`merge_group` triggers** on every required check, so a merge queue gets a
   result from each.
 - **Dependabot** for the development container and the scripts'

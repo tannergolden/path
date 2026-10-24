@@ -215,8 +215,10 @@ So `lint-command` starts out pointing at
 [`.github/scripts/validate-repository.py`](.github/scripts/validate-repository.py),
 which checks the files that exist from the first commit - every YAML and JSON
 file parses, every workflow `uses:` is pinned to a tag or a commit rather than a
-branch, no CRLF or stray whitespace. A typo in any of those breaks something
-quietly, so this is a real gate, not a placeholder that returns zero.
+branch, no CRLF or stray whitespace, and every document's footer links its
+licence from the repository root rather than naming it. A typo in any of those
+breaks something quietly, so this is a real gate, not a placeholder that
+returns zero.
 
 **It is still only half the story.** Nothing is testing or building your project,
 because your project does not exist yet. Open `.github/workflows/checks.yml` and
@@ -422,7 +424,8 @@ publishes nothing.
    `.github/template-sync` you want to own outright.
 10. **Choose your licence.** `LICENSE` arrives as MIT, in your name. If your
     project needs another licence, replace the file: every document's footer
-    links to `LICENSE` rather than naming one, so nothing else needs editing.
+    links to `LICENSE` rather than naming one, so nothing else needs editing,
+    and the repository validator fails a footer that names one.
 11. **Replace this README.** Everything above describes the template, not your
     project. Nothing rewrites it for you, because only you know what this
     repository is for. The sections worth keeping are the workflow table and

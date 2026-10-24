@@ -413,6 +413,58 @@ class TestPromptsPage(ValidatorTestCase):
         self.assertClean(self.repo.run())
 
 
+class TestFooterLicence(ValidatorTestCase):
+    """A footer links its licence from the repository root, and names none."""
+
+    PAGE = '# Page\n\nBody.\n\nBuilt with care. {clause}\n'
+    CLAUSE = 'Distributed under the terms in [LICENSE](/LICENSE).'
+
+    def page(self, clause: str, rel: str = 'docs/Page.md') -> None:
+        self.repo.write(rel, self.PAGE.format(clause=clause))
+
+    def test_the_root_link_passes(self) -> None:
+        self.page(self.CLAUSE)
+        self.assertClean(self.repo.run())
+
+    def test_a_named_licence_is_reported(self) -> None:
+        self.page('Distributed under the MIT License.')
+        self.assertFinding(self.repo.run(), 'the footer names its licence, MIT')
+
+    def test_a_named_licence_beside_the_link_is_reported(self) -> None:
+        self.page('Distributed under the Apache License 2.0, in [LICENSE](/LICENSE).')
+        self.assertFinding(self.repo.run(), 'the footer names its licence, Apache')
+
+    def test_a_relative_link_is_reported(self) -> None:
+        """It resolves where it is, and breaks when the page is copied to another depth."""
+        self.page('Distributed under the terms in [LICENSE](../LICENSE).')
+        self.assertFinding(self.repo.run(), 'does not link its licence from the repository root')
+
+    def test_a_footer_with_no_link_is_reported(self) -> None:
+        self.page("Distributed under the terms in this repository's LICENSE.")
+        self.assertFinding(self.repo.run(), 'does not link its licence from the repository root')
+
+    def test_another_name_for_the_licence_file_passes(self) -> None:
+        self.page('Distributed under the terms in [COPYING](/COPYING).')
+        self.assertClean(self.repo.run())
+
+    def test_a_clause_quoted_as_code_is_not_a_footer(self) -> None:
+        self.repo.write('docs/Guide.md', (
+            '# Guide\n\nNever write `Distributed under the MIT License.` in a footer.\n\n'
+            '```markdown\nDistributed under the MIT License.\n```\n'
+        ))
+        self.assertClean(self.repo.run())
+
+    def test_only_markdown_is_read(self) -> None:
+        self.repo.write('NOTICE.txt', 'Distributed under the MIT License.\n')
+        self.assertClean(self.repo.run())
+
+    def test_the_template_is_held_to_it_as_well(self) -> None:
+        """Unlike a placeholder, a stale footer is a defect before initialisation too."""
+        self.repo.write('.github/TEMPLATE_INIT', 'This repository has not been initialised yet.\n')
+        self.page('Distributed under the MIT License.', 'docs/templates/Seed.md')
+        self.assertFinding(self.repo.run(), 'the footer names its licence')
+
+
 class TestGitUnavailable(unittest.TestCase):
     """A git that cannot answer must say so, not raise."""
 

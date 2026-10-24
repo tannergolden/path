@@ -107,6 +107,6 @@ Plan where each part of the project goes and which of the template's files you w
 
 <br />
 
-Built with ❤️ by the Engineering Team. Distributed under the MIT License.
+Built with ❤️ by the Engineering Team. Distributed under the terms in [LICENSE](../../LICENSE).
 
 </div>

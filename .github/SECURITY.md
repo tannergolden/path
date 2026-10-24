@@ -91,6 +91,6 @@ The Golden Path template includes pre-configured settings for the following GitH
 
 <br />
 
-Built with ❤️ by the Engineering Team. Distributed under the MIT License.
+Built with ❤️ by the Engineering Team. Distributed under the terms in [LICENSE](../LICENSE).
 
 </div>

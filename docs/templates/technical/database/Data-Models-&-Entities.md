@@ -98,6 +98,6 @@ erDiagram
 
 <br />
 
-Built with ❤️ by the Engineering Team. Distributed under the MIT License.
+Built with ❤️ by the Engineering Team. Distributed under the terms in this repository's LICENSE.
 
 </div>

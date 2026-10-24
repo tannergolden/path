@@ -32,13 +32,24 @@ every generated repository, whose own release notes are its changelog.
 ## [Unreleased]
 
 > [!IMPORTANT]
-> **Cut this release after the standards release it relies on.** Four of the
-> changes below work through `tannergolden/standards` rather than through this
-> template: the secret scan passing a merge queue, the Actions event policy
-> for the governance stub, initialisation removing the Vulnerability Report
-> issue form from a public repository, and CI installing the scripts'
-> requirements before it runs them. Each takes effect once the standards'
-> `v1` moves past it.
+> **Cut this release after the standards release it relies on.** These
+> changes work through `tannergolden/standards` rather than through this
+> template, and each takes effect once the standards' `v1` moves past it:
+>
+> - the secret scan passing a merge queue, and the Actions event policy for
+>   the governance stub;
+> - initialisation removing the Vulnerability Report issue form from a
+>   public repository;
+> - CI and 🏷️ Cut Release installing the scripts' requirements before they
+>   run them;
+> - trusted publishing to npm and crates.io, the licence attached to each
+>   release, and the summary prompt at the top of drafted release notes;
+> - Dependency Review as a required check, and every required check accepted
+>   from GitHub Actions alone, once 🎯 Apply Standards reapplies the rulesets.
+>
+> Once `v1` has moved, delete `statuses: write` from the `pr` job in
+> `governance.yml`. The standards no longer ask for it, and 🔬 Verify Stub
+> Ceilings reports it until it goes.
 
 _(New repositories only)_ marks a file seeded once, which a sync never brings
 to a repository that already exists. _(Template only)_ marks one that
@@ -124,6 +135,14 @@ initialisation deletes.
 - The development container installs Python and the scripts' requirements,
   and gitleaks from Ubuntu's archive, so the `pre-commit` hook scans what is
   staged.
+- **The secrets table** in `.github/workflows/README.md` gives every secret
+  an expiry or a rotation, says npm and crates.io publish without a token
+  once a package has its first version, and says PyPI still needs its token.
+  The release stub's `package` job says the same.
+- The required checks are listed with Dependency Review wherever the
+  documents name them.
+- The README points at the project README seed, and at the standards'
+  checklist for making a repository public.
 - 🔬 Verify Stub Ceilings installs the pinned requirements before it runs,
   and runs when the checker or its requirements change.
 - The CI failure alert watches the Scorecard workflow, and starts only for

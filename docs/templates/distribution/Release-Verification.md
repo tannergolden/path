@@ -32,6 +32,7 @@ Every release that 📦 Release publishes carries these files. The build archive
 | `build-<tag>.tar.gz`  | `[The build output: what is inside, and how to run or install it]`                                                | Yes, on a public repository                         |
 | `sbom-<tag>.cdx.json` | A CycloneDX SBOM: each dependency the release was built from, read from the manifests and lockfiles in the source | No                                                  |
 | `README.md`           | The project README as of the release                                                                              | No                                                  |
+| `LICENSE`             | The licence the release was published under, which holds for it whatever the licence in the repository says later | No                                                  |
 | `[Registry package]`  | `[The same release on npm \| PyPI \| crates.io \| a container registry]`                                          | `[The registry's own provenance, where it has one]` |
 
 The attestation is a signed statement that names the archive's SHA-256 digest, the repository and commit it was built from, and the workflow that built it. There is no long-lived signing key to fetch: GitHub signs each attestation with a short-lived certificate issued to the workflow run, and `gh` checks it against Sigstore's public trust root. The "Source code" archives GitHub adds to every release page are generated on request and are not attested: to check the source, check out the tag instead.

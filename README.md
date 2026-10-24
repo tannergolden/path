@@ -585,11 +585,12 @@ deleted file off rather than bringing it back.
 > every repository, templates included, so applying the rulesets never leaves
 > a pull request waiting on a check that cannot run. Each also triggers on
 > `merge_group`, so the rulesets work with a merge queue. In a merge group the
-> `pr` jobs have no pull request to read, so they skip, and the secret scan
-> passes without scanning again, because each commit in the group was scanned
-> on its own pull request; GitHub counts a skipped job as passing. Never skip
-> a required job in its stub, though: a job skipped there reports under its
-> bare id, such as `secrets`, not the name branch protection waits for.
+> `pr` jobs and dependency review have no pull request to read, so they skip,
+> and the secret scan passes without scanning again, because each commit in
+> the group was scanned on its own pull request; GitHub counts a skipped job
+> as passing. Never skip a required job in its stub, though: a job skipped
+> there reports under its bare id, such as `secrets`, not the name branch
+> protection waits for.
 
 ### Staying current takes no effort
 

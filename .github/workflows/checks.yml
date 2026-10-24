@@ -9,6 +9,11 @@
 # CodeQL's sweep, the full-history secret scan, and a config re-validation,
 # so a dormant repository still gets told when a rule it relies on breaks.
 #
+# Every job here runs in the two golden path templates too. What they ship -
+# the scripts, the workflows, the seeded documents - is what every generated
+# repository's required checks run against, so it is checked before it ships
+# rather than in the first repository that syncs it.
+#
 # ⚠️ THE JOB IDS ARE THE CHECK NAMES. A called workflow reports as
 # `<job id> / <job name>`, so `ci` and `secrets` below are load-bearing:
 # branch protection names them. Renaming either leaves every pull request
@@ -19,6 +24,14 @@ name: '🚦 Checks'
 on:
   push:
   pull_request:
+  # A merge queue asks every required check to report on the merge group as
+  # well, and `ci` and `secrets` are required. Without this trigger a queued
+  # pull request waits on them forever. Never skip either job for a merge
+  # group with an `if:` here: a job skipped in this file reports under its
+  # bare id, `ci` or `secrets`, which is not the name branch protection waits
+  # for. The secret scan passes a merge group on its own instead, since each
+  # commit in it was scanned on its pull request.
+  merge_group:
   schedule:
     - cron: '0 3 * * 1' # weekly sweep of code nothing has touched
   workflow_dispatch:
@@ -54,7 +67,7 @@ jobs:
     # written into this file, so renaming your default branch cannot
     # silently stop this workflow. It also stops a branch with an open
     # pull request running everything twice.
-    if: ${{ !(github.event.repository.is_template && contains(fromJSON('["repo", "path"]'), github.event.repository.name)) && (github.event_name != 'push' || github.ref_name == github.event.repository.default_branch) }}
+    if: ${{ github.event_name != 'push' || github.ref_name == github.event.repository.default_branch }}
     permissions:
       contents: read # read the repository
     uses: tannergolden/standards/.github/workflows/ci.yml@v1
@@ -94,7 +107,7 @@ jobs:
 
   # RULESET-LOAD-BEARING JOB ID: reports as 'secrets / 🔍 Scan for Secrets'.
   secrets:
-    if: ${{ !(github.event.repository.is_template && contains(fromJSON('["repo", "path"]'), github.event.repository.name)) && (github.event_name != 'push' || github.ref_name == github.event.repository.default_branch) }}
+    if: ${{ github.event_name != 'push' || github.ref_name == github.event.repository.default_branch }}
     permissions:
       contents: read # full-history checkout for the secret scan
       issues: write # one-time escalation issue when scanning is silently off
@@ -102,12 +115,10 @@ jobs:
     secrets: inherit # zizmor: ignore[secrets-inherit] - first-party callee at the ref pinned above.
 
   codeql:
-    # INERT IN THE TWO GOLDEN PATH TEMPLATES. They hold no source code, so a
-    # weekly sweep there would analyse an empty tree forever. Every other
-    # repository runs this same file normally, a template derived from one
-    # of them included: `is_template` alone is true there too, so every job
-    # here also names the two.
-    if: ${{ !(github.event.repository.is_template && contains(fromJSON('["repo", "path"]'), github.event.repository.name)) && (github.event_name != 'push' || github.ref_name == github.event.repository.default_branch) }}
+    # Runs in the golden path templates too. They hold no application code,
+    # but they do hold Python scripts and workflows, and CodeQL analyses
+    # both - the same files every generated repository goes on to run.
+    if: ${{ github.event_name != 'push' || github.ref_name == github.event.repository.default_branch }}
     permissions:
       actions: read # CodeQL resolves workflow run metadata during analysis
       contents: read # walk the checkout to build the language matrix
@@ -119,7 +130,7 @@ jobs:
     # with the rest of the checks - actionlint and zizmor over a stub set
     # take seconds, and a finding can appear without a workflow file
     # changing when the shared configuration behind them moves.
-    if: ${{ !(github.event.repository.is_template && contains(fromJSON('["repo", "path"]'), github.event.repository.name)) && (github.event_name != 'push' || github.ref_name == github.event.repository.default_branch) }}
+    if: ${{ github.event_name != 'push' || github.ref_name == github.event.repository.default_branch }}
     permissions:
       contents: read # read the repository
     uses: tannergolden/standards/.github/workflows/lint-workflows.yml@v1

@@ -1,4 +1,6 @@
 #!/usr/bin/env python3
+# SPDX-FileCopyrightText: 2026 Tanner Golden
+# SPDX-License-Identifier: MIT
 """Check every stub's permission ceiling against the workflow it calls.
 
 WHY THIS EXISTS. A caller's `permissions:` block is a CEILING, not a grant:

@@ -1,4 +1,6 @@
 #!/usr/bin/env python3
+# SPDX-FileCopyrightText: 2026 Tanner Golden
+# SPDX-License-Identifier: MIT
 """Tests for the stub ceiling checker.
 
 WHY THIS EXISTS. This program decides whether a stub's `permissions:` block

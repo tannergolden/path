@@ -1,4 +1,6 @@
 #!/usr/bin/env python3
+# SPDX-FileCopyrightText: 2026 Tanner Golden
+# SPDX-License-Identifier: MIT
 """Validate this repository's own configuration.
 
 WHY THIS EXISTS. The `ci` job in `checks.yml` fails when lint, test and

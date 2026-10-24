@@ -1,4 +1,6 @@
 #!/usr/bin/env python3
+# SPDX-FileCopyrightText: 2026 Tanner Golden
+# SPDX-License-Identifier: MIT
 """Tests for this repository's .gitignore.
 
 WHY THIS EXISTS. An ignore rule fails silently by construction: `git add`

@@ -1,4 +1,6 @@
 #!/usr/bin/env python3
+# SPDX-FileCopyrightText: 2026 Tanner Golden
+# SPDX-License-Identifier: MIT
 """Tests for the repository validator.
 
 WHY THIS EXISTS. `validate-repository.py` runs as the `ci` job's

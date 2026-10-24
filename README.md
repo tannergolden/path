@@ -716,8 +716,8 @@ python3 ../standards/.github/scripts/check-frontmatter.py --mode enforce
 **Every change gets a line in [`CHANGELOG.md`](CHANGELOG.md)**, under
 **Unreleased**, in the same pull request. It is what an owner reads before
 running 🔄 Template Sync, and it is the template's only lasting record of a
-release: Cut Release prunes the page it supersedes, and initialisation
-deletes the file from every generated repository.
+release: Cut Release prunes the page and the tag it supersedes, and
+initialisation deletes the file from every generated repository.
 
 **`docs/Prompts.md` is two sections, and the template writes only the
 first.** Add or change a Golden Path prompt only between the two comments
@@ -738,15 +738,20 @@ says what a generated repository does with it. The standards'
 [For Template Authors](https://github.com/tannergolden/standards/blob/Development/docs/distribution/automation/Template-Sync.md#-for-template-authors)
 sets out each section.
 
-**A merge reaches nobody until a release.** Generated repositories follow
-`v1`, so dispatch 🏷️ Cut Release from the default branch with the next
-`vX.Y.Z` and `move-major` left on. It refuses a version that is not a new
+**A merge reaches existing repositories only through a release.** A
+repository generated after it starts from it at once, because "Use this
+template" copies the default branch, so merge a change that relies on a change
+to the standards only once the standards have released it. The repositories
+already generated follow `v1`, so dispatch 🏷️ Cut Release from the default
+branch with the next `vX.Y.Z` and `move-major` left on. It refuses a version that is not a new
 `vX.Y.Z` above the last one, a commit that is not on the default branch, a
 tree missing `.github/template-sync` or `.github/workflows/template-sync.yml`,
 and one the repository validator fails; otherwise it tags the version, moves
 its major tag to it, publishes the release and prunes the one it superseded.
 Before you dispatch it, move the **Unreleased** entries in `CHANGELOG.md` under
-the new version.
+the new version, linked to its release page, and point the previous version's
+link at the commit it was cut from: this release prunes that version's page
+and tag.
 A change that renames a file a generated repository depends on, or reshapes a
 stub in a way a merge cannot carry, is breaking: release it as `v2`, which no
 repository follows until its owner changes `ref:`.

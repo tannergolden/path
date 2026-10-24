@@ -52,6 +52,9 @@ runs them:
   and every `test_*.py` here as its `test-command`. That discovers a test
   added beside a new script without anyone remembering to list it.
 - `verify-stubs.yml` runs `verify-stub-ceilings.py`.
+- `cut-release.yml` runs `validate-repository.py` before it tags a release, so
+  a release the validator fails is refused. In the template, that includes a
+  change to the owner's half of `docs/Prompts.md`.
 
 > [!NOTE]
 > **The tests keep their underscores on purpose.** `unittest` imports each

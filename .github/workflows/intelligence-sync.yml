@@ -1,0 +1,62 @@
+# Installed from tannergolden/intelligence. Edit freely: this file is YOURS.
+#
+# Keeps the universal rules for AI coding agents current in this
+# repository's root AGENTS.md: the block between the INTELLIGENCE markers,
+# which tannergolden/intelligence renders and releases. Every Monday, and
+# whenever you run it, it proposes the latest release's block as one pull
+# request on `chore/intelligence`, and leaves every section this repository
+# owns as it was. A first sync creates AGENTS.md, and docs/Prompts.md, an
+# empty page for this repository's own prompts that sync never changes; the
+# universal prompts stay in the hub. Merging stays yours.
+#
+# It runs on this repository's own GITHUB_TOKEN, with no App and no key, so
+# two settings matter: Settings > Actions > General must allow GitHub
+# Actions to create pull requests, and GitHub holds the checks of a pull
+# request that token opens until you approve them. `make merge` in the hub
+# approves them for a change that is only the block. A BOT_ACCESS_TOKEN
+# secret, if this repository has one, opens it as you instead.
+#
+# `@v0` follows the hub's latest release. To stop, delete this file; the
+# `no-intelligence` topic also keeps `make sync` away, and the
+# `no-intelligence-prompts` topic keeps the prompts page out alone.
+#
+# ⚠️ IT IS SILENT IN THE TWO GOLDEN PATH TEMPLATES. Its guard names them, as
+# every standards stub's does, so it does nothing in tannergolden/repo or
+# tannergolden/path and comes alive in each repository generated from them.
+# This repository's docs/Prompts.md shipped with the template, so the first
+# sync leaves it as it is. 🔄 Template Sync keeps this file current from the
+# template, merged with any edit you make to it.
+
+name: '🔁 Intelligence Sync'
+
+on:
+  schedule:
+    - cron: '23 6 * * 1' # Mondays: picks up a new release, and repairs a block edited by hand
+  workflow_dispatch:
+    inputs:
+      dry-run:
+        description: 'Print what would change, and change nothing'
+        type: boolean
+        default: false
+
+concurrency:
+  group: ${{ github.workflow }}
+  cancel-in-progress: false
+
+# ⚠️ THE `permissions:` BELOW IS A CEILING, NOT A GRANT. The called workflow
+# asks for exactly these two; grant less and it fails before any job starts.
+permissions: {}
+
+jobs:
+  sync:
+    if: ${{ !(github.event.repository.is_template && contains(fromJSON('["repo", "path"]'), github.event.repository.name)) }}
+    permissions:
+      contents: write # push the sync branch (PR-only flow)
+      pull-requests: write # open or update the sync pull request
+    uses: tannergolden/intelligence/.github/workflows/sync.yml@v0
+    with:
+      dry-run: ${{ inputs.dry-run || false }}
+    # Only this one secret, never `secrets: inherit`: the hub's code needs
+    # nothing else this repository holds.
+    secrets:
+      BOT_ACCESS_TOKEN: ${{ secrets.BOT_ACCESS_TOKEN }}

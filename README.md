@@ -68,9 +68,9 @@ the `#` away. [How it works](.github/template-sync.md).
 **This layout is meant to fit any project.** An app, a library, a service, a
 command-line tool, a monorepo: each has code, tests, documents and the things
 that present it, and each of those already has a folder here. So the default is
-simple: **use this layout**, and fit your project into it. The prompt in
-[Integrating Your Project](docs/introduction/Integrating-Your-Project.md) has
-an AI agent do the fitting.
+simple: **use this layout**, and fit your project into it. The
+[Fit My Project Into This Scaffold](docs/Prompts.md#fit-my-project-into-this-scaffold)
+prompt has an AI agent do the fitting.
 
 **Keep a layout of your own only when your project needs one.** Some projects
 already have a shape that means something, and moving them into `src/` would
@@ -149,12 +149,12 @@ changes. It is the route this template is built for, and the one
 
 Less than it looks, and it is worth knowing why before choosing it. **The
 standards reach both routes identically.** Every `uses:` in these workflows
-points at `tannergolden/standards@v1`, a moving major tag, so every fix in the
+but 🔁 Intelligence Sync's points at `tannergolden/standards@v1`, a moving major tag, so every fix in the
 v1 line arrives the moment it is published whether you forked or generated -
 which is what **Staying current takes no effort** describes further down.
 Forking does not make you more current; that part is already free.
 
-What a fork does sync is the **scaffold**: the fifteen stub workflows, the
+What a fork does sync is the **scaffold**: the sixteen stub workflows, the
 directory layout, the seeded documents. A generated repository can take the
 stub and seed fixes too - every stub but `cut-release.yml`, while the layout
 stays yours - whenever you run 🔄 Template Sync, so what a fork adds is the
@@ -190,8 +190,8 @@ changes, and two routes to them would only collide.
 > template author's identity, unmerged with your edits.
 
 > [!NOTE]
-> **Neither route carries the template flag over.** Ten of the fifteen stubs
-> are silent here: nine in the two golden path templates alone, and
+> **Neither route carries the template flag over.** Eleven of the sixteen stubs
+> are silent here: ten in the two golden path templates alone, and
 > `release.yml`, with initialisation, in every template.
 > 🏷️ Cut Release runs only in a template. `prune-runs.yml`, `verify-stubs.yml`
 > and `auto-index.yml` run on both sides, and 🔄 Template Sync reads the same
@@ -249,36 +249,38 @@ You do not have to fill in all of them - one real command is enough.
 
 ---
 
-## 🤖 No AI Infrastructure, On Purpose
+## 🤖 Agent Rules, When You Merge Them
 
-This template ships **no agent instruction files and no agent configuration**.
-That is a decision, not an omission.
+This template ships **no agent instructions of its own, and one stub that
+offers them**. That is a decision, not an omission.
 
 Agent instructions are **always loaded**. Every byte is paid on every session, in
 every repository, forever. They also carry conventions that belong to a project
 rather than to a scaffold: how you write commits, what must never be touched by
-hand, which commands actually build the thing. Shipping a default set makes that
-choice on your behalf, invisibly, and the usual result is a file nobody wrote and
-nobody trusts.
+hand, which commands actually build the thing. A default set written into your
+repository makes that choice on your behalf, invisibly, and the usual result is
+a file nobody wrote and nobody trusts. So nothing here writes an `AGENTS.md`;
+what ships instead lets you take shared rules when you choose to:
 
-**Nothing here depends on them.** Initialisation, CI, the rulesets, the release
-flow and every workflow behave identically with none of it present. Adding it is
-additive, and so is taking it away.
+| It ships                                                                             | What it does                                                                                                                                                                                                                                                                                   |
+| :----------------------------------------------------------------------------------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [`.github/workflows/intelligence-sync.yml`](.github/workflows/intelligence-sync.yml) | 🔁 Intelligence Sync. Every Monday, and whenever you run it, it proposes the latest release of [`tannergolden/intelligence`](https://github.com/tannergolden/intelligence) as one pull request: one root `AGENTS.md`, with the universal rules between markers and empty sections for your own |
+| [`docs/Prompts.md`](docs/Prompts.md)                                                 | Ready-made prompts in two sections kept apart: the Golden Path's own, kept current by 🔄 Template Sync, and this repository's, which only you write. The first 🔁 Intelligence Sync leaves this page as it is                                                                                  |
 
-When you do want it, there are two supported routes and no wrong answer:
+**Nothing lands until you merge it.** The stub is silent in this template and
+comes alive in yours. It opens its pull request with the repository's own
+token, so **Allow GitHub Actions to create and approve pull requests** must be
+on, which `apply-settings` in step 4 below sees to, and GitHub holds that pull
+request's checks until you approve them, unless a `BOT_ACCESS_TOKEN` opens it
+as you instead. The hub suits several repositories that share one set of rules,
+for the same reason the workflows here are called rather than copied: the law
+lives in one place, and a fix reaches every repository at the next release.
 
-| Route                                                                           | You commit                  | Updates arrive by                            |
-| :------------------------------------------------------------------------------ | :-------------------------- | :------------------------------------------- |
-| **By hand**                                                                     | the instructions themselves | you editing them                             |
-| **[`tannergolden/intelligence`](https://github.com/tannergolden/intelligence)** | one workflow stub           | a pull request each release, which you merge |
-
-Writing them by hand suits conventions that are specific to one project. The
-hub suits several repositories that share one set, for the same reason the
-workflows here are called rather than copied: the law lives in one place, and a
-fix reaches every repository at the next release. Its README carries the stub
-to copy. Every Monday, and whenever you run it, the stub proposes the latest
-release as one pull request: one root `AGENTS.md`, with the universal rules
-between markers and empty sections for your own.
+**Nothing here depends on it, either.** Initialisation, CI, the rulesets, the
+release flow and every other workflow behave identically without it. If you
+would rather write your rules by hand, delete the stub and write `AGENTS.md`
+yourself: 🔄 Template Sync switches a deleted stub off rather than bringing it
+back.
 
 > [!IMPORTANT]
 > **Whichever route you take, confirm the tools you actually use load what you
@@ -342,9 +344,9 @@ publishes nothing.
    that the DCO check requires. Once branch protection is on, a commit without
    it blocks the merge. `git config alias.ci 'commit -s'` and forget about it.
 3. **Fit your project in, and configure the `ci` job in `checks.yml`.** The
-   prompt in [Integrating Your Project](docs/introduction/Integrating-Your-Project.md)
-   has an AI agent move your project into the folders here and point the `ci`
-   job at its commands. Or configure the job by hand, as above, once you have
+   [Fit My Project Into This Scaffold](docs/Prompts.md#fit-my-project-into-this-scaffold)
+   prompt has an AI agent move your project into the folders here and point the
+   `ci` job at its commands. Or configure the job by hand, as above, once you have
    something to build. If your project needs a layout of its own, keep it, and
    switch off any kept-current file you put to another use - see
    **🧭 This Layout, Or Your Own** above.
@@ -363,10 +365,10 @@ publishes nothing.
 6. **Use your account's community health files, if you keep them.** When your
    account's public `.github` repository holds a code of conduct, a
    contributing guide, a security policy and the rest for every repository, the
-   copies here hide them. The prompt in
-   [Using Your Account Defaults](docs/introduction/Using-Your-Account-Defaults.md)
-   has an AI agent ask which copies to remove, then remove them, so GitHub
-   shows yours. `README.md` is never one of them: it stays, for you to replace
+   copies here hide them. The
+   [Use My Account's Community Health Files](docs/Prompts.md#use-my-accounts-community-health-files)
+   prompt has an AI agent ask which copies to remove, then remove them, so
+   GitHub shows yours. `README.md` is never one of them: it stays, for you to replace
    below.
 7. **Uncomment the rules you want in `.github/CODEOWNERS`**, replacing
    `@your-org/your-team` with a real owner. A rule naming an owner without write
@@ -460,9 +462,11 @@ tables after every push:
 ## 🌿 How The Workflows Work
 
 Your repository holds **triggers**. The logic lives in
-[`tannergolden/standards`](https://github.com/tannergolden/standards) and is
-pulled in by `uses:`. GitHub only runs a workflow that lives in the repository
-being pushed to, which is why these fifteen small files exist here at all. They
+[`tannergolden/standards`](https://github.com/tannergolden/standards), or for
+🔁 Intelligence Sync in
+[`tannergolden/intelligence`](https://github.com/tannergolden/intelligence), and
+is pulled in by `uses:`. GitHub only runs a workflow that lives in the repository
+being pushed to, which is why these sixteen small files exist here at all. They
 are grouped by what they do - everything that verifies a change in one file,
 everything that reacts to humans in another - so one push produces one run
 with every check in it, not four runs to read separately.
@@ -483,6 +487,7 @@ with every check in it, not four runs to read separately.
 | `verify-stubs.yml`         | Proves every job's permission ceiling matches its called workflow        |
 | `auto-index.yml`           | Redraws every folder log and index after a push, as a pull request       |
 | `template-sync.yml`        | Proposes the template's later fixes as one pull request, when run        |
+| `intelligence-sync.yml`    | Proposes the shared agent rules as one pull request, every Monday        |
 | `cut-release.yml`          | Publishes this template's releases. Inert in yours until you adopt it    |
 
 **Do not rename the job ids** `ci` and `secrets` (in `checks.yml`) or `pr`
@@ -532,8 +537,9 @@ They keep up a different way, and only when you ask: see
 **🔄 Template Sync: Fixes When You Ask** below.
 
 Almost nothing here pins a third-party action, either. Every `uses:` in the
-stubs points at `tannergolden/standards`, so the SHA pins behind them are
-maintained once, there, rather than in every repository built from this one.
+stubs points at `tannergolden/standards`, or `tannergolden/intelligence` for
+🔁 Intelligence Sync, so the SHA pins behind them are maintained once, there,
+rather than in every repository built from this one.
 The exception is `verify-stubs.yml`, which runs steps of its own and pins
 `actions/checkout` to a commit three times. Those three are why
 `.github/dependabot.yml` ships with `github-actions` enabled: it keeps them
@@ -636,6 +642,20 @@ python3 ../standards/.github/scripts/check-frontmatter.py --mode enforce
 The frontmatter check matters most for the seeds: every generated
 repository's `ci` job runs it with `frontmatter: 'enforce'`, so a seed that
 fails it here fails that required check in each repository that syncs it.
+
+**`docs/Prompts.md` is two sections, and the template writes only the
+first.** Add or change a Golden Path prompt only between the two comments
+that open and close its section. Never change anything from
+**✍️ This Repository's Prompts** to the end of the page: that is each owner's,
+and a change there would reach every generated repository's own prompts at its
+next sync, and conflict with whatever its owner wrote. The repository validator
+holds that half to a hash while `.github/TEMPLATE_INIT` exists, so 🏷️ Cut
+Release refuses a release that changed it.
+
+**🔁 Intelligence Sync is the hub's stub plus one guard.** When
+`tannergolden/intelligence` changes `setup/intelligence-sync.yml`, bring the
+change into `.github/workflows/intelligence-sync.yml` and keep the job's `if:`,
+which keeps it silent in the two golden path templates.
 
 **A new file needs a line in `.github/template-sync`**, in the section that
 says what a generated repository does with it. The standards'

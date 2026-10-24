@@ -18,6 +18,8 @@ about any language. Link checking and spelling are separate jobs in the
 called workflow already; workflow semantics and security are the `lint` job.
 This
 covers the gap between them: the configuration files nothing else parses.
+In the template alone, it also holds the owner's half of docs/Prompts.md
+still, since every generated repository's own prompts live there.
 
 Exits non-zero on the first category with findings, listing all of them.
 Annotations are emitted in GitHub's format when running under Actions, so
@@ -26,6 +28,7 @@ findings land on the file and line in the diff.
 
 from __future__ import annotations
 
+import hashlib
 import json
 import os
 import pathlib
@@ -277,6 +280,44 @@ def check_whitespace(path: pathlib.Path, text: str, eol: str) -> None:
             report(path, number, 'trailing whitespace')
 
 
+# THE OWNER'S HALF OF docs/Prompts.md IS FROZEN IN THE TEMPLATE. The page is
+# the template's down to the comment that closes the Golden Path prompts, and
+# each generated repository's owner's from that comment to the end. Template
+# Sync merges the whole page, so a template edit below that comment would land
+# in every owner's own prompts, or conflict with what they wrote there. So
+# while .github/TEMPLATE_INIT exists - in the template, and in a copy not yet
+# initialised - that half must match the hash below exactly. 🏷️ Cut Release
+# runs this script, so a release that changed it is refused. A deliberate
+# change is breaking: release it as a new major, and update the hash.
+PROMPTS_PAGE = 'docs/Prompts.md'
+GOLDEN_PATH_OPENS = '<!-- The Golden Path prompts start here.'
+GOLDEN_PATH_CLOSES = '<!-- The Golden Path prompts end here.'
+OWNER_HEADING = "## ✍️ This Repository's Prompts"
+OWNER_HALF_SHA256 = 'f93d5b44980ed8cdfb0c6f16d4cc4f171f18a89fdaf6423f126ec703b1bc8952'
+
+
+def check_prompts_page() -> None:
+    page = ROOT / PROMPTS_PAGE
+    if not (ROOT / '.github' / 'TEMPLATE_INIT').is_file() or not page.is_file():
+        return
+    lines = page.read_text(encoding='utf-8').splitlines(keepends=True)
+
+    def found(prefix: str) -> list[int]:
+        return [i for i, line in enumerate(lines) if line.startswith(prefix)]
+
+    opens, closes, heading = found(GOLDEN_PATH_OPENS), found(GOLDEN_PATH_CLOSES), found(OWNER_HEADING)
+    if len(opens) != 1 or len(closes) != 1 or len(heading) != 1 or not opens[0] < closes[0] < heading[0]:
+        report(page, None, 'the Golden Path prompts must sit between one opening and one closing '
+                           "comment, with the owner's section after them")
+        return
+    owner_half = ''.join(lines[closes[0]:]).encode('utf-8')
+    if hashlib.sha256(owner_half).hexdigest() != OWNER_HALF_SHA256:
+        report(page, closes[0] + 1, "the owner's section changed: from this comment to the end belongs "
+                                    "to each generated repository's owner, so the template leaves it as "
+                                    'it is; revert it, or release a deliberate change as a new major and '
+                                    'update OWNER_HALF_SHA256 in this script')
+
+
 def main() -> int:
     try:
         import yaml  # noqa: F401
@@ -320,6 +361,8 @@ def main() -> int:
             check_yaml(path, text)
             if path.parent.name == 'workflows':
                 check_pins(path, text)
+
+    check_prompts_page()
 
     counts = {
         'files': len(files),

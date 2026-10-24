@@ -47,17 +47,27 @@ you when it is created. `pre-commit` scans only when
 [gitleaks](https://github.com/gitleaks/gitleaks) is installed, and says so when
 it is not.
 
+`commit-msg` also checks who the commit is by, as CI does: an AI is never the
+author, and one sign-off must be the author's own. A merge commit, a `fixup!`
+and a `squash!` are left alone, since a rebase folds the last two away; an
+`amend!` commit is checked as the message it will become.
+
+> [!NOTE]
+> **`git revert` runs no commit-msg hook.** Its default message,
+> `Revert "..."`, fails the pull request's check, so reword it as
+> `revert(<scope>): ...` before you push.
+
 ---
 
 ## 📝 File Log
 
 <!-- AUTO-INDEX:BEGIN dir=. style=log -->
 
-| Entry                      | Purpose                                                                                                                                         |
-| :------------------------- | :---------------------------------------------------------------------------------------------------------------------------------------------- |
-| [`commit-msg`](commit-msg) | Checks a commit message before git records it: a Conventional Commit header with a scope, and the Signed-off-by trailer the DCO check requires. |
-| [`pre-commit`](pre-commit) | Scans what is staged for secrets before git records it, with gitleaks when it is installed.                                                     |
-| [`README.md`](README.md)   | This file.                                                                                                                                      |
+| Entry                      | Purpose                                                                                                                                                               |
+| :------------------------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [`commit-msg`](commit-msg) | Checks a commit message before git records it: a Conventional Commit header with a scope, the Signed-off-by trailer the DCO check requires, and who the commit is by. |
+| [`pre-commit`](pre-commit) | Scans what is staged for secrets before git records it, with gitleaks when it is installed.                                                                           |
+| [`README.md`](README.md)   | This file.                                                                                                                                                            |
 
 <!-- AUTO-INDEX:END -->
 

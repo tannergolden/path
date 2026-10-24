@@ -32,29 +32,47 @@ COMMIT_MSG = HOOKS / 'commit-msg'
 PRE_COMMIT = HOOKS / 'pre-commit'
 
 SIGNOFF = 'Signed-off-by: Ada Lovelace <ada@example.com>'
+ADA = {'GIT_AUTHOR_NAME': 'Ada Lovelace', 'GIT_AUTHOR_EMAIL': 'ada@example.com'}
 
 
 class CommitMsgTestCase(unittest.TestCase):
+    """The hook in a repository of its own, as git runs it, by a known author.
+
+    The hook asks git who the author is and whether a merge is in progress,
+    so it runs inside a scratch repository with no global or system
+    configuration, never inside whatever repository runs the tests.
+    """
+
     def setUp(self) -> None:
         self.dir = pathlib.Path(tempfile.mkdtemp(prefix='commit-msg-test-'))
+        self.env = {
+            **os.environ, **ADA,
+            'GIT_COMMITTER_NAME': 'Ada Lovelace', 'GIT_COMMITTER_EMAIL': 'ada@example.com',
+            'GIT_CONFIG_GLOBAL': os.devnull, 'GIT_CONFIG_NOSYSTEM': '1',
+        }
+        self.git('init', '-q')
 
     def tearDown(self) -> None:
         shutil.rmtree(self.dir, ignore_errors=True)
 
-    def check(self, message: str) -> subprocess.CompletedProcess[str]:
+    def git(self, *args: str) -> str:
+        return subprocess.run(['git', *args], cwd=self.dir, env=self.env, capture_output=True,
+                              text=True, check=True).stdout.strip()
+
+    def check(self, message: str, **env: str) -> subprocess.CompletedProcess[str]:
         path = self.dir / 'COMMIT_EDITMSG'
         path.write_text(message, encoding='utf-8')
         return subprocess.run(
             [sys.executable, str(COMMIT_MSG), str(path)],
-            capture_output=True, text=True,
+            capture_output=True, text=True, cwd=self.dir, env={**self.env, **env},
         )
 
-    def assertAccepted(self, message: str) -> None:
-        result = self.check(message)
+    def assertAccepted(self, message: str, **env: str) -> None:
+        result = self.check(message, **env)
         self.assertEqual(result.returncode, 0, result.stderr)
 
-    def assertRejected(self, message: str, reason: str) -> None:
-        result = self.check(message)
+    def assertRejected(self, message: str, reason: str, **env: str) -> None:
+        result = self.check(message, **env)
         self.assertEqual(result.returncode, 1, f'accepted: {message!r}')
         self.assertIn(reason, result.stderr)
 
@@ -122,14 +140,66 @@ class TestBody(CommitMsgTestCase):
         )
 
 
+class TestIdentity(CommitMsgTestCase):
+    """Who a commit is by, as CI's identity check reads it."""
+
+    def test_an_ai_author_is_rejected_even_with_a_human_signoff(self) -> None:
+        self.assertRejected(
+            f'fix(scripts): tidy\n\n{SIGNOFF}\n', 'its author is an AI',
+            GIT_AUTHOR_NAME='Claude', GIT_AUTHOR_EMAIL='noreply@anthropic.com',
+        )
+
+    def test_a_signoff_that_is_not_the_authors_is_rejected(self) -> None:
+        self.assertRejected(
+            'fix(scripts): tidy\n\nSigned-off-by: Grace Hopper <grace@example.com>\n', "no sign-off is its author's"
+        )
+
+    def test_the_authors_signoff_matches_without_regard_to_case(self) -> None:
+        self.assertAccepted('fix(scripts): tidy\n\nSigned-off-by: ADA LOVELACE <Ada@Example.com>\n')
+
+    def test_a_lowercase_ai_signoff_is_still_an_ai_signoff(self) -> None:
+        self.assertRejected(
+            f'fix(scripts): tidy\n\n{SIGNOFF}\nsigned-off-by: Claude <noreply@anthropic.com>\n', 'signed off by an AI'
+        )
+
+
 class TestExemptions(CommitMsgTestCase):
+    def merge_in_progress(self) -> None:
+        self.git('commit', '-q', '--allow-empty', '-m', 'root')
+        (self.dir / '.git' / 'MERGE_HEAD').write_text(self.git('rev-parse', 'HEAD') + '\n', encoding='utf-8')
+
     def test_a_merge_commit_is_left_alone(self) -> None:
+        self.merge_in_progress()
         self.assertAccepted("Merge branch 'Development' into feat/topic\n")
 
-    def test_an_autosquash_marker_is_left_alone(self) -> None:
-        for prefix in ('fixup! ', 'squash! ', 'amend! '):
+    def test_a_merge_message_of_ones_own_is_left_alone_too(self) -> None:
+        """CI exempts a commit by its two parents, whatever its message says."""
+        self.merge_in_progress()
+        self.assertAccepted('sync the topic branch\n')
+
+    def test_merge_wording_without_a_merge_is_checked(self) -> None:
+        """CI exempts by parents, not wording, so a single-parent "Merge ..." fails there."""
+        self.assertRejected("Merge branch 'Development' into feat/topic\n", 'does not match')
+
+    def test_a_fixup_or_squash_marker_is_left_alone(self) -> None:
+        for prefix in ('fixup! ', 'squash! '):
             with self.subTest(prefix=prefix):
                 self.assertAccepted(f'{prefix}feat(scripts): add a hook\n')
+
+    def test_an_amend_marker_checks_the_message_it_will_become(self) -> None:
+        """An amend! body replaces its target's message, and no hook runs then."""
+        self.assertRejected('amend! feat(scripts): add a hook\n\nFeat(X): Add A\n', 'does not match')
+        self.assertAccepted(f'amend! feat(scripts): add a hook\n\nfeat(scripts): add the hook\n\n{SIGNOFF}\n')
+
+
+class TestCommentCharacter(CommitMsgTestCase):
+    def test_a_configured_comment_character_is_honoured(self) -> None:
+        self.git('config', 'core.commentChar', ';')
+        self.assertAccepted(
+            f'fix(scripts): tidy\n\n# kept, as git keeps it\n{SIGNOFF}\n'
+            '; ------------------------ >8 ------------------------\n'
+            'diff --git a/x b/x\n+Pages 1\u20132\n'
+        )
 
     def test_an_empty_message_is_left_to_git(self) -> None:
         self.assertAccepted('# Please enter the commit message.\n')

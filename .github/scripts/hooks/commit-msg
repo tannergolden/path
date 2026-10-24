@@ -3,7 +3,8 @@
 # SPDX-License-Identifier: MIT
 #
 # Checks a commit message before git records it: a Conventional Commit
-# header with a scope, and the Signed-off-by trailer the DCO check requires.
+# header with a scope, the Signed-off-by trailer the DCO check requires, and
+# who the commit is by.
 #
 # WHY A LOCAL COPY OF A RULE CI ALREADY HOLDS. The pull request runs the
 # canonical checks - ✍️ Commit Messages and ✍️ DCO Sign-Off, from
@@ -18,11 +19,15 @@
 #
 #     git config core.hooksPath .github/scripts/hooks
 #
-# `git commit --no-verify` skips it, and CI still checks the result.
+# `git commit --no-verify` skips it, and CI still checks the result. So does
+# `git revert`, which runs no commit-msg hook: reword its `Revert "..."`
+# message as `revert(<scope>): ...` before you push, or CI rejects it.
 
 from __future__ import annotations
 
+import os
 import re
+import subprocess
 import sys
 
 TYPES = ('feat', 'fix', 'docs', 'style', 'refactor', 'perf', 'test', 'build',
@@ -36,41 +41,83 @@ UNSCOPED = re.compile(r'^(?P<type>[a-z]+)(?P<breaking>!)?: ')
 
 # An optional leading emoji and a space, as the standards' checker reads it.
 EMOJI_PREFIX = re.compile(
-    '^[\U0001F000-\U0001FAFF←-⇿⌀-➿⤀-⯿]️?\\s'
+    '^[\U0001F000-\U0001FAFF\u2190-\u21FF\u2300-\u27BF\u2900-\u2BFF]\uFE0F?\\s'
 )
 
 # U+2013 EN DASH through U+2015 HORIZONTAL BAR: the em dash is the banned
 # character, and its neighbours go with it. Escapes, so this file holds none.
 BANNED_DASHES = re.compile('[\u2013-\u2015]')
 
-SIGNOFF = re.compile(r'(?m)^Signed-off-by:\s*(.+?)\s*$')
+# Read without regard to case, as CI reads it.
+SIGNOFF = re.compile(r'(?im)^signed-off-by:\s*(.+?)\s*$')
 
-# An AI is credited with Co-Authored-By and never signs off; the person
-# contributing the change does.
+# An AI is credited with Co-Authored-By and is never the author and never
+# signs off; the person contributing the change does both.
 AI_IDENTITY = re.compile(
     r'\b(claude|anthropic|openai|chatgpt|codex|copilot|gemini|antigravity|cursor|grok|x\.ai|devin)\b',
     re.I,
 )
 
-# Messages git or a later rebase writes for itself, checked by nothing here.
-EXEMPT_PREFIXES = ('Merge ', 'fixup! ', 'squash! ', 'amend! ')
+# Messages a later rebase discards or rewrites in its own editor, where no
+# hook runs: a fixup! commit's message is dropped, and a squash! commit's is
+# combined by hand. An amend! commit's body REPLACES its target's message,
+# so that body is checked as the message it will become.
+DISCARDED_PREFIXES = ('fixup! ', 'squash! ')
+AMEND_PREFIX = 'amend! '
 
-SCISSORS = '# ------------------------ >8 ------------------------'
+# Git's scissors line, with whatever comment character is in use.
+SCISSORS = re.compile(r'^(?P<char>\S) -{24} >8 -{24}$')
 
 
-def cleaned(raw: str) -> str:
+def git(*args: str) -> subprocess.CompletedProcess[str]:
+    return subprocess.run(['git', *args], capture_output=True, text=True, check=False)
+
+
+def comment_char() -> str:
+    """The character git strips comment lines by: core.commentChar, else `#`.
+
+    `auto` means git picked one the message does not use; the scissors line,
+    when there is one, still says which.
+    """
+    configured = git('config', 'core.commentChar').stdout.strip()
+    return configured if configured and configured != 'auto' else '#'
+
+
+def cleaned(raw: str, char: str) -> str:
     """The message as git will store it: no comment lines, nothing past the scissors."""
-    kept = []
-    for line in raw.splitlines():
-        if line.startswith(SCISSORS):
+    lines = raw.splitlines()
+    for line in lines:
+        found = SCISSORS.match(line)
+        if found:
+            char = found.group('char')
             break
-        if line.startswith('#'):
+    kept = []
+    for line in lines:
+        found = SCISSORS.match(line)
+        if found and found.group('char') == char:
+            break
+        if line.startswith(char):
             continue
         kept.append(line.rstrip())
     return '\n'.join(kept).strip('\n')
 
 
-def problems(message: str) -> list[str]:
+def author() -> tuple[str, str]:
+    """Who git will record as the author, `--author` included, or two empty strings."""
+    ident = git('var', 'GIT_AUTHOR_IDENT').stdout
+    found = re.match(r'^(?P<name>.*?) <(?P<email>[^>]*)>', ident)
+    if found:
+        return found.group('name').strip(), found.group('email').strip()
+    return os.environ.get('GIT_AUTHOR_NAME', '').strip(), os.environ.get('GIT_AUTHOR_EMAIL', '').strip()
+
+
+def merging() -> bool:
+    """Whether this commit concludes a merge. CI exempts a commit by its two
+    parents, never by its wording, so the hook asks git the same question."""
+    return git('rev-parse', '-q', '--verify', 'MERGE_HEAD').returncode == 0
+
+
+def problems(message: str, name: str = '', email: str = '') -> list[str]:
     found: list[str] = []
     header = message.split('\n', 1)[0].rstrip()
 
@@ -106,6 +153,20 @@ def problems(message: str) -> list[str]:
                 f'it is signed off by an AI ({signer}); the person contributing it signs off, '
                 'and the AI is credited with Co-Authored-By'
             )
+
+    # Who it is by, as CI's identity check reads it: never an AI, and one of
+    # its sign-offs must be the author's own.
+    if name or email:
+        if AI_IDENTITY.search(f'{name} {email}'):
+            found.append(
+                f'its author is an AI ({name} <{email}>); author it as the person contributing it, '
+                'with `git commit --author`'
+            )
+        elif signers and not any(signer.lower() == f'{name} <{email}>'.lower() for signer in signers):
+            found.append(
+                f'no sign-off is its author\'s ({name} <{email}>); add it with '
+                f"`--trailer 'Signed-off-by: {name} <{email}>'`"
+            )
     return found
 
 
@@ -114,10 +175,14 @@ def main(argv: list[str]) -> int:
         print('usage: commit-msg <path to the commit message file>', file=sys.stderr)
         return 2
     with open(argv[1], encoding='utf-8') as handle:
-        message = cleaned(handle.read())
-    if not message or message.startswith(EXEMPT_PREFIXES):
+        message = cleaned(handle.read(), comment_char())
+    if not message or merging() or message.startswith(DISCARDED_PREFIXES):
         return 0
-    found = problems(message)
+    if message.startswith(AMEND_PREFIX):
+        message = message.split('\n', 1)[1].strip('\n') if '\n' in message else ''
+        if not message:
+            return 0
+    found = problems(message, *author())
     if not found:
         return 0
     print('commit-msg: this commit message would fail the pull request checks:', file=sys.stderr)

@@ -22,7 +22,13 @@ _Every folder already has a job._
 
 This repository already has a home for each part of a project: `src/` for the code, in three layers, `tests/` for its suites, `docs/` for its documents, `assets/` for what presents it, and settings that wait for a language. Each folder's `README.md` says what belongs in it and when, and the fill-in documents in [`docs/templates/`](../templates/README.md) describe the same layout. A project that keeps it is laid out the way its own documents, and every repository built from this template, already describe. Deleting the folders and starting new ones throws that away.
 
-The prompt below has an AI agent do the fitting. It reads every folder's README, shows you a plan of where each part of your project goes, and waits for your approval. Then it moves the project in and points the checks at it. It keeps a folder your project does not use yet, and changes the layout only where your language, framework or build tool requires it, citing the documentation that says so.
+The prompt below has an AI agent do the fitting. It reads every folder's README, shows you a plan of where each part of your project goes, and waits for your approval. Then it moves the project in and points the checks at it. It keeps a folder your project does not use yet, and changes the layout only where your project needs it, giving the reason.
+
+### When a project needs its own layout
+
+The layout fits almost any project, so the prompt starts from it. A few projects already have a shape that means something, and moving them into `src/` would break what they are: dotfiles, whose tree mirrors where each file installs; a notes vault, whose folders are its categories; a project whose language, framework or build tool sets a layout of its own. For those, the prompt has the agent say so in its plan and keep the project's layout. Everything else the template ships still applies, because the checks, the community health files and the editor settings work with any layout.
+
+A layout of your own has one more thing to watch. 🔄 Template Sync overwrites every file the **Kept current** section of `.github/template-sync` names, each time you run it, with the template's latest version, merging only where you changed the file. That section includes the folder READMEs in `docs/`, so a file there that you put to a different use would be overwritten. The prompt has the agent list each one, so you can put a `#` in front of its line first.
 
 ---
 
@@ -62,8 +68,9 @@ Plan where each part of the project goes and which of the template's files you w
 - Show the plan as a table of each part, the folder it goes to and the README rule that puts it there, such as | billing/rules.py | src/domain/ | src/README.md: domain imports nothing outside itself |. List after it each template file you will edit, and any folder you propose to add, remove or rename, with its reason.
 - Move code rather than rewrite it: change only the import paths and build settings the move needs. If a module does not fit one layer cleanly, place it where most of it belongs and list it as a follow-up.
 - A folder the project does not use yet stays, with its README, until it does; packages/ and benchmarks/ say when that is.
-- Remove, rename or move a folder the template ships, or add a top-level folder, only when the project's language, framework or build tool requires a layout the template cannot hold. Name the requirement and link the documentation that sets it.
+- Remove, rename or move a folder the template ships, or add a top-level folder, only when the project needs a layout of its own: its language, framework or build tool requires one the template cannot hold, or the project already has a shape that moving it into src/ would break, such as dotfiles that mirror where they install or a notes vault whose folders are its categories. Name the reason, and link the documentation that sets it where there is any. If the whole project keeps its own layout, say so at the top of the plan.
 - Leave every path that .github/template-sync keeps current where it is, and edit those files only where the project needs it: the commands in checks.yml, the ecosystems in .github/dependabot.yml, the features in .devcontainer/devcontainer.json, and the variable names in .env.example, never their values. Take each version from the project's own files or CI, never from memory.
+- Template Sync overwrites each path in the Kept current section of .github/template-sync when it runs, merging only where the file was changed. List each of those paths the plan puts to a different use, and propose a # in front of its line, or a rule such as !/docs/** under Your rules, so a sync does not overwrite it.
 - In checks.yml, keep the checks it already runs and add the project's beside them, and keep the job ids ci, secrets and pr.
 - If the code comes from another git repository, ask me whether to keep its history before you copy anything.
 - Leave README.md and LICENSE as they are, and the file logs between the AUTO-INDEX markers, which are redrawn after each push.

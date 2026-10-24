@@ -47,19 +47,74 @@ moment you have a reason to.
 What it deliberately does **not** decide is the language: no build system, no
 package manager, no toolchain. A structure is universal; a build is not.
 
-**Nothing reaches in and rewrites your tree, and the scaffold can still keep
-up - when you ask.** The standards stay current because they are linked. The
-files copied here - the workflow stubs, the repository scripts, the seeded
+**Nothing changes your tree on its own, and the scaffold can still keep up -
+when you ask.** The standards stay current because they are linked. The files
+copied here - the workflow stubs, the repository scripts, the seeded
 documents - are brought up to date only when you run **🔄 Template Sync** from
 the Actions tab: it proposes the template's later fixes as one pull request,
-merged with whatever you changed. It never runs on its own, so a repository
-whose owner never runs it never changes. Nothing is pushed to your branch,
-nothing you deleted comes back, and editing anything after generating has no
-upstream consequence. [`.github/template-sync`](.github/template-sync) names
-every file it may touch: put a `#` in front of a line to keep that file yours.
-The structure folders are on it switched off, so a sync never touches them
-unless you take the `#` away.
-[How it works](.github/template-sync.md).
+overwriting each of those files you left as it was and merging the ones you
+changed. It never runs on its own, so a repository whose owner never runs it
+never changes. Nothing is pushed to your branch, nothing you deleted comes
+back, and editing anything after generating has no upstream consequence.
+[`.github/template-sync`](.github/template-sync) names every file it may
+touch: put a `#` in front of a line to keep that file yours. The structure
+folders are on it switched off, so a sync never touches them unless you take
+the `#` away. [How it works](.github/template-sync.md).
+
+---
+
+## 🧭 This Layout, Or Your Own
+
+**This layout is meant to fit any project.** An app, a library, a service, a
+command-line tool, a monorepo: each has code, tests, documents and the things
+that present it, and each of those already has a folder here. So the default is
+simple: **use this layout**, and fit your project into it. The prompt in
+[Integrating Your Project](docs/introduction/Integrating-Your-Project.md) has
+an AI agent do the fitting.
+
+**Keep a layout of your own only when your project needs one.** Some projects
+already have a shape that means something, and moving them into `src/` would
+break what they are:
+
+| Your project                                                      | Why it keeps its own layout                                 |
+| :---------------------------------------------------------------- | :---------------------------------------------------------- |
+| Dotfiles, or anything else that mirrors where its files install   | The tree is the destination, so `src/` would mean nothing   |
+| A notes vault or a knowledge base                                 | Its folders are its categories, and its readers browse them |
+| A language, framework or build tool that sets a layout of its own | The tool finds files by where they are                      |
+
+If you are not sure, use this one. A folder you do not need yet costs one
+README; a layout you invent costs everyone who has to learn it.
+
+**Either way, it is yours to customise.** Rename a folder, add one, or delete
+one you will never use: every file here is yours to change, and the folder
+READMEs say what each one is for, so you know what you are changing. A layout
+of your own still keeps everything else this template ships - the checks, the
+community health files, the development container and the editor settings -
+because none of it cares where your code lives.
+
+> [!WARNING]
+> **🔄 Template Sync does overwrite some files.** Each time you run it, it
+> brings every path in the **Kept current** section of
+> [`.github/template-sync`](.github/template-sync) up to the template's latest
+> release: the workflow stubs and scripts in `.github/`, the community health
+> files and forms, `.devcontainer/`, `.vscode/`, the configuration files at the
+> root, and the seeded documents and folder READMEs in `docs/`.
+>
+> - **A file you had not changed** is overwritten with the template's version.
+> - **A file you changed** is merged with the template's change. Where you
+>   both changed the same lines, yours stays as it is and the pull request
+>   shows the template's change.
+> - **A file the template removed** goes too, unless you had changed it.
+>
+> It still arrives as one pull request for you to review, and only when you
+> run it. Your structure is not on that list: `src/`, `tests/`, `packages/`,
+> `benchmarks/`, `assets/`, this README and the licence start switched off,
+> and a file the template does not ship is never touched.
+>
+> So if you make one of those kept-current files your own - `docs/` put to a
+> different use, say, or a `.gitignore` you rewrote - put a `#` in front of its
+> line, or add a rule such as `!/docs/**` under **Your rules**, before you next
+> run it. A file you delete is switched off for you.
 
 ---
 
@@ -290,7 +345,9 @@ publishes nothing.
    prompt in [Integrating Your Project](docs/introduction/Integrating-Your-Project.md)
    has an AI agent move your project into the folders here and point the `ci`
    job at its commands. Or configure the job by hand, as above, once you have
-   something to build.
+   something to build. If your project needs a layout of its own, keep it, and
+   switch off any kept-current file you put to another use - see
+   **🧭 This Layout, Or Your Own** above.
 4. **Apply the settings, then the protection** - run **🎯 Apply Standards**
    from the Actions tab. `apply-settings` writes the repository settings
    (squash-only merges, head branches deleted on merge, auto-merge, the
@@ -508,13 +565,13 @@ compares this repository with that release and proposes whatever changed as
 **one pull request** on `chore/template-sync`, which you review and merge like
 any other. If you never run it, nothing in this repository ever changes.
 
-| It always...                  | Because                                                                                                       |
-| :---------------------------- | :------------------------------------------------------------------------------------------------------------ |
-| Merges rather than overwrites | Each file is merged with whatever you changed in it, by the same three-way merge git uses                     |
-| Writes in your identity       | The template is rewritten exactly as initialisation rewrote it, so footers and contact links stay yours       |
-| Leaves a conflict untouched   | A file you and the template changed in the same place stays as you have it; the pull request shows the change |
-| Respects a deletion           | A file you delete is switched off, under its old name or a new one, until you take the `#` off its line again |
-| Leaves your structure alone   | `src/`, `tests/`, `packages/`, `benchmarks/`, `assets/`, this README and the licence start switched off       |
+| It always...                        | Because                                                                                                                  |
+| :---------------------------------- | :----------------------------------------------------------------------------------------------------------------------- |
+| Overwrites only what you left alone | A file you had not changed takes the template's version; one you changed is merged, by the same three-way merge git uses |
+| Writes in your identity             | The template is rewritten exactly as initialisation rewrote it, so footers and contact links stay yours                  |
+| Leaves a conflict untouched         | A file you and the template changed in the same place stays as you have it; the pull request shows the change            |
+| Respects a deletion                 | A file you delete is switched off, under its old name or a new one, until you take the `#` off its line again            |
+| Leaves your structure alone         | `src/`, `tests/`, `packages/`, `benchmarks/`, `assets/`, this README and the licence start switched off                  |
 
 Three files describe it, and only one of them is yours to edit:
 

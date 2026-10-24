@@ -76,7 +76,8 @@ rule, because the seeds use all three forms. A file still carrying brackets
 has not been adopted yet.
 
 Whenever you run 🔄 Template Sync, it brings the seeds themselves up to date: each
-improvement arrives as a pull request, merged with anything you changed in them.
+improvement arrives as a pull request that overwrites a seed you had not changed
+with the template's version, and merges one you had with your changes.
 It never touches a document you copied out - from the moment you make it, that
 copy is an ordinary file in your tree. Put a `#` in front of a seed's line in `.github/template-sync`
 to keep that seed exactly as it is.
@@ -108,6 +109,13 @@ and add folders below them as you grow: give each one a `README.md` that logs
 its files, the way every seeded folder does, and update it in the same change
 that adds a file. `templates/` is not copied across: the seeds stay where they
 are and you take what you want.
+
+**Use these folders unless your project needs its own.** They fit any project,
+which is why the standards use the same seven. If yours keeps its documents
+another way - a notes vault whose folders are its documents, say - keep that
+way, and add `!/docs/**` under **Your rules** in `.github/template-sync`. Every
+README in these folders is kept current, so 🔄 Template Sync would otherwise
+overwrite any of them you put to a different use the next time you run it.
 
 ---
 

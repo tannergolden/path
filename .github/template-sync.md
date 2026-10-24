@@ -43,6 +43,24 @@ is called, never copied, so a fix to how syncing works reaches this repository o
 
 ---
 
+## ✍️ What It Overwrites
+
+**A sync does overwrite files: every path the list keeps current, and nothing else.** That is how
+those files stay current with the template. In the pull request a sync opens:
+
+- **A file you had not changed** is overwritten with the template's version.
+- **A file you changed** is merged with the template's change. Where you both changed the same lines,
+  yours stays as it is, and the pull request shows the template's change.
+- **A file the template removed** is removed too, unless you had changed it.
+- **A folder log** between `AUTO-INDEX` markers is redrawn from your tree.
+
+A path the list leaves to you, and any file the template does not ship, is never touched. So before
+you run it, look down the **Kept current** section for any file you put to a different use - a folder
+README you rewrote because this repository keeps a layout of its own, say - and put a `#` in front of
+its line. A file you deleted is switched off for you.
+
+---
+
 ## 📋 Choosing What Syncs
 
 `.github/template-sync` names every path the template ships, in `.gitignore` syntax:

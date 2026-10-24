@@ -681,7 +681,7 @@ beside this repository:
 ```bash
 git clone --depth 1 --branch v1 https://github.com/tannergolden/standards ../standards
 
-python3 -m pip install --requirement .github/scripts/requirements.txt
+python3 -m pip install --require-hashes --requirement .github/scripts/requirements.txt
 python3 .github/scripts/validate-repository.py
 python3 -m unittest discover -s .github/scripts -p 'test_*.py'
 python3 ../standards/.github/scripts/template-sync.py check --repo-dir .

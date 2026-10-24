@@ -62,6 +62,37 @@ class GitignoreTestCase(unittest.TestCase):
         for p in paths:
             self.assertTrue(self.ignored(p), f'{p} is tracked but should be ignored')
 
+    def assertTrackedWithoutCase(self, *paths: str) -> None:
+        """Tracked on macOS and Windows too, where git matches without regard to case."""
+        for p in paths:
+            result = subprocess.run(
+                ['git', '-c', 'core.ignorecase=true', 'check-ignore', '-q', '--no-index', p],
+                cwd=self.root, capture_output=True,
+            )
+            self.assertNotEqual(result.returncode, 0, f'{p} is IGNORED where case does not matter')
+
+
+class TestLeftoversDoNotReachIntoContent(GitignoreTestCase):
+    """Python packaging leftovers, kept to the places they are leftovers."""
+
+    def test_a_downloads_folder_below_the_root_is_content(self) -> None:
+        """Unanchored, `downloads/` hid assets/downloads/ whole, re-includes and all."""
+        self.assertTracked('assets/downloads/press-kit.zip', 'docs/downloads/guide.md')
+        self.assertIgnored('downloads/setup.tar.gz')
+
+    def test_an_env_folder_survives_where_case_does_not_matter(self) -> None:
+        """`ENV/` matched every `env/` on macOS and Windows: Terraform's among them."""
+        self.assertTrackedWithoutCase('env/prod/main.tf', 'src/env/index.ts')
+
+
+class TestCredentialStores(GitignoreTestCase):
+    def test_login_files_are_ignored(self) -> None:
+        self.assertIgnored('.pypirc', '.netrc', '_netrc', '.git-credentials',
+                           '.docker/config.json', 'tools/.docker/config.json')
+
+    def test_a_docker_folder_that_is_not_dockers_own_is_left_alone(self) -> None:
+        self.assertTracked('docker/config.json')
+
 
 class TestSourceDirectoriesAreNotSwallowed(GitignoreTestCase):
     """Names that are SOURCE in mainstream ecosystems, not build output.

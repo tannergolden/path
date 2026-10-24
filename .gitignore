@@ -33,11 +33,12 @@ venv/
 .tox/
 .nox/
 .ipynb_checkpoints/
-ENV/
 build/
 develop-eggs/
 dist/
-downloads/
+# Anchored: a `downloads/` folder deeper down, such as assets/downloads/, is
+# content, and an ignored folder takes the re-includes below with it.
+/downloads/
 eggs/
 .eggs/
 sdist/
@@ -46,7 +47,8 @@ wheels/
 .installed.cfg
 *.egg
 
-# ⚠️ `lib/`, `lib64/`, `bin/`, `parts/` and `var/` ARE DELIBERATELY ABSENT.
+# ⚠️ `lib/`, `lib64/`, `bin/`, `parts/`, `var/` AND `ENV/` ARE DELIBERATELY
+# ABSENT.
 #
 # They were here as virtualenv leftovers, and `.venv` / `venv/` above already
 # cover every one of them. Unanchored, they also matched at ANY depth - and
@@ -60,7 +62,9 @@ wheels/
 # was not there - no warning, no error. In a scaffold whose whole premise is
 # that YOU choose the directory structure, quietly deciding a tree is
 # disposable is the one thing it must not do. A project that really does put
-# build output in `bin/` should anchor it: `/bin/`.
+# build output in `bin/` should anchor it: `/bin/`. `ENV/` is the same case on
+# macOS and Windows, where git matches without regard to case by default: it
+# swallowed every `env/` folder, Terraform's environments among them.
 
 # Go & native binaries
 *.exe
@@ -155,6 +159,13 @@ id_rsa
 id_dsa
 id_ecdsa
 id_ed25519
+# Credential stores by their usual names: package-registry and git logins,
+# and Docker's, which holds registry passwords.
+.pypirc
+.netrc
+_netrc
+.git-credentials
+**/.docker/config.json
 # Terraform and OpenTofu state holds every secret a plan touched, in plain
 # text, and a variables file is where the inputs to one are kept.
 *.tfstate

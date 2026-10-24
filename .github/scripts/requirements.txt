@@ -3,7 +3,7 @@
 # Installed by 🔬 Verify Stub Ceilings, by the development container, and by
 # anyone running the checks by hand:
 #
-#     python3 -m pip install --requirement .github/scripts/requirements.txt
+#     python3 -m pip install --require-hashes --requirement .github/scripts/requirements.txt
 #
 # Pinned so every run checks with the same parser, and kept current by the
 # `pip` ecosystem in .github/dependabot.yml.

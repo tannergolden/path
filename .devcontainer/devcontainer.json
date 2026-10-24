@@ -20,8 +20,10 @@
     "ghcr.io/devcontainers/features/common-utils:1": {},
     "ghcr.io/devcontainers/features/git:1": {},
     // For the repository's own checks; see above. The version matches the
-    // Python CI runs them on.
-    "ghcr.io/devcontainers/features/python:1": { "version": "3.12" }
+    // Python CI runs them on. `installTools` off: the feature would otherwise
+    // install a dozen linters and formatters through pipx that nothing here
+    // uses, on every rebuild.
+    "ghcr.io/devcontainers/features/python:1": { "version": "3.12", "installTools": false }
 
     // --- Uncomment what this project actually uses --------------------------
     //
@@ -55,10 +57,12 @@
   },
 
   // Installs what the repository's own checks need, switches on the git hooks
-  // in .github/scripts/hooks, which check a commit message and scan for
-  // secrets before git records anything, and sets the commit message
-  // template that spells out the format. Append your project's bootstrap
-  // command once it has one, for example `&& npm ci`, `&& pip install -e .`,
-  // `&& go mod download`, or `&& cargo fetch`.
-  "postCreateCommand": "python3 -m pip install --user --requirement .github/scripts/requirements.txt && git config core.hooksPath .github/scripts/hooks && git config commit.template .github/commit-template.txt"
+  // in .github/scripts/hooks, which check a commit message before git records
+  // it, and sets the commit message template that spells out the format. The
+  // hooks scan staged changes for secrets only where gitleaks is installed,
+  // and nothing here installs it: add it to this command if you want that
+  // scan before every commit as well as in CI. Append your project's
+  // bootstrap command once it has one, for example `&& npm ci`,
+  // `&& pip install -e .`, `&& go mod download`, or `&& cargo fetch`.
+  "postCreateCommand": "python3 -m pip install --user --require-hashes --requirement .github/scripts/requirements.txt && git config core.hooksPath .github/scripts/hooks && git config commit.template .github/commit-template.txt"
 }

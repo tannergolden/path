@@ -78,7 +78,7 @@ runs them:
 From the root of the repository:
 
 ```bash
-python3 -m pip install --requirement .github/scripts/requirements.txt
+python3 -m pip install --require-hashes --requirement .github/scripts/requirements.txt
 python3 .github/scripts/validate-repository.py
 python3 -m unittest discover -s .github/scripts -p 'test_*.py'
 ```

@@ -24,12 +24,15 @@ What it takes to keep this project running once it exists, and what to do when
 something goes wrong.
 
 - **Runbooks**: the steps for a routine task or a known failure, written to be
-  followed under pressure.
-- **Incidents**: how one is declared and handled, and who is told.
+  followed under pressure, one each in `runbooks/`, from the
+  [Runbook template](../templates/Runbook.md).
+- **Incidents**: how one is declared and handled, and who is told, from the
+  [Incident Response](../templates/operations/Incident-Response.md) seed.
 - **Post-mortems**: one for each incident, in `post-mortems/`, from the
   [Post-Mortem template](../templates/Post-Mortem.md).
 - **Security**: what this project protects, how it protects it, and the risks
-  it still carries.
+  it still carries, from the [Threat Model](../templates/operations/Threat-Model.md)
+  seed.
 
 Its documents are **yours from the first commit**: nothing upstream ever
 writes, moves or removes one. Only this README is ever updated from the

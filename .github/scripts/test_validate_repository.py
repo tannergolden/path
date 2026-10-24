@@ -364,7 +364,7 @@ OWNER_HALF = '''<!-- The Golden Path prompts end here. Everything below this com
 
 <br />
 
-Built with ❤️ by the Engineering Team. Distributed under the MIT License.
+Built with ❤️ by the Engineering Team. Distributed under the terms in [LICENSE](../LICENSE).
 
 </div>
 '''

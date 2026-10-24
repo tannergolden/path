@@ -51,12 +51,17 @@
 /.github/ISSUE_TEMPLATE/config.yml
 /.github/SECURITY.md
 /.github/SUPPORT.md
+/.github/commit-template.txt
 /.github/dependabot.yml
 /.github/pull_request_template.md
 /.github/release.yml
 /.github/scripts/README.md
+/.github/scripts/hooks/README.md
+/.github/scripts/hooks/commit-msg
+/.github/scripts/hooks/pre-commit
 /.github/scripts/requirements.txt
 /.github/scripts/test_gitignore.py
+/.github/scripts/test_hooks.py
 /.github/scripts/test_validate_repository.py
 /.github/scripts/test_verify_stub_ceilings.py
 /.github/scripts/validate-repository.py

@@ -1,0 +1,135 @@
+#!/usr/bin/env python3
+# SPDX-FileCopyrightText: 2026 Tanner Golden
+# SPDX-License-Identifier: MIT
+#
+# Checks a commit message before git records it: a Conventional Commit
+# header with a scope, and the Signed-off-by trailer the DCO check requires.
+#
+# WHY A LOCAL COPY OF A RULE CI ALREADY HOLDS. The pull request runs the
+# canonical checks - ✍️ Commit Messages and ✍️ DCO Sign-Off, from
+# tannergolden/standards - and they stay the authority. But they run after a
+# push, and a commit that fails them has to be rewritten: an amend, or an
+# interactive rebase across every commit on the branch. This catches the
+# same mistakes while they still cost nothing. Where this file and the
+# standards disagree, the standards win; the rules below follow
+# commit-check.py and dco-check.sh there.
+#
+# Enable it once per clone (the development container does it for you):
+#
+#     git config core.hooksPath .github/scripts/hooks
+#
+# `git commit --no-verify` skips it, and CI still checks the result.
+
+from __future__ import annotations
+
+import re
+import sys
+
+TYPES = ('feat', 'fix', 'docs', 'style', 'refactor', 'perf', 'test', 'build',
+         'ci', 'chore', 'revert', 'security')
+MAX_HEADER = 100
+
+HEADER = re.compile(
+    r'^(?P<type>[a-z]+)\((?P<scope>[a-z0-9][a-z0-9-]*)\)(?P<breaking>!)?: (?P<subject>.+)$'
+)
+UNSCOPED = re.compile(r'^(?P<type>[a-z]+)(?P<breaking>!)?: ')
+
+# An optional leading emoji and a space, as the standards' checker reads it.
+EMOJI_PREFIX = re.compile(
+    '^[\U0001F000-\U0001FAFF←-⇿⌀-➿⤀-⯿]️?\\s'
+)
+
+# U+2013 EN DASH through U+2015 HORIZONTAL BAR: the em dash is the banned
+# character, and its neighbours go with it. Escapes, so this file holds none.
+BANNED_DASHES = re.compile('[\u2013-\u2015]')
+
+SIGNOFF = re.compile(r'(?m)^Signed-off-by:\s*(.+?)\s*$')
+
+# An AI is credited with Co-Authored-By and never signs off; the person
+# contributing the change does.
+AI_IDENTITY = re.compile(
+    r'\b(claude|anthropic|openai|chatgpt|codex|copilot|gemini|antigravity|cursor|grok|x\.ai|devin)\b',
+    re.I,
+)
+
+# Messages git or a later rebase writes for itself, checked by nothing here.
+EXEMPT_PREFIXES = ('Merge ', 'fixup! ', 'squash! ', 'amend! ')
+
+SCISSORS = '# ------------------------ >8 ------------------------'
+
+
+def cleaned(raw: str) -> str:
+    """The message as git will store it: no comment lines, nothing past the scissors."""
+    kept = []
+    for line in raw.splitlines():
+        if line.startswith(SCISSORS):
+            break
+        if line.startswith('#'):
+            continue
+        kept.append(line.rstrip())
+    return '\n'.join(kept).strip('\n')
+
+
+def problems(message: str) -> list[str]:
+    found: list[str] = []
+    header = message.split('\n', 1)[0].rstrip()
+
+    if len(header) > MAX_HEADER:
+        found.append(f'the subject line is {len(header)} characters (limit {MAX_HEADER})')
+
+    match = HEADER.match(header)
+    if not match:
+        loose = UNSCOPED.match(header)
+        if loose:
+            found.append(
+                f'`{loose.group("type")}:` has no scope - write `{loose.group("type")}(<scope>):`, '
+                'where the scope names the area changed (workflows, scripts, docs, deps, readme)'
+            )
+        else:
+            found.append('the subject line does not match `<type>(<scope>): <subject>`')
+    elif match.group('type') not in TYPES:
+        found.append(f'`{match.group("type")}` is not an allowed type ({", ".join(TYPES)})')
+    else:
+        subject = EMOJI_PREFIX.sub('', match.group('subject'))
+        if not subject[:1].islower() or not subject[:1].isascii():
+            found.append('the subject must start with a lowercase letter, optionally after an emoji and a space')
+
+    if BANNED_DASHES.search(message):
+        found.append('it contains an em dash (use a comma, a colon, or a spaced hyphen)')
+
+    signers = SIGNOFF.findall(message)
+    if not signers:
+        found.append('it has no `Signed-off-by:` trailer - commit with `git commit -s`, or add it with `git commit --amend -s`')
+    for signer in signers:
+        if AI_IDENTITY.search(signer):
+            found.append(
+                f'it is signed off by an AI ({signer}); the person contributing it signs off, '
+                'and the AI is credited with Co-Authored-By'
+            )
+    return found
+
+
+def main(argv: list[str]) -> int:
+    if len(argv) != 2:
+        print('usage: commit-msg <path to the commit message file>', file=sys.stderr)
+        return 2
+    with open(argv[1], encoding='utf-8') as handle:
+        message = cleaned(handle.read())
+    if not message or message.startswith(EXEMPT_PREFIXES):
+        return 0
+    found = problems(message)
+    if not found:
+        return 0
+    print('commit-msg: this commit message would fail the pull request checks:', file=sys.stderr)
+    for problem in found:
+        print(f'  - {problem}', file=sys.stderr)
+    print(
+        'The full rules: https://github.com/tannergolden/standards/blob/Development/docs/distribution/Conventional-Commits.md\n'
+        'Your message is kept in .git/COMMIT_EDITMSG. Skip this check with --no-verify; CI still runs it.',
+        file=sys.stderr,
+    )
+    return 1
+
+
+if __name__ == '__main__':
+    sys.exit(main(sys.argv))

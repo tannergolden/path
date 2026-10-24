@@ -150,6 +150,7 @@
 # --- Yours: seeded once, never synced -----------------------------------------
 #/README.md
 #/LICENSE
+#/.git-blame-ignore-revs
 #/.github/CODEOWNERS
 #/.github/FUNDING.yml
 #/.github/actions/**

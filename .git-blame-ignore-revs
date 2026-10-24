@@ -1,0 +1,12 @@
+# Commits that changed only formatting, which `git blame` should look through.
+#
+# 🖌️ Code Style Formatter lands its fixes as format-only commits. Without
+# this file, every line it touched blames that commit instead of the change
+# that actually wrote the line. GitHub's blame view reads this file from the
+# root of the repository on its own; for the command line, run once:
+#
+#     git config blame.ignoreRevsFile .git-blame-ignore-revs
+#
+# Add the full 40-character SHA of a commit that changed formatting and
+# nothing else, one per line, with a comment naming it. Never list a commit
+# that also changed behaviour: blame would hide who wrote that behaviour.

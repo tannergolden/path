@@ -7,6 +7,16 @@ node_modules/
 npm-debug.log*
 yarn*.log
 .pnpm-store/
+.eslintcache
+# Yarn 2 and later keep their own state under .yarn/. Without zero-installs
+# only these five folders are source, which is the list Yarn itself gives.
+.pnp.*
+.yarn/*
+!.yarn/patches
+!.yarn/plugins
+!.yarn/releases
+!.yarn/sdks
+!.yarn/versions
 
 # Python
 __pycache__/
@@ -16,6 +26,13 @@ __pycache__/
 venv/
 # Hypothesis example database (created by the local property-test run)
 .hypothesis/
+# The caches the common test, type and lint tools write beside the code.
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.tox/
+.nox/
+.ipynb_checkpoints/
 ENV/
 build/
 develop-eggs/
@@ -45,8 +62,7 @@ wheels/
 # disposable is the one thing it must not do. A project that really does put
 # build output in `bin/` should anchor it: `/bin/`.
 
-# Go
-obj/
+# Go & native binaries
 *.exe
 *.exe~
 *.dll
@@ -58,18 +74,35 @@ target/
 **/*.rs.bk
 cargo-home/
 
+# .NET & Visual Studio
+obj/
+.vs/
+*.user
+*.suo
+
 # Java / JVM
 .gradle/
 !src/main/**/build/
 !src/test/**/build/
 out/
 .artifacts/
+*.class
 *.jar
 *.war
 *.ear
+# ⚠️ THE WRAPPERS' OWN JARS ARE SOURCE. Every Gradle Wrapper and Maven
+# Wrapper project commits them, and `./gradlew` and `./mvnw` cannot start
+# without them - while `git add -A` would skip them without a word.
+!**/gradle/wrapper/gradle-wrapper.jar
+!**/.mvn/wrapper/maven-wrapper.jar
 *.zip
 *.tar.gz
 *.rar
+# An archive under assets/ is something the project presents - a font pack,
+# a press kit - not build output, so it is kept.
+!/assets/**/*.zip
+!/assets/**/*.tar.gz
+!/assets/**/*.rar
 
 # C / C++
 *.o
@@ -102,8 +135,34 @@ local.properties
 .env
 .env.*
 !.env.example
+# direnv's file usually exports the same secrets. A project whose .envrc
+# holds none can delete this line.
+.envrc
+.direnv/
 *.pem
 *.key
+# A Keynote deck in assets/ shares the extension and is not a key.
+!/assets/**/*.key
+# Keystores and private keys by their usual names. Public halves (`.pub`)
+# are not matched and stay committable.
+*.jks
+*.keystore
+*.p12
+*.pfx
+*.p8
+*.ppk
+id_rsa
+id_dsa
+id_ecdsa
+id_ed25519
+# Terraform and OpenTofu state holds every secret a plan touched, in plain
+# text, and a variables file is where the inputs to one are kept.
+*.tfstate
+*.tfstate.*
+*.tfvars
+*.tfvars.json
+crash.log
+crash.*.log
 firebase-debug.log
 .firebaserc
 
@@ -134,7 +193,15 @@ Thumbs.db
 # to sit here undid `!src/main/**/build/` fifty lines earlier and swallowed
 # any Java package named `build`. A duplicate is never harmless in this file.
 coverage/
+.coverage
+.coverage.*
+htmlcov/
 *.tsbuildinfo
+# End-to-end runs: Playwright's report, traces and caches.
+playwright-report/
+test-results/
+blob-report/
+playwright/.cache/
 .next/
 .serverless/
 .terraform/

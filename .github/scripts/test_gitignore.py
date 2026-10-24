@@ -149,6 +149,78 @@ class TestEnvironmentFiles(GitignoreTestCase):
     def test_key_material_is_ignored(self) -> None:
         self.assertIgnored('server.pem', 'id_rsa.key', 'certs/tls.pem')
 
+    def test_keystores_and_private_keys_are_ignored(self) -> None:
+        self.assertIgnored(
+            'app/release.keystore', 'keystore.jks', 'cert.p12', 'cert.pfx',
+            'AuthKey_ABC123.p8', 'putty.ppk',
+            'id_rsa', 'id_dsa', 'id_ecdsa', 'id_ed25519', 'deploy/id_ed25519',
+        )
+
+    def test_a_public_key_is_not(self) -> None:
+        self.assertTracked('id_ed25519.pub', 'keys/id_rsa.pub')
+
+    def test_infrastructure_state_and_variables_are_ignored(self) -> None:
+        # Terraform state holds every secret a plan touched, in plain text.
+        self.assertIgnored(
+            'terraform.tfstate', 'terraform.tfstate.backup', 'infra/terraform.tfstate',
+            'prod.tfvars', 'secrets.auto.tfvars', 'secrets.tfvars.json',
+        )
+
+    def test_the_provider_lock_is_not(self) -> None:
+        # The lock pins providers, holds no secret, and is meant to be committed.
+        self.assertTracked('.terraform.lock.hcl')
+
+    def test_direnv_files_are_ignored(self) -> None:
+        self.assertIgnored('.envrc', '.direnv/python-3.12/bin/python')
+
+
+class TestFilesThatLookLikeOutputButAreSource(GitignoreTestCase):
+    """A broad pattern must not swallow the files a project has to commit."""
+
+    def test_the_build_wrappers_jars_are_tracked(self) -> None:
+        # `./gradlew` and `./mvnw` cannot start without these.
+        self.assertTracked(
+            'gradle/wrapper/gradle-wrapper.jar',
+            'services/api/gradle/wrapper/gradle-wrapper.jar',
+            '.mvn/wrapper/maven-wrapper.jar',
+        )
+
+    def test_every_other_jar_is_still_ignored(self) -> None:
+        self.assertIgnored('lib/vendor.jar', 'build/libs/app.jar', 'tools/helper.jar')
+
+    def test_an_archive_in_assets_is_tracked(self) -> None:
+        self.assertTracked('assets/fonts/inter.zip', 'assets/print/press-kit.tar.gz')
+
+    def test_an_archive_anywhere_else_is_still_ignored(self) -> None:
+        self.assertIgnored('dist/release.zip', 'release.tar.gz', 'out/bundle.rar')
+
+    def test_a_keynote_deck_in_assets_is_tracked(self) -> None:
+        self.assertTracked('assets/slides/launch-talk.key')
+
+
+class TestToolOutputIsIgnored(GitignoreTestCase):
+    """Caches and reports the common tools write beside the code."""
+
+    def test_python_tool_caches(self) -> None:
+        self.assertIgnored(
+            '.pytest_cache/v/cache/lastfailed', '.mypy_cache/3.12/x.json',
+            '.ruff_cache/0.6.0/x', '.tox/py312/x', '.nox/tests/x',
+            '.ipynb_checkpoints/notebook-checkpoint.ipynb',
+        )
+
+    def test_coverage_output(self) -> None:
+        self.assertIgnored('.coverage', '.coverage.host.1234', 'htmlcov/index.html')
+
+    def test_compiled_classes_and_visual_studio_state(self) -> None:
+        self.assertIgnored('Foo.class', 'obj/Debug/x', '.vs/x/v17/.suo', 'MyApp.csproj.user', 'MyApp.suo')
+
+    def test_end_to_end_reports(self) -> None:
+        self.assertIgnored('playwright-report/index.html', 'test-results/x/trace.zip', 'blob-report/x')
+
+    def test_yarn_state_without_its_committed_folders(self) -> None:
+        self.assertIgnored('.yarn/cache/x.zip', '.yarn/install-state.gz', '.pnp.cjs', '.pnp.loader.mjs')
+        self.assertTracked('.yarn/releases/yarn-4.5.0.cjs', '.yarn/plugins/x.cjs', '.yarn/patches/x.patch')
+
 
 class TestEditorConfiguration(GitignoreTestCase):
     """The four VS Code files a team shares, the README logging them, and nothing else."""

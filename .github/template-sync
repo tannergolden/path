@@ -26,6 +26,7 @@
 /.env.example
 /.gitattributes
 
+/.github/ACCESSIBILITY.md
 /.github/CODE_OF_CONDUCT.md
 /.github/CONTRIBUTING.md
 /.github/DISCUSSION_TEMPLATE/README.md

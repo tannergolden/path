@@ -57,8 +57,8 @@ none here for them.
 
 <!-- AUTO-INDEX:END -->
 
-🗂️ Machined Indexes redraws this log after every push, from the prose each form
-opens with.
+🗂️ Machined Indexes redraws this log after every push to the default branch,
+from the prose each form opens with.
 
 > [!IMPORTANT]
 > **A form applies only to a category whose slug matches its file name.** Four

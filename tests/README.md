@@ -50,8 +50,8 @@ leaves this whole folder to you, this README included.
 
 <!-- AUTO-INDEX:END -->
 
-🗂️ Machined Indexes redraws this log after every push. Each suite logs its own
-files.
+🗂️ Machined Indexes redraws this log after every push to the default branch.
+Each suite logs its own files.
 
 ---
 

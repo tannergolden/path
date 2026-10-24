@@ -62,13 +62,14 @@ The `notes` task of 📦 Release, in `.github/workflows/release.yml`, keeps one 
 
 1. **Promote** `[Development]` to `[Preview]` to `[Release]` by pull request, with the checklist in section 9 complete.
 2. **Open the draft** on the repository's Releases page. Set its tag to the final version, dropping the `.next` suffix, as `[vX.Y.Z | vX.Y.Z-release]`, and set its target to `[Release]`.
-3. **Edit the notes**: `[add a short summary at the top; put breaking changes and migration steps first; credit the reporter of each fixed vulnerability]`. Delete the "Draft, not published" section the workflow adds.
+3. **Edit the notes**: `[replace the hidden ✍️ SUMMARY prompt at the top with two or three sentences for the people who install it; put breaking changes and migration steps first; credit the reporter of each fixed vulnerability]`. Delete the "Draft, not published" section the workflow adds.
 4. **Publish it.** That starts the `publish` task of 📦 Release. It keeps your notes, builds with `[the build-command input of the publish job | a make build target]`, and attaches:
    - `build-<tag>.tar.gz`: the contents of `[dist | build | target/release]`, the `artifact-path` input, which is `dist` unless the stub sets another
    - `sbom-<tag>.cdx.json`: a CycloneDX SBOM of the dependencies the release was built from
    - `README.md`: the README, with anything between `<!-- internal:start -->` and `<!-- internal:end -->` removed
+   - `LICENSE`: the licence the release is published under
 
-   On a public repository it also signs a build provenance attestation for the archive. With no build output there is no archive and nothing to attest: the release carries its notes, the SBOM and the README.
+   On a public repository it also signs a build provenance attestation for the archive. With no build output there is no archive and nothing to attest: the release carries its notes, the SBOM, the README and the licence.
 
 5. **Verify it** the way a user would, with [Release Verification](Release-Verification.md).
 6. **Announce it** in `[the Announcements discussion category | the chat channel | the project site]`.
@@ -82,7 +83,7 @@ The `publish` task can also be dispatched by hand, and then works out the versio
 A GitHub release is not a package: nobody installs a library from a release page. If users install this project from a registry, the `package` task of 📦 Release publishes it there.
 
 - **Registries**: `[None: the release assets are the deliverable | npm | PyPI | crates.io | A container registry, GHCR by default]`, switched on in the `package` job of `.github/workflows/release.yml`
-- **Credentials**: `[NPM_TOKEN | PYPI_API_TOKEN, or Trusted Publishing on PyPI | CARGO_REGISTRY_TOKEN | Nothing extra for GHCR]`, stored as repository secrets. A registry switched on without its credential fails the run rather than skipping it.
+- **Credentials**: `[Trusted publishing on npm or crates.io, from a trusted publisher naming this repository and release.yml, after a first version published with NPM_TOKEN or CARGO_REGISTRY_TOKEN | PYPI_API_TOKEN | Nothing extra for GHCR]`. A token is a repository secret, with the expiry the secrets table in `.github/workflows/README.md` gives it. A registry switched on without a credential fails the run rather than skipping it.
 - **Rehearse first**: dispatch 📦 Release with the `package` task and `dry-run` on. It builds and checks everything, and publishes nothing.
 - **Then automate**: once a dry run passes, add `github.event_name == 'release'` to the `package` job's condition, so every published release also publishes the package.
 

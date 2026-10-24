@@ -150,6 +150,7 @@ logic it calls lives in `tannergolden/standards`.
 | Task                       | Handling     | Tooling                                                      |
 | :------------------------- | :----------- | :----------------------------------------------------------- |
 | **Lint, Test & Build**     | 🤖 Automated | `checks.yml` (required check `ci`)                           |
+| **Dependency Review**      | 🤖 Automated | `checks.yml` (required check `ci`; public repositories)      |
 | **Secret Scanning**        | 🤖 Automated | `checks.yml` (required check `secrets`)                      |
 | **Static Analysis**        | 🤖 Automated | `checks.yml` (CodeQL, advisory)                              |
 | **Workflow Linting**       | 🤖 Automated | `checks.yml` (actionlint, zizmor)                            |

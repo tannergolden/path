@@ -32,13 +32,24 @@ every generated repository, whose own release notes are its changelog.
 ## [Unreleased]
 
 > [!IMPORTANT]
-> **Cut this release after the standards release it relies on.** Four of the
-> changes below work through `tannergolden/standards` rather than through this
-> template: the secret scan passing a merge queue, the Actions event policy
-> for the governance stub, initialisation removing the Vulnerability Report
-> issue form from a public repository, and CI installing the scripts'
-> requirements before it runs them. Each takes effect once the standards'
-> `v1` moves past it.
+> **Cut this release after the standards release it relies on.** These
+> changes work through `tannergolden/standards` rather than through this
+> template, and each takes effect once the standards' `v1` moves past it:
+>
+> - the secret scan passing a merge queue, and the Actions event policy for
+>   the governance stub;
+> - initialisation removing the Vulnerability Report issue form from a
+>   public repository;
+> - CI and 🏷️ Cut Release installing the scripts' requirements before they
+>   run them;
+> - trusted publishing to npm and crates.io, the licence attached to each
+>   release, and the summary prompt at the top of drafted release notes;
+> - Dependency Review as a required check, and every required check accepted
+>   from GitHub Actions alone, once 🎯 Apply Standards reapplies the rulesets.
+>
+> Once `v1` has moved, delete `statuses: write` from the `pr` job in
+> `governance.yml`. The standards no longer ask for it, and 🔬 Verify Stub
+> Ceilings reports it until it goes.
 
 _(New repositories only)_ marks a file seeded once, which a sync never brings
 to a repository that already exists. _(Template only)_ marks one that
@@ -64,9 +75,10 @@ initialisation deletes.
   reports, and **`.github/ACCESSIBILITY.md`**.
 - **A Maintainers table** in `GOVERNANCE.md`, which the code of conduct and the
   security policy now send people to.
-- **Seeds** for a runbook, incident response, a threat model, getting started,
-  a roadmap, a glossary, the release process, release verification and an
-  architecture overview, under `docs/templates/`.
+- **Seeds** for a runbook, incident response, a threat model, a dependency
+  policy, getting started, a roadmap, a glossary, the release process,
+  release verification, an architecture overview and the project's own
+  README, under `docs/templates/`.
 - **`.github/scripts/requirements.txt`**, pinning the scripts' one dependency,
   PyYAML, by version and hash. Every install of it requires the hashes.
 - **A placeholder check** in the repository validator: once initialised, a
@@ -76,6 +88,11 @@ initialisation deletes.
   names its licence, or links it any way but `[LICENSE](/LICENSE)` from the
   repository root, fails the `ci` check, here and in every generated
   repository, so no page goes stale when the licence changes.
+- **A compiled-code check** in the repository validator: an executable, a
+  library, a compiled class, Python bytecode or a Java archive committed
+  anywhere fails the `ci` check, recognised by its contents rather than its
+  name. A binary the project must keep is marked `reviewed-binary` in
+  `.gitattributes`, and the Gradle and Maven wrapper jars pass.
 - **`merge_group` triggers** on every required check, so a merge queue gets a
   result from each.
 - **Dependabot** for the development container and the scripts'
@@ -115,7 +132,17 @@ initialisation deletes.
 - **Footers name no licence.** Each links to `LICENSE` from the repository
   root, so a repository that chooses a different licence edits nothing else,
   and a document copied to another folder, as every seed is, still reaches it.
-- The development container installs Python and the scripts' requirements.
+- The development container installs Python and the scripts' requirements,
+  and gitleaks from Ubuntu's archive, so the `pre-commit` hook scans what is
+  staged.
+- **The secrets table** in `.github/workflows/README.md` gives every secret
+  an expiry or a rotation, says npm and crates.io publish without a token
+  once a package has its first version, and says PyPI still needs its token.
+  The release stub's `package` job says the same.
+- The required checks are listed with Dependency Review wherever the
+  documents name them.
+- The README points at the project README seed, and at the standards'
+  checklist for making a repository public.
 - 🔬 Verify Stub Ceilings installs the pinned requirements before it runs,
   and runs when the checker or its requirements change.
 - The CI failure alert watches the Scorecard workflow, and starts only for
@@ -149,11 +176,14 @@ initialisation deletes.
 - The workflow comments, the seeds and the Template Sync guide no longer
   misstate which jobs run in a template, what a release carries, what
   initialisation rewrites, or whether a sync pull request's checks run.
+- The folder READMEs said 🗂️ Machined Indexes redraws their logs after every
+  push. It runs after a push to the default branch.
 
 ### Security
 
 - Initialisation removes the Vulnerability Report issue form from a public
-  repository, where an issue would publish the report.
+  repository, where an issue would publish the report, and the repository
+  validator fails a repository made public later that still carries it.
 
 ## [1.3.0] - 2026-10-19
 

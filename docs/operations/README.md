@@ -33,6 +33,9 @@ something goes wrong.
 - **Security**: what this project protects, how it protects it, and the risks
   it still carries, from the [Threat Model](../templates/operations/Threat-Model.md)
   seed.
+- **Dependencies**: how they are chosen, pinned and kept current, and how fast
+  a vulnerable one is fixed, from the
+  [Dependency Policy](../templates/operations/Dependency-Policy.md) seed.
 
 Its documents are **yours from the first commit**: nothing upstream ever
 writes, moves or removes one. Only this README is ever updated from the
@@ -51,8 +54,8 @@ the folder holds.
 
 <!-- AUTO-INDEX:END -->
 
-🗂️ Machined Indexes redraws this log after every push, from each document's own
-frontmatter.
+🗂️ Machined Indexes redraws this log after every push to the default branch,
+from each document's own frontmatter.
 
 ---
 

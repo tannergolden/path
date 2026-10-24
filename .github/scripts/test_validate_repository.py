@@ -20,6 +20,8 @@ Run it:
 
 from __future__ import annotations
 
+import json
+import os
 import pathlib
 import shutil
 import subprocess
@@ -46,15 +48,26 @@ class Repo:
         path.parent.mkdir(parents=True, exist_ok=True)
         path.write_bytes(text.replace('\n', newline).encode('utf-8'))
 
-    def run(self) -> subprocess.CompletedProcess[str]:
+    def run(self, event: dict | None = None) -> subprocess.CompletedProcess[str]:
+        """Run the validator, under `event` as the payload of the run that started it.
+
+        The suite runs inside CI, whose own event names this repository, so
+        the variable is cleared unless a test hands over a payload of its own.
+        """
         self.run_git('add', '-A')
+        env = {k: v for k, v in os.environ.items() if k != 'GITHUB_EVENT_PATH'}
+        if event is not None:
+            payload = self.root.parent / f'{self.root.name}-event.json'
+            payload.write_text(json.dumps(event), encoding='utf-8')
+            env['GITHUB_EVENT_PATH'] = str(payload)
         return subprocess.run(
             [sys.executable, '.github/scripts/validate-repository.py'],
-            cwd=self.root, capture_output=True, text=True,
+            cwd=self.root, capture_output=True, text=True, env=env,
         )
 
     def cleanup(self) -> None:
         shutil.rmtree(self.root, ignore_errors=True)
+        (self.root.parent / f'{self.root.name}-event.json').unlink(missing_ok=True)
 
 
 class ValidatorTestCase(unittest.TestCase):
@@ -334,6 +347,97 @@ class TestBinaryFiles(ValidatorTestCase):
         # repository cannot read - which is a real finding, not an exemption.
         (self.repo.root / 'latin1.txt').write_bytes('caf\xe9\n'.encode('latin-1'))
         self.assertFinding(self.repo.run(), 'not valid UTF-8')
+
+
+class TestCompiledCode(ValidatorTestCase):
+    """Nobody can review a binary, so none is committed (OpenSSF OSPS-QA-05)."""
+
+    def commit(self, rel: str, data: bytes) -> subprocess.CompletedProcess[str]:
+        path = self.repo.root / rel
+        path.parent.mkdir(parents=True, exist_ok=True)
+        path.write_bytes(data)
+        return self.repo.run()
+
+    def test_an_elf_binary_is_reported_whatever_it_is_called(self) -> None:
+        self.assertFinding(self.commit('tools/helper.dat', b'\x7fELF\x02\x01\x01' + b'\0' * 64), 'an ELF executable')
+
+    def test_a_mach_o_binary_is_reported(self) -> None:
+        self.assertFinding(self.commit('bin/tool', b'\xcf\xfa\xed\xfe' + b'\0' * 64), 'a Mach-O')
+
+    def test_a_windows_binary_is_reported(self) -> None:
+        header = bytearray(b'MZ' + b'\0' * 0x7E)
+        header[0x3C:0x40] = (0x40).to_bytes(4, 'little')
+        header[0x40:0x44] = b'PE\0\0'
+        self.assertFinding(self.commit('setup.bin', bytes(header)), 'a Windows executable')
+
+    def test_text_that_happens_to_start_with_mz_is_not(self) -> None:
+        self.repo.write('notes/MZ.txt', 'MZ is where the notes start, and that is all.\n' * 3)
+        self.assertClean(self.repo.run())
+
+    def test_a_java_class_is_reported(self) -> None:
+        self.assertFinding(self.commit('out/App.class', b'\xca\xfe\xba\xbe\x00\x00\x00\x41'), 'compiled Java class')
+
+    def test_python_bytecode_is_reported_by_suffix(self) -> None:
+        self.assertFinding(self.commit('pkg/mod.pyc', b'\x6f\x0d\x0d\x0a' + b'\0' * 12), 'a .pyc file')
+
+    def test_a_jar_is_reported(self) -> None:
+        self.assertFinding(self.commit('libs/thing.jar', b'PK\x03\x04' + b'\0' * 26), 'a .jar file')
+
+    def test_the_build_tools_wrapper_jars_pass(self) -> None:
+        for rel in ('gradle/wrapper/gradle-wrapper.jar',
+                    'android/gradle/wrapper/gradle-wrapper.jar',
+                    '.mvn/wrapper/maven-wrapper.jar'):
+            (self.repo.root / rel).parent.mkdir(parents=True, exist_ok=True)
+            (self.repo.root / rel).write_bytes(b'PK\x03\x04' + b'\0' * 26)
+        self.assertClean(self.repo.run())
+
+    def test_a_binary_marked_reviewed_passes(self) -> None:
+        self.repo.write('.gitattributes', 'tests/fixtures/*.elf binary reviewed-binary\n')
+        self.assertClean(self.commit('tests/fixtures/hello.elf', b'\x7fELF\x02\x01\x01' + b'\0' * 64))
+
+    def test_an_image_is_not_compiled_code(self) -> None:
+        self.repo.write('.gitattributes', '*.png binary\n')
+        self.assertClean(self.commit('assets/logo.png', b'\x89PNG\r\n\x1a\n' + b'\0' * 32))
+
+
+class TestPublicRepository(ValidatorTestCase):
+    """A public repository keeps no vulnerability issue form: an issue there is public."""
+
+    FORM = '.github/ISSUE_TEMPLATE/Vulnerability-Report.yaml'
+    PUBLIC = {'repository': {'full_name': 'octo/widget', 'private': False, 'visibility': 'public'}}
+    PRIVATE = {'repository': {'full_name': 'octo/widget', 'private': True, 'visibility': 'private'}}
+
+    def setUp(self) -> None:
+        super().setUp()
+        self.repo.write(self.FORM, "name: 'Vulnerability Report'\ndescription: 'Private repositories only.'\n")
+
+    def test_a_public_repository_keeping_the_form_is_reported(self) -> None:
+        self.assertFinding(self.repo.run(self.PUBLIC), 'published the moment it is filed')
+
+    def test_an_event_naming_only_the_private_flag_is_read_too(self) -> None:
+        self.assertFinding(self.repo.run({'repository': {'private': False}}), 'delete the form')
+
+    def test_a_private_repository_keeps_it(self) -> None:
+        self.assertClean(self.repo.run(self.PRIVATE))
+
+    def test_the_template_keeps_it_for_the_private_repositories_it_generates(self) -> None:
+        self.repo.write('.github/TEMPLATE_INIT', 'Not initialised yet.\n')
+        self.assertClean(self.repo.run(self.PUBLIC))
+
+    def test_a_public_repository_without_the_form_passes(self) -> None:
+        (self.repo.root / self.FORM).unlink()
+        self.assertClean(self.repo.run(self.PUBLIC))
+
+    def test_a_run_that_cannot_tell_checks_nothing(self) -> None:
+        for event in (None, {'schedule': '0 3 * * 1'}, {'repository': 'octo/widget'}):
+            self.assertClean(self.repo.run(event))
+
+    def test_an_unreadable_event_is_not_a_crash(self) -> None:
+        self.repo.run_git('add', '-A')
+        env = dict(os.environ, GITHUB_EVENT_PATH=str(self.repo.root / 'missing.json'))
+        result = subprocess.run([sys.executable, '.github/scripts/validate-repository.py'],
+                                cwd=self.repo.root, capture_output=True, text=True, env=env)
+        self.assertClean(result)
 
 
 # The owner's half of docs/Prompts.md exactly as the template ships it, from

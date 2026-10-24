@@ -59,13 +59,18 @@
     }
   },
 
+  // gitleaks, so the pre-commit hook scans what is staged for secrets before
+  // git records it. It comes from Ubuntu's own archive, signed and with no
+  // version to keep pinned here; that release trails gitleaks itself, and CI
+  // scans every pull request with the current one. A container that cannot
+  // reach the archive still builds, and the hook says it skipped the scan.
+  "onCreateCommand": "(sudo apt-get update -qq && sudo apt-get install -y -qq --no-install-recommends gitleaks) || echo 'gitleaks could not be installed, so the pre-commit hook will skip its secret scan.'",
+
   // Installs what the repository's own checks need, switches on the git hooks
   // in .github/scripts/hooks, which check a commit message before git records
-  // it, and sets the commit message template that spells out the format. The
-  // hooks scan staged changes for secrets only where gitleaks is installed,
-  // and nothing here installs it: add it to this command if you want that
-  // scan before every commit as well as in CI. Append your project's
-  // bootstrap command once it has one, for example `&& npm ci`,
-  // `&& pip install -e .`, `&& go mod download`, or `&& cargo fetch`.
+  // it, and sets the commit message template that spells out the format.
+  // Append your project's bootstrap command once it has one, for example
+  // `&& npm ci`, `&& pip install -e .`, `&& go mod download`, or
+  // `&& cargo fetch`.
   "postCreateCommand": "python3 -m pip install --user --require-hashes --requirement .github/scripts/requirements.txt && git config core.hooksPath .github/scripts/hooks && git config commit.template .github/commit-template.txt"
 }

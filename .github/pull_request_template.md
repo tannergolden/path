@@ -77,7 +77,8 @@ Reviewer rubric (https://github.com/tannergolden/standards/blob/Development/docs
 - Blocking: Correctness (edge cases + requirement met), Security (secrets,
   least privilege), Testability (coverage matches intent).
 - High: Readability. Medium: Parity with established patterns.
-- Merge needs 🧪 Lint, Test & Build, 🔍 Scan for Secrets, and ✍️ DCO Sign-Off green.
+- Merge needs 🧪 Lint, Test & Build, 📦 Dependency Review, 🔍 Scan for Secrets,
+  and ✍️ DCO Sign-Off green.
 - Tag feedback by intent: [BLOCKER] / [SUGGESTION] / [NIT] / [QUESTION].
 -->
 

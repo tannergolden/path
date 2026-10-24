@@ -44,8 +44,8 @@ leaves this whole folder to you, this README included.
 
 <!-- AUTO-INDEX:END -->
 
-🗂️ Machined Indexes redraws this log after every push. Each layer logs its own
-files.
+🗂️ Machined Indexes redraws this log after every push to the default branch.
+Each layer logs its own files.
 
 ---
 

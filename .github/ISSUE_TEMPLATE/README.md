@@ -48,8 +48,8 @@ Discussions as the only ways in.
 
 <!-- AUTO-INDEX:END -->
 
-🗂️ Machined Indexes redraws this log after every push, from each form's own
-`name:` and `description:`.
+🗂️ Machined Indexes redraws this log after every push to the default branch,
+from each form's own `name:` and `description:`.
 
 > [!IMPORTANT]
 > **Never give this README YAML front matter.** GitHub lists a Markdown file in

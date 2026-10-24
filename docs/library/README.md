@@ -46,8 +46,8 @@ the folder holds.
 
 <!-- AUTO-INDEX:END -->
 
-🗂️ Machined Indexes redraws this log after every push, from each document's own
-frontmatter.
+🗂️ Machined Indexes redraws this log after every push to the default branch,
+from each document's own frontmatter.
 
 ---
 

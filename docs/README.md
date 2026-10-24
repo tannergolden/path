@@ -54,9 +54,9 @@ why they ship as seed content rather than as law.
 
 <!-- AUTO-INDEX:END -->
 
-🗂️ Machined Indexes redraws this log after every push. Every folder below this
-one carries a `README.md` that logs the files inside it, so the tree reads one
-level at a time.
+🗂️ Machined Indexes redraws this log after every push to the default branch.
+Every folder below this one carries a `README.md` that logs the files inside it,
+so the tree reads one level at a time.
 
 ---
 

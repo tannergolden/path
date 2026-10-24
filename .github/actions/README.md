@@ -47,7 +47,7 @@ repository calls from nowhere else.
 
 <!-- AUTO-INDEX:END -->
 
-🗂️ Machined Indexes redraws this log after every push.
+🗂️ Machined Indexes redraws this log after every push to the default branch.
 
 ---
 

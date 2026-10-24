@@ -34,6 +34,11 @@ And it holds every document's footer to linking its licence from the
 repository root, as `[LICENSE](/LICENSE)`, rather than naming the licence,
 which goes stale the day the licence changes.
 
+Two more guard what a repository can hold. Compiled code, which no reviewer
+can read, fails wherever it is committed, and so does the vulnerability
+issue form in a repository that has become public, where an issue filed
+through it is published the moment it is filed.
+
 Exits non-zero on the first category with findings, listing all of them.
 Annotations are emitted in GitHub's format when running under Actions, so
 findings land on the file and line in the diff.
@@ -110,7 +115,7 @@ def attributes(paths: list[pathlib.Path]) -> dict[str, dict[str, str]]:
     if not paths:
         return {}
     rels = [p.relative_to(ROOT).as_posix() for p in paths]
-    out = git('check-attr', '--stdin', '-z', 'text', 'eol',
+    out = git('check-attr', '--stdin', '-z', 'text', 'eol', REVIEWED_BINARY,
               stdin='\0'.join(rels) + '\0')
     fields = out.split('\0')
     found: dict[str, dict[str, str]] = {}
@@ -366,6 +371,97 @@ def check_footer(path: pathlib.Path, text: str) -> None:
                    f'from any folder: write `{LICENCE_CLAUSE}`')
 
 
+# NO COMPILED CODE IS COMMITTED. Nobody can review a binary, so a pull
+# request that adds one asks every reviewer to trust what they cannot read,
+# and a build output committed by mistake goes stale the moment its source
+# changes (OpenSSF baseline OSPS-QA-05). Each is recognised by how it starts,
+# so a rename does not hide it, and by suffix where the format has no fixed
+# start. The build tools' wrapper jars, which their projects commit by
+# design, pass. A binary a project must keep, such as a test fixture, is
+# marked `reviewed-binary` in .gitattributes, where the exception is in plain
+# sight of every reviewer.
+REVIEWED_BINARY = 'reviewed-binary'
+EXECUTABLE_MAGIC = (
+    (b'\x7fELF', 'an ELF executable or library'),
+    (b'\xfe\xed\xfa\xce', 'a Mach-O executable or library'),
+    (b'\xce\xfa\xed\xfe', 'a Mach-O executable or library'),
+    (b'\xfe\xed\xfa\xcf', 'a Mach-O executable or library'),
+    (b'\xcf\xfa\xed\xfe', 'a Mach-O executable or library'),
+    (b'\xca\xfe\xba\xbe', 'a compiled Java class or a universal Mach-O binary'),
+    (b'!<arch>\n', 'a static library'),
+    (b'\x00asm', 'a WebAssembly module'),
+)
+EXECUTABLE_SUFFIXES = {
+    '.exe', '.dll', '.so', '.dylib', '.class', '.jar', '.war', '.ear', '.pyc', '.pyo',
+}
+WRAPPER_JARS = ('gradle/wrapper/gradle-wrapper.jar', '.mvn/wrapper/maven-wrapper.jar')
+
+
+def executable_kind(raw: bytes, suffix: str) -> str | None:
+    for magic, kind in EXECUTABLE_MAGIC:
+        if raw.startswith(magic):
+            return kind
+    # A Windows binary opens with `MZ`, which plain text can too, so the PE
+    # signature the header points at is what decides.
+    if raw[:2] == b'MZ' and len(raw) >= 0x40:
+        offset = int.from_bytes(raw[0x3C:0x40], 'little')
+        if raw[offset:offset + 4] == b'PE\0\0':
+            return 'a Windows executable or library'
+    if suffix in EXECUTABLE_SUFFIXES:
+        return f'a {suffix} file'
+    return None
+
+
+def check_executable(path: pathlib.Path, raw: bytes, attrs: dict[str, str]) -> None:
+    rel = path.relative_to(ROOT).as_posix()
+    if attrs.get(REVIEWED_BINARY) == 'set' or any(rel == j or rel.endswith('/' + j) for j in WRAPPER_JARS):
+        return
+    kind = executable_kind(raw, path.suffix.lower())
+    if kind:
+        report(path, None,
+               f'{kind} is committed, and nobody can review compiled code: build it in CI instead, '
+               f'or mark a binary the project must keep, such as a test fixture, `{REVIEWED_BINARY}` '
+               'in .gitattributes')
+
+
+# A PUBLIC REPOSITORY KEEPS NO VULNERABILITY ISSUE FORM. The form is the
+# intake a private repository needs, where an issue is as private as the
+# repository. In a public one every issue is public, so a report filed
+# through the form is published the moment it is filed. Initialisation
+# deletes the form from a repository that is public when it is generated;
+# one made public later keeps it, and this is what notices. The visibility
+# comes from the event that started the run: a run whose event names no
+# repository, such as a scheduled one, cannot tell, and skips this.
+VULNERABILITY_FORM = '.github/ISSUE_TEMPLATE/Vulnerability-Report.yaml'
+GOING_PUBLIC = ('https://github.com/tannergolden/standards/blob/Development/'
+                'docs/introduction/What-You-Do-By-Hand.md#going-public')
+
+
+def repository_is_public() -> bool:
+    event = os.environ.get('GITHUB_EVENT_PATH')
+    if not event:
+        return False
+    try:
+        payload = json.loads(pathlib.Path(event).read_text(encoding='utf-8'))
+    except (OSError, ValueError):
+        return False
+    repository = payload.get('repository') if isinstance(payload, dict) else None
+    if not isinstance(repository, dict):
+        return False
+    if 'visibility' in repository:
+        return repository['visibility'] == 'public'
+    return repository.get('private') is False
+
+
+def check_vulnerability_form(tracked: list[pathlib.Path]) -> None:
+    form = ROOT / VULNERABILITY_FORM
+    if form in tracked and repository_is_public():
+        report(form, None,
+               'this repository is public, so an issue filed through this form is published the moment '
+               'it is filed: delete the form, since private vulnerability reporting takes reports here, '
+               f'and see what else going public needs at {GOING_PUBLIC}')
+
+
 # THE OWNER'S HALF OF docs/Prompts.md IS FROZEN IN THE TEMPLATE. The page is
 # the template's down to the comment that closes the Golden Path prompts, and
 # each generated repository's owner's from that comment to the end. Template
@@ -432,6 +528,7 @@ def main() -> int:
         rel = path.relative_to(ROOT).as_posix()
         mine = attrs.get(rel, {})
         raw = path.read_bytes()
+        check_executable(path, raw, mine)
         if not is_text(path, mine, raw):
             continue
         files.append(path)
@@ -453,6 +550,8 @@ def main() -> int:
                 check_pins(path, text)
 
     check_prompts_page()
+    if not (ROOT / TEMPLATE_INIT).exists():
+        check_vulnerability_form(tracked)
 
     counts = {
         'files': len(files),

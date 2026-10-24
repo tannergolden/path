@@ -43,7 +43,7 @@ git config core.hooksPath .github/scripts/hooks
 ```
 
 The [development container](../../../.devcontainer/README.md) runs that for
-you when it is created. `pre-commit` scans only when
+you when it is created, and installs gitleaks. `pre-commit` scans only when
 [gitleaks](https://github.com/gitleaks/gitleaks) is installed, and says so when
 it is not.
 
@@ -71,8 +71,8 @@ and a `squash!` are left alone, since a rebase folds the last two away; an
 
 <!-- AUTO-INDEX:END -->
 
-🗂️ Machined Indexes redraws this log after every push, from the comment each
-hook opens with.
+🗂️ Machined Indexes redraws this log after every push to the default branch,
+from the comment each hook opens with.
 
 ---
 

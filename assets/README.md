@@ -45,8 +45,9 @@ Four folders ship: `branding/` for who the project is, `screenshots/` for what
 it looks like, `diagrams/` for how it works, and `html/` for the pages that open
 in a browser. Each holds only its README until its first file arrives.
 
-🗂️ Machined Indexes redraws this table after every push, and every folder here
-carries a `README.md` that logs the files inside it in the same way.
+🗂️ Machined Indexes redraws this table after every push to the default branch,
+and every folder here carries a `README.md` that logs the files inside it in the
+same way.
 
 ---
 

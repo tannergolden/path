@@ -94,13 +94,21 @@ jobs:
     permissions:
       attestations: write # record it
       contents: read # read the repository
-      id-token: write # signs the provenance statement npm attaches
+      id-token: write # trusted publishing to npm and crates.io, and npm's provenance
       packages: write # push to GHCR under this repository
     uses: tannergolden/standards/.github/workflows/publish-package.yml@v1
     with:
       # Turn on exactly the registries this project ships to.
       #
+      # npm and crates.io publish with no stored token once the package has
+      # a trusted publisher naming this repository and this file,
+      # release.yml. The first version needs NPM_TOKEN or
+      # CARGO_REGISTRY_TOKEN; the secrets table in .github/workflows/README.md
+      # says which and for how long. npm's trusted publishing needs the npm
+      # that Node 24 ships, hence `node-version`.
+      #
       # npm: true
+      # node-version: '24.x'
       # pypi: true
       # crates: true
       # container: true

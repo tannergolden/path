@@ -43,8 +43,8 @@ one. Your language's extension supplies it.
 
 <!-- AUTO-INDEX:END -->
 
-🗂️ Machined Indexes redraws this log after every push, from what each file says
-about itself. Read the next section before you add one.
+🗂️ Machined Indexes redraws this log after every push to the default branch,
+from what each file says about itself. Read the next section before you add one.
 
 ---
 

@@ -142,6 +142,6 @@ overwrite any of them you put to a different use the next time you run it.
 
 <br />
 
-Built with ❤️ by the Engineering Team. Distributed under the MIT License.
+Built with ❤️ by the Engineering Team. Distributed under the terms in [LICENSE](/LICENSE).
 
 </div>

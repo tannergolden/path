@@ -50,6 +50,12 @@ jobs:
     # The deploy command is yours; the credential reaches it as
     # $DEPLOY_TOKEN. Nothing is published until you set one.
     #
+    # Keyless instead? Trust this repository's OIDC token in your cloud, and
+    # mind its subject: a repository created, renamed or transferred after
+    # 15 July 2026 presents the immutable form,
+    # `repo:OWNER@OWNER-ID/REPO@REPO-ID:...`, so a trust policy written for
+    # `repo:OWNER/REPO:...` rejects it.
+    #
     # with:
     #   deploy-command: 'npx vercel deploy --prebuilt --token "$DEPLOY_TOKEN"'
     secrets: inherit # zizmor: ignore[secrets-inherit] - first-party callee at the ref pinned above.

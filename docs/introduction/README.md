@@ -26,8 +26,10 @@ for, how its parts fit together, and what to have in place before changing it.
 - **An overview**: what the project does, for whom, and how its parts fit
   together.
 - **Principles**: the few rules every change here is held to, and why.
-- **Getting set up**: what a machine needs to build, test and run the project.
-- **A roadmap**: where the project is going, and what comes next.
+- **Getting set up**: what a machine needs to build, test and run the project,
+  from the [Getting Started](../templates/introduction/Getting-Started.md) seed.
+- **A roadmap**: where the project is going, and what comes next, from the
+  [Roadmap](../templates/introduction/Roadmap.md) seed.
 
 Its documents are **yours from the first commit**: nothing upstream ever
 writes, moves or removes one. Only this README is ever updated from the
@@ -66,6 +68,6 @@ frontmatter.
 
 <br />
 
-Built with ❤️ by the Engineering Team. Distributed under the MIT License.
+Built with ❤️ by the Engineering Team. Distributed under the terms in [LICENSE](/LICENSE).
 
 </div>

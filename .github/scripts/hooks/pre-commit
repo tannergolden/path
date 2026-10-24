@@ -1,0 +1,30 @@
+#!/bin/sh
+# SPDX-FileCopyrightText: 2026 Tanner Golden
+# SPDX-License-Identifier: MIT
+#
+# Scans what is staged for secrets before git records it, with gitleaks when
+# it is installed.
+#
+# A secret that reaches a commit is compromised the moment it is pushed, and
+# rewriting history does not take it back. The 🔍 Scan for Secrets check in
+# CI is the authority and scans every pull request; this is the earlier,
+# cheaper catch. Without gitleaks it says so and lets the commit through,
+# because a hook that blocks every commit on a missing tool is a hook people
+# disable.
+#
+# Enable it once per clone (the development container does it for you):
+#
+#     git config core.hooksPath .github/scripts/hooks
+#
+# `git commit --no-verify` skips it, and CI still scans the result.
+
+if ! command -v gitleaks >/dev/null 2>&1; then
+  echo 'pre-commit: gitleaks is not installed, so the staged changes were not scanned for secrets. CI scans every pull request; install gitleaks (https://github.com/gitleaks/gitleaks) to catch a secret before it is committed.' >&2
+  exit 0
+fi
+
+# gitleaks 8.19 moved the staged scan from `protect` to `git --pre-commit`.
+if gitleaks git --help >/dev/null 2>&1; then
+  exec gitleaks git --pre-commit --staged --redact --no-banner --verbose
+fi
+exec gitleaks protect --staged --redact --no-banner --verbose

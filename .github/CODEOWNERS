@@ -9,8 +9,8 @@
 #   1. Uncomment the rule(s) you want below.
 #   2. Replace @your-org/your-team with a real @user or @org/team that has
 #      write access to this repository.
-#   3. (Optional) Enable: Settings → Branches → Branch protection →
-#      "Require review from Code Owners".
+#   3. (Optional) Turn on "Require review from Code Owners" in each branch
+#      ruleset, under Settings → Rules → Rulesets.
 #
 # PRECEDENCE: the LAST matching rule wins. Put broad defaults first, then more
 # specific overrides below.

@@ -20,6 +20,10 @@
 *.fish  text eol=lf
 Makefile text eol=lf
 
+# Git hooks carry no extension, so the rule above cannot see them, and a
+# hook checked out with CRLF fails before its first line runs.
+.github/scripts/hooks/* text eol=lf
+
 # Batch and PowerShell are the opposite case.
 *.bat text eol=crlf
 *.cmd text eol=crlf
@@ -141,3 +145,4 @@ docs/**  linguist-documentation=true
 .gitattributes export-ignore
 .gitignore     export-ignore
 .editorconfig  export-ignore
+.git-blame-ignore-revs export-ignore

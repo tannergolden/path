@@ -39,6 +39,9 @@ on:
       - '🔬 Verify Stub Ceilings'
       - '🧹 Prune Run History'
       - '🚀 Preview Deploy'
+      # The weekly supply-chain score. A failure here is a broken publish or
+      # a broken upload, and nothing else would ever mention it.
+      - '🛡️ OpenSSF Scorecard'
       # Add any workflow whose silent failure would cost something.
       #
       # ⚠️ NEVER ADD THIS WORKFLOW TO ITS OWN LIST. It cannot escalate its
@@ -47,6 +50,10 @@ on:
     # Only a run on a branch that escalates starts one here. The alert acts
     # on Development alone (see `branches` below), so a run on any other
     # branch would start one that does nothing. Widen both together.
+    #
+    # ⚠️ THIS IS THE ONE STUB THAT NAMES THE DEFAULT BRANCH. A trigger filter
+    # cannot be resolved at run time, so if you rename Development, rename
+    # it here too, or the alerts stop without a word.
     branches: [Development]
 
 concurrency:

@@ -67,14 +67,21 @@ goes through private vulnerability reporting, as [`SECURITY.md`](../SECURITY.md)
 explains. GitHub adds **Report a vulnerability** to the chooser by itself once
 that is enabled, which is why `config.yml` carries no security link of its own.
 
+So that the form cannot invite a public report, **initialisation deletes it
+from a public repository**, and the private report asks the same questions
+through [`VULNERABILITY_REPORT.yml`](../VULNERABILITY_REPORT.yml) instead. A
+private repository keeps it. If you make a private repository public later,
+delete the form yourself.
+
 ---
 
 ## ⚙️ The Discussions Link
 
-The contact link in `config.yml` carries a placeholder, `OWNER/REPOSITORY`,
-because GitHub substitutes nothing in a contact link. Initialisation rewrites
-it for this repository. It still leads nowhere until Discussions is switched on,
-under <kbd>Settings</kbd> → <kbd>General</kbd> → <kbd>Features</kbd>.
+The contact link in `config.yml` points at this repository's Discussions. The
+template ships it with a placeholder for the owner and the repository, because
+GitHub substitutes nothing in a contact link, and initialisation fills it in.
+It still leads nowhere until Discussions is switched on, under
+<kbd>Settings</kbd> → <kbd>General</kbd> → <kbd>Features</kbd>.
 
 Any file in this folder also switches off every default form an account's
 `.github` repository would otherwise supply. It is all or nothing, so a
@@ -90,6 +97,6 @@ repository that keeps one form of its own keeps the whole set here.
 
 <br />
 
-Built with ❤️ by the Engineering Team. Distributed under the MIT License.
+Built with ❤️ by the Engineering Team. Distributed under the terms in [LICENSE](/LICENSE).
 
 </div>

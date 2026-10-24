@@ -35,33 +35,38 @@ _Structured excellence. Rapid documentation. Unified standards._
 | [&#x1F464; User Story](User-Story.md)                   | Requirements from the user's perspective.              | `docs/<area>/stories/<slug>.md` (or your tracker)   |
 | [&#x1F50E; Research Log](Research-Log.md)               | Discovery evidence and recommendations.                | `docs/technical/research/<topic>.md`                |
 | [&#x1F4C9; Post-Mortem](Post-Mortem.md)                 | Blameless incident and outcome analysis.               | `docs/operations/post-mortems/YYYY-MM-DD-<slug>.md` |
+| [&#x1F4D2; Runbook](Runbook.md)                         | The steps for one routine task or one known failure.   | `docs/operations/runbooks/<slug>.md`                |
 | [&#x1F4C4; ADR](ADR.md)                                 | One architecture decision, recorded durably.           | `docs/adrs/ADR-NNNN-Short-Slug.md` (next number)    |
 | [&#x1F4AC; Communication](Communication.md)             | Meeting notes, status heartbeats, stakeholder updates. | reuse in issues, discussions, and reviews           |
 | [&#x1F9ED; ADR index](../adrs/README.md)                | The folder log every ADR is listed in.                 | already in place; each record's row is generated    |
 
 ---
 
-## 🧩 Fill-In Technical Standards
+## 🧩 Fill-In Standards
 
-The fill-in standards live in [`technical/`](technical/README.md), one folder per area, and each folder logs its own files.
+The fill-in standards live in a folder named for the `docs/` area their copies fill: [`introduction/`](introduction/README.md), [`technical/`](technical/README.md) with one folder per technical area, [`operations/`](operations/README.md), [`distribution/`](distribution/README.md) and [`references/`](references/README.md). Each folder logs its own files.
 
-Every document here other than the `README.md` logs is one you complete: either a **fill-in standard** whose decisions are marked by `[square brackets]` - a bare `[REPLACE_ME]`, a choice list like `[REST | GraphQL | gRPC]`, or a prompt like `[why]` - or a **work-product form** whose blank sections you write under (an ADR, a post-mortem, a user story). Each folder also carries a `README.md` that logs the files in it and links one level down; those logs are generated, are navigation rather than seeds, and are never copied out. This catalogue stays the one place that says when to reach for each template, so adding or renaming one means updating its row here; the folder logs redraw themselves. A fill-in standard's destination **mirrors its path minus `templates/`**: `docs/templates/technical/backend/API-Design-Standards.md` instantiates as `docs/technical/backend/API-Design-Standards.md`. **Living inside `docs/templates/` is what marks them all as seed content**, with no in-file directive needed. Everything in this folder **arrives with the repository and can take later fixes**: whenever you run 🔄 Template Sync, it proposes each improvement to a seed as a pull request, merged with anything you changed in it, and never touches the copies you make from them. Put a `#` in front of a seed's line in `.github/template-sync` to keep that seed exactly as it is; editing a file here has no upstream consequence.
+Every document here other than the `README.md` logs is one you complete: either a **fill-in standard** whose decisions are marked by `[square brackets]` - a bare `[REPLACE_ME]`, a choice list like `[REST | GraphQL | gRPC]`, or a prompt like `[why]` - or a **work-product form** whose blank sections you write under (an ADR, a post-mortem, a runbook, a user story). Each folder also carries a `README.md` that logs the files in it and links one level down; those logs are generated, are navigation rather than seeds, and are never copied out. This catalogue stays the one place that says when to reach for each template, so adding or renaming one means updating its row here; the folder logs redraw themselves. A fill-in standard's destination **mirrors its path minus `templates/`**: `docs/templates/technical/backend/API-Design-Standards.md` instantiates as `docs/technical/backend/API-Design-Standards.md`. **Living inside `docs/templates/` is what marks them all as seed content**, with no in-file directive needed. Everything in this folder **arrives with the repository and can take later fixes**: whenever you run 🔄 Template Sync, it proposes each improvement to a seed as a pull request, merged with anything you changed in it, and never touches the copies you make from them. Put a `#` in front of a seed's line in `.github/template-sync` to keep that seed exactly as it is; editing a file here has no upstream consequence.
 
-| Area               | Templates                                                                                                                                                                                                                                                         |
-| :----------------- | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **Stack & Source** | [&#x1F527; Technology Stack & Tooling](technical/Technology-Stack-&-Tooling.md), [&#x1F4BB; Source Code](technical/Source-Code.md), [&#x1F4E6; Packages & Workspaces](technical/Packages-&-Workspaces.md)                                                         |
-| **Interface**      | [&#x1F4D0; Formatting & Standards](technical/interface/Formatting-&-Standards.md), [&#x1F58C;&#xFE0F; Styling & Theming](technical/interface/Styling-&-Theming.md), [&#x1F6E0;&#xFE0F; UI Setup & Environment](technical/interface/UI-Setup-&-Environment.md)     |
-| **Backend**        | [&#x1F4E1; API Design Standards](technical/backend/API-Design-Standards.md), [&#x1F512; Authentication & Security](technical/backend/Authentication-&-Security.md), [&#x1F4CB; Schema & Validation](technical/backend/Schema-&-Validation.md)                     |
-| **Database**       | [&#x1F5C4;&#xFE0F; Data Models & Entities](technical/database/Data-Models-&-Entities.md), [&#x1F504; Migration Policies](technical/database/Migration-Policies.md)                                                                                                |
-| **Infrastructure** | [&#x2601;&#xFE0F; Environment Configuration](technical/infrastructure/Environment-Configuration.md), [&#x1F504; CI CD Pipelines](technical/infrastructure/CI-CD-Pipelines.md), [&#x1F680; Deployment Protocols](technical/infrastructure/Deployment-Protocols.md) |
-| **Testing**        | [&#x1F9E9; Unit Test Standards](technical/testing/Unit-Test-Standards.md), [&#x1F3AD; E2E Testing](technical/testing/E2E-Testing.md), [&#x26A1; Performance Benchmarks](technical/benchmarks/Performance-Benchmarks.md)                                           |
+| Area               | Templates                                                                                                                                                                                                                                                                                |
+| :----------------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Introduction**   | [&#x1F680; Getting Started](introduction/Getting-Started.md), [&#x1F5FA;&#xFE0F; Roadmap](introduction/Roadmap.md)                                                                                                                                                                       |
+| **Stack & Source** | [&#x1F3DB;&#xFE0F; Architecture Overview](technical/Architecture-Overview.md), [&#x1F527; Technology Stack & Tooling](technical/Technology-Stack-&-Tooling.md), [&#x1F4BB; Source Code](technical/Source-Code.md), [&#x1F4E6; Packages & Workspaces](technical/Packages-&-Workspaces.md) |
+| **Interface**      | [&#x1F4D0; Formatting & Standards](technical/interface/Formatting-&-Standards.md), [&#x1F58C;&#xFE0F; Styling & Theming](technical/interface/Styling-&-Theming.md), [&#x1F6E0;&#xFE0F; UI Setup & Environment](technical/interface/UI-Setup-&-Environment.md)                            |
+| **Backend**        | [&#x1F4E1; API Design Standards](technical/backend/API-Design-Standards.md), [&#x1F512; Authentication & Security](technical/backend/Authentication-&-Security.md), [&#x1F4CB; Schema & Validation](technical/backend/Schema-&-Validation.md)                                            |
+| **Database**       | [&#x1F5C4;&#xFE0F; Data Models & Entities](technical/database/Data-Models-&-Entities.md), [&#x1F504; Migration Policies](technical/database/Migration-Policies.md)                                                                                                                       |
+| **Infrastructure** | [&#x2601;&#xFE0F; Environment Configuration](technical/infrastructure/Environment-Configuration.md), [&#x1F504; CI CD Pipelines](technical/infrastructure/CI-CD-Pipelines.md), [&#x1F680; Deployment Protocols](technical/infrastructure/Deployment-Protocols.md)                        |
+| **Testing**        | [&#x1F9E9; Unit Test Standards](technical/testing/Unit-Test-Standards.md), [&#x1F3AD; E2E Testing](technical/testing/E2E-Testing.md), [&#x26A1; Performance Benchmarks](technical/benchmarks/Performance-Benchmarks.md)                                                                  |
+| **Operations**     | [&#x1F6A8; Incident Response](operations/Incident-Response.md), [&#x1F575;&#xFE0F; Threat Model](operations/Threat-Model.md)                                                                                                                                                             |
+| **Distribution**   | [&#x1F6A2; Release Process](distribution/Release-Process.md), [&#x1F50F; Release Verification](distribution/Release-Verification.md)                                                                                                                                                     |
+| **References**     | [&#x1F4D8; Glossary](references/Glossary.md)                                                                                                                                                                                                                                             |
 
 ---
 
 ## 🚀 How To Use
 
 1. **Copy** the template to its destination above - never fill in the template file itself; your `docs/templates/` copies stay pristine as long as you copy rather than edit them, and running 🔄 Template Sync brings them to the template's newest form, so every copy you make after it starts from there.
-2. **Replace** every bracketed placeholder, and change the copy's `type` from `template` to its own: `standard` for a fill-in standard, `record` for everything else; delete sections that genuinely don't apply.
+2. **Replace** every bracketed placeholder, and change the copy's `type` from `template` to its own: `guide` for a page someone follows step by step (Getting Started, Release Verification), `reference` for one they look things up in (the Glossary), `standard` for any other fill-in standard, `record` for everything else; delete sections that genuinely don't apply.
 3. **Link** the document from the pull request (or issue) it supports, so decisions stay traceable.
 
 ---
@@ -70,17 +75,22 @@ Every document here other than the `README.md` logs is one you complete: either 
 
 <!-- AUTO-INDEX:BEGIN dir=. style=log -->
 
-| Entry                                              | Purpose                                                                                                                         |
-| :------------------------------------------------- | :------------------------------------------------------------------------------------------------------------------------------ |
-| [`technical/`](technical/README.md)                | Fill-in technical standards: the stack, source and package layout, and one folder per technical area.                           |
-| [`ADR.md`](ADR.md)                                 | The standard template for recording an architecture decision.                                                                   |
-| [`Communication.md`](Communication.md)             | Channels, expectations, and etiquette for communicating across issues, discussions, and reviews.                                |
-| [`Implementation-Plan.md`](Implementation-Plan.md) | Reusable template for planning an implementation in small, reviewable slices.                                                   |
-| [`Post-Mortem.md`](Post-Mortem.md)                 | Blameless post-mortem template for capturing incidents and their lessons.                                                       |
-| [`README.md`](README.md)                           | This file.                                                                                                                      |
-| [`Research-Log.md`](Research-Log.md)               | The format for a filed research report: a dated, sourced, claim-by-claim investigation kept current by its verification window. |
-| [`Technical-Design.md`](Technical-Design.md)       | Template for proposing and reviewing a technical design.                                                                        |
-| [`User-Story.md`](User-Story.md)                   | Template for writing user stories with clear acceptance criteria.                                                               |
+| Entry                                              | Purpose                                                                                                                                                            |
+| :------------------------------------------------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [`distribution/`](distribution/README.md)          | Fill-in standards for releasing: how this project cuts, checks and publishes a release, and how the people who download one verify it.                             |
+| [`introduction/`](introduction/README.md)          | Fill-in documents for the pages a newcomer reads first: how to build the project and set up to change it, and where the project is going.                          |
+| [`operations/`](operations/README.md)              | Fill-in standards for keeping the project safe once it runs: how an incident is declared, run and closed, and a threat model of what the project protects and how. |
+| [`references/`](references/README.md)              | Fill-in reference pages, the ones a reader consults rather than reads through, starting with the glossary of the words this project uses its own way.              |
+| [`technical/`](technical/README.md)                | Fill-in technical standards: the architecture, the stack, source and package layout, and one folder per technical area.                                            |
+| [`ADR.md`](ADR.md)                                 | The standard template for recording an architecture decision.                                                                                                      |
+| [`Communication.md`](Communication.md)             | Channels, expectations, and etiquette for communicating across issues, discussions, and reviews.                                                                   |
+| [`Implementation-Plan.md`](Implementation-Plan.md) | Reusable template for planning an implementation in small, reviewable slices.                                                                                      |
+| [`Post-Mortem.md`](Post-Mortem.md)                 | Blameless post-mortem template for capturing incidents and their lessons.                                                                                          |
+| [`README.md`](README.md)                           | This file.                                                                                                                                                         |
+| [`Research-Log.md`](Research-Log.md)               | The format for a filed research report: a dated, sourced, claim-by-claim investigation kept current by its verification window.                                    |
+| [`Runbook.md`](Runbook.md)                         | The steps for one routine task or one known failure, written to be followed under pressure. Copy it once for each task or alert that needs a written procedure.    |
+| [`Technical-Design.md`](Technical-Design.md)       | Template for proposing and reviewing a technical design.                                                                                                           |
+| [`User-Story.md`](User-Story.md)                   | Template for writing user stories with clear acceptance criteria.                                                                                                  |
 
 <!-- AUTO-INDEX:END -->
 
@@ -102,6 +112,6 @@ frontmatter.
 
 <br />
 
-Built with ❤️ by the Engineering Team. Distributed under the MIT License.
+Built with ❤️ by the Engineering Team. Distributed under the terms in [LICENSE](/LICENSE).
 
 </div>

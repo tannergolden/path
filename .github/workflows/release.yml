@@ -2,11 +2,16 @@
 #
 # The whole release chain, in one file: draft the notes through the week,
 # publish the assets when a release is cut, optionally push the package to
-# its registries, and prune the releases the new one superseded.
+# its registries, and - only when someone asks - prune old releases.
 #
 # A dispatch runs ONE task, chosen in the form, so running the package
 # publish can never accidentally prune a release. The scheduled and
 # release-event paths pick their own jobs the same way.
+#
+# ⚠️ RELEASE PAGES ARE THIS REPOSITORY'S CHANGELOG. Each one carries the
+# notes for its version, the credit for any vulnerability it fixed, and its
+# assets and SBOM. Nothing deletes one on its own: pruning is a dispatch,
+# and it previews by default.
 #
 # ⚠️ TAGS ARE NEVER DELETED by the prune. A release is a page; a tag is a
 # contract. Anything pinned to `vX.Y.Z` keeps resolving after its release
@@ -112,13 +117,14 @@ jobs:
     secrets: inherit # zizmor: ignore[secrets-inherit] - first-party callee at the ref pinned above.
 
   prune-releases:
-    # Event-driven on purpose: pruning is triggered by the thing that makes
-    # an old release old. The release event applies the plan; a dispatch
-    # defaults to a dry run.
-    if: ${{ !github.event.repository.is_template && (github.event_name == 'release' || (github.event_name == 'workflow_dispatch' && inputs.task == 'prune')) }}
+    # DISPATCH-ONLY, DELIBERATELY. Deleting a published release deletes its
+    # notes, and the notes are the changelog, so it is a decision a person
+    # makes rather than a side effect of publishing the next one. Run the
+    # `prune` task, read the preview, then run it again with dry-run off.
+    if: ${{ !github.event.repository.is_template && github.event_name == 'workflow_dispatch' && inputs.task == 'prune' }}
     permissions:
       contents: write # deleting releases requires write
     uses: tannergolden/standards/.github/workflows/prune-releases.yml@v1
     with:
       keep: 1
-      dry-run: ${{ inputs.dry-run || false }}
+      dry-run: ${{ inputs.dry-run }}

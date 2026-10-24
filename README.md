@@ -148,16 +148,17 @@ changes. It is the route this template is built for, and the one
 ### What a fork actually buys you
 
 Less than it looks, and it is worth knowing why before choosing it. **The
-standards reach both routes identically.** Every `uses:` in these workflows
-but 🔁 Intelligence Sync's points at `tannergolden/standards@v1`, a moving major tag, so every fix in the
-v1 line arrives the moment it is published whether you forked or generated -
-which is what **Staying current takes no effort** describes further down.
+standards reach both routes identically.** Every stub's `uses:` but
+🔁 Intelligence Sync's points at `tannergolden/standards@v1`, a moving major
+tag, so every fix in the v1 line arrives the moment it is published whether you
+forked or generated - which is what **Staying current takes no effort**
+describes further down.
 Forking does not make you more current; that part is already free.
 
-What a fork does sync is the **scaffold**: the sixteen stub workflows, the
+What a fork does sync is the **scaffold**: the seventeen workflows, the
 directory layout, the seeded documents. A generated repository can take the
-stub and seed fixes too - every stub but `cut-release.yml`, while the layout
-stays yours - whenever you run 🔄 Template Sync, so what a fork adds is the
+workflow and seed fixes too - every workflow but `cut-release.yml`, while the
+layout stays yours - whenever you run 🔄 Template Sync, so what a fork adds is the
 shared history - and with it, every change at once or none. In a fork, delete
 `.github/workflows/template-sync.yml`: `Sync fork` already carries the same
 changes, and two routes to them would only collide.
@@ -190,15 +191,16 @@ changes, and two routes to them would only collide.
 > template author's identity, unmerged with your edits.
 
 > [!NOTE]
-> **Neither route carries the template flag over.** Eleven of the sixteen stubs
-> are silent here: ten in the two golden path templates alone, and
-> `release.yml`, with initialisation, in every template.
-> 🏷️ Cut Release runs only in a template. `prune-runs.yml`, `verify-stubs.yml`
-> and `auto-index.yml` run on both sides, and 🔄 Template Sync reads the same
-> flag to decide whether to check its list or to sync. A fork inherits that
-> flag no more than a generated repository does, so your copy lands on the right
-> side of every guard - and made a template of its own, it keeps its checks and
-> still syncs from here.
+> **Neither route carries the template flag over.** Some jobs read it: most
+> of the jobs that act on a repository are silent in the two golden path
+> templates, `release.yml` and initialisation are silent in every template,
+> and 🏷️ Cut Release runs only in one. The checks, the Scorecard score, the
+> run-history prune and the index redraw run on both sides. The table under
+> **How The Workflows Work** says which is which, and 🔄 Template Sync reads
+> the same flag to decide whether to check its list or to sync. A fork
+> inherits that flag no more than a generated repository does, so your copy
+> lands on the right side of every guard - and made a template of its own, it
+> keeps its checks and still syncs from here.
 
 ---
 
@@ -213,8 +215,10 @@ So `lint-command` starts out pointing at
 [`.github/scripts/validate-repository.py`](.github/scripts/validate-repository.py),
 which checks the files that exist from the first commit - every YAML and JSON
 file parses, every workflow `uses:` is pinned to a tag or a commit rather than a
-branch, no CRLF or stray whitespace. A typo in any of those breaks something
-quietly, so this is a real gate, not a placeholder that returns zero.
+branch, no CRLF or stray whitespace, and every document's footer links its
+licence from the repository root rather than naming it. A typo in any of those
+breaks something quietly, so this is a real gate, not a placeholder that
+returns zero.
 
 **It is still only half the story.** Nothing is testing or building your project,
 because your project does not exist yet. Open `.github/workflows/checks.yml` and
@@ -243,7 +247,7 @@ Any language, any tool. A few starting points:
 You do not have to fill in all of them - one real command is enough.
 
 > [!TIP]
-> Prefer a `Makefile`? Add one with `lint`, `test`, `build`, and `docs` targets,
+> Prefer a `Makefile`? Add one with `setup`, `lint`, `test` and `build` targets,
 > then delete the `with:` block entirely: the `ci` job falls back to `make <target>`
 > whenever no explicit command is given.
 
@@ -276,6 +280,12 @@ as you instead. The hub suits several repositories that share one set of rules,
 for the same reason the workflows here are called rather than copied: the law
 lives in one place, and a fix reaches every repository at the next release.
 
+Beside the stub, the template carries **policy for people**: the
+[contributing guide](.github/CONTRIBUTING.md#3-ai-assisted-contributions) says
+how AI-assisted contributions are handled - you sign off, the AI is credited
+with `Co-Authored-By`, and you say in the pull request what it drafted. That is
+a rule about contributions, not an instruction any tool loads.
+
 **Nothing here depends on it, either.** Initialisation, CI, the rulesets, the
 release flow and every other workflow behave identically without it. If you
 would rather write your rules by hand, delete the stub and write `AGENTS.md`
@@ -300,8 +310,8 @@ back.
 ## 🎉 What Happens On Its Own
 
 **"Use this template" substitutes nothing.** GitHub copies every file verbatim,
-so a generated repository would otherwise carry the template author's licence
-holder, funding target, and documentation footers forever.
+so a generated repository would otherwise carry the template author as its
+licence holder, funding target, maintainer and README credit forever.
 
 The `init` job in `lifecycle.yml` fixes that on its own, once. It rewrites the identity to
 **your** account, rewrites the bare "Initial commit" into a proper Conventional
@@ -312,6 +322,12 @@ template** - a file that serves the template and nothing generated from it -
 goes with it, and every folder log is redrawn to match. 🏷️ Cut Release is not
 one of them: any repository released by tag can adopt it, so it stays, inert,
 until you adopt it or delete it.
+
+On a **public** repository it also deletes the 🛡️ Vulnerability Report issue
+form. That form exists for private repositories, where issues are already
+closed to the public; on a public one a vulnerability goes through private
+vulnerability reporting, with `.github/VULNERABILITY_REPORT.yml` asking the same
+questions in private.
 
 Two things it deliberately leaves alone. The first is any reference to a
 repository on the template's account - `tannergolden/standards`, whose shared
@@ -333,16 +349,26 @@ publishes nothing.
 ## 🚀 The First Five Minutes
 
 > [!TIP]
-> Every step below, plus signing and the token, is kept as one canonical
-> checklist in the standards:
+> The steps by hand that every repository on the standards shares, signing
+> and the admin token among them, are kept as one checklist in the standards:
 > [🙋 What You Do By Hand](https://github.com/tannergolden/standards/blob/Development/docs/introduction/What-You-Do-By-Hand.md).
+> The steps below are this template's own, and add what only it needs.
 
 1. **Check that init ran** - `.github/TEMPLATE_INIT` should be gone and the
    `LICENSE` should carry your name and the current year. If not, dispatch
    **🎯 Standards Lifecycle** from the Actions tab.
-2. **Sign your commits off.** `git commit -s` adds the `Signed-off-by` trailer
-   that the DCO check requires. Once branch protection is on, a commit without
-   it blocks the merge. `git config alias.ci 'commit -s'` and forget about it.
+2. **Sign your commits off, and switch on the hooks.** `git commit -s` adds the
+   `Signed-off-by` trailer that the DCO check requires. Once branch protection
+   is on, a commit without it blocks the merge. Then let git check each commit
+   before it exists - the message, the sign-off, and the staged changes for
+   secrets - with the hooks this repository ships:
+
+   ```bash
+   git config core.hooksPath .github/scripts/hooks
+   ```
+
+   The development container does this for you.
+
 3. **Fit your project in, and configure the `ci` job in `checks.yml`.** The
    [Fit My Project Into This Scaffold](docs/Prompts.md#fit-my-project-into-this-scaffold)
    prompt has an AI agent move your project into the folders here and point the
@@ -358,10 +384,19 @@ publishes nothing.
    on its own applies only the labels, on a green run that looks like it did
    everything - so tick the job you want as well. Do settings first: they are
    checkboxes, while a wrong ruleset blocks every merge. See the token note
-   below before you do.
-5. **Enable private vulnerability reporting** under Settings → Security. The
-   issue chooser gains a "Report a vulnerability" entry automatically, which is
-   why no security contact link is hard-coded.
+   below before you do. On a public repository the settings also include the
+   Actions event policy that keeps `governance.yml`'s pull request triage and
+   first-time welcome running once GitHub's default policy blocks
+   `pull_request_target`, on 2 December 2026 at the latest.
+5. **Check the private channels reach you.** The settings switch on private
+   vulnerability reporting, which puts **Report a vulnerability** on the
+   Security tab; without `ADMIN_TOKEN`, switch it on under Settings → Advanced
+   Security. A conduct report needs a private route too. On a public
+   repository an organization owns, accept content reports under Settings →
+   Moderation options → Reported content. A personal account has no such
+   setting, and its content reports reach GitHub alone, so give each
+   maintainer a private contact in the Maintainers table of
+   `.github/GOVERNANCE.md`.
 6. **Use your account's community health files, if you keep them.** When your
    account's public `.github` repository holds a code of conduct, a
    contributing guide, a security policy and the rest for every repository, the
@@ -370,17 +405,28 @@ publishes nothing.
    prompt has an AI agent ask which copies to remove, then remove them, so
    GitHub shows yours. `README.md` is never one of them: it stays, for you to replace
    below.
-7. **Uncomment the rules you want in `.github/CODEOWNERS`**, replacing
-   `@your-org/your-team` with a real owner. A rule naming an owner without write
-   access is a GitHub error, which is why every rule ships commented out.
+7. **Name the maintainers.** Initialisation puts you in the **Maintainers**
+   table in `.github/GOVERNANCE.md`; add anyone else with merge or admin
+   access, and a private address if reports should reach you outside GitHub.
+   Then uncomment the rules you want in `.github/CODEOWNERS`, replacing
+   `@your-org/your-team` with a real owner. A rule naming an owner without
+   write access is a GitHub error, which is why every rule ships commented out,
+   and once initialised the repository validator fails a rule left naming the
+   placeholder.
 8. **Enable ecosystems in `.github/dependabot.yml`** as you add manifests. Only
-   `github-actions` is on, because it is the only one guaranteed to apply.
+   the three this template ships are on - the workflows, the development
+   container and the scripts' requirements - because they are the only ones
+   guaranteed to apply.
 9. **Add a `BOT_ACCESS_TOKEN` secret** so 🔄 Template Sync, whenever you run
    it, can update the workflow stubs too - the default token cannot write
    `.github/workflows/`, so without it those files wait in an issue instead.
    While you are there, put a `#` in front of anything in
    `.github/template-sync` you want to own outright.
-10. **Replace this README.** Everything above describes the template, not your
+10. **Choose your licence.** `LICENSE` arrives as MIT, in your name. If your
+    project needs another licence, replace the file: every document's footer
+    links to `LICENSE` rather than naming one, so nothing else needs editing,
+    and the repository validator fails a footer that names one.
+11. **Replace this README.** Everything above describes the template, not your
     project. Nothing rewrites it for you, because only you know what this
     repository is for. The sections worth keeping are the workflow table and
     the token note; the rest is scaffolding that has done its job.
@@ -391,9 +437,9 @@ publishes nothing.
 > need a token with administration write as `ADMIN_TOKEN`. Without it, those
 > jobs stop with a sentence naming the missing token instead of a bare `403`.
 >
-> A fine-grained token scoped to your repositories generated from the
-> templates, with **Administration: Read and write** and nothing else, is all
-> it needs. Step-by-step:
+> A fine-grained token with **Administration: Read and write**, and
+> **Contents: Read-only**, which a private repository needs, is all it needs.
+> Step-by-step:
 > [Creating the ADMIN_TOKEN](https://github.com/tannergolden/standards/blob/Development/docs/operations/Branch-Protection.md#-creating-the-admin_token).
 > You can skip it entirely by applying the settings and rulesets yourself,
 > where your own rights are already enough.
@@ -404,24 +450,26 @@ publishes nothing.
 
 <!-- AUTO-INDEX:BEGIN dir=. style=log -->
 
-| Entry                                       | Purpose                                                                                                                                |
-| :------------------------------------------ | :------------------------------------------------------------------------------------------------------------------------------------- |
-| [`.devcontainer/`](.devcontainer/README.md) | The language-neutral development container this repository ships, and how to give it the toolchain your project needs.                 |
-| [`.github/`](.github/)                      | Community health files, forms, CODEOWNERS, Dependabot, actions, scripts and workflows - logged below                                   |
-| [`.vscode/`](.vscode/README.md)             | The VS Code settings and extension recommendations this repository shares, and why every other file in this folder stays out of git.   |
-| [`assets/`](assets/README.md)               | Where this project keeps what presents it: four folders to start, a name ready for every other kind, and the rules every file follows. |
-| [`benchmarks/`](benchmarks/README.md)       | The benchmark suites and recorded results that defend the performance budgets of this project.                                         |
-| [`docs/`](docs/README.md)                   | Where this project keeps its own documents, and where the engineering standards it follows actually live.                              |
-| [`packages/`](packages/README.md)           | Workspace packages, one folder each, for when a second consumer needs shared code.                                                     |
-| [`src/`](src/README.md)                     | The application source, split into three layers whose dependencies point inward.                                                       |
-| [`tests/`](tests/README.md)                 | The test suites, from isolated units to whole user journeys, and how CI comes to run them.                                             |
-| [`.editorconfig`](.editorconfig)            | Editor defaults every editor honours: UTF-8, LF, a final newline, and indentation per language                                         |
-| [`.env.example`](.env.example)              | Environment variable template for this project.                                                                                        |
-| [`.gitattributes`](.gitattributes)          | Git attributes - line endings, diffs, and what counts as binary                                                                        |
-| [`.gitignore`](.gitignore)                  | &#x1F5C4;&#xFE0F; Universal Ignore Patterns                                                                                            |
-| [`.markdownlint.json`](.markdownlint.json)  | Repository-wide markdownlint rules. Discovered by mechanism, which is why this lives at the root.                                      |
-| [`LICENSE`](LICENSE)                        | MIT License                                                                                                                            |
-| [`README.md`](README.md)                    | This file.                                                                                                                             |
+| Entry                                              | Purpose                                                                                                                                |
+| :------------------------------------------------- | :------------------------------------------------------------------------------------------------------------------------------------- |
+| [`.devcontainer/`](.devcontainer/README.md)        | The language-neutral development container this repository ships, and how to give it the toolchain your project needs.                 |
+| [`.github/`](.github/)                             | Community health files, forms, CODEOWNERS, Dependabot, actions, scripts and workflows - logged below                                   |
+| [`.vscode/`](.vscode/README.md)                    | The VS Code settings and extension recommendations this repository shares, and why every other file in this folder stays out of git.   |
+| [`assets/`](assets/README.md)                      | Where this project keeps what presents it: four folders to start, a name ready for every other kind, and the rules every file follows. |
+| [`benchmarks/`](benchmarks/README.md)              | The benchmark suites and recorded results that defend the performance budgets of this project.                                         |
+| [`docs/`](docs/README.md)                          | Where this project keeps its own documents, and where the engineering standards it follows actually live.                              |
+| [`packages/`](packages/README.md)                  | Workspace packages, one folder each, for when a second consumer needs shared code.                                                     |
+| [`src/`](src/README.md)                            | The application source, split into three layers whose dependencies point inward.                                                       |
+| [`tests/`](tests/README.md)                        | The test suites, from isolated units to whole user journeys, and how CI comes to run them.                                             |
+| [`.editorconfig`](.editorconfig)                   | Editor defaults every editor honours: UTF-8, LF, a final newline, and indentation per language                                         |
+| [`.env.example`](.env.example)                     | Environment variable template for this project.                                                                                        |
+| [`.git-blame-ignore-revs`](.git-blame-ignore-revs) | Commits that changed only formatting, which `git blame` should look through.                                                           |
+| [`.gitattributes`](.gitattributes)                 | Git attributes - line endings, diffs, and what counts as binary                                                                        |
+| [`.gitignore`](.gitignore)                         | &#x1F5C4;&#xFE0F; Universal Ignore Patterns                                                                                            |
+| [`.markdownlint.json`](.markdownlint.json)         | Repository-wide markdownlint rules. Discovered by mechanism, which is why this lives at the root.                                      |
+| [`CHANGELOG.md`](CHANGELOG.md)                     | What changed in each release of this template, newest first, so an owner can see what a Template Sync will bring before running it.    |
+| [`LICENSE`](LICENSE)                               | MIT License                                                                                                                            |
+| [`README.md`](README.md)                           | This file.                                                                                                                             |
 
 <!-- AUTO-INDEX:END -->
 
@@ -434,26 +482,29 @@ tables after every push:
 
 <!-- AUTO-INDEX:BEGIN dir=./.github style=log -->
 
-| Entry                                                           | Purpose                                                                                                                             |
-| :-------------------------------------------------------------- | :---------------------------------------------------------------------------------------------------------------------------------- |
-| [`actions/`](.github/actions/README.md)                         | The composite actions this repository keeps for its own workflows, and for any other repository that calls them.                    |
-| [`DISCUSSION_TEMPLATE/`](.github/DISCUSSION_TEMPLATE/README.md) | The discussion category forms, each bound by its file name to the category it shapes.                                               |
-| [`ISSUE_TEMPLATE/`](.github/ISSUE_TEMPLATE/README.md)           | The issue forms a reporter chooses from, and the chooser configuration that offers them.                                            |
-| [`scripts/`](.github/scripts/README.md)                         | The checks this repository runs on its own configuration, and the tests that guard them.                                            |
-| [`workflows/`](.github/workflows/README.md)                     | Every workflow in this repository: the name it shows in the Actions tab, what triggers it, and what it does.                        |
-| [`CODE_OF_CONDUCT.md`](.github/CODE_OF_CONDUCT.md)              | The code of conduct governing participation in this project.                                                                        |
-| [`CODEOWNERS`](.github/CODEOWNERS)                              | Folder-based ownership rules                                                                                                        |
-| [`CONTRIBUTING.md`](.github/CONTRIBUTING.md)                    | How to contribute, covering branching, commits, code style, testing, and the pull-request process.                                  |
-| [`dependabot.yml`](.github/dependabot.yml)                      | Dependabot - automated dependency updates                                                                                           |
-| [`FUNDING.yml`](.github/FUNDING.yml)                            | &#x1F496; Funding Options                                                                                                           |
-| [`GOVERNANCE.md`](.github/GOVERNANCE.md)                        | How this project is led, who decides what, how access continues, and the review and security standards every change meets.          |
-| [`pull_request_template.md`](.github/pull_request_template.md)  | This template becomes the body of your pull request.                                                                                |
-| [`release.yml`](.github/release.yml)                            | GitHub auto-generated release notes configuration.                                                                                  |
-| [`SECURITY.md`](.github/SECURITY.md)                            | Supported versions and how to report vulnerabilities privately.                                                                     |
-| [`SUPPORT.md`](.github/SUPPORT.md)                              | Where to get help with this repository - the right channel for every kind of question.                                              |
-| [`template-sync`](.github/template-sync)                        | Every path tannergolden/path ships, and whether &#x1F504; Template Sync, when you run it, keeps it current in this repository.      |
-| [`template-sync.md`](.github/template-sync.md)                  | How this repository takes its template's later fixes when you run &#x1F504; Template Sync, what you control, and what waits on you. |
-| [`TEMPLATE_INIT`](.github/TEMPLATE_INIT)                        | This repository has not been initialised yet.                                                                                       |
+| Entry                                                           | Purpose                                                                                                                                              |
+| :-------------------------------------------------------------- | :--------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [`actions/`](.github/actions/README.md)                         | The composite actions this repository keeps for its own workflows, and for any other repository that calls them.                                     |
+| [`DISCUSSION_TEMPLATE/`](.github/DISCUSSION_TEMPLATE/README.md) | The discussion category forms, each bound by its file name to the category it shapes.                                                                |
+| [`ISSUE_TEMPLATE/`](.github/ISSUE_TEMPLATE/README.md)           | The issue forms a reporter chooses from, and the chooser configuration that offers them.                                                             |
+| [`scripts/`](.github/scripts/README.md)                         | The checks this repository runs on its own configuration, and the tests that guard them.                                                             |
+| [`workflows/`](.github/workflows/README.md)                     | Every workflow in this repository: the name it shows in the Actions tab, what triggers it, and what it does.                                         |
+| [`ACCESSIBILITY.md`](.github/ACCESSIBILITY.md)                  | The accessibility this project aims for, how to report a barrier, and what happens after you do.                                                     |
+| [`CODE_OF_CONDUCT.md`](.github/CODE_OF_CONDUCT.md)              | The code of conduct governing participation in this project, how to report a violation, and how harm is addressed and repaired.                      |
+| [`CODEOWNERS`](.github/CODEOWNERS)                              | Folder-based ownership rules                                                                                                                         |
+| [`commit-template.txt`](.github/commit-template.txt)            | &lt;type&gt;(&lt;scope&gt;): &lt;emoji&gt; &lt;subject starting lowercase, no em dash&gt;                                                            |
+| [`CONTRIBUTING.md`](.github/CONTRIBUTING.md)                    | How to contribute, covering branching, commits, code style, testing, and the pull-request process.                                                   |
+| [`dependabot.yml`](.github/dependabot.yml)                      | Dependabot - automated dependency updates                                                                                                            |
+| [`FUNDING.yml`](.github/FUNDING.yml)                            | &#x1F496; Funding Options                                                                                                                            |
+| [`GOVERNANCE.md`](.github/GOVERNANCE.md)                        | How this project is led, who decides what, how access continues, and the review and security standards every change meets.                           |
+| [`pull_request_template.md`](.github/pull_request_template.md)  | This template becomes the body of your pull request.                                                                                                 |
+| [`release.yml`](.github/release.yml)                            | GitHub auto-generated release notes configuration.                                                                                                   |
+| [`SECURITY.md`](.github/SECURITY.md)                            | How to report a vulnerability privately, what happens after you do, which versions receive security fixes, and the protections this repository runs. |
+| [`SUPPORT.md`](.github/SUPPORT.md)                              | Where to get help with this repository - the right channel for every kind of question.                                                               |
+| [`template-sync`](.github/template-sync)                        | Every path tannergolden/path ships, and whether &#x1F504; Template Sync, when you run it, keeps it current in this repository.                       |
+| [`template-sync.md`](.github/template-sync.md)                  | How this repository takes its template's later fixes when you run &#x1F504; Template Sync, what you control, and what waits on you.                  |
+| [`TEMPLATE_INIT`](.github/TEMPLATE_INIT)                        | This repository has not been initialised yet.                                                                                                        |
+| [`VULNERABILITY_REPORT.yml`](.github/VULNERABILITY_REPORT.yml)  | Report a suspected vulnerability privately, so the maintainers can fix it before it is made public.                                                  |
 
 <!-- AUTO-INDEX:END -->
 
@@ -466,59 +517,64 @@ Your repository holds **triggers**. The logic lives in
 🔁 Intelligence Sync in
 [`tannergolden/intelligence`](https://github.com/tannergolden/intelligence), and
 is pulled in by `uses:`. GitHub only runs a workflow that lives in the repository
-being pushed to, which is why these sixteen small files exist here at all. They
-are grouped by what they do - everything that verifies a change in one file,
+being pushed to, which is why these small files exist here at all. They are
+grouped by what they do - everything that verifies a change in one file,
 everything that reacts to humans in another - so one push produces one run
-with every check in it, not four runs to read separately.
+with every check in it, not four runs to read separately. Two of the seventeen,
+`verify-stubs.yml` and `scorecard.yml`, run steps of their own instead of
+calling the standards.
 
-| Workflow                   | Gives you                                                                |
-| :------------------------- | :----------------------------------------------------------------------- |
-| `checks.yml`               | The gates: lint/test/build, secret scan, CodeQL, workflow lint           |
-| `governance.yml`           | PR title and DCO checks, onboarding, triage, stale sweep, slash commands |
-| `release.yml`              | Draft notes, publish assets, registries, prune superseded releases       |
-| `maintenance.yml`          | Prunes stale deployments; deletes draft releases on request              |
-| `prune-runs.yml`           | Prunes workflow run history, with its logs and artifacts                 |
-| `lifecycle.yml`            | Claims this repository once; tells you when a new major exists           |
-| `dependabot-automerge.yml` | Approves and queues Dependabot's patch and minor updates                 |
-| `ci-failure-alert.yml`     | Opens an issue when a watched workflow fails, closes it on green         |
-| `apply-standards.yml`      | Dispatch-only. The label taxonomy and branch protection                  |
-| `auto-format.yml`          | Formats what a push touched                                              |
-| `preview-deploy.yml`       | Deploys pushes to a preview target, once one is configured               |
-| `verify-stubs.yml`         | Proves every job's permission ceiling matches its called workflow        |
-| `auto-index.yml`           | Redraws every folder log and index after a push, as a pull request       |
-| `template-sync.yml`        | Proposes the template's later fixes as one pull request, when run        |
-| `intelligence-sync.yml`    | Proposes the shared agent rules as one pull request, every Monday        |
-| `cut-release.yml`          | Publishes this template's releases. Inert in yours until you adopt it    |
+| Workflow                   | Gives you                                                                | In the two golden path templates     |
+| :------------------------- | :----------------------------------------------------------------------- | :----------------------------------- |
+| `checks.yml`               | The gates: lint/test/build, secret scan, CodeQL, workflow lint           | Runs, as in yours                    |
+| `governance.yml`           | PR title and DCO checks, onboarding, triage, stale sweep, slash commands | The `pr` check runs; the rest silent |
+| `release.yml`              | Draft notes, publish assets, registries, prune old releases on request   | Silent in every template             |
+| `maintenance.yml`          | Prunes stale deployments; deletes draft releases on request              | Silent                               |
+| `prune-runs.yml`           | Prunes workflow run history, with its logs and artifacts                 | Runs, as in yours                    |
+| `lifecycle.yml`            | Claims this repository once; tells you when a new major exists           | Silent                               |
+| `dependabot-automerge.yml` | Approves and queues Dependabot's patch and minor updates                 | Silent                               |
+| `ci-failure-alert.yml`     | Opens an issue when a watched workflow fails, closes it on green         | Silent                               |
+| `apply-standards.yml`      | Dispatch-only. The label taxonomy, the settings and branch protection    | Silent                               |
+| `auto-format.yml`          | Formats what a push touched                                              | Silent                               |
+| `preview-deploy.yml`       | Deploys pushes to a preview target, once one is configured               | Silent                               |
+| `verify-stubs.yml`         | Proves every job's permission ceiling matches its called workflow        | Runs, as in yours                    |
+| `auto-index.yml`           | Redraws every folder log and index after a push, as a pull request       | Runs, as in yours                    |
+| `scorecard.yml`            | A weekly OpenSSF Scorecard score, filed under code scanning              | Runs, as in yours                    |
+| `template-sync.yml`        | Proposes the template's later fixes as one pull request, when run        | Checks its list instead of syncing   |
+| `intelligence-sync.yml`    | Proposes the shared agent rules as one pull request, every Monday        | Silent                               |
+| `cut-release.yml`          | Publishes this template's releases. Inert in yours until you adopt it    | Runs only in a template              |
 
 **Do not rename the job ids** `ci` and `secrets` (in `checks.yml`) or `pr`
 (in `governance.yml`). A called workflow reports its checks as
 `<job id> / <job name>`, so branch protection depends on them - the file a
 job lives in does not matter, but its id does.
 
-Every workflow ships installed, and **almost all of them are inert here on
-purpose**: nearly every job is silent in the two golden path templates and
-comes alive in every repository generated from this one, even one you make a
-template of its own. Three
-run in the template exactly as they will in yours - `prune-runs.yml`, because a
-template accumulates run history like any other repository, `verify-stubs.yml`,
-because a stub with a wrong ceiling should be caught here rather than
-downstream, and `auto-index.yml`, because the template's own folder logs need
-keeping too. Two more run here differently: `template-sync.yml` checks that the
-template's list names every file it ships instead of syncing, and
-`cut-release.yml` runs only here, publishing the releases your copy follows,
-until a repository released by tag adopts it.
-Delete any file that does not fit your project - each one is yours, and nothing
-reinstalls it: 🔄 Template Sync switches a deleted file off rather than bringing
-it back.
+Every workflow ships installed. **The checks run everywhere, the two golden
+path templates included**: what a template ships - the scripts, the workflows,
+the seeded documents - is exactly what every generated repository's required
+checks run against, so it is checked before it ships. **Most jobs that act on a
+repository are silent in the two templates** and come alive in every
+repository generated from this one, even one you make a template of its own:
+triage, the welcome, releases, settings and most housekeeping. The run-history
+prune and the index redraw run in the templates as well, which need them as
+much. `template-sync.yml` checks the
+template's list instead of syncing there, and `cut-release.yml` runs only in a
+template, publishing the releases your copy follows, until a repository
+released by tag adopts it. Delete any file that does not fit your project -
+each one is yours, and nothing reinstalls it: 🔄 Template Sync switches a
+deleted file off rather than bringing it back.
 
 > [!IMPORTANT]
-> **The guard covers the required checks too.** `ci`, `secrets` and `pr` -
-> the three job ids branch protection names - are guarded like everything
-> else, so they do not run while a repository is marked as a template. That
-> is right for this one, which has no source code to check. But if you keep
-> your own repository flagged as a template and apply the rulesets from step
-> 4, every pull request will wait forever on three checks that never report.
-> Un-flag it, or leave those checks out of the ruleset.
+> **The required checks report everywhere, and on a merge queue too.** `ci`,
+> `secrets` and `pr` - the three job ids branch protection names - run in
+> every repository, templates included, so applying the rulesets never leaves
+> a pull request waiting on a check that cannot run. Each also triggers on
+> `merge_group`, so the rulesets work with a merge queue. In a merge group the
+> `pr` jobs have no pull request to read, so they skip, and the secret scan
+> passes without scanning again, because each commit in the group was scanned
+> on its own pull request; GitHub counts a skipped job as passing. Never skip
+> a required job in its stub, though: a job skipped there reports under its
+> bare id, such as `secrets`, not the name branch protection waits for.
 
 ### Staying current takes no effort
 
@@ -540,17 +596,19 @@ Almost nothing here pins a third-party action, either. Every `uses:` in the
 stubs points at `tannergolden/standards`, or `tannergolden/intelligence` for
 🔁 Intelligence Sync, so the SHA pins behind them are maintained once, there,
 rather than in every repository built from this one.
-The exception is `verify-stubs.yml`, which runs steps of its own and pins
-`actions/checkout` to a commit three times. Those three are why
-`.github/dependabot.yml` ships with `github-actions` enabled: it keeps them
-current, and it is the one ecosystem that is correct for every repository
-from the moment it is generated.
+The exceptions are `verify-stubs.yml` and `scorecard.yml`, which run steps of
+their own and pin each third-party action they use to a commit. Those pins are
+why `.github/dependabot.yml` ships with `github-actions` enabled: it keeps them
+current. It also keeps the development container's features and the
+repository scripts' one Python requirement current, the other two manifests
+every generated repository starts with.
 
 > [!NOTE]
 > **If this repository goes quiet for 60 days, GitHub disables its scheduled
 > workflows.** That is a platform rule for public repositories, not something a
 > workflow can opt out of, and it takes the weekly checks sweep, the governance
-> sweep, and the new-major alarm in `lifecycle.yml` with it. GitHub emails you
+> sweep, the Scorecard score, and the new-major alarm in `lifecycle.yml` with
+> it. GitHub emails you
 > when it happens, and one commit or a manual dispatch turns them back on.
 >
 > The safety net is that **Dependabot is not subject to that rule**. It keeps
@@ -558,10 +616,19 @@ from the moment it is generated.
 > when the major changes, a `v2` still arrives as a pull request even with
 > every cron asleep. So a dormant repository still finds out; it just finds out
 > through Dependabot instead of through an issue.
+>
+> Dependabot has a dormancy rule of its own, though: once one of its pull
+> requests has been open for more than 90 days, and in that time nobody has
+> merged or closed any of them, edited `.github/dependabot.yml` or run an
+> update by hand, it pauses. It then opens no pull request at all, security
+> updates included, until someone does. Merge or close what it opens, and the
+> safety net holds.
 
-If you would rather pin exact versions (`@v1.4.2`) for an auditable record of
-what ran when, do that instead - Dependabot updates reusable-workflow
-references natively, and the `dependabot-automerge` stub will merge them on
+If you would rather pin an exact version for an auditable record of what ran
+when, pin its commit, as `@<sha> # v1.4.2`, not the version tag: the standards
+delete each version's tag when the next is cut, and a stub pinned to a tag
+that is gone stops running. Dependabot updates commit pins and their version
+comments natively, and the `dependabot-automerge` stub will merge them on
 green CI.
 
 ---
@@ -577,7 +644,10 @@ only when you run it.
 template's latest release, run **🔄 Template Sync** from the Actions tab: it
 compares this repository with that release and proposes whatever changed as
 **one pull request** on `chore/template-sync`, which you review and merge like
-any other. If you never run it, nothing in this repository ever changes.
+any other. If you never run it, nothing in this repository ever changes. What
+each release brings is in the template's
+[changelog](https://github.com/tannergolden/path/blob/Development/CHANGELOG.md),
+so you can read it before you run one.
 
 | It always...                        | Because                                                                                                                  |
 | :---------------------------------- | :----------------------------------------------------------------------------------------------------------------------- |
@@ -618,20 +688,27 @@ called rather than copied, like every other workflow here.
 This section is for whoever changes the template itself, rather than a
 repository generated from it.
 
-**A pull request here runs two checks.** The guard that keeps most stubs
-silent in the two golden path templates covers the gates too, so what checks
-a change on its way in is 🔄 Template Sync, which holds `.github/template-sync`
-to the files this template ships, and 🔬 Verify Stub Ceilings, when a workflow
-changed. 🗂️ Machined Indexes redraws the folder logs after the merge, as a
-pull request, and 🎯 Apply Standards is silent here as well: a dispatch
-applies nothing and still reports green. Nothing here tests the scripts in
-`.github/scripts/`, runs the repository validator before 🏷️ Cut Release does,
-or checks a document's frontmatter at all, so run the gates yourself before a
-push, from the root, with the standards cloned beside this repository:
+**A pull request here runs the same checks as anywhere else.** 🚦 Checks
+lints the configuration, runs the scripts' tests, enforces every document's
+frontmatter, scans for secrets and runs CodeQL and the workflow lint; ✍️ the
+`pr` check holds the title, the branch name, the commit messages and the
+sign-off; 🔄 Template Sync holds `.github/template-sync` to the files this
+template ships; and 🔬 Verify Stub Ceilings runs when a workflow, the checker
+or its requirements changed. 🗂️ Machined Indexes
+redraws the folder logs after the merge, as a pull request, and
+🛡️ OpenSSF Scorecard rescores the default branch. 🎯 Apply Standards is silent
+here: a dispatch applies nothing and still reports green.
+
+The checks matter most for the seeds and the scripts: every generated
+repository's required `ci` job runs them, with `frontmatter: 'enforce'`, so a
+file that fails here would fail that check in each repository that syncs it.
+To run the same gates before a push, from the root, with the standards cloned
+beside this repository:
 
 ```bash
 git clone --depth 1 --branch v1 https://github.com/tannergolden/standards ../standards
 
+python3 -m pip install --require-hashes --requirement .github/scripts/requirements.txt
 python3 .github/scripts/validate-repository.py
 python3 -m unittest discover -s .github/scripts -p 'test_*.py'
 python3 ../standards/.github/scripts/template-sync.py check --repo-dir .
@@ -639,9 +716,11 @@ python3 ../standards/.github/scripts/update-doc-indexes.py --check --tree
 python3 ../standards/.github/scripts/check-frontmatter.py --mode enforce
 ```
 
-The frontmatter check matters most for the seeds: every generated
-repository's `ci` job runs it with `frontmatter: 'enforce'`, so a seed that
-fails it here fails that required check in each repository that syncs it.
+**Every change gets a line in [`CHANGELOG.md`](CHANGELOG.md)**, under
+**Unreleased**, in the same pull request. It is what an owner reads before
+running 🔄 Template Sync, and it is the template's only lasting record of a
+release: Cut Release prunes the page and the tag it supersedes, and
+initialisation deletes the file from every generated repository.
 
 **`docs/Prompts.md` is two sections, and the template writes only the
 first.** Add or change a Golden Path prompt only between the two comments
@@ -662,13 +741,20 @@ says what a generated repository does with it. The standards'
 [For Template Authors](https://github.com/tannergolden/standards/blob/Development/docs/distribution/automation/Template-Sync.md#-for-template-authors)
 sets out each section.
 
-**A merge reaches nobody until a release.** Generated repositories follow
-`v1`, so dispatch 🏷️ Cut Release from the default branch with the next
-`vX.Y.Z` and `move-major` left on. It refuses a version that is not a new
+**A merge reaches existing repositories only through a release.** A
+repository generated after it starts from it at once, because "Use this
+template" copies the default branch, so merge a change that relies on a change
+to the standards only once the standards have released it. The repositories
+already generated follow `v1`, so dispatch 🏷️ Cut Release from the default
+branch with the next `vX.Y.Z` and `move-major` left on. It refuses a version that is not a new
 `vX.Y.Z` above the last one, a commit that is not on the default branch, a
 tree missing `.github/template-sync` or `.github/workflows/template-sync.yml`,
 and one the repository validator fails; otherwise it tags the version, moves
 its major tag to it, publishes the release and prunes the one it superseded.
+Before you dispatch it, move the **Unreleased** entries in `CHANGELOG.md` under
+the new version, linked to its release page, and point the previous version's
+link at the commit it was cut from: this release prunes that version's page
+and tag.
 A change that renames a file a generated repository depends on, or reshapes a
 stub in a way a merge cannot carry, is breaking: release it as `v2`, which no
 repository follows until its owner changes `ref:`.
@@ -704,6 +790,6 @@ story - go where a numbered or dated record belongs instead. The
 
 <br />
 
-Built with ❤️ by [@tannergolden](https://github.com/tannergolden). Distributed under the MIT License.
+Built with ❤️ by [@tannergolden](https://github.com/tannergolden). Distributed under the terms in [LICENSE](/LICENSE).
 
 </div>

@@ -20,14 +20,16 @@ _Ask once. Ask in the right place._
 
 ## 🧭 Pick Your Channel
 
-| You have…                  | Go to                                                                             |
-| :------------------------- | :-------------------------------------------------------------------------------- |
-| A "how do I…?" question    | 💬 **Discussions → Q&A** (a guided form collects the context answerers need)      |
-| A reproducible bug         | 🐛 **Issues → Bug Report**                                                        |
-| A feature idea             | ✨ **Issues → Feature Request** (or 🧠 Discussions → Ideas to explore it first)   |
-| A documentation gap        | 📚 **Issues → Documentation Report**                                              |
-| A security vulnerability   | 🛡️ **[SECURITY.md](SECURITY.md)** - private disclosure only, never a public issue |
-| A setup or tooling problem | 🧰 **Discussions → Tooling & Setup**                                              |
+| You have…                  | Go to                                                                              |
+| :------------------------- | :--------------------------------------------------------------------------------- |
+| A "how do I…?" question    | 💬 **Discussions → Q&A** (a guided form collects the context answerers need)       |
+| A reproducible bug         | 🐛 **Issues → Bug Report**                                                         |
+| A feature idea             | ✨ **Issues → Feature Request** (or 🧠 Discussions → Ideas to explore it first)    |
+| A documentation gap        | 📚 **Issues → Documentation Report**                                               |
+| An accessibility barrier   | ♿ **Issues → Accessibility Report** - see [ACCESSIBILITY.md](ACCESSIBILITY.md)    |
+| A code of conduct concern  | 📜 **[CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md)** - report privately, as it explains |
+| A security vulnerability   | 🛡️ **[SECURITY.md](SECURITY.md)** - private disclosure only, never a public issue  |
+| A setup or tooling problem | 🧰 **Discussions → Tooling & Setup**                                               |
 
 ---
 

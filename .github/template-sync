@@ -26,6 +26,7 @@
 /.env.example
 /.gitattributes
 
+/.github/ACCESSIBILITY.md
 /.github/CODE_OF_CONDUCT.md
 /.github/CONTRIBUTING.md
 /.github/DISCUSSION_TEMPLATE/README.md
@@ -34,7 +35,6 @@
 /.github/DISCUSSION_TEMPLATE/community.yaml
 /.github/DISCUSSION_TEMPLATE/ideas.yaml
 /.github/DISCUSSION_TEMPLATE/internationalization-i18n.yaml
-/.github/DISCUSSION_TEMPLATE/polls.yaml
 /.github/DISCUSSION_TEMPLATE/q-a.yaml
 /.github/DISCUSSION_TEMPLATE/roadmap.yaml
 /.github/DISCUSSION_TEMPLATE/showcase.yaml
@@ -51,11 +51,18 @@
 /.github/ISSUE_TEMPLATE/config.yml
 /.github/SECURITY.md
 /.github/SUPPORT.md
+/.github/VULNERABILITY_REPORT.yml
+/.github/commit-template.txt
 /.github/dependabot.yml
 /.github/pull_request_template.md
 /.github/release.yml
 /.github/scripts/README.md
+/.github/scripts/hooks/README.md
+/.github/scripts/hooks/commit-msg
+/.github/scripts/hooks/pre-commit
+/.github/scripts/requirements.txt
 /.github/scripts/test_gitignore.py
+/.github/scripts/test_hooks.py
 /.github/scripts/test_validate_repository.py
 /.github/scripts/test_verify_stub_ceilings.py
 /.github/scripts/validate-repository.py
@@ -75,6 +82,7 @@
 /.github/workflows/preview-deploy.yml
 /.github/workflows/prune-runs.yml
 /.github/workflows/release.yml
+/.github/workflows/scorecard.yml
 /.github/workflows/template-sync.yml
 /.github/workflows/verify-stubs.yml
 
@@ -100,8 +108,21 @@
 /docs/templates/Post-Mortem.md
 /docs/templates/README.md
 /docs/templates/Research-Log.md
+/docs/templates/Runbook.md
 /docs/templates/Technical-Design.md
 /docs/templates/User-Story.md
+/docs/templates/distribution/README.md
+/docs/templates/distribution/Release-Process.md
+/docs/templates/distribution/Release-Verification.md
+/docs/templates/introduction/Getting-Started.md
+/docs/templates/introduction/README.md
+/docs/templates/introduction/Roadmap.md
+/docs/templates/operations/Incident-Response.md
+/docs/templates/operations/README.md
+/docs/templates/operations/Threat-Model.md
+/docs/templates/references/Glossary.md
+/docs/templates/references/README.md
+/docs/templates/technical/Architecture-Overview.md
 /docs/templates/technical/Packages-&-Workspaces.md
 /docs/templates/technical/README.md
 /docs/templates/technical/Source-Code.md
@@ -130,12 +151,14 @@
 # --- Yours: seeded once, never synced -----------------------------------------
 #/README.md
 #/LICENSE
+#/.git-blame-ignore-revs
 #/.github/CODEOWNERS
 #/.github/FUNDING.yml
 #/.github/actions/**
 #/.github/workflows/cut-release.yml
 #/assets/**
 #/benchmarks/**
+#/docs/adrs/ADR-0001-Record-Architecture-Decisions.md
 #/packages/**
 #/src/**
 #/tests/**
@@ -144,5 +167,6 @@
 # Initialisation deletes each of these from every repository generated from
 # the template.
 #/.github/TEMPLATE_INIT
+#/CHANGELOG.md
 
 # --- Your rules ---------------------------------------------------------------

@@ -27,16 +27,23 @@
 # so `v1` moves, THEN change the stubs. Remember that re-signing commits is
 # also a push, and lands them in a new minute.
 #
-# Runs when a workflow file changes, and once a day - so a failure that was
-# only ever waiting on a release clears itself without anyone re-running it.
+# Runs when a workflow file or the checker changes, and once a day - so a
+# failure that was only ever waiting on a release clears itself without
+# anyone re-running it.
 
 name: '🔬 Verify Stub Ceilings'
 
 on:
   push:
-    paths: ['.github/workflows/**']
+    paths:
+      - '.github/workflows/**'
+      - '.github/scripts/verify-stub-ceilings.py'
+      - '.github/scripts/requirements.txt'
   pull_request:
-    paths: ['.github/workflows/**']
+    paths:
+      - '.github/workflows/**'
+      - '.github/scripts/verify-stub-ceilings.py'
+      - '.github/scripts/requirements.txt'
   schedule:
     - cron: '15 7 * * *' # daily: clears a stale "waiting on a release"
   workflow_dispatch:
@@ -85,5 +92,15 @@ jobs:
           path: .standards-latest
           persist-credentials: false
 
+      # The checker reads YAML. PyYAML is pinned in requirements.txt rather
+      # than assumed of the runner image, which does not promise it.
+      - name: '🐍 Set up Python'
+        uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7.0.0
+        with:
+          python-version: '3.12'
+
+      - name: '📦 Install the script requirements'
+        run: python -m pip install --require-hashes --requirement .github/scripts/requirements.txt
+
       - name: '🔬 Compare every ceiling against its callee'
-        run: python3 .github/scripts/verify-stub-ceilings.py
+        run: python .github/scripts/verify-stub-ceilings.py

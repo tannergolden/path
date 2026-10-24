@@ -23,7 +23,8 @@ _Consulted, not read through._
 Pages to consult rather than read through: what a term means here, what each
 option does, and what a file or a field holds.
 
-- **A glossary**: the terms this project uses, and what each one means here.
+- **A glossary**: the terms this project uses, and what each one means here,
+  from the [Glossary](../templates/references/Glossary.md) seed.
 - **Catalogues**: every option, setting, command or item the project offers,
   one row each.
 - **Formats**: the keys of a configuration, the shape of a file, the fields of
@@ -66,6 +67,6 @@ frontmatter.
 
 <br />
 
-Built with ❤️ by the Engineering Team. Distributed under the MIT License.
+Built with ❤️ by the Engineering Team. Distributed under the terms in [LICENSE](/LICENSE).
 
 </div>

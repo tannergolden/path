@@ -71,6 +71,6 @@ Stay single-package until you have a concrete second consumer. Adopt a workspace
 
 <br />
 
-Built with ❤️ by the Engineering Team. Distributed under the MIT License.
+Built with ❤️ by the Engineering Team. Distributed under the terms in [LICENSE](/LICENSE).
 
 </div>

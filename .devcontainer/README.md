@@ -25,9 +25,16 @@ Code, or a Codespace - and this folder decides what you get: an Ubuntu base
 image, git, the common shell utilities, and a handful of editor extensions that
 are useful whatever you write.
 
-**Nothing language-specific is installed, on purpose.** This scaffold does not
-know what you are about to build, and a toolchain nobody needs costs every
-contributor a slow rebuild.
+**Nothing for your project's language is installed, on purpose.** This
+scaffold does not know what you are about to build, and a toolchain nobody
+needs costs every contributor a slow rebuild.
+
+**Python is the one exception, and it is not a language choice.** The checks
+this repository runs on its own configuration are Python: the validator, the
+stub checker, the commit-message hook and their tests. So the container
+installs Python and the scripts' one requirement, PyYAML, and switches on the
+[git hooks](../.github/scripts/hooks/README.md) when it is created. A
+container that cannot run those checks cannot tell you whether CI will pass.
 
 `.gitattributes` marks this folder `export-ignore`, so `git archive` leaves it
 out of a source tarball. It is for developing the project, not for shipping it.
@@ -55,9 +62,10 @@ about itself.
 - [ ] Uncomment the feature for your language under `features` in
       `devcontainer.json`. The full catalogue is at
       [containers.dev/features](https://containers.dev/features).
-- [ ] Set `postCreateCommand` to your bootstrap step, such as `npm ci`,
-      `pip install -e .` or `go mod download`, so a fresh container is ready to
-      build.
+- [ ] Append your bootstrap step to `postCreateCommand`, such as
+      `&& npm ci`, `&& pip install -e .` or `&& go mod download`, so a fresh
+      container is ready to build. Keep what is already there: it installs
+      what the repository's own checks need and switches on the hooks.
 - [ ] Add your language's editor extension to `customizations.vscode.extensions`.
 - [ ] Rebuild the container.
 
@@ -81,6 +89,6 @@ as an error.
 
 <br />
 
-Built with ❤️ by the Engineering Team. Distributed under the terms in [LICENSE](../LICENSE).
+Built with ❤️ by the Engineering Team. Distributed under the terms in [LICENSE](/LICENSE).
 
 </div>

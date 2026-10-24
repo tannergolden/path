@@ -1,4 +1,6 @@
 #!/usr/bin/env python3
+# SPDX-FileCopyrightText: 2026 Tanner Golden
+# SPDX-License-Identifier: MIT
 """Tests for the repository validator.
 
 WHY THIS EXISTS. `validate-repository.py` runs as the `ci` job's
@@ -253,6 +255,63 @@ class TestCleanRepository(ValidatorTestCase):
         self.assertClean(self.repo.run())
 
 
+# Built in halves for the reason the validator gives: initialisation, and
+# Template Sync after it, rewrite the whole placeholder in this file too.
+PLACEHOLDER = 'OWNER' + '/' + 'REPOSITORY'
+
+
+class TestPlaceholders(ValidatorTestCase):
+    """A placeholder is expected in the template and a defect after initialisation."""
+
+    CONFIG = '.github/ISSUE_TEMPLATE/config.yml'
+    LINK = (
+        'blank_issues_enabled: false\n'
+        'contact_links:\n'
+        "  - name: Discussions\n"
+        f"    url: 'https://github.com/{PLACEHOLDER}/discussions'\n"
+        "    about: 'Questions.'\n"
+    )
+
+    def test_the_template_keeps_its_placeholders(self) -> None:
+        self.repo.write('.github/TEMPLATE_INIT', 'Not initialised yet.\n')
+        self.repo.write(self.CONFIG, self.LINK)
+        self.repo.write('.github/CODEOWNERS', '* @your-org/your-team\n')
+        self.assertClean(self.repo.run())
+
+    def test_a_contact_link_left_on_the_placeholder_is_reported(self) -> None:
+        self.repo.write(self.CONFIG, self.LINK)
+        self.assertFinding(self.repo.run(), f'still names {PLACEHOLDER}')
+
+    def test_a_replaced_contact_link_passes(self) -> None:
+        self.repo.write(self.CONFIG, self.LINK.replace(PLACEHOLDER, 'octo/widget'))
+        self.assertClean(self.repo.run())
+
+    def test_a_comment_naming_the_placeholder_is_not_a_link(self) -> None:
+        self.repo.write(self.CONFIG, f'# Replace {PLACEHOLDER} below.\nblank_issues_enabled: false\n')
+        self.assertClean(self.repo.run())
+
+    def test_a_codeowners_rule_naming_the_placeholder_team_is_reported(self) -> None:
+        self.repo.write('.github/CODEOWNERS', '/docs/   @your-org/your-team\n')
+        self.assertFinding(self.repo.run(), 'owns nothing')
+
+    def test_a_commented_codeowners_rule_is_left_alone(self) -> None:
+        self.repo.write('.github/CODEOWNERS', '# /docs/   @your-org/your-team\n* @octo\n')
+        self.assertClean(self.repo.run())
+
+    def test_initialisation_cannot_rewrite_the_check(self) -> None:
+        """The defect: initialisation turned the placeholder in the validator
+        into the repository's name, and the check failed every repository
+        right after initialisation, on the link it had filled in."""
+        here = pathlib.Path(__file__).resolve().parent
+        for name in ('validate-repository.py', 'test_validate_repository.py'):
+            self.assertNotIn(PLACEHOLDER, (here / name).read_text(encoding='utf-8'), name)
+
+    def test_the_placeholder_elsewhere_is_not_this_checks_business(self) -> None:
+        # A seed or a workflow comment may name it on purpose.
+        self.repo.write('docs/guide.md', f'Run `gh attestation verify --repo {PLACEHOLDER}`.\n')
+        self.assertClean(self.repo.run())
+
+
 class TestBinaryFiles(ValidatorTestCase):
     """What counts as binary is .gitattributes' answer, not a suffix list."""
 
@@ -306,7 +365,7 @@ OWNER_HALF = '''<!-- The Golden Path prompts end here. Everything below this com
 
 <br />
 
-Built with ❤️ by the Engineering Team. Distributed under the MIT License.
+Built with ❤️ by the Engineering Team. Distributed under the terms in [LICENSE](/LICENSE).
 
 </div>
 '''
@@ -353,6 +412,58 @@ class TestPromptsPage(ValidatorTestCase):
             "Write this repository's own prompts here", 'Write our own prompts here'))
         (self.repo.root / '.github' / 'TEMPLATE_INIT').unlink()
         self.assertClean(self.repo.run())
+
+
+class TestFooterLicence(ValidatorTestCase):
+    """A footer links its licence from the repository root, and names none."""
+
+    PAGE = '# Page\n\nBody.\n\nBuilt with care. {clause}\n'
+    CLAUSE = 'Distributed under the terms in [LICENSE](/LICENSE).'
+
+    def page(self, clause: str, rel: str = 'docs/Page.md') -> None:
+        self.repo.write(rel, self.PAGE.format(clause=clause))
+
+    def test_the_root_link_passes(self) -> None:
+        self.page(self.CLAUSE)
+        self.assertClean(self.repo.run())
+
+    def test_a_named_licence_is_reported(self) -> None:
+        self.page('Distributed under the MIT License.')
+        self.assertFinding(self.repo.run(), 'the footer names its licence, MIT')
+
+    def test_a_named_licence_beside_the_link_is_reported(self) -> None:
+        self.page('Distributed under the Apache License 2.0, in [LICENSE](/LICENSE).')
+        self.assertFinding(self.repo.run(), 'the footer names its licence, Apache')
+
+    def test_a_relative_link_is_reported(self) -> None:
+        """It resolves where it is, and breaks when the page is copied to another depth."""
+        self.page('Distributed under the terms in [LICENSE](../LICENSE).')
+        self.assertFinding(self.repo.run(), 'does not link its licence from the repository root')
+
+    def test_a_footer_with_no_link_is_reported(self) -> None:
+        self.page("Distributed under the terms in this repository's LICENSE.")
+        self.assertFinding(self.repo.run(), 'does not link its licence from the repository root')
+
+    def test_another_name_for_the_licence_file_passes(self) -> None:
+        self.page('Distributed under the terms in [COPYING](/COPYING).')
+        self.assertClean(self.repo.run())
+
+    def test_a_clause_quoted_as_code_is_not_a_footer(self) -> None:
+        self.repo.write('docs/Guide.md', (
+            '# Guide\n\nNever write `Distributed under the MIT License.` in a footer.\n\n'
+            '```markdown\nDistributed under the MIT License.\n```\n'
+        ))
+        self.assertClean(self.repo.run())
+
+    def test_only_markdown_is_read(self) -> None:
+        self.repo.write('NOTICE.txt', 'Distributed under the MIT License.\n')
+        self.assertClean(self.repo.run())
+
+    def test_the_template_is_held_to_it_as_well(self) -> None:
+        """Unlike a placeholder, a stale footer is a defect before initialisation too."""
+        self.repo.write('.github/TEMPLATE_INIT', 'This repository has not been initialised yet.\n')
+        self.page('Distributed under the MIT License.', 'docs/templates/Seed.md')
+        self.assertFinding(self.repo.run(), 'the footer names its licence')
 
 
 class TestGitUnavailable(unittest.TestCase):

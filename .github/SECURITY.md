@@ -1,6 +1,6 @@
 <!--
 title: '🛡️ SECURITY POLICY'
-description: 'Supported versions and how to report vulnerabilities privately.'
+description: 'How to report a vulnerability privately, what happens after you do, which versions receive security fixes, and the protections this repository runs.'
 type: guide
 -->
 
@@ -10,7 +10,7 @@ type: guide
 
 <a name="top"></a>
 
-**Defining the zero-trust blueprint for a transparent and responsible engineering environment.**
+**How to report a vulnerability, and what happens after you do.**
 
 _Report privately. Patch quickly. Disclose responsibly._
 
@@ -20,59 +20,142 @@ _Report privately. Patch quickly. Disclose responsibly._
 
 ## 💡 Overview
 
-This repository ships the Golden Path template's baseline security configurations, intended to help developers identify vulnerabilities early. Security is treated as a shared responsibility; the template provides the tooling, and each project must maintain and monitor its own instance.
+If you believe you have found a security vulnerability in this repository, in
+its configuration, or in anything it releases, please tell us privately and give
+us the chance to fix it before it is made public.
 
 > [!IMPORTANT]
-> If you believe you have found a security vulnerability in this repository or its shipped configuration, please follow the process below. **Do not open a public issue.**
-
----
-
-## ✅ Supported Versions
-
-We provide configuration updates and patch guidance for the following versions:
-
-| Version     | Status                |
-| :---------- | :-------------------- |
-| **0.1.x**   | ✅ Active Maintenance |
-| **< 0.1.0** | ❌ End of Support     |
+> **Never report a vulnerability in a public issue, discussion, or pull
+> request.** Anyone can read those, including the people who would exploit it.
 
 ---
 
 ## 🧱 Reporting a Vulnerability
 
-To protect the community, we ask that you report vulnerabilities through private channels.
+### 1. Report it privately
 
-### 1. Submit the Report
+Open this repository's **Security** tab and choose **Report a vulnerability**.
+GitHub's private vulnerability reporting keeps the report between you and the
+maintainers, needs no email, and lets us work on the fix with you in a private
+advisory.
 
-Use GitHub's private vulnerability reporting: open the repository's **Security** tab and click **Report a vulnerability**. This keeps the report private between you and the maintainers - no email required. (On **private** repositories, where issues are already non-public, the structured 🛡️ Vulnerability Report issue form is the intake channel instead - the issue chooser offers whichever applies.)
+**If there is no Report a vulnerability button**, private reporting has not been
+switched on yet. Do not describe the problem anywhere public. Either contact a
+maintainer through the private contact listed under **Maintainers** in
+[GOVERNANCE.md](GOVERNANCE.md), or open an issue titled
+`Security contact request` containing nothing else, and a maintainer will open a
+private advisory and invite you to it.
 
-### 2. Required Information
+On a **private** repository, where issues are already closed to the public, the
+🛡️ Vulnerability Report issue form is the intake instead.
 
-Please provide a factual summary to assist in triage:
+### 2. What to include
 
-- A description of the vulnerability.
-- Steps to reproduce the issue in a clean clone of the template.
-- Potential impact on projects utilizing this architecture.
+The report form asks for these; the more of them you give, the faster we can
+act:
 
-### 3. Response Timeline
+- What is affected, and what an attacker can achieve.
+- The steps to reproduce it, from a clean clone or a released version.
+- A proof of concept, with any secrets or personal data removed.
+- The versions or commits you tested.
+- Any mitigation you know of.
 
-- **Acknowledgment**: Expected within **24 hours**.
-- **Status Update**: A preliminary assessment or plan will be shared within **7 days**.
+### 3. What to expect
 
-### 4. Credit for Reporters
+| Step                       | Our aim                                                                                          |
+| :------------------------- | :----------------------------------------------------------------------------------------------- |
+| **Acknowledgement**        | Within **7 days** of your report                                                                 |
+| **Assessment**             | Within **14 days**: whether we can reproduce it, how severe it is, and what happens next         |
+| **Fix**                    | Within **30 days** for critical and high severity, **60 days** for medium, **90 days** for low   |
+| **Disclosure**             | When the fix is released, or after **90 days**, whichever is first, unless we agree another date |
+| **Updates while you wait** | At least every **14 days** until the report is closed                                            |
 
-We **credit every reporter** who responsibly discloses a valid vulnerability. Unless you ask to remain anonymous, your name (or handle) is acknowledged in the security advisory and the release notes for the fix. We believe recognition is the least we owe the people who keep the community safe - tell us how you would like to be credited when you report.
+> [!NOTE]
+> **For maintainers:** these are the times the template ships. Set ones you can
+> keep, because a promise you break costs more trust than a slower one you keep.
+
+### 4. Credit for reporters
+
+We **credit every reporter** who responsibly discloses a valid vulnerability.
+Unless you ask to remain anonymous, your name or handle is acknowledged in the
+security advisory and in the release notes for the fix. Tell us how you would
+like to be credited when you report.
 
 ---
 
-## 🧭 Security Configurations
+## 📢 How Fixes Are Published
 
-The Golden Path template includes pre-configured settings for the following GitHub security features:
+- The fix is developed in a private **GitHub security advisory**, with you
+  invited to it if you wish.
+- When it ships, the advisory is published, and a **CVE** is requested through
+  GitHub where the vulnerability warrants one, so dependency tools such as
+  Dependabot can tell everyone affected.
+- The release notes list it under **🔒 Security**, and they are kept: release
+  pages are this repository's changelog and are never deleted on their own.
 
-- **Secret Scanning**: Automated secret detection (Gitleaks) runs on pushes and pull requests to catch committed credentials - a **required merge check** under the shipped rulesets.
-- **Dependabot**: Monthly grouped checks of the `github-actions` ecosystem, with automated pull requests for known security updates. Enable the ecosystem matching your language in `.github/dependabot.yml` as you add manifests.
-- **CodeQL Analysis**: An integrated GitHub Actions workflow for static analysis of common coding patterns (an advisory scan; add its check to the ruleset's required contexts to make it merge-blocking).
-- **Dependency Review**: An advisory CI scan that flags vulnerabilities in newly introduced packages during the PR process (public repositories; not in the shipped ruleset's required checks - add it there to make it a hard gate).
+---
+
+## ✅ Supported Versions
+
+| Version              | Security fixes                                  |
+| :------------------- | :---------------------------------------------- |
+| **Latest release**   | ✅ Yes                                          |
+| **Earlier releases** | ❌ No: upgrade to the latest release to get one |
+
+A release stops receiving security fixes the day the next one is published. If
+this project supports more than the latest release, list each supported line
+here, with the date its support ends.
+
+---
+
+## 🧭 Scope
+
+**In scope:** the code and configuration in this repository, its workflows, and
+the artifacts its releases publish.
+
+**Out of scope:**
+
+- Vulnerabilities in a dependency, unless this project uses it in a way that
+  makes it exploitable. Report those to the dependency's maintainers.
+- Findings from automated scanners with no demonstrated impact.
+- Social engineering, physical attacks, and denial of service against GitHub
+  or any other host.
+
+---
+
+## 🤝 Safe Harbour
+
+We will not pursue or support legal action against anyone who researches and
+reports a vulnerability in good faith and in line with this policy: who avoids
+privacy violations, data destruction and service disruption, uses only accounts
+they own or have permission to use, and gives us reasonable time to fix the
+problem before disclosing it.
+
+---
+
+## 🔒 What This Repository Runs
+
+Each of these is configured by the files in this repository or by
+🎯 Apply Standards:
+
+- **Secret scanning**: Gitleaks scans every pull request, every push to the
+  default branch and, weekly, the whole history, and is a required check under
+  the shipped rulesets. GitHub's own secret scanning and push protection are
+  switched on with the settings.
+- **Static analysis**: CodeQL analyses the code and the GitHub Actions
+  workflows, weekly and on every pull request (public repositories).
+- **Dependency review**: every pull request is screened for dependencies with
+  known vulnerabilities (public repositories).
+- **Dependency updates**: Dependabot keeps the workflow actions, the development
+  container and the repository scripts' requirements current, waits three days
+  before proposing a new version, and opens security updates at once.
+- **Supply-chain score**: OpenSSF Scorecard rates the repository weekly and
+  files its findings under code scanning (public repositories).
+- **Hardened runners**: every job starts by auditing its network egress.
+- **Release integrity**: every release carries a CycloneDX SBOM, and on a
+  public repository its build archive also carries a build provenance
+  attestation. How to check them is in the project's Release Verification
+  document, seeded from `docs/templates/distribution/Release-Verification.md`.
 
 ---
 
@@ -91,6 +174,6 @@ The Golden Path template includes pre-configured settings for the following GitH
 
 <br />
 
-Built with ❤️ by the Engineering Team. Distributed under the MIT License.
+Built with ❤️ by the Engineering Team. Distributed under the terms in [LICENSE](/LICENSE).
 
 </div>

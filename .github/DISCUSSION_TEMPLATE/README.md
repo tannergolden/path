@@ -27,7 +27,14 @@ whose file name matches the category's **slug** - `q-a.yaml` for Q&A,
 also applies `type: discussion` and `status: needs triage`.
 
 Discussions must be switched on first, under <kbd>Settings</kbd> →
-<kbd>General</kbd> → <kbd>Features</kbd>.
+<kbd>General</kbd> → <kbd>Features</kbd>. GitHub then creates six categories:
+Announcements, General, Ideas, Polls, Q&A and Show and tell. A form shapes
+only the category whose slug is its file name, so `announcements.yaml`,
+`ideas.yaml` and `q-a.yaml` work at once. For each of the others, create a
+category whose slug, shown in its address, matches the form's file name: the
+pencil beside **Categories** on the Discussions tab opens the editor. Or
+delete the forms you will not use. Polls take no form, which is why there is
+none here for them.
 
 ---
 
@@ -35,19 +42,18 @@ Discussions must be switched on first, under <kbd>Settings</kbd> →
 
 <!-- AUTO-INDEX:BEGIN dir=. style=log -->
 
-| Entry                                                              | Purpose                                                                                                                                          |
-| :----------------------------------------------------------------- | :----------------------------------------------------------------------------------------------------------------------------------------------- |
-| [`accessibility.yaml`](accessibility.yaml)                         | Accessibility feedback - contrast, keyboard navigation, focus order, screen readers.                                                             |
-| [`announcements.yaml`](announcements.yaml)                         | Official updates such as releases, deprecations, and roadmap notes.                                                                              |
-| [`community.yaml`](community.yaml)                                 | General discussion, introductions, meetups, and topics that don&#x2019;t fit other categories.                                                   |
-| [`ideas.yaml`](ideas.yaml)                                         | Brainstorm features or improvements before opening a formal Feature Request.                                                                     |
-| [`internationalization-i18n.yaml`](internationalization-i18n.yaml) | Translation and localization topics, language-specific feedback, and locale issues.                                                              |
-| [`polls.yaml`](polls.yaml)                                         | Run time-boxed surveys to gather community sentiment and make lightweight decisions (priorities, roadmap themes, release timing, naming).        |
-| [`q-a.yaml`](q-a.yaml)                                             | Ask &#x201C;how do I&#x2026;?&#x201D; questions and get help from maintainers and the community.                                                 |
-| [`README.md`](README.md)                                           | This file.                                                                                                                                       |
-| [`roadmap.yaml`](roadmap.yaml)                                     | High-level plans and milestones. Link to Issues and Pull Requests for tracking.                                                                  |
-| [`showcase.yaml`](showcase.yaml)                                   | Share demos, prototypes, case studies, success stories, and lessons learned.                                                                     |
-| [`tooling-setup.yaml`](tooling-setup.yaml)                         | Developer environment topics - IDEs, Node.js versions, package managers, linters, CI runners, containers/devcontainers, and local configuration. |
+| Entry                                                              | Purpose                                                                                                                                                       |
+| :----------------------------------------------------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| [`accessibility.yaml`](accessibility.yaml)                         | Accessibility feedback - contrast, keyboard navigation, focus order, screen readers.                                                                          |
+| [`announcements.yaml`](announcements.yaml)                         | Official updates such as releases, deprecations, and roadmap notes.                                                                                           |
+| [`community.yaml`](community.yaml)                                 | General discussion, introductions, meetups, and topics that don&#x2019;t fit other categories.                                                                |
+| [`ideas.yaml`](ideas.yaml)                                         | Brainstorm features or improvements before opening a formal Feature Request.                                                                                  |
+| [`internationalization-i18n.yaml`](internationalization-i18n.yaml) | Translation and localization topics, language-specific feedback, and locale issues.                                                                           |
+| [`q-a.yaml`](q-a.yaml)                                             | Ask &#x201C;how do I&#x2026;?&#x201D; questions and get help from maintainers and the community.                                                              |
+| [`README.md`](README.md)                                           | This file.                                                                                                                                                    |
+| [`roadmap.yaml`](roadmap.yaml)                                     | High-level plans and milestones. Link to Issues and Pull Requests for tracking.                                                                               |
+| [`showcase.yaml`](showcase.yaml)                                   | Share demos, prototypes, case studies, success stories, and lessons learned.                                                                                  |
+| [`tooling-setup.yaml`](tooling-setup.yaml)                         | Developer environment topics - IDEs, language and runtime versions, package managers, linters, CI runners, containers/devcontainers, and local configuration. |
 
 <!-- AUTO-INDEX:END -->
 
@@ -72,6 +78,6 @@ opens with.
 
 <br />
 
-Built with ❤️ by the Engineering Team. Distributed under the MIT License.
+Built with ❤️ by the Engineering Team. Distributed under the terms in [LICENSE](/LICENSE).
 
 </div>

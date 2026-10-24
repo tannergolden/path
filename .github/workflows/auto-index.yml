@@ -10,9 +10,9 @@
 # as one evolving pull request on `docs/auto-index`, never as a push to your
 # branch. A push that left every index current changes nothing.
 #
-# ⚠️ THIS RUNS IN THE TEMPLATE ITSELF, like 🧹 Prune Run History and
-# 🔬 Verify Stub Ceilings. A template's own folder logs need keeping as much
-# as any generated repository's, so there is no is_template guard here.
+# ⚠️ THIS RUNS IN THE TEMPLATE ITSELF, like the checks, 🧹 Prune Run History
+# and 🔬 Verify Stub Ceilings. A template's own folder logs need keeping as
+# much as any generated repository's, so there is no is_template guard here.
 #
 # ⚠️ THE DEFAULT TOKEN CANNOT PUSH THE README IN .github/workflows/. Without
 # a BOT_ACCESS_TOKEN that one log is left as it was and the pull request says

@@ -54,6 +54,6 @@ and where it is linked from in its row: regeneration keeps it.
 
 <br />
 
-Built with ❤️ by the Engineering Team. Distributed under the terms in [LICENSE](../../LICENSE).
+Built with ❤️ by the Engineering Team. Distributed under the terms in [LICENSE](/LICENSE).
 
 </div>

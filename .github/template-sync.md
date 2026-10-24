@@ -208,7 +208,10 @@ never followed on its own: change `ref:` in `.github/workflows/template-sync.yml
 The same stub runs differently in the template: there it **checks** that `.github/template-sync`
 names every file the template ships, and fails a pull request that adds a file without a line for
 it. Template releases are cut with **🏷️ Cut Release**, which only runs in the template; a merge to
-the template reaches a generated repository only once a release moves `v1`.
+the template reaches a generated repository only once a release moves `v1`. What each release
+changed is in the template's own `CHANGELOG.md`, which initialisation deleted from this repository:
+read it [on the template](https://github.com/tannergolden/path/blob/Development/CHANGELOG.md) before
+you run a sync.
 
 What only the template needs is named under **Only ever in the template** in the list.
 Initialisation deleted each of those files from this repository and redrew its folder logs, so no

@@ -168,5 +168,6 @@
 # Initialisation deletes each of these from every repository generated from
 # the template.
 #/.github/TEMPLATE_INIT
+#/CHANGELOG.md
 
 # --- Your rules ---------------------------------------------------------------

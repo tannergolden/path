@@ -218,7 +218,9 @@ file parses, every workflow `uses:` is pinned to a tag or a commit rather than a
 branch, no CRLF or stray whitespace, and every document's footer links its
 licence from the repository root rather than naming it. A typo in any of those
 breaks something quietly, so this is a real gate, not a placeholder that
-returns zero.
+returns zero. It also fails compiled code committed anywhere, which no reviewer
+can read, and, once the repository is public, the vulnerability issue form,
+which would publish a report the moment it was filed.
 
 **It is still only half the story.** Nothing is testing or building your project,
 because your project does not exist yet. Open `.github/workflows/checks.yml` and
@@ -430,6 +432,14 @@ publishes nothing.
     project. Nothing rewrites it for you, because only you know what this
     repository is for. The sections worth keeping are the workflow table and
     the token note; the rest is scaffolding that has done its job.
+
+> [!NOTE]
+> **Going public later is a checklist of its own.** The whole history, every
+> Actions log and the vulnerability issue form become public with the code,
+> and some settings exist only on a public repository. The standards'
+> [going-public checklist](https://github.com/tannergolden/standards/blob/Development/docs/introduction/What-You-Do-By-Hand.md#going-public)
+> lists each step, and the repository validator fails a public repository
+> that still carries the form, which is usually the first sign it is due.
 
 > [!IMPORTANT]
 > **🎯 Apply Standards needs a token for two of its three jobs.** Applying the

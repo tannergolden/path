@@ -76,6 +76,11 @@ initialisation deletes.
   names its licence, or links it any way but `[LICENSE](/LICENSE)` from the
   repository root, fails the `ci` check, here and in every generated
   repository, so no page goes stale when the licence changes.
+- **A compiled-code check** in the repository validator: an executable, a
+  library, a compiled class, Python bytecode or a Java archive committed
+  anywhere fails the `ci` check, recognised by its contents rather than its
+  name. A binary the project must keep is marked `reviewed-binary` in
+  `.gitattributes`, and the Gradle and Maven wrapper jars pass.
 - **`merge_group` triggers** on every required check, so a merge queue gets a
   result from each.
 - **Dependabot** for the development container and the scripts'
@@ -155,7 +160,8 @@ initialisation deletes.
 ### Security
 
 - Initialisation removes the Vulnerability Report issue form from a public
-  repository, where an issue would publish the report.
+  repository, where an issue would publish the report, and the repository
+  validator fails a repository made public later that still carries it.
 
 ## [1.3.0] - 2026-10-19
 

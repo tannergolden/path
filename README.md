@@ -430,8 +430,13 @@ publishes nothing.
     and the repository validator fails a footer that names one.
 11. **Replace this README.** Everything above describes the template, not your
     project. Nothing rewrites it for you, because only you know what this
-    repository is for. The sections worth keeping are the workflow table and
-    the token note; the rest is scaffolding that has done its job.
+    repository is for, but
+    [`docs/templates/Project-README.md`](docs/templates/Project-README.md)
+    gives you the sections a project's front page needs: copy it over this
+    file and fill it in. What the workflow table and the token note above
+    say outlives this file in
+    [`.github/workflows/README.md`](.github/workflows/README.md), which logs
+    every workflow and every secret they read.
 
 > [!NOTE]
 > **Going public later is a checklist of its own.** The whole history, every

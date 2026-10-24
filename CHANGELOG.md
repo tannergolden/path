@@ -64,9 +64,10 @@ initialisation deletes.
   reports, and **`.github/ACCESSIBILITY.md`**.
 - **A Maintainers table** in `GOVERNANCE.md`, which the code of conduct and the
   security policy now send people to.
-- **Seeds** for a runbook, incident response, a threat model, getting started,
-  a roadmap, a glossary, the release process, release verification and an
-  architecture overview, under `docs/templates/`.
+- **Seeds** for a runbook, incident response, a threat model, a dependency
+  policy, getting started, a roadmap, a glossary, the release process,
+  release verification, an architecture overview and the project's own
+  README, under `docs/templates/`.
 - **`.github/scripts/requirements.txt`**, pinning the scripts' one dependency,
   PyYAML, by version and hash. Every install of it requires the hashes.
 - **A placeholder check** in the repository validator: once initialised, a

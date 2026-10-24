@@ -36,10 +36,15 @@ write there stays exactly as you wrote it.
 To use a prompt, copy it whole, replace each placeholder in double braces, and
 paste it into an AI agent that can open this repository's files and run its
 commands, such as Claude Code, Codex, Copilot or Cursor. Set the agent to ask
-before it edits files, pushes or opens a pull request. Prompts that work in any
-repository are the
-[universal prompts](https://github.com/tannergolden/intelligence/blob/Development/docs/Prompts.md)
-in `tannergolden/intelligence`.
+before it edits files, pushes or opens a pull request.
+
+> [!TIP]
+> **Looking for a prompt that works in any repository?** Fixing a bug,
+> reviewing a change, filling the test gaps, writing the release notes and the
+> rest are the [universal prompts](https://github.com/tannergolden/intelligence/blob/Development/docs/Prompts.md) in
+> `tannergolden/intelligence`, kept in one place so a fix to one reaches every
+> repository. This page holds only the prompts particular to repositories built
+> from this template, and to this one.
 
 ---
 
@@ -139,7 +144,8 @@ Ask me which of this repository's community health files to remove, and wait for
 > each a `###` heading, a **Use when** line, a **Fill in** line if it has
 > placeholders, and the prompt in one `text` block. If you have many, group them
 > under `##` sections of your own after this one. Nothing upstream ever writes
-> here.
+> here. Prompts that work in any repository, and how to write a good one, are in
+> the [universal prompts](https://github.com/tannergolden/intelligence/blob/Development/docs/Prompts.md).
 
 ---
 

@@ -352,7 +352,8 @@ OWNER_HALF = '''<!-- The Golden Path prompts end here. Everything below this com
 > each a `###` heading, a **Use when** line, a **Fill in** line if it has
 > placeholders, and the prompt in one `text` block. If you have many, group them
 > under `##` sections of your own after this one. Nothing upstream ever writes
-> here.
+> here. Prompts that work in any repository, and how to write a good one, are in
+> the [universal prompts](https://github.com/tannergolden/intelligence/blob/Development/docs/Prompts.md).
 
 ---
 

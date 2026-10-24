@@ -26,7 +26,8 @@ typo in any of them breaks something quietly. The scripts here check those files
 from the first commit, and the tests beside them check the scripts.
 
 They live under `.github/` so the root of the repository stays yours. Each needs
-only Python 3, plus PyYAML for the ones that read YAML.
+only Python 3, plus the one package pinned in
+[`requirements.txt`](requirements.txt), PyYAML, for the ones that read YAML.
 
 ---
 
@@ -66,6 +67,7 @@ runs them:
 From the root of the repository:
 
 ```bash
+python3 -m pip install --requirement .github/scripts/requirements.txt
 python3 .github/scripts/validate-repository.py
 python3 -m unittest discover -s .github/scripts -p 'test_*.py'
 ```

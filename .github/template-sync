@@ -55,6 +55,7 @@
 /.github/pull_request_template.md
 /.github/release.yml
 /.github/scripts/README.md
+/.github/scripts/requirements.txt
 /.github/scripts/test_gitignore.py
 /.github/scripts/test_validate_repository.py
 /.github/scripts/test_verify_stub_ceilings.py

@@ -156,6 +156,7 @@
 #/.github/workflows/cut-release.yml
 #/assets/**
 #/benchmarks/**
+#/docs/adrs/ADR-0001-Record-Architecture-Decisions.md
 #/docs/introduction/Integrating-Your-Project.md
 #/docs/introduction/Using-Your-Account-Defaults.md
 #/packages/**

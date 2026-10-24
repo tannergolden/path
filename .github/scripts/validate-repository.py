@@ -21,6 +21,12 @@ called workflow already; workflow semantics and security are the `lint` job.
 This
 covers the gap between them: the configuration files nothing else parses.
 
+It also catches a placeholder the template left for initialisation to
+replace, once initialisation has run and it is still there: a contact link
+naming `OWNER/REPOSITORY`, or a CODEOWNERS rule naming `@your-org/your-team`.
+Each is a broken link or an owner that does not exist, and neither says so
+on its own.
+
 Exits non-zero on the first category with findings, listing all of them.
 Annotations are emitted in GitHub's format when running under Actions, so
 findings land on the file and line in the diff.
@@ -279,6 +285,28 @@ def check_whitespace(path: pathlib.Path, text: str, eol: str) -> None:
             report(path, number, 'trailing whitespace')
 
 
+# Placeholders the template ships for initialisation, or the owner, to
+# replace. While `.github/TEMPLATE_INIT` exists the repository is the template
+# itself, or one not yet initialised, and they are expected; once it is gone,
+# one left behind is a defect.
+TEMPLATE_INIT = '.github/TEMPLATE_INIT'
+
+
+def check_placeholders(path: pathlib.Path, text: str) -> None:
+    rel = path.relative_to(ROOT).as_posix()
+    for number, line in enumerate(text.splitlines(), start=1):
+        if line.lstrip().startswith('#'):
+            continue
+        if rel == '.github/ISSUE_TEMPLATE/config.yml' and 'OWNER/REPOSITORY' in line:
+            report(path, number,
+                   'the contact link still names OWNER/REPOSITORY, so it 404s: '
+                   'put this repository there, as initialisation would have')
+        if rel == '.github/CODEOWNERS' and '@your-org/your-team' in line:
+            report(path, number,
+                   'this rule names @your-org/your-team, which owns nothing: '
+                   'name a real @user or @org/team with write access, or comment the rule out')
+
+
 def main() -> int:
     try:
         import yaml  # noqa: F401
@@ -315,6 +343,8 @@ def main() -> int:
         if text is None:
             continue
         check_whitespace(path, text, mine.get('eol', 'unspecified'))
+        if not (ROOT / TEMPLATE_INIT).exists():
+            check_placeholders(path, text)
         suffix = path.suffix.lower()
         if suffix == '.json':
             check_json(path, text)

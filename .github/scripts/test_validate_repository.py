@@ -255,6 +255,50 @@ class TestCleanRepository(ValidatorTestCase):
         self.assertClean(self.repo.run())
 
 
+class TestPlaceholders(ValidatorTestCase):
+    """A placeholder is expected in the template and a defect after initialisation."""
+
+    CONFIG = '.github/ISSUE_TEMPLATE/config.yml'
+    LINK = (
+        'blank_issues_enabled: false\n'
+        'contact_links:\n'
+        "  - name: Discussions\n"
+        "    url: 'https://github.com/OWNER/REPOSITORY/discussions'\n"
+        "    about: 'Questions.'\n"
+    )
+
+    def test_the_template_keeps_its_placeholders(self) -> None:
+        self.repo.write('.github/TEMPLATE_INIT', 'Not initialised yet.\n')
+        self.repo.write(self.CONFIG, self.LINK)
+        self.repo.write('.github/CODEOWNERS', '* @your-org/your-team\n')
+        self.assertClean(self.repo.run())
+
+    def test_a_contact_link_left_on_the_placeholder_is_reported(self) -> None:
+        self.repo.write(self.CONFIG, self.LINK)
+        self.assertFinding(self.repo.run(), 'still names OWNER/REPOSITORY')
+
+    def test_a_replaced_contact_link_passes(self) -> None:
+        self.repo.write(self.CONFIG, self.LINK.replace('OWNER/REPOSITORY', 'octo/widget'))
+        self.assertClean(self.repo.run())
+
+    def test_a_comment_naming_the_placeholder_is_not_a_link(self) -> None:
+        self.repo.write(self.CONFIG, '# Replace OWNER/REPOSITORY below.\nblank_issues_enabled: false\n')
+        self.assertClean(self.repo.run())
+
+    def test_a_codeowners_rule_naming_the_placeholder_team_is_reported(self) -> None:
+        self.repo.write('.github/CODEOWNERS', '/docs/   @your-org/your-team\n')
+        self.assertFinding(self.repo.run(), 'owns nothing')
+
+    def test_a_commented_codeowners_rule_is_left_alone(self) -> None:
+        self.repo.write('.github/CODEOWNERS', '# /docs/   @your-org/your-team\n* @octo\n')
+        self.assertClean(self.repo.run())
+
+    def test_the_placeholder_elsewhere_is_not_this_checks_business(self) -> None:
+        # A seed or a workflow comment may name it on purpose.
+        self.repo.write('docs/guide.md', 'Run `gh attestation verify --repo OWNER/REPOSITORY`.\n')
+        self.assertClean(self.repo.run())
+
+
 class TestBinaryFiles(ValidatorTestCase):
     """What counts as binary is .gitattributes' answer, not a suffix list."""
 

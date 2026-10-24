@@ -10,9 +10,9 @@ body:
     attributes:
       value: |
         ## 🧰 Tooling & Setup
-        Developer environment topics - IDEs, Node.js versions, package managers, linters,
-        CI runners, containers/devcontainers, and local configuration. Share your
-        goal, current setup, what you tried, and any logs or errors.
+        Developer environment topics - IDEs, language and runtime versions, package
+        managers, linters, CI runners, containers/devcontainers, and local configuration.
+        Share your goal, current setup, what you tried, and any logs or errors.
 
   - type: dropdown
     id: topic_type
@@ -20,7 +20,7 @@ body:
       label: '🧭 Topic type'
       options:
         - IDE configuration
-        - Node.js versioning / managers
+        - Language / runtime versions and managers
         - Package managers / workspaces
         - Monorepo tooling
         - Bundlers / build tools
@@ -50,7 +50,7 @@ body:
         - label: JetBrains (WebStorm/IntelliJ)
         - label: Vim / Neovim
         - label: Package manager (npm, pip, cargo, go mod, maven, bundler)
-        - label: nvm / fnm / volta
+        - label: Version managers (nvm, pyenv, rustup, asdf, mise)
         - label: Turborepo / Nx / Rush
         - label: Vite / Webpack / Rollup / esbuild / Parcel
         - label: Compiler or transpiler toolchain
@@ -64,10 +64,10 @@ body:
         - label: Other
 
   - type: input
-    id: node_version
+    id: runtime_versions
     attributes:
-      label: '🧩 Node.js version'
-      placeholder: 'e.g., 20.11.1 (LTS), 22.x (current)'
+      label: '🧩 Language / runtime versions'
+      placeholder: 'e.g. Node 22.11, Python 3.12, Go 1.23, Rust 1.82, JDK 21'
 
   - type: input
     id: package_manager_versions

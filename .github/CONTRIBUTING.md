@@ -32,7 +32,12 @@ We value **small, frequent, and high-quality** contributions that adhere to our 
 ### 1. Prepare Your Environment
 
 - Fork the repository (for external contributors).
-- Set up your local toolchain so it matches CI. The exact command is this project's own - whatever `.github/workflows/checks.yml` is configured to run is the authority, so start there if you are unsure.
+- Set up your local toolchain so it matches CI. The exact command is this project's own - whatever `.github/workflows/checks.yml` is configured to run is the authority, so start there if you are unsure. The [development container](../.devcontainer/README.md) does the repository's part of this for you.
+- Switch on the git hooks, once per clone. They check each commit message and sign-off, and scan what you stage for secrets, before git records anything - the same checks a pull request runs, while fixing a mistake still costs nothing:
+
+  ```bash
+  git config core.hooksPath .github/scripts/hooks
+  ```
 
 - Review the **[Testing Strategy](https://github.com/tannergolden/standards/blob/Development/docs/distribution/Testing-Strategy.md)** to understand our testing layers.
 
@@ -42,10 +47,10 @@ We value **small, frequent, and high-quality** contributions that adhere to our 
 ### 2. Branching Strategy
 
 - **Target Branch:** Always target **`Development`** for new features. `Release` is the production line and is promoted to, never committed to directly.
-- **Naming Convention:** Use descriptive prefixes:
-  - `feat/description`
-  - `bugfix/issue-description`
-  - `docs/update-description`
+- **Naming Convention:** `<type>/<topic>`, where the prefix says what the work is:
+  - `feat/<topic>` for new work
+  - `bugfix/<ticket>` for a fix
+  - `docs/<topic>`, `chore/<task>` and the other Conventional Commit types for the rest
 - Detailed workflows are available in **[Branching Strategy & Workflow](https://github.com/tannergolden/standards/blob/Development/docs/distribution/Branching-Strategy-&-Workflow.md)**.
 
 ---
@@ -84,9 +89,9 @@ This is a **mandated policy**, not a preference:
 
 ### Testing Standards
 
-- **Location**: co-locate unit tests (`foo.test.*`) next to source; keep E2E/integration suites under `tests/`.
+- **Location**: unit tests go in `tests/unit/`, unless your language's convention keeps them beside the source (`foo_test.go`, `foo.test.ts`); integration and end-to-end suites go in `tests/integration/` and `tests/e2e/`. Record which in `docs/technical/testing/Unit-Test-Standards.md`, instantiated from its seed.
 - **Mocking**: always mock network/API calls; isolate pure logic from heavy dependencies.
-- **Structure**: `describe("Unit", …)` / `it("should <behaviour> when <condition>", …)` with descriptive assertions.
+- **Naming**: name each test for the behaviour it pins down - `<unit> should <behaviour> when <condition>` - in whatever structure your test framework uses, with assertions that say what failed.
 - **Gate**: the test suite must pass before merge; add meaningful tests for every logic change, not assertions that cannot fail.
 
 ### Workflow (CI) Authoring
@@ -109,14 +114,25 @@ This is a **mandated policy**, not a preference:
   git commit -s -m "feat(scope): 🎯 summary"
   ```
 
-  This appends `Signed-off-by: Your Name <you@example.com>` using your git identity. Contributions licensed inbound under the repository's [MIT License](../LICENSE).
+  This appends `Signed-off-by: Your Name <you@example.com>` using your git identity. Contributions are licensed inbound under the repository's [licence](../LICENSE).
 
 ### 2. CI/CD Gating
 
 - Every PR triggers a CI workflow containing: Linting, Unit Tests, Build Verification, and Security Analysis.
 - **Zero-Failure Policy**: All checks must be green before the review phase begins.
 
-### 3. Review Etiquette
+### 3. AI-Assisted Contributions
+
+AI tools are welcome here, and the rules for what they produce are the rules for anything else:
+
+- **You are the author.** You sign off the commit, and the sign-off certifies the DCO for everything in it, whoever or whatever drafted it. An AI is never the commit author and never signs off; credit it with a `Co-Authored-By:` trailer instead. The commit checks enforce both.
+- **Say so in the pull request.** Note which parts an AI drafted, so reviewers know where to look hardest.
+- **Review and test it as your own.** Generated code meets the same test policy, and you must be able to explain every line of it.
+- **Never paste secrets, credentials, or anything private into a tool** that sends it elsewhere.
+
+If this project gives AI agents instructions of their own, an agent working here follows them too.
+
+### 4. Review Etiquette
 
 - Expect a maintainer review before merge (repos with a single maintainer may run on the shipped 0-approval ruleset - CI still gates every merge).
 - Be responsive to feedback.
@@ -143,6 +159,8 @@ logic it calls lives in `tannergolden/standards`.
 | **Stale Issue Cleanup**    | 🤖 Automated | `governance.yml` (weekly)                                    |
 | **Slash Commands**         | 🤖 Automated | `governance.yml`                                             |
 | **Runner Egress Audit**    | 🤖 Automated | Harden-Runner (first step of every job)                      |
+| **Supply-Chain Score**     | 🤖 Automated | `scorecard.yml` (weekly, public repositories)                |
+| **Pre-Commit Checks**      | 🤖 Automated | `.github/scripts/hooks/` (commit message, sign-off, secrets) |
 | **Code Formatting**        | 🤖 Automated | `auto-format.yml` (opens a PR, never pushes to your branch)  |
 | **Dependency Updates**     | 🤖 Automated | Dependabot + `dependabot-automerge.yml` (patch & minor only) |
 | **CI Failure Escalation**  | 🤖 Automated | `ci-failure-alert.yml`                                       |

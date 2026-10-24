@@ -5,11 +5,22 @@
 # GitHub reads this file ONLY from the repository that owns it, so unlike the
 # workflows it cannot be shared and has to live here.
 #
-# ⚠️ ONLY `github-actions` IS ENABLED, because it is the only ecosystem this
-# template can be sure exists. A `package-ecosystem` pointing at a manifest
-# that is not there produces a standing error on the Dependabot tab rather
-# than being quietly ignored, so the language ecosystems are commented out
-# below for you to enable as you add them.
+# ⚠️ ONLY THE THREE ECOSYSTEMS THIS TEMPLATE SHIPS ARE ENABLED, because they
+# are the only manifests it can be sure exist: the workflows
+# (`github-actions`), the development container (`devcontainers`), and the
+# one Python package the repository scripts need (`pip`, in
+# .github/scripts/requirements.txt). A `package-ecosystem` pointing at a
+# manifest that is not there produces a standing error on the Dependabot tab
+# rather than being quietly ignored, so the language ecosystems are commented
+# out below for you to enable as you add them - and if you delete one of the
+# three, delete its block too.
+#
+# EVERY ECOSYSTEM WAITS THREE DAYS before proposing a new version. That is
+# GitHub's default; `cooldown` states it here so the number is visible and
+# yours to change. A release that turns out to be
+# malicious is usually pulled within hours, and `dependabot-automerge.yml`
+# would otherwise merge a patch the day it appears. Security updates ignore
+# the cooldown and arrive at once.
 #
 # Pair this with the `dependabot-automerge` stub from tannergolden/standards
 # and patch and minor updates approve and merge themselves once your required
@@ -45,6 +56,9 @@ updates:
       interval: 'monthly'
       time: '07:00'
       timezone: 'Etc/UTC'
+    # Actions accept only `default-days`; the per-semver keys are refused.
+    cooldown:
+      default-days: 3
     open-pull-requests-limit: 5
     commit-message:
       prefix: 'build'
@@ -56,13 +70,67 @@ updates:
       github-actions:
         patterns:
           - '*'
+      # A group applies to version updates unless it says otherwise, so
+      # security fixes would each open a pull request of their own.
+      github-actions-security:
+        applies-to: 'security-updates'
+        patterns:
+          - '*'
+
+  # Keeps the features in .devcontainer/devcontainer.json current.
+  - package-ecosystem: 'devcontainers'
+    directory: '/'
+    schedule:
+      interval: 'monthly'
+      time: '07:00'
+      timezone: 'Etc/UTC'
+    cooldown:
+      default-days: 3
+    open-pull-requests-limit: 5
+    commit-message:
+      prefix: 'build'
+      include: 'scope'
+    labels:
+      - 'type: build'
+      - 'dependencies'
+    groups:
+      devcontainers:
+        patterns:
+          - '*'
+
+  # Keeps the repository scripts' one dependency, PyYAML, current. Delete this
+  # block if you delete .github/scripts/requirements.txt.
+  - package-ecosystem: 'pip'
+    directory: '/.github/scripts'
+    schedule:
+      interval: 'monthly'
+      time: '07:00'
+      timezone: 'Etc/UTC'
+    cooldown:
+      default-days: 3
+    open-pull-requests-limit: 5
+    commit-message:
+      prefix: 'build'
+      include: 'scope'
+    labels:
+      - 'type: build'
+      - 'dependencies'
+    groups:
+      repository-scripts:
+        patterns:
+          - '*'
+      repository-scripts-security:
+        applies-to: 'security-updates'
+        patterns:
+          - '*'
 
   # --- Enable the ones your project actually uses -------------------------
   #
-  # Copy the block above - INCLUDING the commit-message block, or that
+  # Copy the first block above - INCLUDING the commit-message block, or that
   # ecosystem's updates will not be Conventional Commits - change
   # `package-ecosystem`, and point `directory` at the folder holding the
-  # manifest:
+  # manifest. Language ecosystems also accept `semver-major-days`,
+  # `semver-minor-days` and `semver-patch-days` under `cooldown`:
   #
   #   npm       package.json          pip        pyproject.toml
   #   cargo     Cargo.toml            gomod      go.mod

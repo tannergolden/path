@@ -108,6 +108,6 @@ Mapping the project-specific tools to the universal repository interface (Makefi
 
 <br />
 
-Built with ❤️ by the Engineering Team. Distributed under the terms in this repository's LICENSE.
+Built with ❤️ by the Engineering Team. Distributed under the terms in [LICENSE](/LICENSE).
 
 </div>

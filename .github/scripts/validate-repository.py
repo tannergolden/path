@@ -332,7 +332,7 @@ PROMPTS_PAGE = 'docs/Prompts.md'
 GOLDEN_PATH_OPENS = '<!-- The Golden Path prompts start here.'
 GOLDEN_PATH_CLOSES = '<!-- The Golden Path prompts end here.'
 OWNER_HEADING = "## ✍️ This Repository's Prompts"
-OWNER_HALF_SHA256 = '9dc0f0d4cd85470871efd45138731449235ba8c7b2022f031ac77709a00d57f7'
+OWNER_HALF_SHA256 = 'e466797c0f1a1778f6c4be5c9d5237b002cf447e8db8b3bb0b859ea89991239f'
 
 
 def check_prompts_page() -> None:

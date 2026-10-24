@@ -113,6 +113,6 @@ The SBOM is not attested: it lists what the release was built from, and proves n
 
 <br />
 
-Built with ❤️ by the Engineering Team. Distributed under the terms in this repository's LICENSE.
+Built with ❤️ by the Engineering Team. Distributed under the terms in [LICENSE](/LICENSE).
 
 </div>

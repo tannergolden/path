@@ -94,6 +94,6 @@ The "No-Go" criteria for environmental promotion.
 
 <br />
 
-Built with ❤️ by the Engineering Team. Distributed under the terms in this repository's LICENSE.
+Built with ❤️ by the Engineering Team. Distributed under the terms in [LICENSE](/LICENSE).
 
 </div>

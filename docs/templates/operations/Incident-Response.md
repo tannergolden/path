@@ -143,6 +143,6 @@ A suspected vulnerability, breach or leaked credential is handled in private unt
 
 <br />
 
-Built with ❤️ by the Engineering Team. Distributed under the terms in this repository's LICENSE.
+Built with ❤️ by the Engineering Team. Distributed under the terms in [LICENSE](/LICENSE).
 
 </div>

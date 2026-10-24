@@ -421,8 +421,8 @@ publishes nothing.
    While you are there, put a `#` in front of anything in
    `.github/template-sync` you want to own outright.
 10. **Choose your licence.** `LICENSE` arrives as MIT, in your name. If your
-    project needs another licence, replace the file: every document points at
-    `LICENSE` rather than naming one, so nothing else needs editing.
+    project needs another licence, replace the file: every document's footer
+    links to `LICENSE` rather than naming one, so nothing else needs editing.
 11. **Replace this README.** Everything above describes the template, not your
     project. Nothing rewrites it for you, because only you know what this
     repository is for. The sections worth keeping are the workflow table and
@@ -787,6 +787,6 @@ story - go where a numbered or dated record belongs instead. The
 
 <br />
 
-Built with ❤️ by [@tannergolden](https://github.com/tannergolden). Distributed under the terms in [LICENSE](LICENSE).
+Built with ❤️ by [@tannergolden](https://github.com/tannergolden). Distributed under the terms in [LICENSE](/LICENSE).
 
 </div>

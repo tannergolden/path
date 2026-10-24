@@ -251,6 +251,6 @@ A risk stays on this list until a mitigation closes it. A risk nobody accepted i
 
 <br />
 
-Built with ❤️ by the Engineering Team. Distributed under the terms in this repository's LICENSE.
+Built with ❤️ by the Engineering Team. Distributed under the terms in [LICENSE](/LICENSE).
 
 </div>

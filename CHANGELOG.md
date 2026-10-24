@@ -108,8 +108,9 @@ initialisation deletes.
 - **The governance rules** say who holds administrative access on a personal
   account, that the shipped rulesets exempt admins, and how to keep a
   workflow or a bot token from supplying a required review.
-- **Footers name no licence.** A repository that chooses a different licence
-  no longer has to edit every document.
+- **Footers name no licence.** Each links to `LICENSE` from the repository
+  root, so a repository that chooses a different licence edits nothing else,
+  and a document copied to another folder, as every seed is, still reaches it.
 - The development container installs Python and the scripts' requirements.
 - 🔬 Verify Stub Ceilings installs the pinned requirements before it runs,
   and runs when the checker or its requirements change.
@@ -171,6 +172,6 @@ where `v1.3.0` was cut, is the record.
 
 <br />
 
-Built with ❤️ by the Engineering Team. Distributed under the terms in [LICENSE](LICENSE).
+Built with ❤️ by the Engineering Team. Distributed under the terms in [LICENSE](/LICENSE).
 
 </div>

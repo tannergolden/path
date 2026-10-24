@@ -154,6 +154,6 @@ Add a row each time the runbook is used, tested or changed. When a step did not 
 
 <br />
 
-Built with ❤️ by the Engineering Team. Distributed under the terms in this repository's LICENSE.
+Built with ❤️ by the Engineering Team. Distributed under the terms in [LICENSE](/LICENSE).
 
 </div>

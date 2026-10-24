@@ -66,7 +66,7 @@ act:
 | :------------------------- | :----------------------------------------------------------------------------------------------- |
 | **Acknowledgement**        | Within **7 days** of your report                                                                 |
 | **Assessment**             | Within **14 days**: whether we can reproduce it, how severe it is, and what happens next         |
-| **Fix**                    | Within **30 days** for critical and high severity, **90 days** for the rest                      |
+| **Fix**                    | Within **30 days** for critical and high severity, **60 days** for medium, **90 days** for low   |
 | **Disclosure**             | When the fix is released, or after **90 days**, whichever is first, unless we agree another date |
 | **Updates while you wait** | At least every **14 days** until the report is closed                                            |
 
@@ -138,9 +138,10 @@ problem before disclosing it.
 Each of these is configured by the files in this repository or by
 🎯 Apply Standards:
 
-- **Secret scanning**: Gitleaks scans every push and pull request, and is a
-  required check under the shipped rulesets. GitHub's own secret scanning and
-  push protection are switched on with the settings.
+- **Secret scanning**: Gitleaks scans every pull request, every push to the
+  default branch and, weekly, the whole history, and is a required check under
+  the shipped rulesets. GitHub's own secret scanning and push protection are
+  switched on with the settings.
 - **Static analysis**: CodeQL analyses the code and the GitHub Actions
   workflows, weekly and on every pull request (public repositories).
 - **Dependency review**: every pull request is screened for dependencies with

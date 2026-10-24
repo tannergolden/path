@@ -69,8 +69,8 @@ Tensions can occur between community members even when they are trying their bes
 
 When an incident does occur, it is important to report it promptly. To report a possible violation, use whichever of these suits you:
 
-- **Report the content on GitHub.** Open the `···` menu on the comment, issue, pull request or discussion concerned and choose **Report content**. The report reaches the maintainers of this repository as well as GitHub.
-- **Contact a maintainer directly**, through the contact each one lists under **Maintainers** in [GOVERNANCE.md](GOVERNANCE.md).
+- **Contact a maintainer directly**, through the private contact each one lists under **Maintainers** in [GOVERNANCE.md](GOVERNANCE.md).
+- **Report the content on GitHub.** Open the `···` menu on the comment, issue, pull request or discussion concerned and choose **Report content**. Where the repository accepts content reports, which only a public repository owned by an organization can, choose **Report to repository admins** and the report reaches the maintainers privately. Otherwise it goes to GitHub Support.
 - **If a maintainer is involved**, contact another maintainer, or GitHub through its [Report abuse](https://github.com/contact/report-abuse) form.
 
 A security vulnerability is not a conduct report: follow [SECURITY.md](SECURITY.md) instead.
@@ -78,10 +78,13 @@ A security vulnerability is not a conduct report: follow [SECURITY.md](SECURITY.
 The maintainers are this community's moderators. They take reports of violations seriously and will make every effort to respond in a timely manner. They will investigate all reports of code of conduct violations, reviewing messages, logs, and recordings, or interviewing witnesses and other participants. They will keep investigation and enforcement actions as transparent as possible while prioritizing safety and confidentiality. In order to honor these values, enforcement actions are carried out in private with the involved parties, but communicating to the whole community may be part of a mutually agreed upon resolution.
 
 > [!NOTE]
-> **For maintainers:** a report made with **Report content** reaches you only
-> once the repository accepts content reports, under <kbd>Settings</kbd> →
-> <kbd>Moderation options</kbd> → <kbd>Reported content</kbd>. Until then it
-> goes to GitHub alone, so switch it on when you set the repository up.
+> **For maintainers:** list a private contact for every maintainer in
+> GOVERNANCE.md, because it is the one route that reaches you on any
+> repository. **Report content** reaches you only in a public repository an
+> organization owns, once it accepts content reports under
+> <kbd>Settings</kbd> → <kbd>Moderation options</kbd> →
+> <kbd>Reported content</kbd>. On a personal account's repository it goes to
+> GitHub alone.
 
 ---
 

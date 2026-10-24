@@ -49,6 +49,12 @@ Where a part of the project falls short, it is listed as an open issue labelled
 You do not need to know which WCAG criterion is involved, or how to fix it.
 Describing what stopped you is enough.
 
+> [!NOTE]
+> **For maintainers:** GitHub does not create an **Accessibility** discussion
+> category. Create one named **Accessibility**, so the form in
+> `.github/DISCUSSION_TEMPLATE/accessibility.yaml` shapes it, or remove the
+> discussion route above.
+
 ---
 
 ## ⏱️ What to Expect

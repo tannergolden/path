@@ -3,21 +3,25 @@
 # Purpose: steer reporters into the right template, and keep vulnerability
 # reports PRIVATE.
 #
-# ⚠️ THE URL BELOW MUST BE EDITED AFTER GENERATION. GitHub never substitutes
-# placeholders in contact links and there is no expression syntax here, so a
-# contact link either names a real repository or it 404s. It is left visibly
-# wrong on purpose: a placeholder that fails loudly beats a link quietly
-# pointing at somebody else's discussions.
+# ⚠️ THE URL BELOW CARRIES A PLACEHOLDER, AND INITIALISATION REPLACES IT.
+# GitHub never substitutes placeholders in contact links and there is no
+# expression syntax here, so a contact link either names a real repository or
+# it 404s. The placeholder is visibly wrong on purpose: if initialisation is
+# skipped, a link that fails loudly beats one quietly pointing at somebody
+# else's discussions - and once .github/TEMPLATE_INIT is gone, the repository
+# validator fails the `ci` check until it is replaced.
 #
 # There is deliberately NO security contact link. GitHub adds "Report a
 # vulnerability" to this chooser on its own once private vulnerability
-# reporting is enabled (Settings → Security → Private vulnerability
-# reporting), and this repository ships its own SECURITY.md. A hand-written
-# link would duplicate that and go stale.
+# reporting is enabled (Settings → Advanced Security → Private vulnerability
+# reporting), and this repository ships its own SECURITY.md and the private
+# report form, .github/VULNERABILITY_REPORT.yml. A hand-written link would
+# duplicate that and go stale.
 #
-# NOTE: the "Vulnerability Report" issue template beside this file is for
-# PRIVATE repositories only. On a public repository, reporters must use the
-# private intake above rather than opening an issue.
+# NOTE: the "Vulnerability Report" issue form beside this file is for PRIVATE
+# repositories only, and initialisation deletes it from a public one. On a
+# public repository, reporters use the private intake above rather than an
+# issue anyone could read.
 
 blank_issues_enabled: false
 

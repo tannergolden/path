@@ -51,6 +51,7 @@
 /.github/ISSUE_TEMPLATE/config.yml
 /.github/SECURITY.md
 /.github/SUPPORT.md
+/.github/VULNERABILITY_REPORT.yml
 /.github/commit-template.txt
 /.github/dependabot.yml
 /.github/pull_request_template.md

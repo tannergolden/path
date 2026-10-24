@@ -67,6 +67,12 @@ goes through private vulnerability reporting, as [`SECURITY.md`](../SECURITY.md)
 explains. GitHub adds **Report a vulnerability** to the chooser by itself once
 that is enabled, which is why `config.yml` carries no security link of its own.
 
+So that the form cannot invite a public report, **initialisation deletes it
+from a public repository**, and the private report asks the same questions
+through [`VULNERABILITY_REPORT.yml`](../VULNERABILITY_REPORT.yml) instead. A
+private repository keeps it. If you make a private repository public later,
+delete the form yourself.
+
 ---
 
 ## ⚙️ The Discussions Link

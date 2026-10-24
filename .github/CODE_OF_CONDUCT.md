@@ -1,6 +1,6 @@
 <!--
 title: '📜 CODE OF CONDUCT'
-description: 'The code of conduct governing participation in this project.'
+description: 'The code of conduct governing participation in this project, how to report a violation, and how harm is addressed and repaired.'
 type: standard
 -->
 
@@ -10,7 +10,7 @@ type: standard
 
 <a name="top"></a>
 
-**Establishing the universal standard for professional and healthy interaction.**
+**Welcoming, safe and equitable for everyone who takes part.**
 
 _Respect as a protocol, not a preference._
 
@@ -20,75 +20,99 @@ _Respect as a protocol, not a preference._
 
 ## 🎯 Our Pledge
 
-We as members, contributors, and leaders pledge to make participation in our community a harassment-free experience for everyone, regardless of age, body size, visible or invisible disability, ethnicity, sex characteristics, gender identity and expression, level of experience, education, socio-economic status, nationality, personal appearance, race, caste, color, religion, or sexual identity and orientation.
+We pledge to make our community welcoming, safe, and equitable for all.
 
-We pledge to act and interact in ways that contribute to an open, welcoming, diverse, inclusive, and healthy community.
-
----
-
-## 🧱 Our Standards
-
-Maintaining a professional environment requires a commitment to excellence in behavior.
-
-### ✅ Positive Contributions
-
-- **Demonstrating empathy** and kindness toward other people.
-- **Being respectful** of differing opinions, viewpoints, and experiences.
-- **Giving and gracefully receiving** constructive feedback.
-- **Accepting responsibility** and apologizing to those affected by our mistakes.
-- **Focusing on what is best** for the overall community, not just individual interests.
-
-### ❌ Unacceptable Behavior
-
-- The use of sexualized language or imagery, and unwelcome sexual attention.
-- Trolling, insulting or derogatory comments, and personal or political attacks.
-- Public or private harassment.
-- Publishing others' private information (doxing) without explicit permission.
-- Other conduct which could reasonably be considered inappropriate in a professional setting.
+We are committed to fostering an environment that respects and promotes the dignity, rights, and contributions of all individuals, regardless of characteristics including race, ethnicity, caste, color, age, physical characteristics, neurodiversity, disability, sex or gender, gender identity or expression, sexual orientation, language, philosophy or religion, national or social origin, socio-economic position, level of education, or other status. The same privileges of participation are extended to everyone who participates in good faith and in accordance with this Covenant.
 
 ---
 
-## 🛡️ Enforcement Responsibilities
+## ✅ Encouraged Behaviors
 
-Community leaders are responsible for clarifying and enforcing our standards of acceptable behavior and will take appropriate and fair corrective action in response to any behavior that they deem inappropriate, threatening, offensive, or harmful.
+While acknowledging differences in social norms, we all strive to meet our community's expectations for positive behavior. We also understand that our words and actions may be interpreted differently than we intend based on culture, background, or native language.
 
-> [!IMPORTANT]
-> Community leaders have the right to remove, edit, or reject comments, commits, code, wiki edits, issues, and other contributions that are not aligned to this Code of Conduct.
+With these considerations in mind, we agree to behave mindfully toward each other and act in ways that center our shared values, including:
+
+1. Respecting the **purpose of our community**, our activities, and our ways of gathering.
+2. Engaging **kindly and honestly** with others.
+3. Respecting **different viewpoints** and experiences.
+4. **Taking responsibility** for our actions and contributions.
+5. Gracefully giving and accepting **constructive feedback**.
+6. Committing to **repairing harm** when it occurs.
+7. Behaving in other ways that promote and sustain the **well-being of our community**.
+
+---
+
+## ❌ Restricted Behaviors
+
+We agree to restrict the following behaviors in our community. Instances, threats, and promotion of these behaviors are violations of this Code of Conduct.
+
+1. **Harassment.** Violating explicitly expressed boundaries or engaging in unnecessary personal attention after any clear request to stop.
+2. **Character attacks.** Making insulting, demeaning, or pejorative comments directed at a community member or group of people.
+3. **Stereotyping or discrimination.** Characterizing anyone's personality or behavior on the basis of immutable identities or traits.
+4. **Sexualization.** Behaving in a way that would generally be considered inappropriately intimate in the context or purpose of the community.
+5. **Violating confidentiality.** Sharing or acting on someone's personal or private information without their permission.
+6. **Endangerment.** Causing, encouraging, or threatening violence or other harm toward any person or group.
+7. Behaving in other ways that **threaten the well-being** of our community.
+
+### Other Restrictions
+
+1. **Misleading identity.** Impersonating someone else for any reason, or pretending to be someone else to evade enforcement actions.
+2. **Failing to credit sources.** Not properly crediting the sources of content you contribute.
+3. **Promotional materials.** Sharing marketing or other commercial content in a way that is outside the norms of the community.
+4. **Irresponsible communication.** Failing to responsibly present content which includes, links or describes any other restricted behaviors.
+
+---
+
+## 🧯 Reporting an Issue
+
+Tensions can occur between community members even when they are trying their best to collaborate. Not every conflict represents a code of conduct violation, and this Code of Conduct reinforces encouraged behaviors and norms that can help avoid conflicts and minimize harm.
+
+When an incident does occur, it is important to report it promptly. To report a possible violation, use whichever of these suits you:
+
+- **Report the content on GitHub.** Open the `···` menu on the comment, issue, pull request or discussion concerned and choose **Report content**. The report reaches the maintainers of this repository as well as GitHub.
+- **Contact a maintainer directly**, through the contact each one lists under **Maintainers** in [GOVERNANCE.md](GOVERNANCE.md).
+- **If a maintainer is involved**, contact another maintainer, or GitHub through its [Report abuse](https://github.com/contact/report-abuse) form.
+
+A security vulnerability is not a conduct report: follow [SECURITY.md](SECURITY.md) instead.
+
+The maintainers are this community's moderators. They take reports of violations seriously and will make every effort to respond in a timely manner. They will investigate all reports of code of conduct violations, reviewing messages, logs, and recordings, or interviewing witnesses and other participants. They will keep investigation and enforcement actions as transparent as possible while prioritizing safety and confidentiality. In order to honor these values, enforcement actions are carried out in private with the involved parties, but communicating to the whole community may be part of a mutually agreed upon resolution.
+
+> [!NOTE]
+> **For maintainers:** a report made with **Report content** reaches you only
+> once the repository accepts content reports, under <kbd>Settings</kbd> →
+> <kbd>Moderation options</kbd> → <kbd>Reported content</kbd>. Until then it
+> goes to GitHub alone, so switch it on when you set the repository up.
+
+---
+
+## 🩹 Addressing and Repairing Harm
+
+If an investigation by the maintainers finds that this Code of Conduct has been violated, the following enforcement ladder may be used to determine how best to repair harm, based on the incident's impact on the individuals involved and the community as a whole. Depending on the severity of a violation, lower rungs on the ladder may be skipped.
+
+| Rung                                  | Event                                                                                                                                                                                                                                     | Consequence                                                                                                                                                                                                                                                                                                             | Repair                                                                                                                                                                                                           |
+| :------------------------------------ | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **1. Warning**                        | A violation involving a single incident or series of incidents.                                                                                                                                                                           | A private, written warning from the maintainers.                                                                                                                                                                                                                                                                        | Examples of repair include a private written apology, acknowledgement of responsibility, and seeking clarification on expectations.                                                                              |
+| **2. Temporarily Limited Activities** | A repeated incidence of a violation that previously resulted in a warning, or the first incidence of a more serious violation.                                                                                                            | A private, written warning with a time-limited cooldown period designed to underscore the seriousness of the situation and give the community members involved time to process the incident. The cooldown period may be limited to particular communication channels or interactions with particular community members. | Examples of repair may include making an apology, using the cooldown period to reflect on actions and impact, and being thoughtful about re-entering community spaces after the period is over.                  |
+| **3. Temporary Suspension**           | A pattern of repeated violation which the maintainers have tried to address with warnings, or a single serious violation.                                                                                                                 | A private written warning with conditions for return from suspension. In general, temporary suspensions give the person being suspended time to reflect upon their behavior and possible corrective actions.                                                                                                            | Examples of repair include respecting the spirit of the suspension, meeting the specified conditions for return, and being thoughtful about how to reintegrate with the community when the suspension is lifted. |
+| **4. Permanent Ban**                  | A pattern of repeated code of conduct violations that other steps on the ladder have failed to resolve, or a violation so serious that the maintainers determine there is no way to keep the community safe with this person as a member. | Access to all community spaces, tools, and communication channels is removed. In general, permanent bans should be rarely used, should have strong reasoning behind them, and should only be resorted to if working through other remedies has failed to change the behavior.                                           | There is no possible repair in cases of this severity.                                                                                                                                                           |
+
+This enforcement ladder is intended as a guideline. It does not limit the ability of the maintainers to use their discretion and judgment, in keeping with the best interests of our community.
 
 ---
 
 ## 🧭 Scope
 
-This Code of Conduct applies within all community spaces and also applies when an individual is officially representing the community in public spaces. This includes:
-
-- Using an official e-mail address.
-- Posting via an official social media account.
-- Acting as an appointed representative at an online or offline event.
-
----
-
-## 🧯 Reporting & Enforcement
-
-Instances of abusive, harassing, or otherwise unacceptable behavior may be reported privately to the community leaders: contact the repository maintainers named in [GOVERNANCE.md](GOVERNANCE.md) (via the contact details on their GitHub profiles), or use GitHub's **[Report abuse](https://github.com/contact/report-abuse)** form. Security-sensitive reports should follow the process in [SECURITY.md](SECURITY.md).
-
-All complaints will be reviewed and investigated promptly and fairly. All community leaders are obligated to respect the privacy and security of the reporter of any incident.
-
-### 📏 Enforcement Guidelines
-
-Community leaders will follow these Community Impact Guidelines in determining the consequences for any action they deem in violation of this Code of Conduct:
-
-| Tier                 | Community Impact                                                                              | Consequence                                                                                                                                                |
-| :------------------- | :-------------------------------------------------------------------------------------------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **1. Correction**    | Use of inappropriate language or other behavior deemed unprofessional or unwelcome.           | A private, written warning, with clarity around the nature of the violation. A public apology may be requested.                                            |
-| **2. Warning**       | A violation through a single incident or series of actions.                                   | A warning with consequences for continued behavior: no interaction with the people involved for a specified period. Violating these terms leads to Tier 3. |
-| **3. Temporary Ban** | A serious violation of community standards, including sustained inappropriate behavior.       | A temporary ban from any sort of interaction or public communication with the community for a specified period. Violating these terms leads to Tier 4.     |
-| **4. Permanent Ban** | Demonstrating a pattern of violation, sustained harassment, or aggression toward individuals. | A permanent ban from any sort of public interaction within the community.                                                                                  |
+This Code of Conduct applies within all community spaces, and also applies when an individual is officially representing the community in public or other spaces. Examples of representing our community include using an official email address, posting via an official social media account, or acting as an appointed representative at an online or offline event.
 
 ---
 
 ## 📄 Attribution
 
-This Code of Conduct is adapted from the [Contributor Covenant](https://www.contributor-covenant.org), version 2.1, available at <https://www.contributor-covenant.org/version/2/1/code_of_conduct.html>. Community Impact Guidelines were inspired by [Mozilla's code of conduct enforcement ladder](https://github.com/mozilla/diversity).
+This Code of Conduct is adapted from the Contributor Covenant, version 3.0, permanently available at <https://www.contributor-covenant.org/version/3/0/>.
+
+Contributor Covenant is stewarded by the Organization for Ethical Source and licensed under CC BY-SA 4.0. To view a copy of this license, visit <https://creativecommons.org/licenses/by-sa/4.0/>. This adaptation is shared under the same license.
+
+For answers to common questions about Contributor Covenant, see the FAQ at <https://www.contributor-covenant.org/faq>. Translations are provided at <https://www.contributor-covenant.org/translations>. Additional enforcement and community guideline resources can be found at <https://www.contributor-covenant.org/resources>. The enforcement ladder was inspired by the work of [Mozilla's code of conduct team](https://github.com/mozilla/inclusion).
 
 ---
 
@@ -101,12 +125,12 @@ This Code of Conduct is adapted from the [Contributor Covenant](https://www.cont
 
 <div align="center">
 
-**Mutual respect. Professional excellence.**
+**Mutual respect, and a way back when it fails.**
 
 [↑ Back to Top](#top)
 
 <br />
 
-Built with ❤️ by the Engineering Team. Distributed under the MIT License.
+Adapted from the Contributor Covenant 3.0 and shared under CC BY-SA 4.0.
 
 </div>

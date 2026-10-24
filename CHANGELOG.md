@@ -59,7 +59,7 @@ initialisation deletes.
 
 - **🔁 Intelligence Sync** (`intelligence-sync.yml`): every Monday it proposes
   the shared agent rules from `tannergolden/intelligence` as one pull request,
-  which lands only when you merge it. It is silent in the two templates.
+  which lands only when you merge it. It is silent in the template itself.
 - **`docs/Prompts.md`**: the Golden Path's prompts, kept current by a sync,
   and a section for this repository's own prompts that the template never
   changes. It holds the prompts for fitting a project into the scaffold and
@@ -117,6 +117,10 @@ initialisation deletes.
 - **The checks run in the template itself.** `ci`, `secrets`, `codeql`,
   `lint` and `pr` are no longer silent there, so what ships is checked before
   it reaches a generated repository.
+- **The guards name this template alone.** Each job that is silent in the
+  golden path template names only `path` in its `if:`, and the workflow
+  comments, the README and the Template Sync guide say the same. A generated
+  repository's jobs run exactly as before.
 - **Release pruning is a decision, not a side effect.** The `prune` task of
   📦 Release runs only when dispatched, and previews by default.
 - **The code of conduct** is adapted from Contributor Covenant 3.0. Its

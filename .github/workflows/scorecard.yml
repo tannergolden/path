@@ -29,8 +29,8 @@
 #
 # PUBLIC REPOSITORIES ONLY. A score is published for public repositories,
 # and code scanning is free only there, so on a private repository the job
-# is skipped. It runs in the two golden path templates as it does
-# everywhere else: their score is the one generated repositories inherit.
+# is skipped. It runs in the golden path template as it does everywhere
+# else: its score is the one generated repositories inherit.
 #
 # Expect Pinned-Dependencies to mark down every `@v1` in the other stubs.
 # The moving major tag is how a fix in the standards reaches every

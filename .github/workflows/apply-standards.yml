@@ -58,15 +58,14 @@ permissions: {}
 
 jobs:
   apply:
-    # Silent in the two golden path templates, like most jobs here that act
-    # on a repository. A
-    # golden path template ships the WIRING, never the effects: its own
-    # labels, settings, and rulesets are not what a generated repository
-    # inherits - the files are - so applying them there would change nothing
-    # downstream while making it the only repository that needs an
-    # ADMIN_TOKEN it has no use for. A template derived from one of them is
-    # a working repository as well, so it runs here as any other does.
-    if: ${{ !(github.event.repository.is_template && contains(fromJSON('["repo", "path"]'), github.event.repository.name)) }}
+    # Silent in the golden path template, like most jobs here that act on a
+    # repository. The golden path template ships the WIRING, never the
+    # effects: its own labels, settings, and rulesets are not what a
+    # generated repository inherits - the files are - so applying them there
+    # would change nothing downstream while making it the only repository
+    # that needs an ADMIN_TOKEN it has no use for. A template derived from it
+    # is a working repository as well, so it runs here as any other does.
+    if: ${{ !(github.event.repository.is_template && github.event.repository.name == 'path') }}
     permissions:
       contents: read # check this repository out when labels-file names a file in it
       issues: write # create and update the shared labels

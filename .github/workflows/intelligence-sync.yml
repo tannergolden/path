@@ -20,9 +20,9 @@
 # `no-intelligence` topic also keeps `make sync` away, and the
 # `no-intelligence-prompts` topic keeps the prompts page out alone.
 #
-# ⚠️ IT IS SILENT IN THE TWO GOLDEN PATH TEMPLATES. Its guard names them, as
-# every standards stub's does, so it does nothing in tannergolden/repo or
-# tannergolden/path and comes alive in each repository generated from them.
+# ⚠️ IT IS SILENT IN THE GOLDEN PATH TEMPLATE. Its guard names it, as every
+# standards stub's does, so it does nothing in tannergolden/path and comes
+# alive in each repository generated from it.
 # This repository's docs/Prompts.md shipped with the template, so the first
 # sync leaves it as it is. 🔄 Template Sync keeps this file current from the
 # template, merged with any edit you make to it.
@@ -49,7 +49,7 @@ permissions: {}
 
 jobs:
   sync:
-    if: ${{ !(github.event.repository.is_template && contains(fromJSON('["repo", "path"]'), github.event.repository.name)) }}
+    if: ${{ !(github.event.repository.is_template && github.event.repository.name == 'path') }}
     permissions:
       contents: write # push the sync branch (PR-only flow)
       pull-requests: write # open or update the sync pull request

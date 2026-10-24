@@ -61,7 +61,7 @@ concurrency:
 permissions: {}
 
 jobs:
-  # Every job here is inert in every template, a template derived from a
+  # Every job here is inert in every template, a template derived from the
   # golden path one included, and live in every other repository: a
   # template releases with 🏷️ Cut Release instead, which the repositories
   # generated from it follow.

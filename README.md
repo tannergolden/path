@@ -192,8 +192,8 @@ changes, and two routes to them would only collide.
 
 > [!NOTE]
 > **Neither route carries the template flag over.** Some jobs read it: most
-> of the jobs that act on a repository are silent in the two golden path
-> templates, `release.yml` and initialisation are silent in every template,
+> of the jobs that act on a repository are silent in the golden path
+> template, `release.yml` and initialisation are silent in every template,
 > and 🏷️ Cut Release runs only in one. The checks, the Scorecard score, the
 > run-history prune and the index redraw run on both sides. The table under
 > **How The Workflows Work** says which is which, and 🔄 Template Sync reads
@@ -539,7 +539,7 @@ with every check in it, not four runs to read separately. Two of the seventeen,
 `verify-stubs.yml` and `scorecard.yml`, run steps of their own instead of
 calling the standards.
 
-| Workflow                   | Gives you                                                                | In the two golden path templates     |
+| Workflow                   | Gives you                                                                | In the golden path template          |
 | :------------------------- | :----------------------------------------------------------------------- | :----------------------------------- |
 | `checks.yml`               | The gates: lint/test/build, secret scan, CodeQL, workflow lint           | Runs, as in yours                    |
 | `governance.yml`           | PR title and DCO checks, onboarding, triage, stale sweep, slash commands | The `pr` check runs; the rest silent |
@@ -564,14 +564,14 @@ calling the standards.
 `<job id> / <job name>`, so branch protection depends on them - the file a
 job lives in does not matter, but its id does.
 
-Every workflow ships installed. **The checks run everywhere, the two golden
-path templates included**: what a template ships - the scripts, the workflows,
-the seeded documents - is exactly what every generated repository's required
+Every workflow ships installed. **The checks run everywhere, the golden path
+template included**: what a template ships - the scripts, the workflows, the
+seeded documents - is exactly what every generated repository's required
 checks run against, so it is checked before it ships. **Most jobs that act on a
-repository are silent in the two templates** and come alive in every
+repository are silent in the golden path template** and come alive in every
 repository generated from this one, even one you make a template of its own:
 triage, the welcome, releases, settings and most housekeeping. The run-history
-prune and the index redraw run in the templates as well, which need them as
+prune and the index redraw run in the template as well, which needs them as
 much. `template-sync.yml` checks the
 template's list instead of syncing there, and `cut-release.yml` runs only in a
 template, publishing the releases your copy follows, until a repository
@@ -750,7 +750,7 @@ Release refuses a release that changed it.
 **🔁 Intelligence Sync is the hub's stub plus one guard.** When
 `tannergolden/intelligence` changes `setup/intelligence-sync.yml`, bring the
 change into `.github/workflows/intelligence-sync.yml` and keep the job's `if:`,
-which keeps it silent in the two golden path templates.
+which keeps it silent in the golden path template.
 
 **A new file needs a line in `.github/template-sync`**, in the section that
 says what a generated repository does with it. The standards'
@@ -776,9 +776,9 @@ stub in a way a merge cannot carry, is breaking: release it as `v2`, which no
 repository follows until its owner changes `ref:`.
 
 **The guards know this template by name.** Each job that is silent only in
-the two golden path templates names them by repository name in its `if:`, and
-so does the standards' own Template Sync. Rename this repository and those
-jobs start running in it.
+the golden path template names it by repository name in its `if:`, and so
+does the standards' own Template Sync. Rename this repository and those jobs
+start running in it.
 
 ---
 

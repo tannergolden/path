@@ -35,19 +35,19 @@ Discussions must be switched on first, under <kbd>Settings</kbd> →
 
 <!-- AUTO-INDEX:BEGIN dir=. style=log -->
 
-| Entry                                                              | Purpose                                                                                                                                          |
-| :----------------------------------------------------------------- | :----------------------------------------------------------------------------------------------------------------------------------------------- |
-| [`accessibility.yaml`](accessibility.yaml)                         | Accessibility feedback - contrast, keyboard navigation, focus order, screen readers.                                                             |
-| [`announcements.yaml`](announcements.yaml)                         | Official updates such as releases, deprecations, and roadmap notes.                                                                              |
-| [`community.yaml`](community.yaml)                                 | General discussion, introductions, meetups, and topics that don&#x2019;t fit other categories.                                                   |
-| [`ideas.yaml`](ideas.yaml)                                         | Brainstorm features or improvements before opening a formal Feature Request.                                                                     |
-| [`internationalization-i18n.yaml`](internationalization-i18n.yaml) | Translation and localization topics, language-specific feedback, and locale issues.                                                              |
-| [`polls.yaml`](polls.yaml)                                         | Run time-boxed surveys to gather community sentiment and make lightweight decisions (priorities, roadmap themes, release timing, naming).        |
-| [`q-a.yaml`](q-a.yaml)                                             | Ask &#x201C;how do I&#x2026;?&#x201D; questions and get help from maintainers and the community.                                                 |
-| [`README.md`](README.md)                                           | This file.                                                                                                                                       |
-| [`roadmap.yaml`](roadmap.yaml)                                     | High-level plans and milestones. Link to Issues and Pull Requests for tracking.                                                                  |
-| [`showcase.yaml`](showcase.yaml)                                   | Share demos, prototypes, case studies, success stories, and lessons learned.                                                                     |
-| [`tooling-setup.yaml`](tooling-setup.yaml)                         | Developer environment topics - IDEs, Node.js versions, package managers, linters, CI runners, containers/devcontainers, and local configuration. |
+| Entry                                                              | Purpose                                                                                                                                                       |
+| :----------------------------------------------------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| [`accessibility.yaml`](accessibility.yaml)                         | Accessibility feedback - contrast, keyboard navigation, focus order, screen readers.                                                                          |
+| [`announcements.yaml`](announcements.yaml)                         | Official updates such as releases, deprecations, and roadmap notes.                                                                                           |
+| [`community.yaml`](community.yaml)                                 | General discussion, introductions, meetups, and topics that don&#x2019;t fit other categories.                                                                |
+| [`ideas.yaml`](ideas.yaml)                                         | Brainstorm features or improvements before opening a formal Feature Request.                                                                                  |
+| [`internationalization-i18n.yaml`](internationalization-i18n.yaml) | Translation and localization topics, language-specific feedback, and locale issues.                                                                           |
+| [`polls.yaml`](polls.yaml)                                         | Run time-boxed surveys to gather community sentiment and make lightweight decisions (priorities, roadmap themes, release timing, naming).                     |
+| [`q-a.yaml`](q-a.yaml)                                             | Ask &#x201C;how do I&#x2026;?&#x201D; questions and get help from maintainers and the community.                                                              |
+| [`README.md`](README.md)                                           | This file.                                                                                                                                                    |
+| [`roadmap.yaml`](roadmap.yaml)                                     | High-level plans and milestones. Link to Issues and Pull Requests for tracking.                                                                               |
+| [`showcase.yaml`](showcase.yaml)                                   | Share demos, prototypes, case studies, success stories, and lessons learned.                                                                                  |
+| [`tooling-setup.yaml`](tooling-setup.yaml)                         | Developer environment topics - IDEs, language and runtime versions, package managers, linters, CI runners, containers/devcontainers, and local configuration. |
 
 <!-- AUTO-INDEX:END -->
 

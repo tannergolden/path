@@ -121,11 +121,11 @@ called workflow declares the secrets it reads under `secrets:` in its
 ## ⚠️ Before You Change One
 
 - **The checks run everywhere; most jobs that act on a repository do not run
-  in the two golden path templates.** Everything in `checks.yml`, the `pr` check
+  in the golden path template.** Everything in `checks.yml`, the `pr` check
   in `semantic-pr.yml`, `verify-stubs.yml`, `scorecard.yml`, `prune-runs.yml`
-  and `auto-index.yml` run in the templates as they do here. A job whose guard
-  names the two templates alongside `is_template` does nothing in either and
-  comes alive in every other repository, a template derived from one of them
+  and `auto-index.yml` run in the template as they do here. A job whose guard
+  names the golden path template alongside `is_template` does nothing there
+  and comes alive in every other repository, a template derived from it
   included. Initialisation and `release.yml` stay silent in every template: a
   template never initialises itself, and releases with `cut-release.yml`.
   `template-sync.yml` checks its list in a template, and `cut-release.yml` runs

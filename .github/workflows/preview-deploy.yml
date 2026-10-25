@@ -39,10 +39,10 @@ permissions: {}
 
 jobs:
   deploy:
-    # Inert in the two golden path templates, and live in every other
-    # repository, a template derived from one included: `is_template` alone
-    # is true there too, so the guard names the two.
-    if: ${{ !(github.event.repository.is_template && contains(fromJSON('["repo", "path"]'), github.event.repository.name)) }}
+    # Inert in the golden path template, and live in every other
+    # repository, a template derived from it included: `is_template` alone
+    # is true there too, so the guard also names it.
+    if: ${{ !(github.event.repository.is_template && github.event.repository.name == 'path') }}
     permissions:
       contents: read # check out the ref being previewed
       id-token: write # OIDC token for keyless auth to the deploy target

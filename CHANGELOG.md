@@ -31,6 +31,24 @@ every generated repository, whose own release notes are its changelog.
 
 ## [Unreleased]
 
+## [1.4.1] - 2026-10-25
+
+> [!NOTE]
+> **Most of this release's updates work through `tannergolden/standards`**,
+> and reached every repository on `@v1` with its v1.18.0, released just before
+> this one: every action the shared workflows pin, and a `timeout-minutes`
+> input on the 🧪 Lint, Test & Build job for a suite that runs close to its
+> fifteen minutes.
+
+### Changed
+
+- **The development container takes `common-utils` 2**, the feature's current
+  major, in place of 1.
+- **`scorecard.yml` and `verify-stubs.yml` pin the actions' current
+  releases**: harden-runner 2.22.2, codeql-action's upload-sarif 4.39.1 and
+  setup-python 7.1.0, as Dependabot proposed in every repository generated
+  from this template.
+
 ## [1.4.0] - 2026-10-25
 
 > [!NOTE]
@@ -223,6 +241,7 @@ history up to
 where `v1.3.0` was cut, is the record.
 
 [Unreleased]: https://github.com/tannergolden/path/compare/v1...Development
+[1.4.1]: https://github.com/tannergolden/path/releases/tag/v1.4.1
 [1.4.0]: https://github.com/tannergolden/path/releases/tag/v1.4.0
 [1.3.0]: https://github.com/tannergolden/path/tree/bbc8bba9fe8d1374a199d3e93a45c5ec7825a1a7
 

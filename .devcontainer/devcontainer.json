@@ -17,7 +17,7 @@
   "image": "mcr.microsoft.com/devcontainers/base:ubuntu",
 
   "features": {
-    "ghcr.io/devcontainers/features/common-utils:1": {},
+    "ghcr.io/devcontainers/features/common-utils:2": {},
     "ghcr.io/devcontainers/features/git:1": {},
     // For the repository's own checks; see above. The version matches the
     // Python CI runs them on. `installTools` off: the feature would otherwise

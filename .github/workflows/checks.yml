@@ -22,7 +22,11 @@
 name: '🚦 Checks'
 
 on:
+  # Development alone: every other branch is checked through its pull
+  # request. A push there would start a second run that skips every job, and
+  # each skipped job would still show on the pull request as a check.
   push:
+    branches: [Development]
   pull_request:
   # A merge queue asks every required check to report on the merge group as
   # well, and `ci` and `secrets` are required. Without this trigger a queued

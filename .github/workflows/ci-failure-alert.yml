@@ -51,9 +51,10 @@ on:
     # on Development alone (see `branches` below), so a run on any other
     # branch would start one that does nothing. Widen both together.
     #
-    # ⚠️ THIS IS THE ONE STUB THAT NAMES THE DEFAULT BRANCH. A trigger filter
-    # cannot be resolved at run time, so if you rename Development, rename
-    # it here too, or the alerts stop without a word.
+    # ⚠️ THIS FILTER NAMES THE DEFAULT BRANCH, as every stub's push trigger
+    # does. A trigger filter cannot be resolved at run time, so if you rename
+    # Development, rename it here and in each `push:` too, or the alerts stop
+    # without a word.
     branches: [Development]
 
 concurrency:

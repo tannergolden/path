@@ -165,9 +165,6 @@ initialisation deletes.
   Beside the triage in `governance.yml`, which runs on `pull_request_target`,
   it was listed a second time, skipped, on every pull request. If you keep a
   `governance.yml` of your own, delete its `pr` job, or the check runs twice.
-- 🔬 Verify Stub Ceilings runs once per change, on the pull request and on
-  the default branch, rather than again for each push to a pull request's
-  branch.
 
 ### Removed
 
@@ -198,6 +195,15 @@ initialisation deletes.
   initialisation rewrites, or whether a sync pull request's checks run.
 - The folder READMEs said 🗂️ Machined Indexes redraws their logs after every
   push. It runs after a push to the default branch.
+- **Each check shows once on a pull request.** A push to a pull request's
+  branch, and the branch's creation, started a second run of 🚦 Checks,
+  🔄 Template Sync, 🎯 Standards Lifecycle, 🗂️ Machined Indexes,
+  🖌️ Code Style Formatter, 🛡️ OpenSSF Scorecard and 🔬 Verify Stub Ceilings
+  whose every job skipped, and each skipped job showed on the pull request
+  beside the real one. A push now starts them on `Development` alone, and
+  🎯 Standards Lifecycle no longer starts on `create`. The push triggers name
+  the default branch, as 🚨 CI Failure Alerts' filter does: rename
+  `Development` and rename it there too.
 
 ### Security
 

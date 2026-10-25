@@ -12,8 +12,14 @@
 name: '🎯 Standards Lifecycle'
 
 on:
+  # Development alone, and no `create`. A push to any other branch, and
+  # `create`, which fires for every branch and every tag, would each start a
+  # run that skips every job, and each skipped job would still show on the
+  # branch's pull request as a check. Initialisation starts from the push
+  # GitHub sends for a generated repository's first commit, or from a
+  # dispatch.
   push:
-  create:
+    branches: [Development]
   schedule:
     - cron: '0 7 * * 1' # weekly: is there a new major of the standards?
   workflow_dispatch:
@@ -40,12 +46,12 @@ permissions: {}
 jobs:
   init:
     # ONLY EVER THE DEFAULT BRANCH, whatever it is called. This matters more
-    # than it looks: `create` fires for every branch AND every tag, so without
-    # this a topic branch created before initialisation would run it, and this
-    # workflow force-pushes to the default branch - it would put that topic
-    # branch's content there. A manual dispatch is exempt because the operator
-    # chose the ref themselves. The weekly cron belongs to the version check
-    # below, not to this.
+    # than it looks: this workflow force-pushes to the default branch, so a run
+    # from a topic branch created before initialisation would put that
+    # branch's content there. The push trigger already names Development
+    # alone; this holds whatever the trigger is widened to. A manual dispatch
+    # is exempt because the operator chose the ref themselves. The weekly
+    # cron belongs to the version check below, not to this.
     #
     # NEVER IN A TEMPLATE, a derived one included, although most stubs here
     # are silent only in the golden path template: a template never

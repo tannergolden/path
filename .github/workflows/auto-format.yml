@@ -8,7 +8,11 @@
 name: '🖌️ Code Style Formatter'
 
 on:
+  # Development alone: every other branch is checked through its pull
+  # request. A push there would start a second run that skips its job, and
+  # the skipped job would still show on the pull request as a check.
   push:
+    branches: [Development]
   workflow_dispatch:
 
 concurrency:

@@ -43,9 +43,12 @@
 name: '🛡️ OpenSSF Scorecard'
 
 on:
-  # Scorecard supports `push` and `schedule`; both are filtered to the
-  # default branch below, whatever it is called.
+  # Scorecard supports `push` and `schedule`, and scores the default branch
+  # alone. A push starts it on Development only: a push to any other branch
+  # would start a run that skips its job, and the skipped job would still
+  # show on that branch's pull request as a check.
   push:
+    branches: [Development]
   schedule:
     # Weekly, at minute 00 on an hour no other schedule here takes, as the
     # standards' on-the-hour rule asks, so a dormant repository keeps a

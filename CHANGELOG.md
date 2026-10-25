@@ -161,6 +161,9 @@ initialisation deletes.
   Beside the triage in `governance.yml`, which runs on `pull_request_target`,
   it was listed a second time, skipped, on every pull request. If you keep a
   `governance.yml` of your own, delete its `pr` job, or the check runs twice.
+- 🔬 Verify Stub Ceilings runs once per change, on the pull request and on
+  the default branch, rather than again for each push to a pull request's
+  branch.
 
 ### Removed
 

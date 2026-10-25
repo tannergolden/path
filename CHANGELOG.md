@@ -177,6 +177,9 @@ initialisation deletes.
   replaces the Discussions link.
 - The security policy promised 90 days for a medium severity fix, beyond the
   60 days the OpenSSF Best Practices badge allows.
+- The Source Code seed recommended a `lib/` layer that `src/` does not ship
+  and no other document names. It now has the three layers `src/` has, with
+  the rules `src/README.md` gives them.
 - The workflow comments, the seeds and the Template Sync guide no longer
   misstate which jobs run in a template, what a release carries, what
   initialisation rewrites, or whether a sync pull request's checks run.

@@ -31,7 +31,6 @@ This directory houses the foundational code of the project. It is structured to 
 ### Recommended Sub-structure
 
 - **`/app`**: Application-specific logic and entry points.
-- **`/lib`**: Sharable libraries and utility functions.
 - **`/domain`**: Core business entities and logic (framework-agnostic).
 - **`/infra`**: Implementation details (database, external APIs).
 
@@ -42,9 +41,8 @@ This directory houses the foundational code of the project. It is structured to 
 Dependencies must point inward - the domain never imports from delivery or infrastructure:
 
 1. **`domain` imports nothing** outside itself (and the standard library).
-2. **`app` orchestrates**: it may import `domain` and `lib`, and receives `infra` via injection.
+2. **`app` orchestrates**: it may import `domain`, and receives `infra` via injection.
 3. **`infra` implements** interfaces declared by `domain`/`app`; nothing imports `infra` directly except composition roots.
-4. **`lib` stays generic**: if a helper knows your business rules, it belongs in `domain`, not `lib`.
 
 > [!IMPORTANT]
 > Every module must be reachable by this project's unified lint, test, and build commands - the ones CI is configured to run. Wire new tooling into those entry points rather than into bespoke scripts nobody else invokes.

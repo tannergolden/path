@@ -106,6 +106,10 @@ initialisation deletes.
 - `.git-blame-ignore-revs` _(new repositories only)_, a commit message
   template, and this changelog _(template only)_.
 - The seven documentation folders the standards keep, each with a README.
+- **`examples/`**, for runnable examples of the project in use, reserved like
+  `packages/` and `benchmarks/` until the project needs it _(new repositories
+  only)_. The prompt for fitting a project into the scaffold names it beside
+  them.
 
 ### Changed
 

@@ -34,10 +34,10 @@ differently on purpose.
 | **The standards** | By link, from [`tannergolden/standards`](https://github.com/tannergolden/standards) | Shared, so a fix reaches every repository at once                        |
 | **The structure** | Copied here, as real folders and files                                              | Yours from the first commit, because only you can decide what it becomes |
 
-So you get `src/`, `tests/`, `packages/`, `benchmarks/`, `assets/`, and `docs/`
-already laid out, community health files already written, and continuous
-integration already wired - and none of it is enforced. A boilerplate makes the
-common case free; it does not make the uncommon case impossible.
+So you get `src/`, `tests/`, `packages/`, `benchmarks/`, `examples/`, `assets/`,
+and `docs/` already laid out, community health files already written, and
+continuous integration already wired - and none of it is enforced. A boilerplate
+makes the common case free; it does not make the uncommon case impossible.
 
 The name is the point. A golden path is not the only way to build something and
 it is not compulsory. It is the way that already has the paving stones laid, so
@@ -108,8 +108,8 @@ because none of it cares where your code lives.
 >
 > It still arrives as one pull request for you to review, and only when you
 > run it. Your structure is not on that list: `src/`, `tests/`, `packages/`,
-> `benchmarks/`, `assets/`, this README and the licence start switched off,
-> and a file the template does not ship is never touched.
+> `benchmarks/`, `examples/`, `assets/`, this README and the licence start
+> switched off, and a file the template does not ship is never touched.
 >
 > So if you make one of those kept-current files your own - `docs/` put to a
 > different use, say, or a `.gitignore` you rewrote - put a `#` in front of its
@@ -473,6 +473,7 @@ publishes nothing.
 | [`assets/`](assets/README.md)                      | Where this project keeps what presents it: four folders to start, a name ready for every other kind, and the rules every file follows. |
 | [`benchmarks/`](benchmarks/README.md)              | The benchmark suites and recorded results that defend the performance budgets of this project.                                         |
 | [`docs/`](docs/README.md)                          | Where this project keeps its own documents, and where the engineering standards it follows actually live.                              |
+| [`examples/`](examples/README.md)                  | Runnable examples that show how to use this project, one per task, built and checked with the code they show.                          |
 | [`packages/`](packages/README.md)                  | Workspace packages, one folder each, for when a second consumer needs shared code.                                                     |
 | [`src/`](src/README.md)                            | The application source, split into three layers whose dependencies point inward.                                                       |
 | [`tests/`](tests/README.md)                        | The test suites, from isolated units to whole user journeys, and how CI comes to run them.                                             |
@@ -671,7 +672,7 @@ so you can read it before you run one.
 | Writes in your identity             | The template is rewritten exactly as initialisation rewrote it, so footers and contact links stay yours                  |
 | Leaves a conflict untouched         | A file you and the template changed in the same place stays as you have it; the pull request shows the change            |
 | Respects a deletion                 | A file you delete is switched off, under its old name or a new one, until you take the `#` off its line again            |
-| Leaves your structure alone         | `src/`, `tests/`, `packages/`, `benchmarks/`, `assets/`, this README and the licence start switched off                  |
+| Leaves your structure alone         | `src/`, `tests/`, `packages/`, `benchmarks/`, `examples/`, `assets/`, this README and the licence start switched off     |
 
 Three files describe it, and only one of them is yours to edit:
 

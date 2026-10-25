@@ -161,6 +161,7 @@
 #/assets/**
 #/benchmarks/**
 #/docs/adrs/ADR-0001-Record-Architecture-Decisions.md
+#/examples/**
 #/packages/**
 #/src/**
 #/tests/**

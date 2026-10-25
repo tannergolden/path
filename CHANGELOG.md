@@ -31,10 +31,12 @@ every generated repository, whose own release notes are its changelog.
 
 ## [Unreleased]
 
-> [!IMPORTANT]
-> **Cut this release after the standards release it relies on.** These
-> changes work through `tannergolden/standards` rather than through this
-> template, and each takes effect once the standards' `v1` moves past it:
+## [1.4.0] - 2026-10-25
+
+> [!NOTE]
+> **These changes work through `tannergolden/standards`**, not through this
+> template, and reached every repository on `@v1` with its v1.17.0, released
+> just before this one:
 >
 > - the secret scan passing a merge queue, and the Actions event policy for
 >   the governance stub;
@@ -46,10 +48,6 @@ every generated repository, whose own release notes are its changelog.
 >   release, and the summary prompt at the top of drafted release notes;
 > - Dependency Review as a required check, and every required check accepted
 >   from GitHub Actions alone, once 🎯 Apply Standards reapplies the rulesets.
->
-> Once `v1` has moved, delete `statuses: write` from the `pr` job in
-> `semantic-pr.yml`. The standards no longer ask for it, and 🔬 Verify Stub
-> Ceilings reports it until it goes.
 
 _(New repositories only)_ marks a file seeded once, which a sync never brings
 to a repository that already exists. _(Template only)_ marks one that
@@ -210,6 +208,11 @@ initialisation deletes.
 - Initialisation removes the Vulnerability Report issue form from a public
   repository, where an issue would publish the report, and the repository
   validator fails a repository made public later that still carries it.
+- The `pr` job in `semantic-pr.yml` no longer grants `statuses: write`. The
+  standards stopped asking for it in v1.17.0: the semantic title check
+  writes no commit status, and a grant it never uses would let the
+  third-party action post a status under any name, a required check's
+  included.
 
 ## [1.3.0] - 2026-10-19
 
@@ -220,6 +223,7 @@ history up to
 where `v1.3.0` was cut, is the record.
 
 [Unreleased]: https://github.com/tannergolden/path/compare/v1...Development
+[1.4.0]: https://github.com/tannergolden/path/releases/tag/v1.4.0
 [1.3.0]: https://github.com/tannergolden/path/tree/bbc8bba9fe8d1374a199d3e93a45c5ec7825a1a7
 
 ---

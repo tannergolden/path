@@ -57,5 +57,4 @@ jobs:
   pr:
     permissions:
       pull-requests: read # read the PR title under validation
-      statuses: write # publish the semantic-title status check on the PR
     uses: tannergolden/standards/.github/workflows/semantic-pr.yml@v1

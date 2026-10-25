@@ -180,6 +180,8 @@ initialisation deletes.
 - The Source Code seed recommended a `lib/` layer that `src/` does not ship
   and no other document names. It now has the three layers `src/` has, with
   the rules `src/README.md` gives them.
+- The technical documents' README named five of the six areas the fill-in
+  standards lay out, leaving out `benchmarks/`.
 - The workflow comments, the seeds and the Template Sync guide no longer
   misstate which jobs run in a template, what a release carries, what
   initialisation rewrites, or whether a sync pull request's checks run.

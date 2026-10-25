@@ -29,8 +29,9 @@ one.
   [Architecture Overview](../templates/technical/Architecture-Overview.md) seed.
 - **The stack and the source**: what the project is built with, and where each
   part of it lives.
-- **One folder per area**: `backend/`, `database/`, `infrastructure/`,
-  `interface/` and `testing/`, as the fill-in standards lay them out.
+- **One folder per area**: `backend/`, `benchmarks/`, `database/`,
+  `infrastructure/`, `interface/` and `testing/`, as the fill-in standards lay
+  them out.
 - **Designs, plans and research**: `designs/`, `plans/` and `research/`, from
   the Technical Design, Implementation Plan and Research Log templates.
 

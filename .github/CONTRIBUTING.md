@@ -154,8 +154,8 @@ logic it calls lives in `tannergolden/standards`.
 | **Secret Scanning**        | 🤖 Automated | `checks.yml` (required check `secrets`)                      |
 | **Static Analysis**        | 🤖 Automated | `checks.yml` (CodeQL, advisory)                              |
 | **Workflow Linting**       | 🤖 Automated | `checks.yml` (actionlint, zizmor)                            |
-| **PR Title Validation**    | 🤖 Automated | `governance.yml`                                             |
-| **DCO Sign-Off Check**     | 🤖 Automated | `governance.yml` (required check `pr`; bot PRs exempt)       |
+| **PR Title Validation**    | 🤖 Automated | `semantic-pr.yml`                                            |
+| **DCO Sign-Off Check**     | 🤖 Automated | `semantic-pr.yml` (required check `pr`; bot PRs exempt)      |
 | **PR Triage & Labeling**   | 🤖 Automated | `governance.yml`                                             |
 | **Stale Issue Cleanup**    | 🤖 Automated | `governance.yml` (weekly)                                    |
 | **Slash Commands**         | 🤖 Automated | `governance.yml`                                             |

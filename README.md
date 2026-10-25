@@ -155,7 +155,7 @@ forked or generated - which is what **Staying current takes no effort**
 describes further down.
 Forking does not make you more current; that part is already free.
 
-What a fork does sync is the **scaffold**: the seventeen workflows, the
+What a fork does sync is the **scaffold**: the eighteen workflows, the
 directory layout, the seeded documents. A generated repository can take the
 workflow and seed fixes too - every workflow but `cut-release.yml`, while the
 layout stays yours - whenever you run 🔄 Template Sync, so what a fork adds is the
@@ -536,32 +536,35 @@ is pulled in by `uses:`. GitHub only runs a workflow that lives in the repositor
 being pushed to, which is why these small files exist here at all. They are
 grouped by what they do - everything that verifies a change in one file,
 everything that reacts to humans in another - so one push produces one run
-with every check in it, not four runs to read separately. Two of the seventeen,
-`verify-stubs.yml` and `scorecard.yml`, run steps of their own instead of
-calling the standards.
+with every check in it, not four runs to read separately. The pull request
+check is the one exception, with `semantic-pr.yml` to itself: beside the
+triage in `governance.yml` it was listed a second time, skipped, on every pull
+request. Two of the eighteen, `verify-stubs.yml` and `scorecard.yml`, run steps
+of their own instead of calling the standards.
 
-| Workflow                   | Gives you                                                                | In the two golden path templates     |
-| :------------------------- | :----------------------------------------------------------------------- | :----------------------------------- |
-| `checks.yml`               | The gates: lint/test/build, secret scan, CodeQL, workflow lint           | Runs, as in yours                    |
-| `governance.yml`           | PR title and DCO checks, onboarding, triage, stale sweep, slash commands | The `pr` check runs; the rest silent |
-| `release.yml`              | Draft notes, publish assets, registries, prune old releases on request   | Silent in every template             |
-| `maintenance.yml`          | Prunes stale deployments; deletes draft releases on request              | Silent                               |
-| `prune-runs.yml`           | Prunes workflow run history, with its logs and artifacts                 | Runs, as in yours                    |
-| `lifecycle.yml`            | Claims this repository once; tells you when a new major exists           | Silent                               |
-| `dependabot-automerge.yml` | Approves and queues Dependabot's patch and minor updates                 | Silent                               |
-| `ci-failure-alert.yml`     | Opens an issue when a watched workflow fails, closes it on green         | Silent                               |
-| `apply-standards.yml`      | Dispatch-only. The label taxonomy, the settings and branch protection    | Silent                               |
-| `auto-format.yml`          | Formats what a push touched                                              | Silent                               |
-| `preview-deploy.yml`       | Deploys pushes to a preview target, once one is configured               | Silent                               |
-| `verify-stubs.yml`         | Proves every job's permission ceiling matches its called workflow        | Runs, as in yours                    |
-| `auto-index.yml`           | Redraws every folder log and index after a push, as a pull request       | Runs, as in yours                    |
-| `scorecard.yml`            | A weekly OpenSSF Scorecard score, filed under code scanning              | Runs, as in yours                    |
-| `template-sync.yml`        | Proposes the template's later fixes as one pull request, when run        | Checks its list instead of syncing   |
-| `intelligence-sync.yml`    | Proposes the shared agent rules as one pull request, every Monday        | Silent                               |
-| `cut-release.yml`          | Publishes this template's releases. Inert in yours until you adopt it    | Runs only in a template              |
+| Workflow                   | Gives you                                                              | In the two golden path templates   |
+| :------------------------- | :--------------------------------------------------------------------- | :--------------------------------- |
+| `checks.yml`               | The gates: lint/test/build, secret scan, CodeQL, workflow lint         | Runs, as in yours                  |
+| `semantic-pr.yml`          | The `pr` check: PR title, branch name, commit messages, DCO sign-off   | Runs, as in yours                  |
+| `governance.yml`           | Onboarding, triage, stale sweep, slash commands                        | Silent                             |
+| `release.yml`              | Draft notes, publish assets, registries, prune old releases on request | Silent in every template           |
+| `maintenance.yml`          | Prunes stale deployments; deletes draft releases on request            | Silent                             |
+| `prune-runs.yml`           | Prunes workflow run history, with its logs and artifacts               | Runs, as in yours                  |
+| `lifecycle.yml`            | Claims this repository once; tells you when a new major exists         | Silent                             |
+| `dependabot-automerge.yml` | Approves and queues Dependabot's patch and minor updates               | Silent                             |
+| `ci-failure-alert.yml`     | Opens an issue when a watched workflow fails, closes it on green       | Silent                             |
+| `apply-standards.yml`      | Dispatch-only. The label taxonomy, the settings and branch protection  | Silent                             |
+| `auto-format.yml`          | Formats what a push touched                                            | Silent                             |
+| `preview-deploy.yml`       | Deploys pushes to a preview target, once one is configured             | Silent                             |
+| `verify-stubs.yml`         | Proves every job's permission ceiling matches its called workflow      | Runs, as in yours                  |
+| `auto-index.yml`           | Redraws every folder log and index after a push, as a pull request     | Runs, as in yours                  |
+| `scorecard.yml`            | A weekly OpenSSF Scorecard score, filed under code scanning            | Runs, as in yours                  |
+| `template-sync.yml`        | Proposes the template's later fixes as one pull request, when run      | Checks its list instead of syncing |
+| `intelligence-sync.yml`    | Proposes the shared agent rules as one pull request, every Monday      | Silent                             |
+| `cut-release.yml`          | Publishes this template's releases. Inert in yours until you adopt it  | Runs only in a template            |
 
 **Do not rename the job ids** `ci` and `secrets` (in `checks.yml`) or `pr`
-(in `governance.yml`). A called workflow reports its checks as
+(in `semantic-pr.yml`). A called workflow reports its checks as
 `<job id> / <job name>`, so branch protection depends on them - the file a
 job lives in does not matter, but its id does.
 

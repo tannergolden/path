@@ -83,6 +83,7 @@
 /.github/workflows/prune-runs.yml
 /.github/workflows/release.yml
 /.github/workflows/scorecard.yml
+/.github/workflows/semantic-pr.yml
 /.github/workflows/template-sync.yml
 /.github/workflows/verify-stubs.yml
 

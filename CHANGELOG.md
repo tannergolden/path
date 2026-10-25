@@ -48,7 +48,7 @@ every generated repository, whose own release notes are its changelog.
 >   from GitHub Actions alone, once 🎯 Apply Standards reapplies the rulesets.
 >
 > Once `v1` has moved, delete `statuses: write` from the `pr` job in
-> `governance.yml`. The standards no longer ask for it, and 🔬 Verify Stub
+> `semantic-pr.yml`. The standards no longer ask for it, and 🔬 Verify Stub
 > Ceilings reports it until it goes.
 
 _(New repositories only)_ marks a file seeded once, which a sync never brings
@@ -157,6 +157,10 @@ initialisation deletes.
 - The discussion forms' README says which categories GitHub creates, and how
   to add one for each other form.
 - Hidden keyword lists dropped from the documents' frontmatter.
+- **The required `pr` check has a workflow of its own**, `semantic-pr.yml`.
+  Beside the triage in `governance.yml`, which runs on `pull_request_target`,
+  it was listed a second time, skipped, on every pull request. If you keep a
+  `governance.yml` of your own, delete its `pr` job, or the check runs twice.
 
 ### Removed
 

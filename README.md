@@ -114,7 +114,9 @@ because none of it cares where your code lives.
 > So if you make one of those kept-current files your own - `docs/` put to a
 > different use, say, or a `.gitignore` you rewrote - put a `#` in front of its
 > line, or add a rule such as `!/docs/**` under **Your rules**, before you next
-> run it. A file you delete is switched off for you.
+> run it. A file you delete is switched off for you. The
+> [Get Ready For A Template Sync](docs/Prompts.md#get-ready-for-a-template-sync)
+> prompt has an AI agent find those files, and dry-run the sync, first.
 
 ---
 

@@ -31,6 +31,16 @@ every generated repository, whose own release notes are its changelog.
 
 ## [Unreleased]
 
+### Added
+
+- **Golden Path prompts for staying current and following the standards**,
+  in `docs/Prompts.md`, with an index at the top of the template's section:
+  Get Ready For A Template Sync and Review A Template Sync Pull Request
+  around each sync you run, Bring In The Latest Agent Rules for the pull
+  request 🔁 Intelligence Sync opens, and ten read-only audits of a
+  repository against `tannergolden/standards`, from Check This Repository
+  Against The Standards to Check What Is Left To Do By Hand.
+
 ## [1.4.1] - 2026-10-25
 
 > [!NOTE]

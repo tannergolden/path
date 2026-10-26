@@ -114,7 +114,7 @@ jobs:
     if: ${{ github.event_name != 'push' || github.ref_name == github.event.repository.default_branch }}
     permissions:
       contents: read # full-history checkout for the secret scan
-      issues: write # one-time escalation issue when scanning is silently off
+      issues: write # declared by the secret scan job, so the stub grants it too
     uses: tannergolden/standards/.github/workflows/gitleaks.yml@v1
     secrets: inherit # zizmor: ignore[secrets-inherit] - first-party callee at the ref pinned above.
 

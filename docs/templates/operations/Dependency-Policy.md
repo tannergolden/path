@@ -64,9 +64,9 @@ A new dependency is a decision, made in the pull request that adds it, which say
 
 ## 🔄 4. Keeping Them Current
 
-- **Dependabot** opens version updates monthly for the ecosystems in `.github/dependabot.yml`: `[the workflows, the development container and the scripts' requirements, which ship on | the ones this project added]`. It waits until a release is three days old, and groups each ecosystem's updates into one pull request.
+- **Dependabot** opens version updates monthly for the ecosystems in `.github/dependabot.yml`: `[the workflows, the development container and the scripts' requirements, which ship on | the ones this project added]`. It waits until a release is three days old, and puts the month's updates for every ecosystem into one pull request.
 - **Security updates** arrive as soon as an advisory names a version in use, once 🎯 Apply Standards has switched them on.
-- **🦾 Automate Dependabot** approves and merges a patch or minor update once the required checks pass. A major update waits for a person.
+- **🦾 Automate Dependabot** approves and merges a pull request of patch and minor updates once the required checks pass. One with a major update anywhere in it waits for a person, and the rest of that month's updates wait with it.
 - **Somebody answers them**: after 90 days in which nobody responds to its pull requests, Dependabot stops opening any, security updates included. `[@handle]` reviews them every `[week]`.
 - **Each release carries an SBOM**, `sbom-<tag>.cdx.json`, listing every dependency it was built from.
 

@@ -23,9 +23,18 @@
 # patch the day it appears. Security updates ignore the cooldown and arrive at
 # once.
 #
+# ONE PULL REQUEST A MONTH, HOWEVER MANY ECOSYSTEMS. Every ecosystem below
+# joins the `dependencies` group, so a month's updates arrive together on the
+# first of the month as a single pull request, rather than one per ecosystem.
+# The group holds the schedule and the commit message, so an ecosystem in it
+# sets neither: Dependabot refuses the whole file over a `commit-message` on
+# one. Security updates keep no schedule, and each still arrives as soon as
+# its alert opens.
+#
 # Pair this with the `dependabot-automerge` stub from tannergolden/standards
 # and patch and minor updates approve and merge themselves once your required
-# checks pass. Majors still wait for a human.
+# checks pass. Majors still wait for a human, and since a month's updates
+# share one pull request, a major holds the rest of that month's with it.
 #
 # EVERY UPDATE IS A CONVENTIONAL COMMIT. `commit-message.prefix` makes
 # Dependabot title its pull requests `build(deps): ...` rather than its default
@@ -39,16 +48,17 @@
 #      release notes entirely.
 #
 # `build` is the Conventional Commits type for changes to the build system or
-# external dependencies. Keep it on any ecosystem you enable below.
+# external dependencies. It is set once, on the group. A security update is
+# not the group's, so Dependabot titles it after its own last commit here,
+# which the group makes `build(deps):`, or before there is one, after this
+# repository's own commits.
 # =============================================================================
 
 version: 2
-updates:
-  # Keeps the pinned action SHAs in your workflow stubs current. Correct for
-  # every repository from the moment it is generated, whatever language it is
-  # written in.
-  - package-ecosystem: 'github-actions'
-    directory: '/'
+
+multi-ecosystem-groups:
+  # The month's one pull request, named in its title and its branch.
+  dependencies:
     schedule:
       # Monthly, not weekly. Grouped updates make the cadence the only
       # remaining source of noise, and a pin that is four weeks old is not a
@@ -57,20 +67,29 @@ updates:
       interval: 'monthly'
       time: '07:00'
       timezone: 'Etc/UTC'
-    # Actions accept only `default-days`; the per-semver keys are refused.
-    cooldown:
-      default-days: 3
-    open-pull-requests-limit: 5
     commit-message:
       prefix: 'build'
       include: 'scope'
+
+updates:
+  # Keeps the pinned action SHAs in your workflow stubs current. Correct for
+  # every repository from the moment it is generated, whatever language it is
+  # written in.
+  - package-ecosystem: 'github-actions'
+    directory: '/'
+    # A group's member must name its dependencies; '*' is all of them.
+    multi-ecosystem-group: 'dependencies'
+    patterns:
+      - '*'
+    # Actions accept only `default-days`; the per-semver keys are refused.
+    cooldown:
+      default-days: 3
+    # Labels stay with each ecosystem: the group's pull request takes every
+    # member's, and a security update takes its own ecosystem's.
     labels:
       - 'type: build'
       - 'dependencies'
     groups:
-      github-actions:
-        patterns:
-          - '*'
       # A group applies to version updates unless it says otherwise, so
       # security fixes would each open a pull request of their own.
       github-actions-security:
@@ -81,45 +100,28 @@ updates:
   # Keeps the features in .devcontainer/devcontainer.json current.
   - package-ecosystem: 'devcontainers'
     directory: '/'
-    schedule:
-      interval: 'monthly'
-      time: '07:00'
-      timezone: 'Etc/UTC'
+    multi-ecosystem-group: 'dependencies'
+    patterns:
+      - '*'
     cooldown:
       default-days: 3
-    open-pull-requests-limit: 5
-    commit-message:
-      prefix: 'build'
-      include: 'scope'
     labels:
       - 'type: build'
       - 'dependencies'
-    groups:
-      devcontainers:
-        patterns:
-          - '*'
 
   # Keeps the repository scripts' one dependency, PyYAML, current. Delete this
   # block if you delete .github/scripts/requirements.txt.
   - package-ecosystem: 'pip'
     directory: '/.github/scripts'
-    schedule:
-      interval: 'monthly'
-      time: '07:00'
-      timezone: 'Etc/UTC'
+    multi-ecosystem-group: 'dependencies'
+    patterns:
+      - '*'
     cooldown:
       default-days: 3
-    open-pull-requests-limit: 5
-    commit-message:
-      prefix: 'build'
-      include: 'scope'
     labels:
       - 'type: build'
       - 'dependencies'
     groups:
-      repository-scripts:
-        patterns:
-          - '*'
       repository-scripts-security:
         applies-to: 'security-updates'
         patterns:
@@ -127,10 +129,11 @@ updates:
 
   # --- Enable the ones your project actually uses -------------------------
   #
-  # Copy the first block above - INCLUDING the commit-message block, or that
-  # ecosystem's updates will not be Conventional Commits - change
-  # `package-ecosystem`, and point `directory` at the folder holding the
-  # manifest. Language ecosystems also accept `semver-major-days`,
+  # Copy the first block above, change `package-ecosystem`, and point
+  # `directory` at the folder holding the manifest. Keep its
+  # `multi-ecosystem-group` and `patterns`, so its updates join the month's
+  # pull request, and give it no `schedule` or `commit-message`: the group
+  # holds both. Language ecosystems also accept `semver-major-days`,
   # `semver-minor-days` and `semver-patch-days` under `cooldown`:
   #
   #   npm       package.json          pip        pyproject.toml

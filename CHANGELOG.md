@@ -41,6 +41,17 @@ every generated repository, whose own release notes are its changelog.
   repository against `tannergolden/standards`, from Check This Repository
   Against The Standards to Check What Is Left To Do By Hand.
 
+### Changed
+
+- **Dependabot opens one pull request a month**, not one per ecosystem: the
+  workflows, the development container and the scripts' requirements join a
+  multi-ecosystem group, `dependencies`, which holds the monthly schedule and
+  the `build` commit prefix. A major update in it holds that month's pull
+  request for a person. An ecosystem you added to `.github/dependabot.yml`
+  keeps a pull request of its own until it joins the group: give it
+  `multi-ecosystem-group: 'dependencies'` and `patterns: ['*']`, and take out
+  its `schedule` and `commit-message`, which Dependabot refuses on a member.
+
 ## [1.4.1] - 2026-10-25
 
 > [!NOTE]

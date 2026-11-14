@@ -32,8 +32,10 @@ one.
 - **One folder per area**: `backend/`, `benchmarks/`, `database/`,
   `infrastructure/`, `interface/` and `testing/`, as the fill-in standards lay
   them out.
-- **Designs, plans and research**: `designs/`, `plans/` and `research/`, from
-  the Technical Design, Implementation Plan and Research Log templates.
+- **Designs and plans**: `designs/` and `plans/`, from the Technical Design and
+  Implementation Plan templates.
+- **Research**: [`research/`](research/README.md), where every research report
+  is filed from the Research Log template, one per question.
 
 The fill-in standards in [`templates/technical/`](../templates/technical/README.md)
 copy out to the same path here, without `templates/`:
@@ -51,9 +53,10 @@ the folder holds.
 
 <!-- AUTO-INDEX:BEGIN dir=. style=log -->
 
-| Entry                    | Purpose    |
-| :----------------------- | :--------- |
-| [`README.md`](README.md) | This file. |
+| Entry                             | Purpose                                                                                                                                                                                         |
+| :-------------------------------- | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [`research/`](research/README.md) | Every research report filed in this project: one per question, written from the Research Log template, sourced claim by claim, and trusted for three months from the date it was last verified. |
+| [`README.md`](README.md)          | This file.                                                                                                                                                                                      |
 
 <!-- AUTO-INDEX:END -->
 

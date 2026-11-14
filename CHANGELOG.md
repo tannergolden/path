@@ -40,6 +40,8 @@ every generated repository, whose own release notes are its changelog.
   request 🔁 Intelligence Sync opens, and ten read-only audits of a
   repository against `tannergolden/standards`, from Check This Repository
   Against The Standards to Check What Is Left To Do By Hand.
+- **`docs/technical/research/`**, the folder every research report is filed
+  in, with a README that logs each report and the date it was last verified.
 - **🔎 Research Freshness**, in `.github/workflows/research-freshness.yml`,
   with `.github/scripts/research-freshness.py` and its tests. Every Monday it
   opens one issue listing each report verified over three months ago or never
@@ -48,6 +50,8 @@ every generated repository, whose own release notes are its changelog.
 
 ### Changed
 
+- **The Research Log template calls a report stale after three months**, not
+  six, and points at the folder this template now ships.
 - **Dependabot opens one pull request a month**, not one per ecosystem: the
   workflows, the development container and the scripts' requirements join a
   multi-ecosystem group, `dependencies`, which holds the monthly schedule and

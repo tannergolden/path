@@ -270,15 +270,15 @@ empty sections for your own, and one section the template keeps because every
 repository built from it needs it: **Research**, which says where research
 reports go and that every research request ends in one.
 
-| It ships                                                                             | What it does                                                                                                                                                                                                                                                                       |
-| :----------------------------------------------------------------------------------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [`AGENTS.md`](AGENTS.md)                                                             | The universal rules between the `INTELLIGENCE` markers, which 🔁 Intelligence Sync keeps current; empty sections for your own; and the template's **Research** section between the `TEMPLATE-SYNC` markers, which 🔄 Template Sync keeps current without touching a line around it |
-| [`.github/workflows/intelligence-sync.yml`](.github/workflows/intelligence-sync.yml) | 🔁 Intelligence Sync. Every Monday, and whenever you run it, it proposes the latest release of [`tannergolden/intelligence`](https://github.com/tannergolden/intelligence) as one pull request. It runs in this template too, which is where this `AGENTS.md` came from            |
-| [`docs/Prompts.md`](docs/Prompts.md)                                                 | Ready-made prompts in two sections kept apart: the Golden Path's own, kept current by 🔄 Template Sync, and this repository's, which only you write. The first 🔁 Intelligence Sync leaves this page as it is                                                                      |
+| It ships                                                                             | What it does                                                                                                                                                                                                                                                                                                 |
+| :----------------------------------------------------------------------------------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [`AGENTS.md`](AGENTS.md)                                                             | The universal rules between the `INTELLIGENCE` markers, which 🔁 Intelligence Sync keeps current; empty sections for your own; and the template's own sections, **Research** and **Synced files**, between `TEMPLATE-SYNC` markers, which 🔄 Template Sync keeps current without touching a line around them |
+| [`.github/workflows/intelligence-sync.yml`](.github/workflows/intelligence-sync.yml) | 🔁 Intelligence Sync. Every Monday, and whenever you run it, it proposes the latest release of [`tannergolden/intelligence`](https://github.com/tannergolden/intelligence) as one pull request. It runs in this template too, which is where this `AGENTS.md` came from                                      |
+| [`docs/Prompts.md`](docs/Prompts.md)                                                 | Ready-made prompts in two sections kept apart: the Golden Path's own, kept current by 🔄 Template Sync, and this repository's, which only you write. The first 🔁 Intelligence Sync leaves this page as it is                                                                                                |
 
 A repository generated before this template shipped an `AGENTS.md` keeps its
-own: 🔄 Template Sync puts the **Research** section into it, under **Where
-things live**, and changes nothing else in the file.
+own: 🔄 Template Sync puts each of the template's sections into it, under the
+heading it follows here, and changes nothing else in the file.
 
 **Nothing lands until you merge it.** The stub runs here as it does in yours.
 It opens its pull request with the repository's own
@@ -678,6 +678,11 @@ any other. If you never run it, nothing in this repository ever changes. What
 each release brings is in the template's
 [changelog](https://github.com/tannergolden/path/blob/Development/CHANGELOG.md),
 so you can read it before you run one.
+
+**Every file a sync keeps current is listed in
+[`docs/Synced-Files.md`](docs/Synced-Files.md)**, with the part of each that is
+yours to change. Read it before you edit one: a file you only want current is
+brought up to date by its sync, never by hand.
 
 | It always...                        | Because                                                                                                                  |
 | :---------------------------------- | :----------------------------------------------------------------------------------------------------------------------- |

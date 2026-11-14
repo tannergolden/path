@@ -39,18 +39,19 @@ why they ship as seed content rather than as law.
 
 <!-- AUTO-INDEX:BEGIN dir=. style=log -->
 
-| Entry                                     | Purpose                                                                                                                                                                                                                 |
-| :---------------------------------------- | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [`adrs/`](adrs/README.md)                 | Architecture decision records, one file per decision, each logged with its status, date and evidence.                                                                                                                   |
-| [`distribution/`](distribution/README.md) | From a branch to a release: how a change moves through this project and how a release reaches its users, wherever this project adds to the shared workflow.                                                             |
-| [`introduction/`](introduction/README.md) | Where to start: what this project is and how its parts fit together, the principles it holds to, how to get ready to work on it, and where it is going.                                                                 |
-| [`library/`](library/README.md)           | What to learn, and where: guides, background and further reading for anyone new to this project's domain or its tools.                                                                                                  |
-| [`operations/`](operations/README.md)     | Keeping this project healthy and safe once it runs: runbooks, incident response, post-mortems, security, and the risks it still carries.                                                                                |
-| [`references/`](references/README.md)     | Things to look up: the glossary, catalogues, settings and formats, the pages this project consults rather than reads through.                                                                                           |
-| [`technical/`](technical/README.md)       | How this project is built: its architecture, stack and source, one document for each part that needs one, and the designs, plans and research behind them.                                                              |
-| [`templates/`](templates/README.md)       | Index of the reusable document templates and when to use each one.                                                                                                                                                      |
-| [`Prompts.md`](Prompts.md)                | Ready-made prompts for working in this repository with an AI agent, in two sections kept apart: the Golden Path's own, which &#x1F504; Template Sync keeps current, and this repository's, which only its owner writes. |
-| [`README.md`](README.md)                  | This file.                                                                                                                                                                                                              |
+| Entry                                     | Purpose                                                                                                                                                                                                                   |
+| :---------------------------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| [`adrs/`](adrs/README.md)                 | Architecture decision records, one file per decision, each logged with its status, date and evidence.                                                                                                                     |
+| [`distribution/`](distribution/README.md) | From a branch to a release: how a change moves through this project and how a release reaches its users, wherever this project adds to the shared workflow.                                                               |
+| [`introduction/`](introduction/README.md) | Where to start: what this project is and how its parts fit together, the principles it holds to, how to get ready to work on it, and where it is going.                                                                   |
+| [`library/`](library/README.md)           | What to learn, and where: guides, background and further reading for anyone new to this project's domain or its tools.                                                                                                    |
+| [`operations/`](operations/README.md)     | Keeping this project healthy and safe once it runs: runbooks, incident response, post-mortems, security, and the risks it still carries.                                                                                  |
+| [`references/`](references/README.md)     | Things to look up: the glossary, catalogues, settings and formats, the pages this project consults rather than reads through.                                                                                             |
+| [`technical/`](technical/README.md)       | How this project is built: its architecture, stack and source, one document for each part that needs one, and the designs, plans and research behind them.                                                                |
+| [`templates/`](templates/README.md)       | Index of the reusable document templates and when to use each one.                                                                                                                                                        |
+| [`Prompts.md`](Prompts.md)                | Ready-made prompts for working in this repository with an AI agent, in two sections kept apart: the Golden Path's own, which &#x1F504; Template Sync keeps current, and this repository's, which only its owner writes.   |
+| [`README.md`](README.md)                  | This file.                                                                                                                                                                                                                |
+| [`Synced-Files.md`](Synced-Files.md)      | Which files here are kept current from other repositories, by which sync, and which parts of each are yours: read it before editing one, so an update comes from its sync and a change of your own survives the next one. |
 
 <!-- AUTO-INDEX:END -->
 
@@ -108,6 +109,10 @@ Beside the seven folders sits [`Prompts.md`](Prompts.md): ready-made prompts for
 working here with an AI agent, in two sections kept apart. 🔄 Template Sync keeps
 the Golden Path's section current, and the section after it is this
 repository's own, which nothing upstream ever writes.
+
+[`Synced-Files.md`](Synced-Files.md) sits beside it: which files here are kept
+current from other repositories, by which sync, and which part of each is
+yours. Read it before you edit one.
 
 Each folder arrives empty but for a `README.md` that says what belongs in it
 and logs its files. Put each document you write in the folder its kind names,

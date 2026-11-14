@@ -42,15 +42,23 @@ every generated repository, whose own release notes are its changelog.
   Against The Standards to Check What Is Left To Do By Hand.
 - **An `AGENTS.md`, written by 🔁 Intelligence Sync**, which now runs in the
   template as in any repository: the universal rules between the
-  `INTELLIGENCE` markers, empty sections for your own, and one section the
-  template keeps between `TEMPLATE-SYNC` markers, **Research**. It says that
+  `INTELLIGENCE` markers, empty sections for your own, and two sections the
+  template keeps between `TEMPLATE-SYNC` markers. **Research** says that
   research reports go in `docs/technical/research/`, and that a research
   request is done only when its report is filed from the Research Log
-  template. 🔄 Template Sync keeps that section current and never touches a
-  line around it; a repository whose own `AGENTS.md` came first takes the
-  section under **Where things live**. That needs the engine in
-  `tannergolden/standards` that syncs one section of a file, so it reaches a
-  repository once a standards release with it moves `v1`.
+  template. **Synced files** tells an agent never to bring a synced file up
+  to date by hand, or edit inside a machine's markers, and points it at
+  `docs/Synced-Files.md`. 🔄 Template Sync keeps both sections current and
+  never touches a line around them; a repository whose own `AGENTS.md` came
+  first takes each one under the heading it follows here. That needs the
+  engine in `tannergolden/standards` that syncs one section of a file, so it
+  reaches a repository once a standards release with it moves `v1`.
+- **`docs/Synced-Files.md`**, beside `docs/Prompts.md`: every file kept
+  current from another repository, by which sync, which part of each is
+  yours, and what to check before editing one, with a section for agents.
+  The template keeps everything between its `TEMPLATE-SYNC` markers current;
+  the section after it, for anything this repository takes from elsewhere on
+  its own, is yours.
 - **`docs/technical/research/`**, the folder every research report is filed
   in, with a README that logs each report and the date it was last verified.
 - **🔎 Research Freshness**, in `.github/workflows/research-freshness.yml`,

@@ -86,7 +86,7 @@ _The universal rules first, then this repository's own._
 
 <!-- The folders an agent needs, and what each one holds. -->
 
-<!-- TEMPLATE-SYNC:BEGIN -->
+<!-- TEMPLATE-SYNC:RESEARCH:BEGIN -->
 
 ## Research
 
@@ -99,11 +99,25 @@ _The universal rules first, then this repository's own._
 - **Check the folder first.** Reuse a report on the same question verified within the last three months; reverify an older one, or redo it in the same file, before relying on it (RES-001).
 - **Ask where it goes** when the research is about your user's own life and this repository is public (SEC-003).
 
-<!-- TEMPLATE-SYNC:END -->
+<!-- TEMPLATE-SYNC:RESEARCH:END -->
 
 ## Gotchas
 
 <!-- What has bitten someone before: generated files, slow tests, fragile steps. -->
+
+<!-- TEMPLATE-SYNC:SYNCED-FILES:BEGIN -->
+
+## Synced files
+
+Some files here are kept current from other repositories. [`docs/Synced-Files.md`](docs/Synced-Files.md) names
+each one, the sync that owns it, and the part of it that is this repository's. Where this repository keeps its
+docs in `.docs/`, read every `docs/` path in this file as `.docs/`.
+
+- **Never bring a synced file up to date by hand**, from memory or by copying the template's: tell your user which sync to run.
+- **Never edit between `INTELLIGENCE`, `TEMPLATE-SYNC` or `AUTO-INDEX` markers**, or in `.github/template-sync.lock`, and change `.github/template-sync` only when your user asks.
+- **Change a synced file only for this repository's own need, when your user asks**, in the part it leaves to the repository, and say in your report how its next sync will treat the change.
+
+<!-- TEMPLATE-SYNC:SYNCED-FILES:END -->
 
 ## Ask first
 

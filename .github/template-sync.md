@@ -59,11 +59,19 @@ those files stay current with the template. In the pull request a sync opens:
 your section, so a sync only ever brings changes to its own. To keep a change you made to the
 template's section, add `# keep mine: /docs/Prompts.md` under **Your rules**, as above.
 
-**`AGENTS.md` is yours but for one section.** The template keeps only its **Research** section,
-between the `TEMPLATE-SYNC` markers: a sync brings that section up to date, or puts it in under
-**Where things live** if your file lacks it, and never changes a line around it. A change you make
-inside the section is a conflict, and yours stays; a section you take out stays out. To stop it
-altogether, put a `#` in front of `/AGENTS.md`.
+**`AGENTS.md` and `docs/Synced-Files.md` are yours but for the template's sections.** Each section
+the template keeps sits between `TEMPLATE-SYNC` markers, such as **Research** and **Synced files**
+in `AGENTS.md`: a sync brings it up to date, or puts it in under the heading it follows in the
+template if your file lacks it, and never changes a line around it. A change you make inside a
+section is a conflict, and yours stays; a section you take out stays out. To stop a file
+altogether, put a `#` in front of its line. [`docs/Synced-Files.md`](../docs/Synced-Files.md) lists
+every file synced into this repository, and the part of each that is yours.
+
+**A hidden `docs/` or `assets/` is synced where it lives.** If this repository keeps the template's
+`docs/` as `.docs/`, or its `assets/` as `.assets/`, a sync reads and writes those files there and
+never brings the visible folder back. The list still names them by the template's paths, such as
+`/docs/README.md`, so write a rule with those, `!/docs/**`; a `# keep mine:` note may name a file
+either way.
 
 A path the list leaves to you, and any file the template does not ship, is never touched. So before
 you run it, look down the **Kept current** section for any file you put to a different use - a folder

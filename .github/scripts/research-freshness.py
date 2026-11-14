@@ -8,7 +8,8 @@ its claims were last checked, and stale after that (RES-001 in the universal
 rules). Nothing about a stale report looks wrong: it reads as confidently as
 the day it was filed. So this reads the date each report in
 docs/technical/research/ carries, and names every one past its window, or with
-no date at all, for 🔎 Research Freshness to put in one issue.
+no date at all, for 🔎 Research Freshness to put in one issue. A repository
+that keeps its docs hidden in .docs/ has its reports read from there.
 
 THE DATE IS THE REPORT'S OWN. The Research Log template keeps it in the
 hidden frontmatter as `verified: 'YYYY-MM-DD'`, the last time someone checked
@@ -38,6 +39,7 @@ import re
 import sys
 
 FOLDER = pathlib.Path('docs/technical/research')
+HIDDEN = pathlib.Path('.docs/technical/research')  # where a repository that hid docs/ keeps them
 WINDOW_MONTHS = 3
 FRONTMATTER = re.compile(r'\A\s*<!--(?P<body>.*?)-->', re.S)
 DATE_FIELD = re.compile(r"^(?P<key>verified|review_by):[ \t]*['\"]?(?P<value>[^'\"\n]*?)['\"]?[ \t]*$", re.M)
@@ -82,12 +84,15 @@ def read(path: pathlib.Path) -> Report:
     return Report(path, None, fields.get('review_by'))
 
 
+def folders(root: pathlib.Path) -> list[pathlib.Path]:
+    """The research folders this repository has: docs/'s, and .docs/'s where it hid its docs."""
+    return [root / folder for folder in (FOLDER, HIDDEN) if (root / folder).is_dir()]
+
+
 def reports(root: pathlib.Path) -> list[Report]:
-    """Every report in the folder, the folder's own README aside."""
-    folder = root / FOLDER
-    if not folder.is_dir():
-        return []
-    return [read(p) for p in sorted(folder.glob('*.md')) if p.name != 'README.md' and p.is_file()]
+    """Every report in each research folder, the folder's own README aside."""
+    return [read(p) for folder in folders(root) for p in sorted(folder.glob('*.md'))
+            if p.name != 'README.md' and p.is_file()]
 
 
 def body(stale: list[Report], root: pathlib.Path, link_base: str = '') -> str:
@@ -126,10 +131,11 @@ def main(argv: list[str] | None = None) -> int:
 
     found = reports(args.root)
     stale = [report for report in found if report.stale(today)]
-    if not (args.root / FOLDER).is_dir():
-        print(f'{FOLDER.as_posix()}/ does not exist, so there is no research to check.')
+    where = ' and '.join(f'{folder.relative_to(args.root).as_posix()}/' for folder in folders(args.root))
+    if not where:
+        print(f'Neither {FOLDER.as_posix()}/ nor {HIDDEN.as_posix()}/ exists, so there is no research to check.')
     else:
-        print(f'{len(found)} report(s) in {FOLDER.as_posix()}/, {len(stale)} stale as of {today.isoformat()}.')
+        print(f'{len(found)} report(s) in {where}, {len(stale)} stale as of {today.isoformat()}.')
     for report in stale:
         why = f'verified {report.verified.isoformat()}' if report.verified else 'no date'
         print(f'  stale: {report.path.relative_to(args.root).as_posix()} ({why})')

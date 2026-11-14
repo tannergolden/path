@@ -59,6 +59,10 @@ every generated repository, whose own release notes are its changelog.
   The template keeps everything between its `TEMPLATE-SYNC` markers current;
   the section after it, for anything this repository takes from elsewhere on
   its own, is yours.
+- **A `docs/` or `assets/` kept hidden as `.docs/` or `.assets/` keeps
+  syncing**, once the same standards release moves `v1`: each file is synced
+  where the repository keeps it, and no sync brings the visible folder back.
+  🔎 Research Freshness reads `.docs/technical/research/` too.
 - **`docs/technical/research/`**, the folder every research report is filed
   in, with a README that logs each report and the date it was last verified.
 - **🔎 Research Freshness**, in `.github/workflows/research-freshness.yml`,

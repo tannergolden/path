@@ -94,6 +94,14 @@ class TestReports(unittest.TestCase):
         self.write('README.md', '# Research\n')
         self.assertEqual(fresh.reports(self.root), [])
 
+    def test_a_repository_that_hid_its_docs_has_its_reports_read_from_there(self) -> None:
+        hidden = self.root / fresh.HIDDEN
+        hidden.mkdir(parents=True)
+        (hidden / 'Old.md').write_text(report('2026-01-04'), encoding='utf-8')
+        self.write('New.md', report('2026-11-01'))
+        self.assertEqual(self.stale_names('2026-11-14'), ['Old.md'])
+        self.assertEqual(len(fresh.reports(self.root)), 2)
+
     def test_a_missing_folder_has_nothing_to_check(self) -> None:
         empty = pathlib.Path(tempfile.mkdtemp())
         self.addCleanup(shutil.rmtree, empty)

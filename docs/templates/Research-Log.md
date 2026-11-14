@@ -22,7 +22,7 @@ _Every claim sourced. Every finding dated. Nothing trusted past its window._
 ---
 
 > [!TIP]
-> **How to use**: copy this file to `docs/technical/research/<Topic>.md` (keep this template pristine) and fill in every section, including the `focus` and `decision` frontmatter, with `type` set to `record`. Reports live under `docs/technical/research/`, whose README logs them, and every research request ends in one, as `AGENTS.md` says. Delete a prompt once you have satisfied it; mark a section `N/A` only when it genuinely does not apply.
+> **How to use**: copy this file to `docs/technical/research/<Topic>.md`, or `.docs/technical/research/<Topic>.md` where this repository keeps its docs hidden (keep this template pristine) and fill in every section, including the `focus` and `decision` frontmatter, with `type` set to `record`. Reports live under `docs/technical/research/`, whose README logs them, and every research request ends in one, as `AGENTS.md` says. Delete a prompt once you have satisfied it; mark a section `N/A` only when it genuinely does not apply.
 >
 > **The clock**: the `verified:` frontmatter date is the single source of the report's age, and it MUST equal the date of your newest `## 📅 Log Entry:` heading - nothing enforces that, so keeping the two in step is on you. Filing sets both; a reverification appends a new entry and bumps both.
 >

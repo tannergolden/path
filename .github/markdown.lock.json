@@ -1,6 +1,469 @@
 {
- "drawn": null,
- "parts": {},
- "snapshot": null,
+ "drawn": {
+  "born": "2026-07-27",
+  "day": "2026-11-14",
+  "holiday": null,
+  "rainbow": null,
+  "theme": "blackprint"
+ },
+ "parts": {
+  "banners": {
+   "last": {
+    "mode": "repository",
+    "repository": {
+     "archived": false,
+     "branch": "Development",
+     "created": "2026-07-27",
+     "description": "Golden path repository template: language-agnostic boilerplate with folder structure, community health files, dev container and GitHub Actions CI wired to reusable workflows.",
+     "discussionsOn": false,
+     "forks": 0,
+     "full": "tannergolden/path",
+     "homepage": "",
+     "issues": 0,
+     "issuesOn": true,
+     "language": "",
+     "license": "MIT",
+     "name": "path",
+     "org": false,
+     "owner": "tannergolden",
+     "private": false,
+     "pulls": 0,
+     "release": "v1.4.1",
+     "released": "2026-10-25",
+     "releases": 1,
+     "stars": 0,
+     "topics": [
+      "golden-path",
+      "github-actions",
+      "platform-engineering",
+      "template-repository",
+      "boilerplate",
+      "project-template"
+     ],
+     "updated": "2026-11-14",
+     "watchers": 0,
+     "workflows": 20
+    },
+    "subject": "tannergolden/path",
+    "today": "2026-11-14"
+   }
+  },
+  "elements": {
+   "asof": "2026-11-14T12:08:00Z",
+   "drawn": [
+    "path",
+    "standards",
+    "intelligence",
+    "markdown"
+   ],
+   "measured": {
+    "intelligence": {
+     "cells": [
+      [
+       "Language",
+       "PYTHON"
+      ],
+      [
+       "Release",
+       "V0.10.0"
+      ],
+      [
+       "Stars",
+       "0"
+      ]
+     ],
+     "desc": "Universal rules for AI coding agents like Claude Code, Codex, Copilot and Cursor: written once, tested by evals, synced to every repository as AGENTS.md and to every machine.",
+     "link": "https://github.com/tannergolden/intelligence",
+     "name": "intelligence",
+     "owner": "tannergolden"
+    },
+    "markdown": {
+     "cells": [
+      [
+       "Language",
+       "PYTHON"
+      ],
+      [
+       "Release",
+       "V1.17.1"
+      ],
+      [
+       "Stars",
+       "0"
+      ]
+     ],
+     "desc": "README generator for GitHub profiles and repos: scheduled GitHub Actions draw headers, badges, trophies and footers as committed SVGs. No third-party servers.",
+     "link": "https://github.com/tannergolden/markdown",
+     "name": "markdown",
+     "owner": "tannergolden"
+    },
+    "path": {
+     "cells": [
+      [
+       "Language",
+       ""
+      ],
+      [
+       "Release",
+       "V1.4.1"
+      ],
+      [
+       "Stars",
+       "0"
+      ]
+     ],
+     "desc": "Golden path repository template: language-agnostic boilerplate with folder structure, community health files, dev container and GitHub Actions CI wired to reusable workflows.",
+     "link": "https://github.com/tannergolden/path",
+     "name": "path",
+     "owner": "tannergolden"
+    },
+    "standards": {
+     "cells": [
+      [
+       "Language",
+       "PYTHON"
+      ],
+      [
+       "Release",
+       "V1.18.2"
+      ],
+      [
+       "Stars",
+       "0"
+      ]
+     ],
+     "desc": "Engineering standards plus reusable GitHub Actions workflows and composite actions that enforce them for any language: CI/CD, security scanning, branch protection, releases.",
+     "link": "https://github.com/tannergolden/standards",
+     "name": "standards",
+     "owner": "tannergolden"
+    }
+   }
+  },
+  "trophies": {
+   "history": {
+    "active": {
+     "2026-11-14": 18
+    },
+    "commits": {
+     "2026-11-14": 195
+    },
+    "contributors": {
+     "2026-11-14": 2
+    },
+    "forks": {
+     "2026-11-14": 0
+    },
+    "merged": {
+     "2026-11-14": 0
+    },
+    "releases": {
+     "2026-11-14": 1
+    },
+    "resolved": {
+     "2026-11-14": 0
+    },
+    "stars": {
+     "2026-11-14": 0
+    }
+   },
+   "last": {
+    "curs": {
+     "alive": 1,
+     "answered": 0,
+     "auto-pilot": 1,
+     "big-name": 0,
+     "big-week": 6,
+     "birthday": 0,
+     "by-the-book": 195,
+     "changelog": 1,
+     "clean-bill": 1,
+     "cloned": null,
+     "comeback": 0,
+     "constellation": 0,
+     "containerized": 0,
+     "crew": 1,
+     "documented": 1,
+     "downloaded": 0,
+     "fast-reply": 0,
+     "filed": 6,
+     "first-fork": 0,
+     "first-merge": 0,
+     "first-release": 1,
+     "first-star": 0,
+     "first-tag": 2,
+     "first-watcher": 0,
+     "follows-the-standards": 1,
+     "fork-magnet": null,
+     "forked-far": 0,
+     "form-filler": 1,
+     "friday-deploy": 0,
+     "friday-the-13th": 0,
+     "front-door": 0,
+     "full-house": 0,
+     "gatekeeper": 1,
+     "ghost": 0,
+     "gitmoji": 0,
+     "golden-path": 1,
+     "good-first-issues": 0,
+     "green-machine": 29,
+     "green-wall": 0,
+     "help-wanted": 0,
+     "house-rules": 1,
+     "label-maker": 9,
+     "leap-day": 0,
+     "licensed": 1,
+     "living-forks": 0,
+     "locksmith": 1,
+     "long-game": 1,
+     "long-thread": 0,
+     "marathon-day": 1,
+     "mentor": 0,
+     "midnight-oil": 0,
+     "monthly-release": 1,
+     "named": 1,
+     "new-year": 0,
+     "night-shift": 113,
+     "open-hand": 0,
+     "org-backed": 0,
+     "outside-help": 0,
+     "outside-merges": 0,
+     "packager": 0,
+     "palindrome": 0,
+     "paperwork": 1,
+     "popular-opinion": 0,
+     "poster": 0,
+     "prerelease": 0,
+     "protected": 0,
+     "ready-room": 1,
+     "referred": null,
+     "registry": null,
+     "regulars": 2,
+     "release-notes": 1,
+     "reviewed": 0,
+     "roadmap": 0,
+     "round-number": 0,
+     "same-day-fix": 0,
+     "semver": 1,
+     "signed": 100,
+     "small-steps": 1,
+     "squeaky": 1,
+     "star-of-the-week": null,
+     "stargazer-streak": 0,
+     "stranger-report": 0,
+     "streak": 4,
+     "support-line": 1,
+     "talkative": 0,
+     "ten-strong": 2,
+     "test-suite": 1,
+     "the-answer": 0,
+     "town-hall": 0,
+     "trending": null,
+     "triage": 0,
+     "used-by": null,
+     "visited": null,
+     "watched": 0,
+     "weekend-project": 5,
+     "weekly-beat": 4,
+     "welcome-mat": 1,
+     "well-formed": 1,
+     "well-maintained": 0,
+     "wired": 1
+    },
+    "delta": {
+     "active": 0,
+     "commits": 0,
+     "contributors": 0,
+     "forks": 0,
+     "merged": 0,
+     "releases": 0,
+     "resolved": 0,
+     "stars": 0
+    },
+    "extra": {
+     "commits30": 10,
+     "lastRelease": 20
+    },
+    "mode": "repository",
+    "new": {
+     "active": false,
+     "commits": true,
+     "contributors": true,
+     "forks": false,
+     "merged": false,
+     "releases": true,
+     "resolved": false,
+     "stars": false
+    },
+    "owners": {},
+    "subject": "tannergolden/path",
+    "today": "2026-11-14",
+    "values": {
+     "active": 18,
+     "commits": 195,
+     "contributors": 2,
+     "forks": 0,
+     "merged": 0,
+     "releases": 1,
+     "resolved": 0,
+     "stars": 0
+    }
+   },
+   "reached": {
+    "ach:alive": {
+     "1": "2026-11-14"
+    },
+    "ach:auto-pilot": {
+     "1": "2026-11-14"
+    },
+    "ach:by-the-book": {
+     "1": "2026-11-14"
+    },
+    "ach:changelog": {
+     "1": "2026-11-14"
+    },
+    "ach:clean-bill": {
+     "1": "2026-11-14"
+    },
+    "ach:documented": {
+     "1": "2026-11-14"
+    },
+    "ach:filed": {
+     "1": "2026-11-14"
+    },
+    "ach:first-release": {
+     "1": "2026-11-14"
+    },
+    "ach:first-tag": {
+     "1": "2026-11-14"
+    },
+    "ach:follows-the-standards": {
+     "1": "2026-11-14"
+    },
+    "ach:form-filler": {
+     "1": "2026-11-14"
+    },
+    "ach:gatekeeper": {
+     "1": "2026-11-14"
+    },
+    "ach:golden-path": {
+     "1": "2026-11-14"
+    },
+    "ach:house-rules": {
+     "1": "2026-11-14"
+    },
+    "ach:licensed": {
+     "1": "2026-11-14"
+    },
+    "ach:locksmith": {
+     "1": "2026-11-14"
+    },
+    "ach:named": {
+     "1": "2026-11-14"
+    },
+    "ach:night-shift": {
+     "1": "2026-11-14"
+    },
+    "ach:paperwork": {
+     "1": "2026-11-14"
+    },
+    "ach:ready-room": {
+     "1": "2026-11-14"
+    },
+    "ach:signed": {
+     "1": "2026-11-14"
+    },
+    "ach:small-steps": {
+     "1": "2026-11-14"
+    },
+    "ach:squeaky": {
+     "1": "2026-11-14"
+    },
+    "ach:support-line": {
+     "1": "2026-11-14"
+    },
+    "ach:test-suite": {
+     "1": "2026-11-14"
+    },
+    "ach:welcome-mat": {
+     "1": "2026-11-14"
+    },
+    "ach:well-formed": {
+     "1": "2026-11-14"
+    },
+    "ach:wired": {
+     "1": "2026-11-14"
+    },
+    "active": {},
+    "commits": {
+     "1.0": "2026-11-14"
+    },
+    "contributors": {
+     "1.0": "2026-11-14"
+    },
+    "forks": {},
+    "merged": {},
+    "releases": {
+     "1.0": "2026-11-14"
+    },
+    "resolved": {},
+    "stars": {}
+   },
+   "scan": {
+    "tannergolden/path": {
+     "complete": true,
+     "cursor": null,
+     "head": "2c57efdd04179abc2073ca5f383e300447d70bb5",
+     "stats": {
+      "authors": {
+       "claude": 48,
+       "tannergolden": 147
+      },
+      "coauthored": 58,
+      "conventional": 195,
+      "days": [
+       "2026-11-14",
+       "2026-10-28",
+       "2026-10-26",
+       "2026-10-25",
+       "2026-10-24",
+       "2026-10-23",
+       "2026-10-21",
+       "2026-10-20",
+       "2026-10-19",
+       "2026-10-18",
+       "2026-10-13",
+       "2026-10-11",
+       "2026-10-10",
+       "2026-10-07",
+       "2026-09-19",
+       "2026-07-30",
+       "2026-07-28",
+       "2026-07-27"
+      ],
+      "docs": 89,
+      "early": 14,
+      "emoji": 0,
+      "fix": 21,
+      "heavy": 4,
+      "lunch": 0,
+      "max_files": 122,
+      "max_lines": 5087,
+      "midnight": 0,
+      "night": 113,
+      "onefile": 109,
+      "refresh": 0,
+      "refresh_days": {},
+      "revert": 0,
+      "signed": 100,
+      "sweeping": 4,
+      "test": 2,
+      "total": 195
+     },
+     "total": 195
+    }
+   }
+  }
+ },
+ "snapshot": "2026-11-14",
  "version": 1
 }

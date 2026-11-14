@@ -73,8 +73,8 @@ from what each file says about itself.
 - [ ] Rebuild the container.
 
 > [!NOTE]
-> **There is no `settings` block, deliberately.** VS Code reads
-> [`.vscode/settings.json`](../.vscode/settings.json) inside the container like
+> **There is no `settings` block, deliberately.** VS Code reads a repository's
+> own `.vscode/settings.json`, where it keeps one, inside the container like
 > anywhere else, so a copy here would be a second source of truth, and the copy
 > that drifts is always the one nobody remembers.
 

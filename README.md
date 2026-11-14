@@ -97,8 +97,8 @@ because none of it cares where your code lives.
 > brings every path in the **Kept current** section of
 > [`.github/template-sync`](.github/template-sync) up to the template's latest
 > release: the workflow stubs and scripts in `.github/`, the community health
-> files and forms, `.devcontainer/`, `.vscode/`, the configuration files at the
-> root, and the seeded documents and folder READMEs in `docs/`.
+> files and forms, `.devcontainer/`, the configuration files at the root, and
+> the seeded documents and folder READMEs in `docs/`.
 >
 > - **A file you had not changed** is overwritten with the template's version.
 > - **A file you changed** is merged with the template's change. Where you
@@ -478,7 +478,6 @@ publishes nothing.
 | :------------------------------------------------- | :------------------------------------------------------------------------------------------------------------------------------------- |
 | [`.devcontainer/`](.devcontainer/README.md)        | The language-neutral development container this repository ships, and how to give it the toolchain your project needs.                 |
 | [`.github/`](.github/)                             | Community health files, forms, CODEOWNERS, Dependabot, actions, scripts and workflows - logged below                                   |
-| [`.vscode/`](.vscode/README.md)                    | The VS Code settings and extension recommendations this repository shares, and why every other file in this folder stays out of git.   |
 | [`assets/`](assets/README.md)                      | Where this project keeps what presents it: four folders to start, a name ready for every other kind, and the rules every file follows. |
 | [`benchmarks/`](benchmarks/README.md)              | The benchmark suites and recorded results that defend the performance budgets of this project.                                         |
 | [`docs/`](docs/README.md)                          | Where this project keeps its own documents, and where the engineering standards it follows actually live.                              |

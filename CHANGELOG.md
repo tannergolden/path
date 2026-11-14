@@ -86,6 +86,16 @@ every generated repository, whose own release notes are its changelog.
   `multi-ecosystem-group: 'dependencies'` and `patterns: ['*']`, and take out
   its `schedule` and `commit-message`, which Dependabot refuses on a member.
 
+### Removed
+
+- **`.vscode/`**, with its settings, extension recommendations and README.
+  An editor's settings and extensions are each project's own choice, and a
+  template that ships them chooses for every repository built from it. A sync
+  removes the copies a repository never changed and keeps any it did; to keep
+  the template's as they are, put a `#` in front of their three lines in
+  `.github/template-sync` before you run it. `.gitignore` still keeps a
+  repository's personal VS Code files out, and lets the four a team shares in.
+
 ## [1.4.1] - 2026-10-25
 
 > [!NOTE]

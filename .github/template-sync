@@ -98,10 +98,6 @@
 /.gitignore
 /.markdownlint.json
 
-/.vscode/README.md
-/.vscode/extensions.json
-/.vscode/settings.json
-
 # Yours but for the sections the template keeps between TEMPLATE-SYNC
 # markers, here and in docs/Synced-Files.md: only those lines ever sync.
 /AGENTS.md

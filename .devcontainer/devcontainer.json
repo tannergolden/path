@@ -51,11 +51,11 @@
         "tamasfe.even-better-toml"
       ]
 
-      // No "settings" block here on purpose. VS Code reads
-      // .vscode/settings.json inside the container like anywhere else, so
-      // repeating editor.formatOnSave and markdownlint.config would create a
-      // second source of truth - and the copy that drifts is always the one
-      // nobody remembers exists.
+      // No "settings" block here on purpose. VS Code reads a repository's
+      // own .vscode/settings.json, where it keeps one, inside the container
+      // like anywhere else, so repeating settings here would create a second
+      // source of truth - and the copy that drifts is always the one nobody
+      // remembers exists.
     }
   },
 

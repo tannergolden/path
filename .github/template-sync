@@ -61,8 +61,10 @@
 /.github/scripts/hooks/commit-msg
 /.github/scripts/hooks/pre-commit
 /.github/scripts/requirements.txt
+/.github/scripts/research-freshness.py
 /.github/scripts/test_gitignore.py
 /.github/scripts/test_hooks.py
+/.github/scripts/test_research_freshness.py
 /.github/scripts/test_validate_repository.py
 /.github/scripts/test_verify_stub_ceilings.py
 /.github/scripts/validate-repository.py
@@ -82,6 +84,7 @@
 /.github/workflows/preview-deploy.yml
 /.github/workflows/prune-runs.yml
 /.github/workflows/release.yml
+/.github/workflows/research-freshness.yml
 /.github/workflows/scorecard.yml
 /.github/workflows/semantic-pr.yml
 /.github/workflows/template-sync.yml

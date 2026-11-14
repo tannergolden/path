@@ -40,6 +40,11 @@ every generated repository, whose own release notes are its changelog.
   request 🔁 Intelligence Sync opens, and ten read-only audits of a
   repository against `tannergolden/standards`, from Check This Repository
   Against The Standards to Check What Is Left To Do By Hand.
+- **🔎 Research Freshness**, in `.github/workflows/research-freshness.yml`,
+  with `.github/scripts/research-freshness.py` and its tests. Every Monday it
+  opens one issue listing each report verified over three months ago or never
+  dated, keeps that issue current, and closes it once none is left. Like any
+  workflow file, it waits on a `BOT_ACCESS_TOKEN` in a sync.
 
 ### Changed
 

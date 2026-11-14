@@ -1,0 +1,81 @@
+# Installed from tannergolden/path. Edit freely: this file is YOURS.
+#
+# Names the research reports in docs/technical/research/ that have gone
+# stale: verified over three months ago, or never dated (RES-001 in the
+# universal rules). Every Monday, and whenever you run it, it opens one issue
+# listing each such report, keeps that issue current while any stays stale,
+# and closes it once every report is current again. It changes no file.
+#
+# .github/scripts/research-freshness.py decides what is stale, with its tests
+# beside it; this file only carries the answer to an issue.
+#
+# ⚠️ IT IS SILENT IN THE GOLDEN PATH TEMPLATE. Its guard names it, as every
+# standards stub's does, so it does nothing in tannergolden/path and comes
+# alive in each repository generated from it. 🔄 Template Sync keeps this
+# file and its script current from the template, merged with any edit you
+# make to them.
+
+name: '🔎 Research Freshness'
+
+on:
+  schedule:
+    - cron: '0 9 * * 1' # Mondays, on an hour of its own after the weekly sweep
+  workflow_dispatch:
+
+concurrency:
+  group: ${{ github.workflow }}
+  cancel-in-progress: false
+
+permissions: {}
+
+jobs:
+  freshness:
+    name: '🔎 Stale Research'
+    if: ${{ !(github.event.repository.is_template && github.event.repository.name == 'path') }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    permissions:
+      contents: read # read the research reports
+      issues: write # open, update or close the one issue that lists stale reports
+    steps:
+      - name: '🛡️ Harden Runner'
+        uses: tannergolden/standards/.github/actions/harden@v1
+        with:
+          egress-policy: audit
+          notice: '🔎 Listing the research reports past their three months.'
+
+      - name: '📂 Checkout'
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+
+      # The script needs only the Python the runner image ships.
+      - name: '🔎 Find the stale reports'
+        id: find
+        env:
+          LINK_BASE: ${{ github.server_url }}/${{ github.repository }}/blob/${{ github.event.repository.default_branch }}/
+        run: python3 .github/scripts/research-freshness.py --body "$RUNNER_TEMP/stale.md" --link-base "$LINK_BASE"
+
+      # One issue, found by its exact title: opened when a report goes stale,
+      # its list rewritten while any stays stale, and closed when none is.
+      - name: '📝 Open, update or close the issue'
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+          STALE: ${{ steps.find.outputs.stale }}
+          TITLE: '🔎 Research past its three months'
+        run: |
+          set -euo pipefail
+          number="$(gh issue list --state open --limit 100 --json number,title \
+            --jq 'map(select(.title == env.TITLE)) | .[0].number // empty')"
+          if [ "${STALE:-0}" -gt 0 ]; then
+            if [ -n "$number" ]; then
+              gh issue edit "$number" --body-file "$RUNNER_TEMP/stale.md"
+            elif ! gh issue create --title "$TITLE" --body-file "$RUNNER_TEMP/stale.md" --label automated; then
+              # The label comes with the standards' labels; without it, open the issue all the same.
+              gh issue create --title "$TITLE" --body-file "$RUNNER_TEMP/stale.md"
+            fi
+            echo "::notice title=Research Freshness::${STALE} report(s) past their three months."
+          elif [ -n "$number" ]; then
+            gh issue close "$number" --reason completed --comment 'Every research report here is current again.'
+          fi

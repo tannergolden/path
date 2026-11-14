@@ -44,8 +44,10 @@ request is not the first place you hear about them.
 | [`hooks/`](hooks/README.md)                                    | The git hooks this repository ships, what each catches before a commit is recorded, and how to switch them on. |
 | [`README.md`](README.md)                                       | This file.                                                                                                     |
 | [`requirements.txt`](requirements.txt)                         | The Python packages the scripts beside this file need, and nothing else.                                       |
+| [`research-freshness.py`](research-freshness.py)               | List the research reports that have gone stale.                                                                |
 | [`test_gitignore.py`](test_gitignore.py)                       | Tests for this repository's .gitignore.                                                                        |
 | [`test_hooks.py`](test_hooks.py)                               | Tests for the git hooks in .github/scripts/hooks/.                                                             |
+| [`test_research_freshness.py`](test_research_freshness.py)     | Tests for the stale research check.                                                                            |
 | [`test_validate_repository.py`](test_validate_repository.py)   | Tests for the repository validator.                                                                            |
 | [`test_verify_stub_ceilings.py`](test_verify_stub_ceilings.py) | Tests for the stub ceiling checker.                                                                            |
 | [`validate-repository.py`](validate-repository.py)             | Validate this repository's own configuration.                                                                  |

@@ -59,6 +59,7 @@
 /.github/VULNERABILITY_REPORT.yml
 /.github/commit-template.txt
 /.github/dependabot.yml
+/.github/markdown.md
 /.github/pull_request_template.md
 /.github/release.yml
 /.github/scripts/README.md
@@ -169,6 +170,10 @@
 #/.github/FUNDING.yml
 #/.github/actions/**
 #/.github/workflows/cut-release.yml
+# The Markdown Kit's settings and stub, so the theme you choose stays chosen:
+# .github/markdown.md says how to change it.
+#/.github/markdown.yaml
+#/.github/workflows/markdown.yml
 #/assets/**
 #/benchmarks/**
 #/docs/adrs/ADR-0001-Record-Architecture-Decisions.md
@@ -181,6 +186,7 @@
 # Initialisation deletes each of these from every repository generated from
 # the template.
 #/.github/TEMPLATE_INIT
+#/.github/markdown.lock.json
 #/CHANGELOG.md
 
 # --- Your rules ---------------------------------------------------------------

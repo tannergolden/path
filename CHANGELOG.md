@@ -33,6 +33,14 @@ every generated repository, whose own release notes are its changelog.
 
 ### Added
 
+- **This README, drawn by the Markdown Kit** in the `blackprint` with the
+  holidays on: its header, a placard for each repository a generated one runs
+  on, its trophy case and its footer. The stub and the settings,
+  `.github/workflows/markdown.yml` and `.github/markdown.yaml`, are seeded once
+  and never synced, so each repository keeps the theme its owner chooses;
+  `.github/markdown.md`, kept current, says how to change it. Initialisation
+  deletes the kit's lock, `.github/markdown.lock.json`, so each trophy case
+  keeps a history of its own.
 - **Golden Path prompts for staying current and following the standards**,
   in `docs/Prompts.md`, with an index at the top of the template's section:
   Get Ready For A Template Sync and Review A Template Sync Pull Request

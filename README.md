@@ -4,6 +4,7 @@ description: 'A language-agnostic scaffold. Structure, community health files, a
 type: index
 -->
 
+<!-- markdown:header:start -->
 <div align="center">
 
 # 🛤️ GOLDEN PATH
@@ -15,6 +16,7 @@ type: index
 _Scaffold here. Standards by link. Template fixes when you ask._
 
 </div>
+<!-- markdown:header:end -->
 
 ---
 
@@ -151,15 +153,15 @@ changes. It is the route this template is built for, and the one
 
 Less than it looks, and it is worth knowing why before choosing it. **The
 standards reach both routes identically.** Every stub's `uses:` but
-🔁 Intelligence Sync's points at `tannergolden/standards@v1`, a moving major
+🔁 Intelligence Sync's and 📝 Markdown's points at `tannergolden/standards@v1`, a moving major
 tag, so every fix in the v1 line arrives the moment it is published whether you
 forked or generated - which is what **Staying current takes no effort**
 describes further down.
 Forking does not make you more current; that part is already free.
 
-What a fork does sync is the **scaffold**: the eighteen workflows, the
+What a fork does sync is the **scaffold**: the nineteen workflows, the
 directory layout, the seeded documents. A generated repository can take the
-workflow and seed fixes too - every workflow but `cut-release.yml`, while the
+workflow and seed fixes too - every workflow but `cut-release.yml` and `markdown.yml`, while the
 layout stays yours - whenever you run 🔄 Template Sync, so what a fork adds is the
 shared history - and with it, every change at once or none. In a fork, delete
 `.github/workflows/template-sync.yml`: `Sync fork` already carries the same
@@ -442,8 +444,10 @@ publishes nothing.
     repository is for, but
     [`docs/templates/Project-README.md`](docs/templates/Project-README.md)
     gives you the sections a project's front page needs: copy it over this
-    file and fill it in. What the workflow table and the token note above
-    say outlives this file in
+    file and fill it in, leaving out its masthead and footer: the kit's next
+    run draws the header and the footer in their place, in the theme
+    [`.github/markdown.md`](.github/markdown.md) says how to choose. What the
+    workflow table and the token note above say outlives this file in
     [`.github/workflows/README.md`](.github/workflows/README.md), which logs
     every workflow and every secret they read.
 
@@ -522,6 +526,9 @@ tables after every push to the default branch:
 | [`dependabot.yml`](.github/dependabot.yml)                      | Dependabot - automated dependency updates                                                                                                            |
 | [`FUNDING.yml`](.github/FUNDING.yml)                            | &#x1F496; Funding Options                                                                                                                            |
 | [`GOVERNANCE.md`](.github/GOVERNANCE.md)                        | How this project is led, who decides what, how access continues, and the review and security standards every change meets.                           |
+| [`markdown.lock.json`](.github/markdown.lock.json)              | -                                                                                                                                                    |
+| [`markdown.md`](.github/markdown.md)                            | How the Markdown Kit draws this README, and how to change its theme, holidays, words, placards and trophies. Read it before editing its settings.    |
+| [`markdown.yaml`](.github/markdown.yaml)                        | How &#x1F4DD; Markdown draws this README: its theme, the words on its header and footer, its placards and its trophy case.                           |
 | [`pull_request_template.md`](.github/pull_request_template.md)  | This template becomes the body of your pull request.                                                                                                 |
 | [`release.yml`](.github/release.yml)                            | GitHub auto-generated release notes configuration.                                                                                                   |
 | [`SECURITY.md`](.github/SECURITY.md)                            | How to report a vulnerability privately, what happens after you do, which versions receive security fixes, and the protections this repository runs. |
@@ -540,7 +547,9 @@ tables after every push to the default branch:
 Your repository holds **triggers**. The logic lives in
 [`tannergolden/standards`](https://github.com/tannergolden/standards), or for
 🔁 Intelligence Sync in
-[`tannergolden/intelligence`](https://github.com/tannergolden/intelligence), and
+[`tannergolden/intelligence`](https://github.com/tannergolden/intelligence), or
+for 📝 Markdown in
+[`tannergolden/markdown`](https://github.com/tannergolden/markdown), and
 is pulled in by `uses:`. GitHub only runs a workflow that lives in the repository
 being pushed to, which is why these small files exist here at all. They are
 grouped by what they do - everything that verifies a change in one file,
@@ -548,7 +557,7 @@ everything that reacts to humans in another - so one push produces one run
 with every check in it, not four runs to read separately. The pull request
 check is the one exception, with `semantic-pr.yml` to itself: beside the
 triage in `governance.yml` it was listed a second time, skipped, on every pull
-request. Two of the eighteen, `verify-stubs.yml` and `scorecard.yml`, run steps
+request. Two of the nineteen, `verify-stubs.yml` and `scorecard.yml`, run steps
 of their own instead of calling the standards.
 
 | Workflow                   | Gives you                                                              | In the golden path template        |
@@ -570,6 +579,7 @@ of their own instead of calling the standards.
 | `scorecard.yml`            | A weekly OpenSSF Scorecard score, filed under code scanning            | Runs, as in yours                  |
 | `template-sync.yml`        | Proposes the template's later fixes as one pull request, when run      | Checks its list instead of syncing |
 | `intelligence-sync.yml`    | Proposes the shared agent rules as one pull request, every Monday      | Silent                             |
+| `markdown.yml`             | Draws this README in its theme, every night. Seeded once, never synced | Runs, as in yours                  |
 | `cut-release.yml`          | Publishes this template's releases. Inert in yours until you adopt it  | Runs only in a template            |
 
 **Do not rename the job ids** `ci` and `secrets` (in `checks.yml`) or `pr`
@@ -623,7 +633,8 @@ They keep up a different way, and only when you ask: see
 
 Almost nothing here pins a third-party action, either. Every `uses:` in the
 stubs points at `tannergolden/standards`, or `tannergolden/intelligence` for
-🔁 Intelligence Sync, so the SHA pins behind them are maintained once, there,
+🔁 Intelligence Sync, or `tannergolden/markdown` for 📝 Markdown, so the SHA
+pins behind them are maintained once, there,
 rather than in every repository built from this one.
 The exceptions are `verify-stubs.yml` and `scorecard.yml`, which run steps of
 their own and pin each third-party action they use to a commit. Those pins are
@@ -714,6 +725,37 @@ option altogether, delete that file.
 
 The engine lives in [`tannergolden/standards`](https://github.com/tannergolden/standards/blob/Development/docs/distribution/automation/Template-Sync.md),
 called rather than copied, like every other workflow here.
+
+---
+
+## 🎨 This Page Is Drawn
+
+This README's header, cards, trophy case and footer are drawn by the
+[Markdown Kit](https://github.com/tannergolden/markdown) every night, in the
+`blackprint` with the holidays on, from the stub in
+`.github/workflows/markdown.yml` and the settings in `.github/markdown.yaml`.
+Your repository starts with both, seeded once: 🔄 Template Sync never touches
+them, so the theme is yours to change whenever you like, and
+[`.github/markdown.md`](.github/markdown.md) says how.
+
+The cards are the four repositories every repository generated from this one
+runs on: this template, whose fixes arrive by 🔄 Template Sync; the
+standards, whose workflows the stubs call; the hub that writes the rules in
+`AGENTS.md`; and the kit that draws this page.
+
+<div align="center">
+
+<!-- markdown:element:path:start -->
+<!-- markdown:element:path:end -->
+<!-- markdown:element:standards:start -->
+<!-- markdown:element:standards:end -->
+
+<!-- markdown:element:intelligence:start -->
+<!-- markdown:element:intelligence:end -->
+<!-- markdown:element:markdown:start -->
+<!-- markdown:element:markdown:end -->
+
+</div>
 
 ---
 
@@ -816,6 +858,10 @@ story - go where a numbered or dated record belongs instead. The
 
 ---
 
+<!-- markdown:trophies:start -->
+<!-- markdown:trophies:end -->
+
+<!-- markdown:footer:start -->
 <div align="center">
 
 **Structure, not opinions. Standards by link, not by copy.**
@@ -827,3 +873,4 @@ story - go where a numbered or dated record belongs instead. The
 Built with ❤️ by [@tannergolden](https://github.com/tannergolden). Distributed under the terms in [LICENSE](/LICENSE).
 
 </div>
+<!-- markdown:footer:end -->

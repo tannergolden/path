@@ -1,0 +1,44 @@
+# How 📝 Markdown draws this README: its theme, the words on its header and
+# footer, its placards and its trophy case.
+#
+# Seeded once and never synced, so every choice here stays yours. Whatever is
+# not written here is read from GitHub and git. .github/markdown.md says how
+# to change the theme, and the kit's docs/references/Settings.md every key.
+
+# The page's one theme: every part is drawn in the blackprint.
+theme: blackprint
+# Around each holiday its set takes over the page, then hands it back.
+holidays: true
+
+# The title and the line under it are this repository's name and its
+# description on GitHub. The motto and the closing words are the golden
+# path's own: write your page's here.
+banners:
+  motto: Scaffold here. Standards by link. Template fixes when you ask.
+  closing: Structure, not opinions. Standards by link, not by copy.
+  hide: [license] # the repository validator fails a footer that names one
+
+# A card for each repository every repository generated from the golden path
+# runs on, measured from GitHub: its description, language, latest release
+# and stars. Each is drawn where the README carries its markers.
+elements:
+  path:
+    kind: placard
+    icon: compass
+    measure: tannergolden/path
+  standards:
+    kind: placard
+    icon: book
+    measure: tannergolden/standards
+  intelligence:
+    kind: placard
+    icon: chip
+    measure: tannergolden/intelligence
+  markdown:
+    kind: placard
+    icon: layers
+    measure: tannergolden/markdown
+
+# The trophy case, over the footer: the core trophies and the achievements.
+trophies:
+  style: trophy

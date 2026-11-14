@@ -1,0 +1,36 @@
+# Installed from tannergolden/markdown. Edit freely: this file is YOURS.
+#
+# Draws this repository's README with the Markdown Kit every night: the
+# header, the placards, the trophy case and the footer, as committed SVGs, in
+# the theme .github/markdown.yaml names. Seeded once and never synced, so the
+# theme you choose stays chosen; .github/markdown.md says how to change it.
+# It runs in the golden path template too, which draws its own README with it.
+
+name: '📝 Markdown'
+
+on:
+  schedule:
+    - cron: '0 0 * * *' # every night at midnight UTC
+  workflow_dispatch:
+
+concurrency: # one drawing at a time; the next waits its turn
+  group: markdown-${{ github.ref }}
+  cancel-in-progress: false
+
+# ⚠️ THE `permissions:` BELOW IS A CEILING, NOT A GRANT. The kit's job asks
+# for exactly these two; grant less and it fails before any job starts.
+permissions: {}
+
+jobs:
+  markdown:
+    permissions:
+      contents: write # the images, the README's blocks and the lock
+      pull-requests: write # only used with commit: pr
+    uses: tannergolden/markdown/.github/workflows/markdown.yml@v1 # zizmor: ignore[unpinned-uses] - first-party workflow on its moving major, the way every stub calls it.
+    # A default branch that refuses the bot's push, as one that requires pull
+    # requests does, takes the drawing as a pull request instead:
+    # with:
+    #   commit: pr
+    # Only this one secret, never `secrets: inherit`, and an optional one.
+    secrets:
+      MARKDOWN_TOKEN: ${{ secrets.MARKDOWN_TOKEN }}

@@ -4,7 +4,8 @@
 # stale: verified over three months ago, or never dated (RES-001 in the
 # universal rules). Every Monday, and whenever you run it, it opens one issue
 # listing each such report, keeps that issue current while any stays stale,
-# and closes it once every report is current again. It changes no file.
+# and closes it once every report is current again. Where issues are turned
+# off, it lists them in the run's summary instead. It changes no file.
 #
 # .github/scripts/research-freshness.py decides what is stale, with its tests
 # beside it; this file only carries the answer to an issue.
@@ -58,6 +59,9 @@ jobs:
 
       # One issue, found by its exact title: opened when a report goes stale,
       # its list rewritten while any stays stale, and closed when none is.
+      # Where issues are turned off, the list goes in this run's summary with
+      # a warning instead, and the run still passes: stale research is a
+      # reminder, not a broken build.
       - name: '📝 Open, update or close the issue'
         env:
           GH_TOKEN: ${{ github.token }}
@@ -66,6 +70,13 @@ jobs:
           TITLE: '🔎 Research past its three months'
         run: |
           set -euo pipefail
+          if [ "$(gh api "repos/$GH_REPO" --jq .has_issues)" != true ]; then
+            if [ "${STALE:-0}" -gt 0 ]; then
+              cat "$RUNNER_TEMP/stale.md" >> "$GITHUB_STEP_SUMMARY"
+              echo "::warning title=Research Freshness::${STALE} report(s) past their three months. Issues are off here, so the list is in this run's summary."
+            fi
+            exit 0
+          fi
           number="$(gh issue list --state open --limit 100 --json number,title \
             --jq 'map(select(.title == env.TITLE)) | .[0].number // empty')"
           if [ "${STALE:-0}" -gt 0 ]; then

@@ -28,7 +28,7 @@ _Every claim sourced. Every finding dated. Nothing trusted past its window._
 >
 > **Provenance is part of the finding**: a claim rests on a source, and a source you could not fetch directly is weaker than one you read. Tag every source's fetch status and say so - an unverifiable claim that hides its provenance is worse than one that admits it.
 >
-> **Lifecycle**: under 3 months a report is trusted; past 3 months, or with no `verified` date, it is stale (RES-001), and 🔎 Research Freshness lists it in an issue every Monday. Before anything relies on a stale report, reverify it - append a log entry and bump `verified` - or replace it with a new research pass in the same file.
+> **Lifecycle**: under 3 months a report is trusted; past 3 months, or with no `verified` date, it is stale (RES-001), and 🔎 Research Freshness lists it every Monday, in an issue or, where issues are turned off, in that run's summary. Before anything relies on a stale report, reverify it - append a log entry and bump `verified` - or replace it with a new research pass in the same file.
 
 ---
 

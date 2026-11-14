@@ -33,8 +33,9 @@ how it was fetched, and the decision it fed.
   entry, never into a second report.
 - **Trusted for three months** from its `verified` date. After that a report is
   stale: before anything relies on it, reverify its claims and move the date, or
-  replace it with a new research pass. 🔎 Research Freshness opens an issue
-  every Monday listing each report past its window, or with no date at all.
+  replace it with a new research pass. Every Monday 🔎 Research Freshness lists
+  each report past its window or with no date at all: in an issue, or, where
+  issues are turned off, in that run's summary.
 - **Durable conclusions graduate.** A finding that must outlive the window
   becomes a decision in [`adrs/`](../../adrs/README.md), and the report's
   **Graduated to** row links it.

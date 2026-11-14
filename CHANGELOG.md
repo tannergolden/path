@@ -68,8 +68,10 @@ every generated repository, whose own release notes are its changelog.
 - **🔎 Research Freshness**, in `.github/workflows/research-freshness.yml`,
   with `.github/scripts/research-freshness.py` and its tests. Every Monday it
   opens one issue listing each report verified over three months ago or never
-  dated, keeps that issue current, and closes it once none is left. Like any
-  workflow file, it waits on a `BOT_ACCESS_TOKEN` in a sync.
+  dated, keeps that issue current, and closes it once none is left; where
+  issues are turned off, it lists them in the run's summary with a warning,
+  and the run still passes. Like any workflow file, it waits on a
+  `BOT_ACCESS_TOKEN` in a sync.
 - **A Research Anything prompt** in `docs/Prompts.md`: researched from cited
   sources, and filed as a report the next question can reuse.
 

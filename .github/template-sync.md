@@ -59,6 +59,12 @@ those files stay current with the template. In the pull request a sync opens:
 your section, so a sync only ever brings changes to its own. To keep a change you made to the
 template's section, add `# keep mine: /docs/Prompts.md` under **Your rules**, as above.
 
+**`AGENTS.md` is yours but for one section.** The template keeps only its **Research** section,
+between the `TEMPLATE-SYNC` markers: a sync brings that section up to date, or puts it in under
+**Where things live** if your file lacks it, and never changes a line around it. A change you make
+inside the section is a conflict, and yours stays; a section you take out stays out. To stop it
+altogether, put a `#` in front of `/AGENTS.md`.
+
 A path the list leaves to you, and any file the template does not ship, is never touched. So before
 you run it, look down the **Kept current** section for any file you put to a different use - a folder
 README you rewrote because this repository keeps a layout of its own, say - and put a `#` in front of

@@ -97,6 +97,10 @@
 /.vscode/extensions.json
 /.vscode/settings.json
 
+# Yours but for its Research section, the one part the template keeps:
+# only the lines between its TEMPLATE-SYNC markers are ever synced.
+/AGENTS.md
+
 /docs/Prompts.md
 /docs/README.md
 /docs/adrs/README.md

@@ -257,26 +257,31 @@ You do not have to fill in all of them - one real command is enough.
 
 ---
 
-## 🤖 Agent Rules, When You Merge Them
+## 🤖 Agent Rules
 
-This template ships **no agent instructions of its own, and one stub that
-offers them**. That is a decision, not an omission.
+This template ships **one `AGENTS.md`, written by the same sync every
+repository takes, and the stub that keeps it current**.
 
 Agent instructions are **always loaded**. Every byte is paid on every session, in
-every repository, forever. They also carry conventions that belong to a project
-rather than to a scaffold: how you write commits, what must never be touched by
-hand, which commands actually build the thing. A default set written into your
-repository makes that choice on your behalf, invisibly, and the usual result is
-a file nobody wrote and nobody trusts. So nothing here writes an `AGENTS.md`;
-what ships instead lets you take shared rules when you choose to:
+every repository, forever, and most of what they say belongs to a project rather
+than to a scaffold: how you write commits, what must never be touched by hand,
+which commands actually build the thing. So the file holds the universal rules,
+empty sections for your own, and one section the template keeps because every
+repository built from it needs it: **Research**, which says where research
+reports go and that every research request ends in one.
 
-| It ships                                                                             | What it does                                                                                                                                                                                                                                                                                   |
-| :----------------------------------------------------------------------------------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [`.github/workflows/intelligence-sync.yml`](.github/workflows/intelligence-sync.yml) | 🔁 Intelligence Sync. Every Monday, and whenever you run it, it proposes the latest release of [`tannergolden/intelligence`](https://github.com/tannergolden/intelligence) as one pull request: one root `AGENTS.md`, with the universal rules between markers and empty sections for your own |
-| [`docs/Prompts.md`](docs/Prompts.md)                                                 | Ready-made prompts in two sections kept apart: the Golden Path's own, kept current by 🔄 Template Sync, and this repository's, which only you write. The first 🔁 Intelligence Sync leaves this page as it is                                                                                  |
+| It ships                                                                             | What it does                                                                                                                                                                                                                                                                       |
+| :----------------------------------------------------------------------------------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [`AGENTS.md`](AGENTS.md)                                                             | The universal rules between the `INTELLIGENCE` markers, which 🔁 Intelligence Sync keeps current; empty sections for your own; and the template's **Research** section between the `TEMPLATE-SYNC` markers, which 🔄 Template Sync keeps current without touching a line around it |
+| [`.github/workflows/intelligence-sync.yml`](.github/workflows/intelligence-sync.yml) | 🔁 Intelligence Sync. Every Monday, and whenever you run it, it proposes the latest release of [`tannergolden/intelligence`](https://github.com/tannergolden/intelligence) as one pull request. It runs in this template too, which is where this `AGENTS.md` came from            |
+| [`docs/Prompts.md`](docs/Prompts.md)                                                 | Ready-made prompts in two sections kept apart: the Golden Path's own, kept current by 🔄 Template Sync, and this repository's, which only you write. The first 🔁 Intelligence Sync leaves this page as it is                                                                      |
 
-**Nothing lands until you merge it.** The stub is silent in this template and
-comes alive in yours. It opens its pull request with the repository's own
+A repository generated before this template shipped an `AGENTS.md` keeps its
+own: 🔄 Template Sync puts the **Research** section into it, under **Where
+things live**, and changes nothing else in the file.
+
+**Nothing lands until you merge it.** The stub runs here as it does in yours.
+It opens its pull request with the repository's own
 token, so **Allow GitHub Actions to create and approve pull requests** must be
 on, which `apply-settings` in step 4 below sees to, and GitHub holds that pull
 request's checks until you approve them, unless a `BOT_ACCESS_TOKEN` opens it
@@ -292,9 +297,9 @@ a rule about contributions, not an instruction any tool loads.
 
 **Nothing here depends on it, either.** Initialisation, CI, the rulesets, the
 release flow and every other workflow behave identically without it. If you
-would rather write your rules by hand, delete the stub and write `AGENTS.md`
-yourself: 🔄 Template Sync switches a deleted stub off rather than bringing it
-back.
+would rather write your rules by hand, delete the stub and the block and write
+`AGENTS.md` yourself: 🔄 Template Sync switches a deleted stub off rather than
+bringing it back, and a **Research** section you take out stays out.
 
 > [!IMPORTANT]
 > **Whichever route you take, confirm the tools you actually use load what you
@@ -307,7 +312,9 @@ back.
 > **Either route stays reversible.** What you write by hand is yours to delete.
 > What the hub delivers sits between two markers in one file and arrives
 > through one stub, so removing it is deleting both, and a `no-intelligence`
-> topic keeps the hub's `make sync` from bringing it back.
+> topic keeps the hub's `make sync` from bringing it back. To stop the template
+> keeping its section, put a `#` in front of `/AGENTS.md` in
+> `.github/template-sync`.
 
 ---
 
@@ -485,6 +492,7 @@ publishes nothing.
 | [`.gitattributes`](.gitattributes)                 | Git attributes - line endings, diffs, and what counts as binary                                                                        |
 | [`.gitignore`](.gitignore)                         | &#x1F5C4;&#xFE0F; Universal Ignore Patterns                                                                                            |
 | [`.markdownlint.json`](.markdownlint.json)         | Repository-wide markdownlint rules. Discovered by mechanism, which is why this lives at the root.                                      |
+| [`AGENTS.md`](AGENTS.md)                           | How AI coding agents work in this repository: the universal rules first, then its own.                                                 |
 | [`CHANGELOG.md`](CHANGELOG.md)                     | What changed in each release of this template, newest first, so an owner can see what a Template Sync will bring before running it.    |
 | [`LICENSE`](LICENSE)                               | MIT License                                                                                                                            |
 | [`README.md`](README.md)                           | This file.                                                                                                                             |

@@ -40,6 +40,17 @@ every generated repository, whose own release notes are its changelog.
   request 🔁 Intelligence Sync opens, and ten read-only audits of a
   repository against `tannergolden/standards`, from Check This Repository
   Against The Standards to Check What Is Left To Do By Hand.
+- **An `AGENTS.md`, written by 🔁 Intelligence Sync**, which now runs in the
+  template as in any repository: the universal rules between the
+  `INTELLIGENCE` markers, empty sections for your own, and one section the
+  template keeps between `TEMPLATE-SYNC` markers, **Research**. It says that
+  research reports go in `docs/technical/research/`, and that a research
+  request is done only when its report is filed from the Research Log
+  template. 🔄 Template Sync keeps that section current and never touches a
+  line around it; a repository whose own `AGENTS.md` came first takes the
+  section under **Where things live**. That needs the engine in
+  `tannergolden/standards` that syncs one section of a file, so it reaches a
+  repository once a standards release with it moves `v1`.
 - **`docs/technical/research/`**, the folder every research report is filed
   in, with a README that logs each report and the date it was last verified.
 - **🔎 Research Freshness**, in `.github/workflows/research-freshness.yml`,

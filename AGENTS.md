@@ -94,7 +94,7 @@ _The universal rules first, then this repository's own._
 > **🔄 Template Sync keeps this section current** from `tannergolden/path`, here and in every
 > repository built from it, and never touches the rest of this file. Write your own rules around it.
 
-- **Every research request ends in a filed report.** When your user asks you to research, look into, compare or find out about anything, the work is done only when its report is in `docs/technical/research/`, written from `docs/templates/Research-Log.md` with every section filled in and `verified` set to the day its claims were checked. Give the bottom line in your reply too.
+- **Every research request ends in a filed report.** When your user asks you to research, look into, compare or find out about anything, the work is done only when its report is in `docs/technical/research/`, written from `docs/templates/Research-Log.md` with every section filled in and `verified` set to the day its claims were checked, unless a section of this file that is the repository's own sends research of that kind elsewhere. Give the bottom line in your reply too.
 - **One file per question**, named for its topic, such as `docs/technical/research/Message-Queues.md`. The folder's README logs every report with the date it was last verified.
 - **Check the folder first.** Reuse a report on the same question verified within the last three months; reverify an older one, or redo it in the same file, before relying on it (RES-001).
 - **Ask where it goes** when the research is about your user's own life and this repository is public (SEC-003).

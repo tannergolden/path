@@ -20,9 +20,10 @@ _Every claim sourced. Every report dated._
 
 ## 💡 What This Folder Is For
 
-Every research request ends here. When someone asks an agent to research, look
-into, compare or find out about anything, the work is done only when its report
-is filed in this folder, as `AGENTS.md` says. Each report answers one question
+Every research request ends in a report, filed in this folder unless
+`AGENTS.md` sends research of that kind elsewhere. When someone asks an agent to
+research, look into, compare or find out about anything, the work is done only
+when its report is filed, as `AGENTS.md` says. Each report answers one question
 in the shape of the [Research Log](../../templates/Research-Log.md) template:
 the bottom line, the findings claim by claim with the source each rests on and
 how it was fetched, and the decision it fed.

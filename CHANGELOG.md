@@ -44,9 +44,9 @@ every generated repository, whose own release notes are its changelog.
   template as in any repository: the universal rules between the
   `INTELLIGENCE` markers, empty sections for your own, and two sections the
   template keeps between `TEMPLATE-SYNC` markers. **Research** says that
-  research reports go in `docs/technical/research/`, and that a research
-  request is done only when its report is filed from the Research Log
-  template. **Synced files** tells an agent never to bring a synced file up
+  research reports go in `docs/technical/research/`, unless the repository's
+  own sections send research of a kind elsewhere, and that a research request
+  is done only when its report is filed. **Synced files** tells an agent never to bring a synced file up
   to date by hand, or edit inside a machine's markers, and points it at
   `docs/Synced-Files.md`. 🔄 Template Sync keeps both sections current and
   never touches a line around them; a repository whose own `AGENTS.md` came

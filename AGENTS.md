@@ -19,7 +19,7 @@ _The universal rules first, then this repository's own._
 
 ---
 
-<!-- INTELLIGENCE:BEGIN sha256:10c18e5e2b030ebe29815f3ad2a7da2aeba674a2da6b03ce7f5795d84a1bcd8b -->
+<!-- INTELLIGENCE:BEGIN sha256:aa14c064772002f3d1afebe084e82b9fa95a972ead504dae3f46218c2ba14fbe -->
 
 ## Constitution
 
@@ -51,6 +51,7 @@ _The universal rules first, then this repository's own._
 - WORK-006: After two failed attempts at the same fix, stop retrying variants: re-diagnose from the evidence, or ask.
 - DOC-003: Write plainly: prefer the concrete word, and cut filler, flattery and stock AI phrasing.
 - COM-005: In replies and prose, write times of day in 12-hour form with am or pm, such as 3:30 pm; keep machine formats such as ISO 8601 and cron as they are.
+- RES-001: Research last verified over three months ago, or undated, is stale: before you rely on it or build a new report on it, reverify its claims and update its date or do a new research pass; if you can do neither, say it is stale.
 
 ### Owner-only Defaults
 

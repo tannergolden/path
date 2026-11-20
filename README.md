@@ -273,7 +273,7 @@ The Golden Path is released under the terms in [LICENSE](/LICENSE).
 
 <!-- markdown:trophies:start -->
 <p align="center">
-  <picture><source media="(prefers-color-scheme: dark)" srcset="assets/trophies/level.svg"><img src="assets/trophies/level-day.svg" alt="tannergolden/path: level 20, 6,758 XP, case 27% complete, released 25 days ago"></picture>
+  <picture><source media="(prefers-color-scheme: dark)" srcset="assets/trophies/level.svg"><img src="assets/trophies/level-day.svg" alt="tannergolden/path: level 20, 6,758 XP, case 27% complete, released 26 days ago"></picture>
   <picture><source media="(prefers-color-scheme: dark)" srcset="assets/trophies/next-up.svg"><img src="assets/trophies/next-up-day.svg" alt="Next up: Active Days to Bronze 60%, Regulars 40%, By the Book II 39%"></picture>
 </p>
 
@@ -281,7 +281,7 @@ The Golden Path is released under the terms in [LICENSE](/LICENSE).
   <a href="https://github.com/tannergolden/markdown/blob/HEAD/docs/references/Catalogue.md#repository-stars"><picture><source media="(prefers-color-scheme: dark)" srcset="assets/trophies/stars.svg"><img src="assets/trophies/stars-day.svg" alt="Stars trophy: Unranked, 0, 0% to Bronze"></picture></a>
   <a href="https://github.com/tannergolden/markdown/blob/HEAD/docs/references/Catalogue.md#repository-forks"><picture><source media="(prefers-color-scheme: dark)" srcset="assets/trophies/forks.svg"><img src="assets/trophies/forks-day.svg" alt="Forks trophy: Unranked, 0, 0% to Bronze"></picture></a>
   <a href="https://github.com/tannergolden/markdown/blob/HEAD/docs/references/Catalogue.md#repository-contributors"><picture><source media="(prefers-color-scheme: dark)" srcset="assets/trophies/contributors.svg"><img src="assets/trophies/contributors-day.svg" alt="Contributors trophy: Bronze, 2, 0% to Silver, top 43%, newly reached"></picture></a>
-  <a href="https://github.com/tannergolden/markdown/blob/HEAD/docs/references/Catalogue.md#repository-commits"><picture><source media="(prefers-color-scheme: dark)" srcset="assets/trophies/commits.svg"><img src="assets/trophies/commits-day.svg" alt="Commits trophy: Bronze, 195, 23% to Silver, top 3.1%, newly reached"></picture></a>
+  <a href="https://github.com/tannergolden/markdown/blob/HEAD/docs/references/Catalogue.md#repository-commits"><picture><source media="(prefers-color-scheme: dark)" srcset="assets/trophies/commits.svg"><img src="assets/trophies/commits-day.svg" alt="Commits trophy: Bronze, 196, 24% to Silver, top 3.1%, newly reached"></picture></a>
   <a href="https://github.com/tannergolden/markdown/blob/HEAD/docs/references/Catalogue.md#repository-releases"><picture><source media="(prefers-color-scheme: dark)" srcset="assets/trophies/releases.svg"><img src="assets/trophies/releases-day.svg" alt="Releases trophy: Bronze, 1, 0% to Silver, top 10%, newly reached"></picture></a>
   <a href="https://github.com/tannergolden/markdown/blob/HEAD/docs/references/Catalogue.md#repository-merged"><picture><source media="(prefers-color-scheme: dark)" srcset="assets/trophies/merged.svg"><img src="assets/trophies/merged-day.svg" alt="Merged PRs trophy: Unranked, 0, 0% to Bronze"></picture></a>
   <a href="https://github.com/tannergolden/markdown/blob/HEAD/docs/references/Catalogue.md#repository-resolved"><picture><source media="(prefers-color-scheme: dark)" srcset="assets/trophies/resolved.svg"><img src="assets/trophies/resolved-day.svg" alt="Issues Resolved trophy: Unranked, 0, 0% to Bronze"></picture></a>
@@ -340,7 +340,7 @@ The Golden Path is released under the terms in [LICENSE](/LICENSE).
   <a href="https://github.com/tannergolden/markdown/blob/HEAD/docs/references/Catalogue.md#repository-test-suite"><picture><source media="(prefers-color-scheme: dark)" srcset="assets/trophies/achievements/test-suite.svg"><img src="assets/trophies/achievements/test-suite-day.svg" alt="Test Suite: earned, Uncommon"></picture></a>
   <a href="https://github.com/tannergolden/markdown/blob/HEAD/docs/references/Catalogue.md#repository-wired"><picture><source media="(prefers-color-scheme: dark)" srcset="assets/trophies/achievements/wired.svg"><img src="assets/trophies/achievements/wired-day.svg" alt="Wired: earned, Uncommon"></picture></a>
   <a href="https://github.com/tannergolden/markdown/blob/HEAD/docs/references/Catalogue.md#repository-squeaky"><picture><source media="(prefers-color-scheme: dark)" srcset="assets/trophies/achievements/squeaky.svg"><img src="assets/trophies/achievements/squeaky-day.svg" alt="Squeaky: earned, Common"></picture></a>
-  <a href="https://github.com/tannergolden/markdown/blob/HEAD/docs/references/Catalogue.md#repository-green-machine"><picture><source media="(prefers-color-scheme: dark)" srcset="assets/trophies/achievements/green-machine.svg"><img src="assets/trophies/achievements/green-machine-day.svg" alt="Green Machine: 28% (28 of 100)"></picture></a>
+  <a href="https://github.com/tannergolden/markdown/blob/HEAD/docs/references/Catalogue.md#repository-green-machine"><picture><source media="(prefers-color-scheme: dark)" srcset="assets/trophies/achievements/green-machine.svg"><img src="assets/trophies/achievements/green-machine-day.svg" alt="Green Machine: 33% (33 of 100)"></picture></a>
   <a href="https://github.com/tannergolden/markdown/blob/HEAD/docs/references/Catalogue.md#repository-release-notes"><picture><source media="(prefers-color-scheme: dark)" srcset="assets/trophies/achievements/release-notes.svg"><img src="assets/trophies/achievements/release-notes-day.svg" alt="Release Notes: 10% (1 of 10)"></picture></a>
   <a href="https://github.com/tannergolden/markdown/blob/HEAD/docs/references/Catalogue.md#repository-semver"><picture><source media="(prefers-color-scheme: dark)" srcset="assets/trophies/achievements/semver.svg"><img src="assets/trophies/achievements/semver-day.svg" alt="Semver: 10% (1 of 10)"></picture></a>
   <a href="https://github.com/tannergolden/markdown/blob/HEAD/docs/references/Catalogue.md#repository-containerized"><picture><source media="(prefers-color-scheme: dark)" srcset="assets/trophies/achievements/containerized.svg"><img src="assets/trophies/achievements/containerized-day.svg" alt="Containerized: 0% (0 of 1)"></picture></a>
@@ -432,7 +432,7 @@ The Golden Path is released under the terms in [LICENSE](/LICENSE).
   <source media="(max-width: 585px) and (prefers-color-scheme: dark)" srcset="assets/banners/footer-narrow-dark.svg">
   <source media="(max-width: 585px)" srcset="assets/banners/footer-narrow-day.svg">
   <source media="(prefers-color-scheme: dark)" srcset="assets/banners/footer-dark.svg">
-  <img alt="Structure, not opinions. Standards by link, not by copy. Back to Top. Built with love by @tannergolden. Last updated November 14, 2026." src="assets/banners/footer-day.svg">
+  <img alt="Structure, not opinions. Standards by link, not by copy. Back to Top. Built with love by @tannergolden. Last updated November 19, 2026." src="assets/banners/footer-day.svg">
 </picture>
 </a>
 

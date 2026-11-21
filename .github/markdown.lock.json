@@ -1,7 +1,7 @@
 {
  "drawn": {
   "born": "2026-07-27",
-  "day": "2026-11-20",
+  "day": "2026-11-21",
   "holiday": null,
   "rainbow": null,
   "theme": "blackprint"
@@ -45,11 +45,11 @@
      "workflows": 20
     },
     "subject": "tannergolden/path",
-    "today": "2026-11-20"
+    "today": "2026-11-21"
    }
   },
   "elements": {
-   "asof": "2026-11-20T06:06:00Z",
+   "asof": "2026-11-21T05:57:00Z",
    "drawn": [
     "path",
     "standards",
@@ -194,7 +194,7 @@
      "first-tag": 2,
      "first-watcher": 0,
      "follows-the-standards": 1,
-     "fork-magnet": null,
+     "fork-magnet": 0,
      "forked-far": 0,
      "form-filler": 1,
      "friday-deploy": 0,
@@ -206,7 +206,7 @@
      "gitmoji": 0,
      "golden-path": 1,
      "good-first-issues": 0,
-     "green-machine": 33,
+     "green-machine": 35,
      "green-wall": 0,
      "help-wanted": 0,
      "house-rules": 1,
@@ -248,7 +248,7 @@
      "signed": 100,
      "small-steps": 1,
      "squeaky": 1,
-     "star-of-the-week": null,
+     "star-of-the-week": 0,
      "stargazer-streak": 0,
      "stranger-report": 0,
      "streak": 4,
@@ -258,7 +258,7 @@
      "test-suite": 1,
      "the-answer": 0,
      "town-hall": 0,
-     "trending": null,
+     "trending": 0,
      "triage": 0,
      "used-by": null,
      "visited": null,
@@ -272,7 +272,7 @@
     },
     "delta": {
      "active": 0,
-     "commits": 0,
+     "commits": 1,
      "contributors": 0,
      "forks": 0,
      "merged": 0,
@@ -282,22 +282,22 @@
     },
     "extra": {
      "commits30": 6,
-     "lastRelease": 26
+     "lastRelease": 27
     },
     "mode": "repository",
     "new": {
      "active": false,
-     "commits": true,
-     "contributors": true,
+     "commits": false,
+     "contributors": false,
      "forks": false,
      "merged": false,
-     "releases": true,
+     "releases": false,
      "resolved": false,
      "stars": false
     },
     "owners": {},
     "subject": "tannergolden/path",
-    "today": "2026-11-20",
+    "today": "2026-11-21",
     "values": {
      "active": 18,
      "commits": 196,
@@ -413,7 +413,7 @@
     "tannergolden/path": {
      "complete": true,
      "cursor": null,
-     "head": "5ed0ace9ac68ea769ed9ed20dec30eb20b371802",
+     "head": "5f67d03040c315991270de40df2a6682a7fc5953",
      "stats": {
       "authors": {
        "claude": 48,
@@ -452,14 +452,15 @@
       "midnight": 0,
       "night": 113,
       "onefile": 110,
-      "refresh": 6,
+      "refresh": 7,
       "refresh_days": {
        "2026-11-14": 1,
        "2026-11-15": 1,
        "2026-11-16": 1,
        "2026-11-17": 1,
        "2026-11-18": 1,
-       "2026-11-19": 1
+       "2026-11-19": 1,
+       "2026-11-20": 1
       },
       "revert": 0,
       "signed": 100,
@@ -467,11 +468,11 @@
       "test": 2,
       "total": 196
      },
-     "total": 202
+     "total": 203
     }
    }
   }
  },
- "snapshot": "2026-11-14",
+ "snapshot": "2026-11-21",
  "version": 1
 }

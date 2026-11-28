@@ -1,8 +1,8 @@
 {
  "drawn": {
   "born": "2026-07-27",
-  "day": "2026-11-27",
-  "holiday": "thanksgiving",
+  "day": "2026-11-28",
+  "holiday": null,
   "rainbow": null,
   "theme": "blackprint"
  },
@@ -45,11 +45,11 @@
      "workflows": 20
     },
     "subject": "tannergolden/path",
-    "today": "2026-11-27"
+    "today": "2026-11-28"
    }
   },
   "elements": {
-   "asof": "2026-11-27T07:10:00Z",
+   "asof": "2026-11-28T06:43:00Z",
    "drawn": [
     "path",
     "standards",
@@ -206,7 +206,7 @@
      "gitmoji": 0,
      "golden-path": 1,
      "good-first-issues": 0,
-     "green-machine": 19,
+     "green-machine": 21,
      "green-wall": 0,
      "help-wanted": 0,
      "house-rules": 1,
@@ -282,7 +282,7 @@
     },
     "extra": {
      "commits30": 1,
-     "lastRelease": 33
+     "lastRelease": 34
     },
     "mode": "repository",
     "new": {
@@ -297,7 +297,7 @@
     },
     "owners": {},
     "subject": "tannergolden/path",
-    "today": "2026-11-27",
+    "today": "2026-11-28",
     "values": {
      "active": 18,
      "commits": 196,
@@ -413,7 +413,7 @@
     "tannergolden/path": {
      "complete": true,
      "cursor": null,
-     "head": "5d867c1381acc33ddd4d07dd8ee80820994109dc",
+     "head": "6a95dc039933ac5e17e4017d0f316fdc312ca360",
      "stats": {
       "authors": {
        "claude": 48,
@@ -452,7 +452,7 @@
       "midnight": 0,
       "night": 113,
       "onefile": 110,
-      "refresh": 13,
+      "refresh": 14,
       "refresh_days": {
        "2026-11-14": 1,
        "2026-11-15": 1,
@@ -466,7 +466,8 @@
        "2026-11-23": 1,
        "2026-11-24": 1,
        "2026-11-25": 1,
-       "2026-11-26": 1
+       "2026-11-26": 1,
+       "2026-11-27": 1
       },
       "revert": 0,
       "signed": 100,
@@ -474,11 +475,11 @@
       "test": 2,
       "total": 196
      },
-     "total": 209
+     "total": 210
     }
    }
   }
  },
- "snapshot": "2026-11-21",
+ "snapshot": "2026-11-28",
  "version": 1
 }
